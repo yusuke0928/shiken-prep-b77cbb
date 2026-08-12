@@ -1,0 +1,32 @@
+{
+  "lang": "ja",
+  "name": "柏原市 採用試験対策",
+  "short_name": "柏原市対策",
+  "description": "柏原市役所 採用試験（土木職B）対策一式：SCOAトレーナー・選考対策・個人面接想定問答",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#12211D",
+  "theme_color": "#0C1815",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

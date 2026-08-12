@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>柏原市役所 技術職 面接想定問答集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16211F;
+    --ink-soft:#4A5854;
+    --paper:#EEF0EA;
+    --paper-hi:#F7F8F4;
+    --river:#24504B;
+    --river-deep:#173630;
+    --contour:#C4CCC2;
+    --marker:#DCE94F;
+    --marker-soft:#F0F5B8;
+    --disp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    --body:"BIZ UDPGothic","Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+    --mono:"Roboto Mono",ui-monospace,monospace;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.85;
+    font-feature-settings:"palt";
+  }
+
+  /* ---- 方眼（野帳の5mm方眼） ---- */
+  .grid-bg{
+    background-image:
+      linear-gradient(to right, var(--contour) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--contour) 1px, transparent 1px);
+    background-size:19px 19px;
+    opacity:1;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---- 表紙帯 ---- */
+  header.cover{
+    background:var(--river-deep);
+    color:#E8EDE7;
+    border-bottom:6px solid var(--marker);
+  }
+  .cover-inner{
+    max-width:760px;margin:0 auto;padding:44px 18px 34px;
+  }
+  .stamp{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.22em;
+    border:1px solid rgba(232,237,231,.5);
+    padding:5px 11px;
+    margin-bottom:22px;
+  }
+  h1{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(28px,7vw,42px);
+    line-height:1.28;
+    margin:0 0 14px;
+    letter-spacing:.01em;
+  }
+  h1 .thin{display:block;font-size:.48em;font-weight:500;letter-spacing:.16em;opacity:.75;margin-bottom:10px}
+  .cover-meta{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.08em;
+    color:rgba(232,237,231,.72);
+    border-top:1px solid rgba(232,237,231,.25);
+    padding-top:14px;
+    margin-top:22px;
+    display:flex;flex-wrap:wrap;gap:6px 22px;
+  }
+
+  /* ---- 使い方 ---- */
+  .howto{
+    background:var(--paper-hi);
+    border:1px solid var(--contour);
+    padding:20px 22px;
+    margin:30px 0 8px;
+    font-size:14.5px;
+    line-height:1.9;
+  }
+  .howto b{font-family:var(--disp);font-weight:700}
+
+  /* ---- 進捗 ---- */
+  .progress{
+    position:sticky;top:0;z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--contour);
+    margin:0 -18px 0;
+    padding:11px 18px;
+    display:flex;align-items:center;gap:14px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  }
+  .bar{flex:1;height:5px;background:var(--contour);position:relative;overflow:hidden}
+  .bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--river);transition:width .3s ease}
+  .ctrl{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    background:none;border:1px solid var(--river);color:var(--river);
+    padding:5px 10px;cursor:pointer;
+  }
+  .ctrl:hover{background:var(--river);color:var(--paper-hi)}
+  .ctrl:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* ---- 章 ---- */
+  .chapter{margin:52px 0 22px;display:flex;align-items:baseline;gap:14px}
+  .chapter .ch-no{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--river);white-space:nowrap}
+  .chapter h2{
+    font-family:var(--disp);font-weight:900;font-size:20px;margin:0;letter-spacing:.02em;
+  }
+  .chapter::after{content:"";flex:1;height:1px;background:var(--contour)}
+
+  /* ---- 設問カード ---- */
+  details.qa{
+    background:var(--paper-hi);
+    border:1px solid var(--contour);
+    border-left:3px solid var(--river);
+    margin-bottom:12px;
+  }
+  details.qa[open]{border-left-color:var(--marker)}
+  details.qa summary{
+    list-style:none;cursor:pointer;
+    padding:16px 18px 16px 16px;
+    display:flex;gap:13px;align-items:flex-start;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  summary:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .qno{
+    font-family:var(--mono);font-weight:700;font-size:12px;
+    color:var(--river);padding-top:5px;letter-spacing:.04em;flex:none;
+  }
+  .qtext{
+    font-family:var(--disp);font-weight:700;font-size:16.5px;line-height:1.65;flex:1;
+  }
+  .chev{flex:none;color:var(--ink-soft);font-family:var(--mono);font-size:13px;padding-top:4px;transition:transform .2s}
+  details.qa[open] .chev{transform:rotate(90deg)}
+
+  .qbody{padding:0 18px 22px 47px;border-top:1px dashed var(--contour);margin:0 18px 0 47px;padding-left:0;padding-right:0}
+
+  .lbl{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    color:var(--river);margin:18px 0 7px;
+  }
+  .aim{font-size:14px;color:var(--ink-soft);line-height:1.8}
+  ul.points{margin:0;padding-left:1.15em;font-size:15px}
+  ul.points li{margin-bottom:5px}
+  ul.points li::marker{color:var(--river)}
+
+  .sample{
+    background:var(--paper);
+    border:1px solid var(--contour);
+    padding:15px 17px;
+    font-size:15px;line-height:1.9;
+  }
+  .sample::before{
+    content:"回答例";
+    display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    color:var(--ink-soft);margin-bottom:8px;
+  }
+
+  .warn{
+    background:var(--marker-soft);
+    border-left:3px solid var(--marker);
+    padding:12px 15px;
+    font-size:14px;line-height:1.8;
+    margin-top:16px;
+  }
+  .warn b{font-family:var(--disp)}
+
+  .done{
+    margin-top:18px;display:flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);cursor:pointer;
+  }
+  .done input{width:15px;height:15px;accent-color:var(--river);cursor:pointer}
+
+  /* ---- チェックリスト ---- */
+  .checklist{
+    background:var(--river-deep);color:#E8EDE7;
+    padding:30px 26px;margin-top:56px;
+  }
+  .checklist h2{font-family:var(--disp);font-weight:900;font-size:19px;margin:0 0 6px}
+  .checklist p.lead{font-size:14px;color:rgba(232,237,231,.7);margin:0 0 18px}
+  .checklist ul{margin:0;padding-left:1.1em;font-size:15px;line-height:2}
+  .checklist li::marker{color:var(--marker)}
+
+  footer.note{
+    margin-top:34px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;
+    border-top:1px solid var(--contour);padding-top:16px;
+  }
+
+  @media (max-width:520px){
+    .qbody{margin-left:0;padding-left:0}
+    details.qa summary{padding:14px}
+    .qtext{font-size:15.5px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  @media print{
+    body{background:#fff;font-size:11pt;line-height:1.6}
+    .grid-bg{background-image:none}
+    header.cover{background:#fff;color:#000;border-bottom:2px solid #000}
+    .stamp,.progress,.done,.chev{display:none}
+    .cover-meta{color:#333;border-color:#999}
+    details.qa{break-inside:avoid;background:#fff;border-color:#999}
+    .checklist{background:#fff;color:#000;border:1px solid #000}
+    .checklist p.lead{color:#333}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="stamp">FIELD NOTE — 面接準備</div>
+    <h1><span class="thin">柏原市役所 採用試験</span>技術職 面接想定問答集</h1>
+    <div class="cover-meta">
+      <span>区分：技術職（土木）</span>
+      <span>全27問</span>
+      <span>作成：2026.08</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap grid-bg">
+
+  <div class="howto">
+    <b>使い方</b><br>
+    設問をタップすると、質問の意図・答えの骨子・回答例が開きます。回答例は<b>丸暗記しないこと</b>。骨子だけ頭に入れて、自分の経験と言葉に置き換えて声に出す練習をしてください。数字や制度名は、面接前に必ず柏原市の公式ホームページで最新の状況を確認してください。
+  </div>
+
+  <div class="progress">
+    <span id="count">0 / 27</span>
+    <div class="bar"><span id="fill"></span></div>
+    <button class="ctrl" id="toggleAll">すべて開く</button>
+  </div>
+
+  <!-- ============ 第1章 ============ -->
+  <div class="chapter"><span class="ch-no">CH.1</span><h2>志望動機と人物</h2></div>
+
+  <details class="qa">
+    <summary><span class="qno">01</span><span class="qtext">なぜ柏原市を志望したのですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">近隣市や大阪府ではなく、なぜここなのか。定着してくれる人かを見ています。技術職でも人物質問は必ず来ます。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>柏原との個人的な接点（住んでいる・通っていた・関わりがある）</li>
+        <li>市の計画や地形など、具体的な事実を一つ挟む</li>
+        <li>技術職として何を担いたいかで着地する</li>
+      </ul>
+      <div class="lbl">組み立て</div>
+      <div class="sample">柏原市は大和川と石川が合流し、東は生駒山地、西は玉手山に挟まれた土地で、河川・斜面・市街地の課題が一つの市に凝縮されています。第5次総合計画では2030年に「選ばれ、選び続けられるまち」を掲げていますが、それを支えるのは道路や水路といった土台だと考えています。生活の基盤をつくる側から、住み続けられるまちに関わりたいと思い志望しました。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">02</span><span class="qtext">民間の建設会社ではなく、なぜ市役所の技術職なのですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">技術職の面接で最も突っ込まれる質問。「安定しているから」を疑われています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>発注者側として、計画・設計から維持管理まで一つのまちに長く関われる</li>
+        <li>採算が合わない地域も切り捨てず、公平に整備できるのは行政だけ</li>
+        <li>市民生活と直接つながる仕事がしたい</li>
+      </ul>
+      <div class="warn"><b>注意</b>／「技術力を磨きたいだけなら民間のほうが機会は多いのでは」と必ず返されます。技術の話ではなく、<b>地域への責任</b>に着地させてください。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">03</span><span class="qtext">これまでに力を入れて取り組んだことを教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>課題 → 自分の工夫 → 周囲との関わり → 学び、の順で話す</li>
+        <li>成果の大きさより、他人を巻き込んだ過程を厚く</li>
+        <li>研究・実習・現場経験があれば技術系のエピソードを優先</li>
+      </ul>
+      <p class="aim">役所は組織で動きます。個人の技術力より調整力が評価されます。1分程度に収め、深掘りの余地を残してください。</p>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">04</span><span class="qtext">あなたの長所と短所を教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>長所は必ず具体的なエピソードとセットで</li>
+        <li>短所は実在するものを一つ。ただし改善のために今していることを添える</li>
+        <li>「心配性」「慎重すぎる」は技術職ではむしろ長所に転びやすい</li>
+      </ul>
+      <div class="warn"><b>注意</b>／「短所は特にありません」は最悪の回答。逆に「時間にルーズ」「人の話を聞かない」など、公務に致命的なものは避けます。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">05</span><span class="qtext">希望しない部署に配属されたらどうしますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>技術職でも用地、施設管理、事務系の仕事に就く可能性を理解している</li>
+        <li>どの部署も市民生活に直結するので前向きに取り組む</li>
+        <li>異動を通じて市全体を知ることが将来の判断力になる</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">06</span><span class="qtext">併願はしていますか。第一志望はどこですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>併願は正直に答える（隠しても不自然になる）</li>
+        <li>そのうえで「柏原市が第一志望です」と理由付きで言い切る</li>
+        <li>理由は01の志望動機と矛盾させない</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">07</span><span class="qtext">ストレスを感じたとき、どう対処しますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">技術職は住民説明や災害対応で矢面に立ちます。長く働けるかを見ています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>具体的な切り替え方法を一つ（運動・趣味など）</li>
+        <li>一人で抱え込まず、相談できる相手がいる</li>
+        <li>「ストレスを感じません」とは言わない</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <!-- ============ 第2章 ============ -->
+  <div class="chapter"><span class="ch-no">CH.2</span><h2>柏原市を知る</h2></div>
+
+  <details class="qa">
+    <summary><span class="qno">08</span><span class="qtext">柏原市の魅力を一つ挙げてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">素材</div>
+      <ul class="points">
+        <li>ぶどう栽培とワイン（カタシモワイナリー／斜面地の農業景観）</li>
+        <li>亀の瀬の地すべり対策施設、高井田横穴群、智識寺跡などの歴史資源</li>
+        <li>近鉄大阪線とJR大和路線の2路線があり、天王寺方面へのアクセスが良い</li>
+        <li>山と川に囲まれた自然環境が市街地のすぐそばにある</li>
+      </ul>
+      <div class="warn"><b>注意</b>／技術職なら、魅力を<b>地形や基盤の話につなげる</b>と印象が強くなります。例：ぶどう畑は景観資源であると同時に、斜面地の土地利用と保全という技術的テーマでもある。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">09</span><span class="qtext">柏原市の課題を一つ挙げ、どう関わりたいか教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>人口減少と高齢化、それに伴う税収減と施設の維持</li>
+        <li>災害リスク（河川・土砂）と、インフラの老朽化</li>
+        <li>空き家の増加、斜面地の住宅地と狭い道路</li>
+      </ul>
+      <div class="warn"><b>注意</b>／課題は批判で終わらせず、必ず「だから自分はこう関わりたい」までセットにしてください。市の職員を前にした批判だけの回答は減点されます。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">10</span><span class="qtext">柏原市の総合計画について知っていることはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">押さえる点</div>
+      <ul class="points">
+        <li>現行は第5次柏原市総合計画。2030年のまちの将来像を掲げている</li>
+        <li>キーワードは「選ばれる」「選び続けられる」まち</li>
+        <li>まち・ひと・しごと創生総合戦略では「子育て環境ナンバーワン」「働きやすい」「住んでみたい・住み続けたい」「暮らしやすい」の4つを基本目標としている</li>
+      </ul>
+      <div class="warn"><b>要確認</b>／計画は改定されることがあります。面接前に市ホームページで<b>現在の計画の版と将来像の文言</b>を必ず確認してください。うろ覚えで言い切るのが一番危険です。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">11</span><span class="qtext">柏原市のまちづくりで、あなたが改善したい点はどこですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">素材</div>
+      <ul class="points">
+        <li>斜面地の住宅地と狭あい道路（緊急車両の進入、擁壁の老朽化）</li>
+        <li>柏原駅・河内国分駅周辺の歩行空間とバリアフリー</li>
+        <li>空き家の増加と、跡地の活用</li>
+        <li>農地・緑地の保全と、宅地との調和</li>
+      </ul>
+      <p class="aim">一つに絞って、現地を見た印象を交えて話せると説得力が出ます。</p>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">12</span><span class="qtext">柏原市内で実際に見てきた場所はありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">「地域密着」を口だけで言っていないかの確認。技術職では特に効きます。</p>
+      <div class="lbl">準備</div>
+      <ul class="points">
+        <li>亀の瀬地すべり資料室は見学可能。全国有数の地すべり対策事業を実地で語れる</li>
+        <li>大和川と石川の合流点、堤防の高さや河川敷の使われ方</li>
+        <li>山麓部の住宅地と、そこに至る道路の幅員・勾配</li>
+        <li>駅前の歩道、段差、自転車の停め方</li>
+      </ul>
+      <div class="warn"><b>これが最大の差別化</b>／実際に歩いて「ここがこうなっていた」と一言添えられる受験者は多くありません。見学の可否や日程は事前に確認を。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <!-- ============ 第3章 ============ -->
+  <div class="chapter"><span class="ch-no">CH.3</span><h2>技術職の専門</h2></div>
+
+  <details class="qa">
+    <summary><span class="qno">13</span><span class="qtext">柏原市の防災上の課題を、技術職の視点で説明してください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">本命の質問。柏原の地形を理解しているかが一発で分かります。</p>
+      <div class="lbl">骨子（3層で整理する）</div>
+      <ul class="points">
+        <li><b>河川</b>／大和川の外水氾濫と、市街地に降った雨が排けない内水氾濫</li>
+        <li><b>斜面</b>／山麓部に土砂災害警戒区域が分布し、住宅が近接している</li>
+        <li><b>地すべり</b>／亀の瀬は国が直轄で対策を続けている全国有数の地すべり地帯</li>
+      </ul>
+      <div class="sample">柏原市は河川災害と土砂災害の両方を抱える地形です。ハード整備だけで完全に防ぐことはできないので、雨水排水などの施設整備と並行して、ハザードマップの周知や避難行動といったソフト面を組み合わせる必要があると考えます。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">14</span><span class="qtext">老朽化したインフラにどう対応すべきだと思いますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">キーワード</div>
+      <ul class="points">
+        <li>事後保全から<b>予防保全</b>への転換</li>
+        <li>道路法に基づき、橋梁やトンネルは<b>5年に1回の近接目視点検</b>が義務づけられている</li>
+        <li>橋梁長寿命化修繕計画、公共施設等総合管理計画</li>
+        <li>点検・診断・措置・記録のサイクルを回す</li>
+        <li>人口減少で財源も職員も限られる前提を必ず入れる</li>
+      </ul>
+      <div class="sample">すべてを同時に更新する財源はないので、点検結果に基づいて優先順位をつけ、壊れる前に手を入れる予防保全が基本になると考えます。同時に、利用実態が変わった施設は集約や規模の見直しも含めて検討する必要があると思います。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">15</span><span class="qtext">柏原市の上下水道について知っていることはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">最重要の事実</div>
+      <ul class="points">
+        <li>柏原市の水道事業は<b>令和7年4月に大阪広域水道企業団へ統合</b>された</li>
+        <li>同時に統合したのは岸和田市・八尾市・富田林市・高石市の計5団体</li>
+        <li>つまり現在は<b>上水道は企業団、下水道は市</b>の所管</li>
+        <li>下水道の課題は管路の老朽化更新と浸水対策</li>
+      </ul>
+      <div class="warn"><b>ここを間違えると致命的</b>／「柏原市の水道職員として働きたい」と言ってしまうと、制度を調べていないことが即座に露見します。受験する職種の担当範囲を募集要項で必ず確認してください。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">16</span><span class="qtext">専門知識のない住民や事務職員に、どう説明しますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">技術職は住民説明会や用地交渉の前面に立ちます。「技術が分かる人」ではなく「技術を伝えられる人」を探しています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>専門用語を使わず、図や写真、現地の写真で示す</li>
+        <li>「なぜ必要か」「いつまでか」「生活にどう影響するか」を先に伝える</li>
+        <li>相手が何を心配しているかを先に聞く</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">17</span><span class="qtext">工事に反対する住民がいたら、どう対応しますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">手順で答える</div>
+      <ul class="points">
+        <li>まず反対の理由を具体的に聴く（騒音か、通行か、補償か、説明不足か）</li>
+        <li>技術的に代替できる部分があるか検討する（工法・時間帯・動線）</li>
+        <li>独断で判断・約束せず、上司や関係課と協議したうえで回答する</li>
+      </ul>
+      <div class="warn"><b>言葉選び</b>／「説得します」は避けてください。「理由を伺ったうえで、できることとできないことを整理して説明します」が適切です。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">18</span><span class="qtext">災害が発生したとき、技術職は何をすると思いますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>発災直後は道路・橋梁・水路・擁壁のパトロールと被害状況の把握</li>
+        <li>通行止めなどの応急措置と、二次被害の防止</li>
+        <li>応急復旧、その後の災害査定に向けた記録・写真の整理</li>
+        <li>職員自身も被災者になりうるため、参集体制と分担を日頃から確認しておく</li>
+      </ul>
+      <p class="aim">最後の一点まで言えると、組織で動く自覚があると評価されます。</p>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">19</span><span class="qtext">「道路に穴が空いている」と市民から通報が入りました。どう動きますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">土木職の日常業務そのものです。手順で答えられるかを見ています。</p>
+      <div class="lbl">手順で答える</div>
+      <ul class="points">
+        <li>場所と状況を聞き取り、<b>まず現地を確認する</b></li>
+        <li>市道か、府道・国道か、私道かを確認する（管理者が違えば所管課に引き継ぐ）</li>
+        <li>危険なら現場でカラーコーンなどの応急措置を先に行う</li>
+        <li>常温合材などで応急復旧し、必要に応じて本復旧を計画する</li>
+        <li>対応内容を記録し、通報者にも結果を伝える</li>
+      </ul>
+      <div class="warn"><b>加点ポイント</b>／道路の管理に瑕疵があって事故が起きれば、<b>市が賠償責任を負う</b>ことがあります。「だから通報への初動が重要」まで言えると、責任の所在を理解していると評価されます。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">20</span><span class="qtext">柏原市内の河川や水路は、誰が管理しているか分かりますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">管理区分を理解しているかは、土木職の基礎知識として問われやすい論点です。</p>
+      <div class="lbl">押さえる考え方</div>
+      <ul class="points">
+        <li>河川は等級と区間によって<b>国・府・市</b>と管理者が分かれる</li>
+        <li>大和川は一級河川で、本川は国が管理している</li>
+        <li>市が担うのは主に、法定外水路や雨水排水施設など身近な施設</li>
+        <li>だから浸水対策は、国・府・市の連携なしには成立しない</li>
+      </ul>
+      <div class="warn"><b>要確認</b>／個々の河川・水路の管理者は区間ごとに異なります。断定せず「大和川は国管理、支川や水路は府・市」と大枠で答え、詳細は入庁後に確認したいと添えるのが安全です。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">21</span><span class="qtext">発注者としての土木職は、具体的に何をする仕事だと思いますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">「現場で工事をする」と答えると、役割を理解していないと判断されます。</p>
+      <div class="lbl">仕事の流れで答える</div>
+      <ul class="points">
+        <li>計画・調査 → 設計（または委託の監督） → 積算 → 発注 → 工事監督 → 検査 → 維持管理</li>
+        <li>用地交渉、関係機関との協議、住民説明も土木職の仕事</li>
+        <li>予算要求や補助金の申請など、机上の業務も相当な割合を占める</li>
+      </ul>
+      <div class="sample">設計や施工そのものは委託・請負で進みますが、何を、どの優先順位で、いくらでつくるかを決めるのは市の技術職です。現場に立つ時間だけでなく、積算や協議、説明までを含めて責任を持つ仕事だと理解しています。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">22</span><span class="qtext">大学（高専）で学んだ土木の分野は何ですか。市でどう活かせますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">つなげ方の例</div>
+      <ul class="points">
+        <li><b>水理・河川</b>／内水氾濫対策、雨水排水計画、流量計算</li>
+        <li><b>土質・地盤</b>／斜面地の安定、擁壁、亀の瀬のような地すべり地形の理解</li>
+        <li><b>構造・材料</b>／橋梁点検、コンクリート構造物の劣化診断、長寿命化</li>
+        <li><b>計画・交通</b>／通学路の安全対策、狭あい道路、駅周辺の歩行空間</li>
+      </ul>
+      <div class="warn"><b>注意</b>／面接官の全員が土木出身とは限りません。専門用語を並べず、<b>柏原市のどの課題に効くか</b>まで翻訳して話してください。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">23</span><span class="qtext">施工業者とは、どのような関係で仕事を進めるべきだと思いますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>発注者と受注者は対等な契約関係であり、上下ではない</li>
+        <li>公平・公正な取扱いを徹底する（特定業者への便宜は絶対にしない）</li>
+        <li>現場の安全と品質を確保するため、必要な確認と協議は遠慮なく行う</li>
+      </ul>
+      <p class="aim">公務員倫理の観点が入っている質問です。接待や便宜供与を明確に否定できるようにしておいてください。</p>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">24</span><span class="qtext">建設業の人手不足について、行政としてどう向き合うべきだと思いますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">時事性のある質問。工事を担う地元業者がいなければ、市はインフラを維持できません。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>担い手が減れば、災害時の応急復旧を支える地元業者も減る</li>
+        <li>時間外労働の上限規制を踏まえた<b>適正な工期設定</b>と、無理のない発注時期の平準化</li>
+        <li>ICT施工やドローン点検など、省力化技術の活用（i-Construction）</li>
+        <li>設計変更や協議に発注者側が迅速に対応することも、現場の負担軽減になる</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">25</span><span class="qtext">入庁後に取りたい資格や、勉強したいことはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">土木職で挙げやすい資格</div>
+      <ul class="points">
+        <li>1級土木施工管理技士（監督業務の基礎になる）</li>
+        <li>技術士補・技術士（建設部門）</li>
+        <li>測量士補・測量士</li>
+        <li>コンクリート診断士（老朽化対策と直結する）</li>
+      </ul>
+      <p class="aim">名前を挙げるだけでなく、「点検や監督の場面で必要になるから」と業務との結びつきを一言添えてください。資格より先に、現場を見て覚えたいという姿勢も忘れずに。</p>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <!-- ============ 第4章 ============ -->
+  <div class="chapter"><span class="ch-no">CH.4</span><h2>締めくくり</h2></div>
+
+  <details class="qa">
+    <summary><span class="qno">26</span><span class="qtext">最後に何か質問はありますか。（逆質問）</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">使える質問</div>
+      <ul class="points">
+        <li>入庁までに勉強しておくべきことはありますか</li>
+        <li>技術職の若手は、最初にどのような業務から担当することが多いですか</li>
+        <li>技術職として長く働くうえで、大切にされていることは何ですか</li>
+      </ul>
+      <div class="warn"><b>避けるべき質問</b>／給与、残業、休暇、転勤の有無。調べれば分かることも聞かないこと。「特にありません」も熱意を疑われるので、必ず一つ用意してください。</div>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">27</span><span class="qtext">最後に、何か伝えたいことはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>30秒以内。志望動機の要点をもう一度、短く</li>
+        <li>面接中に言い足りなかった点があれば一つだけ補う</li>
+        <li>「柏原市で働きたい」という意思を最後に明言する</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk">確認済み</label>
+    </div>
+  </details>
+
+  <!-- ============ チェックリスト ============ -->
+  <div class="checklist">
+    <h2>面接前に目を通しておく資料</h2>
+    <p class="lead">柏原市ホームページで確認できます。</p>
+    <ul>
+      <li>第5次柏原市総合計画（将来像と分野別の目標）</li>
+      <li>ハザードマップ（洪水・土砂災害）</li>
+      <li>公共施設等総合管理計画</li>
+      <li>橋梁長寿命化修繕計画</li>
+      <li>都市計画マスタープラン</li>
+      <li>通学路交通安全プログラム</li>
+      <li>広報かしわら 直近3か月分</li>
+      <li>採用試験の募集要項（受験区分の職務内容欄）</li>
+    </ul>
+  </div>
+
+  <footer class="note">
+    本資料は面接対策用の参考メモです。計画名、制度、組織の所管は改定・変更されることがあります。数字や固有名詞を面接で述べる際は、必ず柏原市の公式ホームページで最新の内容を確認してください。
+  </footer>
+
+</div>
+
+<script>
+  (function(){
+    var all = document.querySelectorAll('details.qa');
+    var chks = document.querySelectorAll('.chk');
+    var count = document.getElementById('count');
+    var fill = document.getElementById('fill');
+    var btn = document.getElementById('toggleAll');
+
+    function update(){
+      var n = 0;
+      chks.forEach(function(c){ if(c.checked) n++; });
+      count.textContent = n + ' / ' + chks.length;
+      fill.style.width = (n / chks.length * 100) + '%';
+    }
+    chks.forEach(function(c){ c.addEventListener('change', update); });
+    update();
+
+    btn.addEventListener('click', function(){
+      var open = btn.textContent.indexOf('開く') !== -1;
+      all.forEach(function(d){ d.open = open; });
+      btn.textContent = open ? 'すべて閉じる' : 'すべて開く';
+    });
+
+    window.addEventListener('beforeprint', function(){
+      all.forEach(function(d){ d.open = true; });
+    });
+  })();
+</script>
+
+</body>
+</html>

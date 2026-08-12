@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCOA 実戦ドリル｜柏原市役所 技術職</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=BIZ+UDPGothic:wght@400;700&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16211F; --ink-soft:#4A5854;
+    --paper:#EEF0EA; --paper-hi:#F7F8F4;
+    --river:#24504B; --river-deep:#173630;
+    --contour:#C4CCC2; --marker:#DCE94F; --marker-soft:#F0F5B8;
+    --alert:#B3341F; --alert-soft:#F6E3DF;
+    --disp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    --body:"BIZ UDPGothic","Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+    --mono:"Roboto Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;font-feature-settings:"palt";
+    background-image:linear-gradient(to right,var(--contour) 1px,transparent 1px),linear-gradient(to bottom,var(--contour) 1px,transparent 1px);
+    background-size:19px 19px;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px 80px}
+
+  header.cover{background:var(--river-deep);color:#E8EDE7;border-bottom:6px solid var(--marker)}
+  .cover-inner{max-width:720px;margin:0 auto;padding:38px 16px 30px}
+  .stamp{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.22em;border:1px solid rgba(232,237,231,.5);padding:5px 11px;margin-bottom:18px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(26px,6.5vw,38px);line-height:1.3;margin:0}
+  h1 .thin{display:block;font-size:.48em;font-weight:500;letter-spacing:.16em;opacity:.75;margin-bottom:9px}
+  .cover-meta{font-family:var(--mono);font-size:12px;letter-spacing:.07em;color:rgba(232,237,231,.72);border-top:1px solid rgba(232,237,231,.25);padding-top:13px;margin-top:20px;display:flex;flex-wrap:wrap;gap:5px 20px}
+
+  .panel{background:var(--paper-hi);border:1px solid var(--contour);padding:22px;margin-top:28px}
+  .panel h2{font-family:var(--disp);font-weight:900;font-size:17px;margin:0 0 4px}
+  .panel .lead{font-size:13.5px;color:var(--ink-soft);margin:0 0 18px;line-height:1.85}
+  .panel .note{font-size:13px;line-height:1.85;background:var(--marker-soft);border-left:3px solid var(--marker);padding:12px 14px;margin-top:20px}
+
+  .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--river);margin:22px 0 9px}
+  .lbl:first-of-type{margin-top:0}
+
+  .catgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+  .pick{
+    font-family:var(--body);text-align:left;background:var(--paper);border:1px solid var(--contour);
+    color:var(--ink);padding:13px 15px;cursor:pointer;line-height:1.5;
+  }
+  .pick:hover{border-color:var(--river);background:#fff}
+  .pick:focus-visible{outline:2px solid var(--river);outline-offset:2px}
+  .pick b{display:block;font-family:var(--disp);font-weight:700;font-size:15px}
+  .pick span{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.05em}
+  .pick.wide{grid-column:1/-1;border-left:3px solid var(--river)}
+
+  /* ===== 出題カード ===== */
+  #stage{margin-top:26px}
+  .hud{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.05em;margin-bottom:9px}
+  .hud .tag{background:var(--river);color:var(--paper-hi);padding:3px 9px;font-size:11px;letter-spacing:.1em}
+  .hud .spacer{flex:1}
+  .hud .clock{font-weight:700;color:var(--river)}
+  .hud .clock.over{color:var(--alert)}
+
+  .timer{height:7px;background:var(--contour);position:relative;overflow:hidden;margin-bottom:2px}
+  .timer i{position:absolute;inset:0 auto 0 0;width:100%;background:var(--river);transition:width .1s linear}
+  .timer.over i{width:100%!important;background:var(--alert);animation:pulse 1s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .overmsg{display:none;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--alert);margin:6px 0 0}
+  .timer.over ~ .overmsg{display:block}
+
+  .card{
+    background:var(--paper-hi);border:1px solid var(--contour);border-top:3px solid var(--river);
+    padding:22px 20px;margin-top:14px;
+    animation:flip .42s cubic-bezier(.2,.7,.3,1);transform-origin:top center;
+  }
+  @keyframes flip{from{transform:perspective(900px) rotateX(-78deg);opacity:0}to{transform:perspective(900px) rotateX(0);opacity:1}}
+  .qtext{font-family:var(--disp);font-weight:700;font-size:17px;line-height:1.72;margin:0}
+  .qsub{font-family:var(--mono);font-size:15.5px;background:var(--paper);border:1px solid var(--contour);padding:11px 14px;margin:13px 0 0;overflow-x:auto;letter-spacing:.02em}
+
+  .opts{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+  .opt{width:100%;text-align:left;font-family:var(--body);font-size:15px;line-height:1.6;background:var(--paper);
+    border:1px solid var(--contour);color:var(--ink);padding:12px 14px;cursor:pointer;display:flex;gap:11px;align-items:flex-start}
+  .opt:hover:not(:disabled){border-color:var(--river);background:#fff}
+  .opt:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .opt:disabled{cursor:default}
+  .opt .mk{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-soft);padding-top:3px;flex:none}
+  .opt.correct{border-color:var(--river);background:#E3EDE5;border-width:2px}
+  .opt.correct .mk{color:var(--river)}
+  .opt.wrongpick{border-color:var(--alert);background:var(--alert-soft);border-width:2px}
+  .opt.wrongpick .mk{color:var(--alert)}
+
+  .fb{margin-top:16px;padding:14px 16px;font-size:14.5px;line-height:1.85;border-left:3px solid var(--marker);background:var(--marker-soft)}
+  .fb .verdict{font-family:var(--disp);font-weight:900;font-size:14.5px;letter-spacing:.04em;display:block;margin-bottom:6px}
+  .fb.ok .verdict{color:var(--river)}
+  .fb.ng .verdict{color:var(--alert)}
+  .fb .tip{display:block;margin-top:9px;padding-top:9px;border-top:1px dashed rgba(22,33,31,.22);font-size:13.5px;color:var(--ink-soft)}
+
+  .next{margin-top:16px;width:100%;font-family:var(--disp);font-weight:700;font-size:15px;letter-spacing:.05em;
+    background:var(--river);color:var(--paper-hi);border:none;padding:14px;cursor:pointer}
+  .next:hover{background:var(--river-deep)}
+  .next:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  .quit{margin-top:10px;width:100%;font-family:var(--mono);font-size:11px;letter-spacing:.1em;background:none;
+    border:1px solid var(--contour);color:var(--ink-soft);padding:9px;cursor:pointer}
+  .quit:hover{border-color:var(--river);color:var(--river)}
+
+  /* ===== 結果 ===== */
+  .result{background:var(--river-deep);color:#E8EDE7;padding:30px 24px;margin-top:26px}
+  .result h2{font-family:var(--disp);font-weight:900;font-size:18px;margin:0 0 12px}
+  .big{font-family:var(--mono);font-size:36px;font-weight:700;color:var(--marker);line-height:1.2}
+  .result p{font-size:14.5px;color:rgba(232,237,231,.82);line-height:1.9;margin:12px 0 0}
+  .stats{font-family:var(--mono);font-size:12.5px;line-height:2.05;margin-top:16px;border-top:1px solid rgba(232,237,231,.25);padding-top:14px}
+  .stats .hl{color:var(--marker)}
+  .again{margin-top:20px;width:100%;font-family:var(--disp);font-weight:700;font-size:15px;background:var(--marker);
+    color:var(--river-deep);border:none;padding:13px;cursor:pointer}
+
+  footer.note{margin-top:34px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;border-top:1px solid var(--contour);padding-top:16px}
+  [hidden]{display:none!important}
+  @media (prefers-reduced-motion:reduce){.card{animation:none}.timer.over i{animation:none}}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="stamp">DRILL — 基礎能力検査</div>
+    <h1><span class="thin">柏原市役所 技術職（土木）</span>SCOA 実戦ドリル</h1>
+    <div class="cover-meta"><span>全60問</span><span>5分野</span><span>制限30秒／問</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ===== スタート画面 ===== -->
+  <section class="panel" id="start">
+    <h2>出題方法を選ぶ</h2>
+    <p class="lead">柏原市はSCOA総合適性検査をテストセンター方式で実施しています。出題は言語・数理・論理・一般常識・基礎英語の5尺度。本番は120問60分とされ、1問あたり約30秒しかありません。このドリルも30秒で計測します。</p>
+
+    <div class="lbl">分野を選んで練習する</div>
+    <div class="catgrid" id="catBtns"></div>
+
+    <div class="lbl">まとめて解く</div>
+    <div class="catgrid">
+      <button class="pick wide" data-mode="all"><b>ランダム出題（全60問）</b><span>全分野をシャッフル</span></button>
+      <button class="pick wide" data-mode="mock20"><b>本番形式ミニテスト（20問）</b><span>本番の配分比でランダム抽出</span></button>
+    </div>
+
+    <p class="note">本番の配点は英語の比重が最も高く、次いで数理と論理です。専門試験は課されないため、中学〜高校初級レベルを速く正確に処理する練習が最も効きます。柏原市は過去問を公表していないので、本ドリルはSCOAの一般的な出題形式に沿ったオリジナル問題です。</p>
+  </section>
+
+  <!-- ===== 出題 ===== -->
+  <section id="stage" hidden>
+    <div class="hud">
+      <span class="tag" id="tag">言語</span>
+      <span id="pos">1 / 20</span>
+      <span class="spacer"></span>
+      <span class="clock" id="clock">30.0s</span>
+    </div>
+    <div class="timer" id="timer"><i id="timerFill"></i></div>
+    <p class="overmsg">30秒経過　本番ならここで見切って次に進む場面です</p>
+    <div id="cardHost"></div>
+    <button class="quit" id="quit">中断してトップに戻る</button>
+  </section>
+
+  <!-- ===== 結果 ===== -->
+  <section class="result" id="result" hidden>
+    <h2>結果</h2>
+    <div class="big" id="finalScore">—</div>
+    <p id="comment"></p>
+    <div class="stats" id="stats"></div>
+    <button class="again" id="again">もう一度</button>
+  </section>
+
+  <footer class="note">
+    本ドリルはSCOAの公表されている出題尺度をもとに作成した練習用オリジナル問題で、実際の試験問題ではありません。出題数・試験時間・実施方式は年度や職種で変わることがあるため、必ず柏原市の受験案内で確認してください。常識分野の制度や数値は改正されることがあります。
+  </footer>
+</div>
+
+<script>
+const BANK = {
+"言語":[
+ {q:"「需要」の対義語として正しいものはどれか。",o:["供給","消費","生産","流通"],a:0,e:"求める側が需要、与える側が供給。経済用語の基本的な対義語です。",t:"輸出⇔輸入、収入⇔支出もセットで確認を。"},
+ {q:"「気が置けない」の意味として正しいものはどれか。",o:["油断ができない","遠慮がいらない","落ち着きがない","気に入らない"],a:1,e:"気を置く必要がない、つまり遠慮せず打ち解けられるという意味です。",t:"誤用率の高い慣用句の代表格。「油断できない」は誤りです。"},
+ {q:"「呉越同舟」の意味として正しいものはどれか。",o:["少人数で大軍に立ち向かうこと","仲の悪い者同士が同じ場に居合わせること","昔からの習慣を守り続けること","二つの物事が両立しないこと"],a:1,e:"敵対する呉と越の人間が同じ舟に乗り合わせた故事から。転じて、協力せざるを得ない状況も指します。"},
+ {q:"「五里霧中」の意味として正しいものはどれか。",o:["非常に遠い道のりのこと","事情がつかめず方針が立たないこと","休みなく努力し続けること","短期間で大きく成長すること"],a:1,e:"深い霧の中で方向を見失う様子から、手がかりがなく判断がつかない状態を指します。",t:"「五里夢中」は誤字。漢字での出題に注意。"},
+ {q:"「情けは人のためならず」の本来の意味として正しいものはどれか。",o:["情けをかけるとその人のためにならない","人に親切にすれば巡り巡って自分に返る","情けは人によって使い分けるべきだ","人の情けはあてにならない"],a:1,e:"「人のためならず」は「その人のためだけではない」の意。誤用が広まっている代表例です。"},
+ {q:"「先生が資料を見る」を尊敬語に直したとき、正しいものはどれか。",o:["先生が資料を拝見する","先生が資料をご覧になる","先生が資料を見させていただく","先生が資料をお見えになる"],a:1,e:"「見る」の尊敬語は「ご覧になる」。「拝見する」は謙譲語で自分の動作に使います。",t:"尊敬語は相手を上げる、謙譲語は自分を下げる。面接でも問われます。"},
+ {q:"「お客様が来る」を尊敬語に直したとき、適切でないものはどれか。",o:["お客様がいらっしゃる","お客様がお見えになる","お客様が参られる","お客様がお越しになる"],a:2,e:"「参る」は謙譲語のため、尊敬の助動詞を付けても尊敬語にはなりません。",t:"「〜られる」を付ければ敬語になる、という思い込みが失点の元です。"},
+ {q:"「抽象」の対義語として正しいものはどれか。",o:["具体","現実","客観","詳細"],a:0,e:"抽象⇔具体。客観の対義語は主観です。"},
+ {q:"「憂慮」の類義語として最も適切なものはどれか。",o:["心配","後悔","警戒","落胆"],a:0,e:"憂慮は事態を心配して思い悩むこと。「懸念」もほぼ同義です。"},
+ {q:"「収賄」の読みとして正しいものはどれか。",o:["しゅうわい","しゅうぞう","しゅうろ","しゅうかい"],a:0,e:"収賄（しゅうわい）は賄賂を受け取ること。渡す側は贈賄（ぞうわい）です。",t:"公務員として必ず知っておくべき語。倫理面の面接質問にもつながります。"}
+],
+"数理":[
+ {q:"次の計算の答えはどれか。",s:"12 × 25 − 180 ÷ 6",o:["270","250","320","180"],a:0,e:"乗除が先。12×25＝300、180÷6＝30。300−30＝270。",t:"12×25は「12×100÷4」と考えると速い。"},
+ {q:"定価の2割引で買ったところ、代金は1,760円だった。定価はいくらか。",o:["2,000円","2,112円","2,200円","2,400円"],a:2,e:"2割引＝定価の0.8倍。1,760÷0.8＝2,200円。",t:"割引後の額から戻すときは掛けずに割る。"},
+ {q:"原価1,000円の品物に定価をつけ、定価の2割引で売っても原価の2割の利益が出るようにしたい。定価はいくらか。",o:["1,400円","1,440円","1,500円","1,600円"],a:2,e:"売価は1,000×1.2＝1,200円。定価をdとすると0.8d＝1,200、d＝1,500円。",t:"損益算は「原価→定価→売価」の3段構えで整理する。"},
+ {q:"現在、父は42歳、子は12歳である。父の年齢が子の年齢のちょうど2倍になるのは何年後か。",o:["12年後","15年後","18年後","20年後"],a:2,e:"x年後として42+x＝2(12+x)。42+x＝24+2xよりx＝18。18年後に60歳と30歳。"},
+ {q:"全長6kmの道のりを、はじめ時速4kmで歩き、途中から時速12kmで走ったところ、ちょうど1時間かかった。走った距離は何kmか。",o:["2km","3km","4km","4.5km"],a:1,e:"歩きx、走りyとして x+y＝6、x/4+y/12＝1。後式を12倍して3x+y＝12。差から2x＝6、x＝3、y＝3。",t:"速さの文章題は「距離の式」と「時間の式」の連立が定石。"},
+ {q:"8%の食塩水200gに水を加えて5%にしたい。加える水は何gか。",o:["80g","100g","120g","150g"],a:2,e:"食塩は200×0.08＝16gで不変。5%にするには全体320g必要。320−200＝120g。",t:"濃度算は「食塩の量は変わらない」を軸に立式する。"},
+ {q:"ある仕事をAは6日、Bは12日で終える。2人で同時に行うと何日で終わるか。",o:["3日","4日","5日","9日"],a:1,e:"1日あたりA＝1/6、B＝1/12、合計1/4。1÷(1/4)＝4日。",t:"仕事算は全体を1、または最小公倍数（この場合12）と置く。"},
+ {q:"5科目のテストの平均点が72点だった。6科目目で平均を75点にするには、何点取ればよいか。",o:["81点","85点","87点","90点"],a:3,e:"6科目で平均75点なら合計450点。現在の合計は72×5＝360点。450−360＝90点。",t:"平均の問題は必ず合計に直してから処理する。"},
+ {q:"2個のさいころを同時に投げたとき、出た目の和が7になる確率はどれか。",o:["1/12","1/9","1/6","1/4"],a:2,e:"全36通りのうち和が7は6通り。6/36＝1/6。",t:"2個のさいころでは和7が最も出やすい、と覚えておくと速い。"},
+ {q:"次の数列の□に入る数はどれか。",s:"2, 5, 11, 23, 47, □",o:["71","83","95","99"],a:2,e:"直前の数を2倍して1を足す規則。47×2+1＝95。",t:"差が3,6,12,24と倍々になっている点からも導けます。"},
+ {q:"ある店の売上が、前月比で1月は20%増、2月は20%減となった。2月の売上は前年12月と比べてどうか。",o:["変わらない","4%増","4%減","8%減"],a:2,e:"1.2×0.8＝0.96。4%減です。",t:"「同率の増減は元に戻らない」は頻出のひっかけ。"},
+ {q:"1辺10cmの正方形に内接する円の面積はいくらか。円周率は3.14とする。",o:["31.4cm²","62.8cm²","78.5cm²","314cm²"],a:2,e:"内接円の半径は5cm。5×5×3.14＝78.5cm²。",t:"内接＝直径が1辺と等しい。外接と取り違えないこと。"}
+],
+"論理":[
+ {q:"「雨が降れば、試合は中止になる」が真であるとき、確実に正しいものはどれか。",o:["試合が中止になったなら、雨が降った","雨が降らなければ、試合は中止にならない","試合が中止にならなかったなら、雨は降らなかった","試合が中止になるのは雨のときだけである"],a:2,e:"命題が真ならその対偶も真。「AならばB」の対偶は「BでないならAでない」です。",t:"逆と裏は必ずしも真になりません。最大のひっかけどころ。"},
+ {q:"「すべての土木技術者は図面が読める」が真であるとき、確実に正しいものはどれか。",o:["図面が読める人は土木技術者である","図面が読めない人は土木技術者ではない","土木技術者でない人は図面が読めない","図面が読める人の多くは土木技術者である"],a:1,e:"「すべてのAはB」の対偶は「BでないものはAでない」。他はすべて逆か裏です。"},
+ {q:"「AでなければBでない」と同じ意味になるものはどれか。",o:["AならばBである","BならばAである","AでないならばBである","BでないならばAでない"],a:1,e:"「¬A→¬B」の対偶は「B→A」です。",t:"記号に置き換えて対偶を取るのが最短ルート。"},
+ {q:"A、B、C、Dの身長について、AはBより高く、CはAより高く、DはBより低い。最も背が高いのは誰か。",o:["A","B","C","D"],a:2,e:"C > A > B > D と一列に確定します。",t:"順序問題は不等号を一本の列に並べ直す。"},
+ {q:"A〜Eの5人が徒競走をした。AはBより先、CはDより先、BはCより先、EはAより先にゴールした。3位は誰か。",o:["A","B","C","D"],a:1,e:"E > A > B > C > D の順。3位はBです。"},
+ {q:"40人のクラスで、英語の合格者は28人、数学の合格者は25人、両方合格した者は18人だった。どちらも不合格だった者は何人か。",o:["3人","5人","7人","9人"],a:1,e:"少なくとも一方に合格したのは28+25−18＝35人。40−35＝5人。",t:"ベン図を書き、重なりを一度だけ引く（包除原理）。"},
+ {q:"あるクラスで犬を飼う人は15人、猫を飼う人は12人、両方飼う人は6人、どちらも飼っていない人は9人だった。クラスの人数は何人か。",o:["27人","30人","33人","36人"],a:1,e:"少なくとも一方は15+12−6＝21人。21+9＝30人。"},
+ {q:"「すべての税理士は国家資格者である」「ある国家資格者は公務員である」がともに真であるとき、確実にいえることはどれか。",o:["ある税理士は公務員である","すべての公務員は国家資格者である","税理士でない国家資格者がいる","確実にいえることはない"],a:3,e:"公務員である国家資格者が税理士とは限らず、両者を結ぶ根拠がありません。",t:"「ある」を含む前提から強い結論は導けない。"},
+ {q:"3人が赤・青・黄のいずれか異なる色の服を着ている。「赤の人は田中ではない」「佐藤は青ではない」「鈴木は赤である」とき、青を着ているのは誰か。",o:["田中","佐藤","鈴木","確定できない"],a:0,e:"鈴木が赤。佐藤は青ではなく赤も不可なので黄。残る青は田中です。",t:"対応関係は表を書いて×を埋めていくのが確実。"},
+ {q:"「四角形が正方形であること」は、「四角形が長方形であること」の何にあたるか。",o:["必要条件","十分条件","必要十分条件","いずれでもない"],a:1,e:"正方形ならば必ず長方形ですが、逆は成り立ちません。したがって十分条件です。",t:"「PならばQ」のとき、Pが十分条件、Qが必要条件。"},
+ {q:"4チームが総当たり戦（各チームが他のすべてと1回ずつ対戦）を行うとき、試合数は何試合か。",o:["4試合","6試合","8試合","12試合"],a:1,e:"4チームから2チームを選ぶ組合せ。4×3÷2＝6試合。",t:"総当たりは n(n−1)÷2。リーグ戦の問題で頻出。"},
+ {q:"ある年の8月11日は火曜日だった。その日から数えて100日後は何曜日か。",o:["水曜日","木曜日","金曜日","土曜日"],a:1,e:"100÷7＝14あまり2。火曜日の2日後で木曜日。",t:"曜日算は7で割った余りだけ進める。"}
+],
+"常識":[
+ {q:"日本国憲法の三大原則の組み合わせとして正しいものはどれか。",o:["国民主権・基本的人権の尊重・平和主義","三権分立・法の下の平等・平和主義","国民主権・議院内閣制・地方自治","基本的人権の尊重・三権分立・国民主権"],a:0,e:"三大原則は国民主権、基本的人権の尊重、平和主義。三権分立は統治の仕組みで、原則には含まれません。",t:"面接で「公務員の使命」を語る場面にも使えます。"},
+ {q:"市町村長の被選挙権が認められる年齢はどれか。",o:["満18歳以上","満20歳以上","満25歳以上","満30歳以上"],a:2,e:"市町村長・市町村議会議員・衆議院議員は満25歳以上。都道府県知事と参議院議員は満30歳以上です。",t:"「知事と参議院だけ30歳」で整理する。"},
+ {q:"地方自治法にもとづき、住民が条例の制定・改廃を請求する場合に必要な署名数はどれか。",o:["有権者の50分の1以上","有権者の10分の1以上","有権者の3分の1以上","有権者の過半数"],a:0,e:"条例の制定・改廃と監査の請求は50分の1以上。議会の解散や首長の解職請求は原則3分の1以上です。",t:"「人の職が飛ぶ請求は3分の1、それ以外は50分の1」。"},
+ {q:"三権分立において、内閣が裁判所に対して持つ権限はどれか。",o:["違憲立法審査","最高裁判所長官の指名","弾劾裁判所の設置","国政調査"],a:1,e:"内閣は最高裁判所長官を指名し、その他の裁判官を任命します。弾劾裁判所の設置と国政調査は国会の権限です。"},
+ {q:"為替が円高に進んだとき、一般に起こることとして正しいものはどれか。",o:["輸出企業の採算が改善する","輸入品の価格が下がる","日本人の海外旅行費用が割高になる","訪日外国人にとって日本での買い物が割安になる"],a:1,e:"円高では円の価値が上がるため輸入品は安くなります。輸出は不利、海外旅行は割安、訪日客には割高です。",t:"「円高＝円が強い＝買う側が得」で一本化する。"},
+ {q:"日本の最南端に位置する島はどれか。",o:["南鳥島","与那国島","沖ノ鳥島","波照間島"],a:2,e:"最南端は沖ノ鳥島、最東端は南鳥島、最西端は与那国島、最北端は択捉島です。",t:"「南は沖ノ鳥、東は南鳥」が入れ替わるひっかけに注意。"},
+ {q:"世界文化遺産「百舌鳥・古市古墳群」が所在する都道府県はどれか。",o:["奈良県","大阪府","京都府","兵庫県"],a:1,e:"堺市、羽曳野市、藤井寺市にまたがる大阪府の世界文化遺産です。",t:"柏原市の近隣。地元の地理として面接でも話題にできます。"},
+ {q:"大化の改新を進めた中心人物の組み合わせとして正しいものはどれか。",o:["聖徳太子と蘇我馬子","中大兄皇子と中臣鎌足","天武天皇と持統天皇","桓武天皇と坂上田村麻呂"],a:1,e:"中大兄皇子（のちの天智天皇）と中臣鎌足が蘇我氏を倒し、公地公民を柱とする改革を進めました。"},
+ {q:"支点から2mの位置に10kgのおもりをつるした。反対側の支点から1mの位置に何kgのおもりをつるすとつり合うか。",o:["5kg","10kg","15kg","20kg"],a:3,e:"（重さ×支点からの距離）が左右で等しいときつり合う。10×2＝20、20÷1＝20kg。",t:"モーメントの基本。構造力学の出発点なので土木受験者は必答。"},
+ {q:"うすい塩酸に水酸化ナトリウム水溶液を加えて中和させたとき、生じる塩はどれか。",o:["塩化ナトリウム","炭酸ナトリウム","硫酸ナトリウム","塩化カルシウム"],a:0,e:"HCl + NaOH → NaCl + H₂O。酸の陰イオンとアルカリの陽イオンが結びついて塩ができます。",t:"中和では必ず水ができる、と押さえる。"},
+ {q:"だ液に含まれる消化酵素アミラーゼが分解するものはどれか。",o:["タンパク質","脂肪","デンプン","繊維質"],a:2,e:"アミラーゼはデンプンを麦芽糖に分解します。タンパク質はペプシン、脂肪はリパーゼが担当します。"},
+ {q:"地震において初期微動を引き起こす波と、その性質の説明として正しいものはどれか。",o:["S波で、P波より速く伝わる","P波で、S波より速く伝わる","P波で、S波より遅く伝わる","表面波で、最も速く伝わる"],a:1,e:"P波（縦波）が先に到達して初期微動を起こし、遅れて届くS波（横波）が主要動を起こします。この差が初期微動継続時間です。",t:"緊急地震速報はP波を検知する仕組み。防災の面接質問にもつながります。"}
+],
+"英語":[
+ {q:"次の語の対義語として正しいものはどれか。",s:"increase",o:["produce","decrease","expand","continue"],a:1,e:"increase（増加する）の対義語は decrease（減少する）。expand は「拡大する」で類義側です。",t:"接頭辞 de- は「下へ・減る」方向を示すことが多い。"},
+ {q:"次の語の対義語として正しいものはどれか。",s:"ancient",o:["modern","famous","natural","serious"],a:0,e:"ancient（古代の）⇔ modern（現代の）。"},
+ {q:"次の語の意味として正しいものはどれか。",s:"reduce",o:["繰り返す","減らす","置き換える","調査する"],a:1,e:"reduce は「減らす、削減する」。名詞形は reduction です。",t:"3R（Reduce・Reuse・Recycle）から連想できます。"},
+ {q:"次の語の意味として正しいものはどれか。",s:"necessary",o:["必要な","可能な","十分な","便利な"],a:0,e:"necessary は「必要な」。possible が「可能な」、convenient が「便利な」です。"},
+ {q:"次の空欄に入る語として正しいものはどれか。",s:"If I ( ) rich, I would buy a house.",o:["am","was","were","will be"],a:2,e:"現在の事実に反する仮定を表す仮定法過去。主語が I でも be動詞は were を用いるのが原則です。",t:"帰結節に would があれば仮定法、と見抜くのが最短。"},
+ {q:"次の空欄に入る語として正しいものはどれか。",s:"I have been living here ( ) 2010.",o:["for","since","from","during"],a:1,e:"現在完了で起点を示すときは since。for は期間の長さに使います。",t:"since＋時点、for＋期間。セットで覚える。"},
+ {q:"次の空欄に入る語として正しいものはどれか。",s:"She is good ( ) playing tennis.",o:["at","in","for","with"],a:0,e:"be good at ~ で「〜が得意である」。"},
+ {q:"次の空欄に入る語として正しいものはどれか。",s:"The man ( ) lives next door is a doctor.",o:["which","who","whom","what"],a:1,e:"先行詞が人で、関係詞節の主語にあたるため主格の who を用います。",t:"人＋主格＝who、人＋目的格＝whom（またはwho）。"},
+ {q:"次の空欄に入る語として正しいものはどれか。",s:"The bridge ( ) built in 1990.",o:["is","was","has","were"],a:1,e:"1990年という過去の時点なので過去形の受動態 was built。主語が単数なので were は不可です。"},
+ {q:"次の空欄に入る語句として正しいものはどれか。",s:"This bag is ( ) than that one.",o:["expensive","more expensive","most expensive","the most expensive"],a:1,e:"than があるので比較級。expensive のような長い語は more をつけます。"},
+ {q:"次の動詞の過去形として正しいものはどれか。",s:"bring",o:["bringed","brang","brought","braught"],a:2,e:"bring − brought − brought と変化する不規則動詞です。",t:"buy−bought、think−thought と同じ型でまとめて覚える。"},
+ {q:"下線部の熟語の意味として正しいものはどれか。",s:"They decided to put off the meeting.",o:["中止する","延期する","開催する","短縮する"],a:1,e:"put off は「延期する」で postpone と同義。中止は call off です。",t:"put off と call off は対で出題されやすい。"},
+ {q:"下線部の熟語の意味として正しいものはどれか。",s:"I am looking forward to seeing you.",o:["会うのを楽しみにしている","会うのをためらっている","会う予定を立てている","会うのを忘れていた"],a:0,e:"look forward to ~ing で「〜を楽しみに待つ」。to のあとは動名詞になる点が頻出です。"},
+ {q:"下線部の熟語の意味として正しいものはどれか。",s:"Don't give up so easily.",o:["油断する","あきらめる","言い返す","引き受ける"],a:1,e:"give up は「あきらめる、放棄する」。"}
+]
+};
+
+const MOCK_MIX = {"言語":3,"数理":4,"論理":4,"常識":3,"英語":6};
+const MARKS = ['A','B','C','D','E'];
+const LIMIT = 30000;
+
+const $ = id => document.getElementById(id);
+const startEl=$('start'), stageEl=$('stage'), resultEl=$('result');
+const host=$('cardHost'), tagEl=$('tag'), posEl=$('pos'), clockEl=$('clock');
+const timerEl=$('timer'), fillEl=$('timerFill');
+
+let queue=[], idx=0, log=[], t0=0, tick=null;
+
+// --- スタート画面の分野ボタン ---
+Object.keys(BANK).forEach(cat => {
+  const b=document.createElement('button');
+  b.className='pick';
+  b.innerHTML='<b></b><span>'+BANK[cat].length+'問</span>';
+  b.querySelector('b').textContent=cat;
+  b.addEventListener('click',()=>begin(BANK[cat].map(x=>({...x,cat}))));
+  $('catBtns').appendChild(b);
+});
+
+document.querySelectorAll('[data-mode]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    if(b.dataset.mode==='all'){
+      const all=[];
+      Object.keys(BANK).forEach(c=>BANK[c].forEach(x=>all.push({...x,cat:c})));
+      begin(shuffle(all));
+    }else{
+      const sel=[];
+      Object.keys(MOCK_MIX).forEach(c=>{
+        shuffle(BANK[c].map(x=>({...x,cat:c}))).slice(0,MOCK_MIX[c]).forEach(x=>sel.push(x));
+      });
+      begin(shuffle(sel));
+    }
+  });
+});
+
+function shuffle(a){
+  const r=a.slice();
+  for(let i=r.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[r[i],r[j]]=[r[j],r[i]];}
+  return r;
+}
+
+function begin(list){
+  queue=list; idx=0; log=[];
+  startEl.hidden=true; resultEl.hidden=true; stageEl.hidden=false;
+  render();
+}
+
+function render(){
+  const it=queue[idx];
+  tagEl.textContent=it.cat;
+  posEl.textContent=(idx+1)+' / '+queue.length;
+  timerEl.classList.remove('over');
+  fillEl.style.width='100%';
+  clockEl.classList.remove('over');
+
+  host.innerHTML='';
+  const card=document.createElement('div');
+  card.className='card';
+
+  const p=document.createElement('p');
+  p.className='qtext'; p.textContent=it.q;
+  card.appendChild(p);
+
+  if(it.s){
+    const s=document.createElement('div');
+    s.className='qsub'; s.textContent=it.s;
+    card.appendChild(s);
+  }
+
+  const ul=document.createElement('ul'); ul.className='opts';
+  it.o.forEach((text,i)=>{
+    const li=document.createElement('li');
+    const b=document.createElement('button');
+    b.className='opt'; b.type='button';
+    b.innerHTML='<span class="mk">'+MARKS[i]+'</span><span></span>';
+    b.querySelector('span:last-child').textContent=text;
+    b.addEventListener('click',()=>answer(i,card,ul,it));
+    li.appendChild(b); ul.appendChild(li);
+  });
+  card.appendChild(ul);
+  host.appendChild(card);
+
+  startClock();
+}
+
+function startClock(){
+  stopClock();
+  t0=Date.now();
+  clockEl.textContent='30.0s';
+  tick=setInterval(()=>{
+    const el=Date.now()-t0;
+    if(el<LIMIT){
+      const left=(LIMIT-el)/1000;
+      clockEl.textContent=left.toFixed(1)+'s';
+      fillEl.style.width=((LIMIT-el)/LIMIT*100)+'%';
+    }else{
+      timerEl.classList.add('over');
+      clockEl.classList.add('over');
+      clockEl.textContent='+'+((el-LIMIT)/1000).toFixed(1)+'s 超過';
+    }
+  },100);
+}
+function stopClock(){ if(tick){clearInterval(tick); tick=null;} }
+
+function answer(pick,card,ul,it){
+  if(card.dataset.done) return;
+  card.dataset.done='1';
+  stopClock();
+  const ms=Date.now()-t0;
+  const ok=(pick===it.a);
+  log.push({cat:it.cat, ok, ms});
+
+  ul.querySelectorAll('.opt').forEach((b,i)=>{
+    b.disabled=true;
+    if(i===it.a) b.classList.add('correct');
+    if(i===pick && !ok) b.classList.add('wrongpick');
+  });
+
+  const fb=document.createElement('div');
+  fb.className='fb '+(ok?'ok':'ng');
+  const secs=(ms/1000).toFixed(1);
+  fb.innerHTML='<span class="verdict"></span><span class="exp"></span>'+(it.t?'<span class="tip"></span>':'');
+  fb.querySelector('.verdict').textContent=(ok?'正解':'不正解　正解は '+MARKS[it.a])+'　（'+secs+'秒'+(ms>LIMIT?'／30秒超過':'')+'）';
+  fb.querySelector('.exp').textContent=it.e;
+  if(it.t) fb.querySelector('.tip').textContent='ポイント：'+it.t;
+  card.appendChild(fb);
+
+  const nx=document.createElement('button');
+  nx.className='next';
+  nx.textContent=(idx+1<queue.length)?'次の問題へ':'結果を見る';
+  nx.addEventListener('click',()=>{
+    idx++;
+    if(idx<queue.length) render(); else finish();
+  });
+  card.appendChild(nx);
+  nx.focus();
+}
+
+function finish(){
+  stopClock();
+  stageEl.hidden=true; resultEl.hidden=false;
+  const n=log.length, ok=log.filter(x=>x.ok).length;
+  const pct=Math.round(ok/n*100);
+  const avg=(log.reduce((s,x)=>s+x.ms,0)/n/1000).toFixed(1);
+  const over=log.filter(x=>x.ms>LIMIT).length;
+  $('finalScore').textContent=ok+' / '+n+'　('+pct+'%)';
+  $('comment').textContent = pct>=80
+    ? (over===0 ? '正答率・速度ともに本番水準です。この状態を維持してください。'
+               : '正答率は十分です。あとは速度だけ。超過した問題を見直し、解法を型として覚えてください。')
+    : pct>=60 ? '基礎は入っています。正答率の低い分野を一つに絞って潰すと、短期間で伸びます。'
+    : '取りこぼしが目立ちます。まず数理と論理から。この2分野は解法の型が決まっており、練習量がそのまま点になります。';
+  const per={};
+  log.forEach(x=>{ per[x.cat]=per[x.cat]||{ok:0,n:0}; per[x.cat].n++; if(x.ok)per[x.cat].ok++; });
+  $('stats').innerHTML =
+    '平均解答時間　<span class="hl">'+avg+'秒</span><br>'+
+    '30秒超過　<span class="hl">'+over+'問</span><br><br>'+
+    Object.keys(per).map(k=>k+'　'+per[k].ok+' / '+per[k].n).join('<br>');
+}
+
+$('quit').addEventListener('click',()=>{
+  stopClock(); stageEl.hidden=true; resultEl.hidden=true; startEl.hidden=false;
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+$('again').addEventListener('click',()=>{
+  resultEl.hidden=true; startEl.hidden=false;
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="柏原市対策">
+<meta name="theme-color" content="#173630" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C1815" media="(prefers-color-scheme: dark)">
+<title>柏原市役所 選考対策（個人面接以外）</title>
+<style>
+  :root{
+    --ink:#16211F;
+    --ink-soft:#4A5854;
+    --paper:#EEF0EA;
+    --paper-hi:#F7F8F4;
+    --river:#24504B;
+    --river-deep:#173630;
+    --contour:#C4CCC2;
+    --marker:#DCE94F;
+    --marker-soft:#F0F5B8;
+    --red:#9A2B1F;
+    --red-soft:#F7E4E0;
+    --fab-bg:rgba(247,248,244,.86);
+    --disp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Meiryo",sans-serif;
+    --body:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.85;
+    font-feature-settings:"palt";
+  }
+
+  .grid-bg{
+    background-image:
+      linear-gradient(to right, var(--contour) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--contour) 1px, transparent 1px);
+    background-size:19px 19px;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px 80px}
+
+  header.cover{
+    background:var(--river-deep);
+    color:#E8EDE7;
+    border-bottom:6px solid var(--marker);
+  }
+  .cover-inner{max-width:760px;margin:0 auto;padding:44px 18px 34px}
+  .stamp{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.22em;
+    border:1px solid rgba(232,237,231,.5);
+    padding:5px 11px;
+    margin-bottom:22px;
+  }
+  h1{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(26px,6.6vw,40px);
+    line-height:1.3;
+    margin:0 0 14px;
+    letter-spacing:.01em;
+  }
+  h1 .thin{display:block;font-size:.46em;font-weight:500;letter-spacing:.14em;opacity:.75;margin-bottom:10px}
+  .cover-meta{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    color:rgba(232,237,231,.72);
+    border-top:1px solid rgba(232,237,231,.25);
+    padding-top:14px;
+    margin-top:22px;
+    display:flex;flex-wrap:wrap;gap:6px 20px;
+  }
+
+  .howto{
+    background:var(--paper-hi);
+    border:1px solid var(--contour);
+    padding:20px 22px;
+    margin:30px 0 8px;
+    font-size:14.5px;
+    line-height:1.9;
+  }
+  .howto b{font-family:var(--disp);font-weight:700}
+
+  /* 目次 */
+  .toc{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px;
+    margin:22px 0 8px;
+  }
+  .toc a{
+    display:block;
+    background:var(--paper-hi);border:1px solid var(--contour);border-left:3px solid var(--river);
+    color:var(--ink);text-decoration:none;
+    padding:12px 13px;font-size:13.5px;line-height:1.5;
+  }
+  .toc a b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--river);margin-bottom:3px}
+  @media (max-width:520px){.toc{grid-template-columns:1fr}}
+
+  .progress{
+    position:sticky;top:0;z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--contour);
+    margin:0 -18px 0;
+    padding:8px 18px 10px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  }
+  .progress-row1{
+    font-size:11px;color:var(--river);font-weight:700;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    margin-bottom:6px;
+  }
+  .progress-row1 .ch-name{opacity:.85;font-weight:500}
+  .progress-row1 .ch-name::before{content:" ／ "}
+  @media (max-width:380px){.progress-row1 .ch-name{display:none}.progress-row1 .ch-name::before{content:""}}
+  .progress-row2{display:flex;align-items:center;gap:14px}
+  .bar{flex:1;height:5px;background:var(--contour);position:relative;overflow:hidden}
+  .bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--river);transition:width .3s ease}
+  .ctrl{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    background:none;border:1px solid var(--river);color:var(--river);
+    padding:5px 10px;cursor:pointer;
+  }
+  .ctrl:hover{background:var(--river);color:var(--paper-hi)}
+  .ctrl:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  .chapter{margin:52px 0 22px;display:flex;align-items:baseline;gap:14px;scroll-margin-top:88px}
+  #toc{scroll-margin-top:88px}
+
+  .back-toc{margin:26px 0 0;font-size:13px}
+  .back-toc a{
+    display:inline-flex;align-items:center;gap:5px;
+    color:var(--river);text-decoration:none;
+    font-family:var(--mono);letter-spacing:.06em;
+    border-bottom:1px dotted var(--river);
+    padding-bottom:1px;
+  }
+  .back-toc a:hover{border-bottom-style:solid}
+
+  .fab{
+    position:fixed;
+    right:16px;
+    bottom:calc(16px + env(safe-area-inset-bottom));
+    z-index:30;
+    min-width:44px;min-height:44px;
+    padding:11px 16px;
+    border-radius:999px;
+    border:1px solid var(--river);
+    background:var(--fab-bg);
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    color:var(--river);
+    font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;font-weight:700;
+    display:flex;align-items:center;gap:6px;
+    text-decoration:none;cursor:pointer;
+    box-shadow:0 3px 12px rgba(0,0,0,.18);
+    opacity:0;visibility:hidden;transform:translateY(10px);
+    transition:opacity .25s ease,transform .25s ease,visibility .25s;
+  }
+  .fab.show{opacity:1;visibility:visible;transform:translateY(0)}
+  .fab:hover{background:var(--river);color:var(--paper-hi)}
+  .fab:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){.fab{transition:none}}
+  .chapter .ch-no{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--river);white-space:nowrap}
+  .chapter h2{font-family:var(--disp);font-weight:900;font-size:20px;margin:0;letter-spacing:.02em}
+  .chapter::after{content:"";flex:1;height:1px;background:var(--contour)}
+
+  .lead{font-size:14.5px;color:var(--ink-soft);line-height:1.9;margin:0 0 20px}
+  h3.sub{
+    font-family:var(--disp);font-weight:700;font-size:16px;
+    margin:34px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--contour);
+  }
+  h4.subsub{font-family:var(--disp);font-weight:700;font-size:14.5px;margin:20px 0 8px;color:var(--river)}
+
+  /* 設問カード（既存資料と共通言語） */
+  details.qa{
+    background:var(--paper-hi);
+    border:1px solid var(--contour);
+    border-left:3px solid var(--river);
+    margin-bottom:12px;
+  }
+  details.qa[open]{border-left-color:var(--marker)}
+  details.qa summary{
+    list-style:none;cursor:pointer;
+    padding:16px 18px 16px 16px;
+    display:flex;gap:13px;align-items:flex-start;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  summary:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .qno{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--river);padding-top:5px;letter-spacing:.04em;flex:none}
+  .qtext{font-family:var(--disp);font-weight:700;font-size:16px;line-height:1.6;flex:1}
+  .chev{flex:none;color:var(--ink-soft);font-family:var(--mono);font-size:13px;padding-top:4px;transition:transform .2s}
+  details.qa[open] .chev{transform:rotate(90deg)}
+  .qbody{padding:0 18px 22px 47px;border-top:1px dashed var(--contour);margin:0 18px 0 47px}
+  @media (max-width:520px){.qbody{margin-left:0;padding-left:0}details.qa summary{padding:14px}.qtext{font-size:15px}}
+
+  .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--river);margin:18px 0 7px}
+  .aim{font-size:14px;color:var(--ink-soft);line-height:1.8}
+  ul.points{margin:0;padding-left:1.15em;font-size:15px}
+  ul.points li{margin-bottom:5px}
+  ul.points li::marker{color:var(--river)}
+  ol.steps{margin:0;padding-left:1.3em;font-size:15px}
+  ol.steps li{margin-bottom:7px}
+  ol.steps li::marker{font-family:var(--mono);color:var(--river);font-weight:700}
+
+  .sample{background:var(--paper);border:1px solid var(--contour);padding:15px 17px;font-size:15px;line-height:1.9}
+  .sample::before{content:"回答例";display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-soft);margin-bottom:8px}
+
+  .warn{background:var(--marker-soft);border-left:3px solid var(--marker);padding:12px 15px;font-size:14px;line-height:1.8;margin-top:16px}
+  .warn b{font-family:var(--disp)}
+
+  .alert-red{
+    background:var(--red-soft);border:1px solid var(--red);color:var(--red);
+    padding:14px 16px;font-size:14.5px;line-height:1.8;font-weight:700;margin:22px 0;
+  }
+  .alert-red b{font-family:var(--disp)}
+
+  .done{margin-top:18px;display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);cursor:pointer}
+  .done input{width:15px;height:15px;accent-color:var(--river);cursor:pointer}
+
+  /* 選考フロー図 */
+  .flow{margin:24px 0 8px;position:relative}
+  .flow-step{display:flex;gap:0;position:relative;padding-bottom:26px}
+  .flow-step:last-child{padding-bottom:0}
+  .flow-rail{width:34px;flex:none;display:flex;flex-direction:column;align-items:center}
+  .flow-dot{width:14px;height:14px;border-radius:50%;background:var(--river);border:3px solid var(--paper-hi);box-shadow:0 0 0 1px var(--river);flex:none;margin-top:4px}
+  .flow-step.is-gate .flow-dot{background:var(--marker);box-shadow:0 0 0 1px var(--river-deep)}
+  .flow-line{flex:1;width:2px;background:var(--contour);margin-top:2px}
+  .flow-step:last-child .flow-line{display:none}
+  .flow-body{flex:1;background:var(--paper-hi);border:1px solid var(--contour);padding:14px 16px;margin-left:10px}
+  .flow-step.is-gate .flow-body{border-left:3px solid var(--marker)}
+  .flow-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .flow-title{font-family:var(--disp);font-weight:900;font-size:15.5px}
+  .flow-date{font-family:var(--mono);font-size:11px;color:var(--river);white-space:nowrap}
+  .flow-desc{font-size:13.5px;color:var(--ink-soft);line-height:1.8;margin-top:6px}
+  .flow-see{font-size:13px;margin-top:8px}
+  .flow-see b{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-soft);display:block;margin-bottom:3px}
+
+  /* 逆算スケジュール表 */
+  .tbl-wrap{overflow-x:auto;margin:18px 0}
+  table.sched{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+  table.sched th,table.sched td{border:1px solid var(--contour);padding:9px 11px;text-align:left;vertical-align:top}
+  table.sched th{background:var(--river-deep);color:#E8EDE7;font-family:var(--mono);font-size:11px;letter-spacing:.08em;font-weight:500}
+  table.sched td.when{font-family:var(--mono);font-size:12px;color:var(--river);white-space:nowrap;font-weight:700}
+  table.sched tr:nth-child(even) td{background:var(--paper-hi)}
+
+  /* 尺の型カード */
+  .dur-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+  @media (max-width:640px){.dur-grid{grid-template-columns:1fr}}
+  .dur-card{background:var(--paper-hi);border:1px solid var(--contour);padding:14px 15px}
+  .dur-card .dtitle{font-family:var(--disp);font-weight:900;font-size:15px;color:var(--river);margin-bottom:2px}
+  .dur-card .dchar{font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-bottom:10px}
+  .dur-card ol{margin:0;padding-left:1.2em;font-size:13.5px;line-height:1.75}
+  .dur-card ol li::marker{font-family:var(--mono);color:var(--river);font-size:11px}
+
+  /* 撮影技術チェックグリッド */
+  .tech-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:18px 0}
+  .tech-item{display:flex;gap:12px;background:var(--paper-hi);border:1px solid var(--contour);padding:12px 14px}
+  .tech-item .ticon{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#fff;background:var(--river);padding:3px 8px;height:fit-content;white-space:nowrap;flex:none}
+  .tech-item .tbody b{font-family:var(--disp);display:block;font-size:14.5px;margin-bottom:3px}
+  .tech-item .tbody p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.8}
+
+  /* 提出前チェックリスト */
+  ul.checkline{list-style:none;margin:0;padding:0;font-size:14.5px}
+  ul.checkline li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--contour)}
+  ul.checkline li:last-child{border-bottom:none}
+  ul.checkline li input{width:16px;height:16px;margin-top:3px;accent-color:var(--river);flex:none;cursor:pointer}
+
+  /* 集団討論：役割カード */
+  .role-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+  @media (max-width:560px){.role-grid{grid-template-columns:1fr}}
+  .role-card{background:var(--paper-hi);border:1px solid var(--contour);border-top:3px solid var(--river);padding:13px 15px}
+  .role-card b{font-family:var(--disp);font-size:14.5px;display:block;margin-bottom:6px}
+  .role-card ul{margin:0;padding-left:1.1em;font-size:13.5px;line-height:1.75}
+
+  /* 評価される／されない発言 */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+  @media (max-width:560px){.compare{grid-template-columns:1fr}}
+  .compare .good,.compare .bad{padding:13px 15px;font-size:13.5px;line-height:1.8}
+  .compare .good{background:#E9F0DE;border:1px solid #A9C48F}
+  .compare .bad{background:var(--red-soft);border:1px solid #C99A92}
+  .compare .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;display:block;margin-bottom:6px;font-weight:700}
+  .compare .good .tag{color:#3E6B2A}
+  .compare .bad .tag{color:var(--red)}
+
+  /* 頻出テーマ10本 */
+  .topic-card{background:var(--paper-hi);border:1px solid var(--contour);margin-bottom:12px}
+  .topic-head{display:flex;align-items:center;gap:11px;padding:13px 16px;border-bottom:1px dashed var(--contour)}
+  .topic-no{font-family:var(--mono);font-weight:700;font-size:11px;color:#fff;background:var(--river);padding:3px 8px}
+  .topic-name{font-family:var(--disp);font-weight:900;font-size:15.5px}
+  .topic-body{padding:14px 16px}
+  .topic-body .lbl{margin-top:0}
+
+  /* データシート */
+  .data-item{background:var(--paper-hi);border:1px solid var(--contour);border-left:3px solid var(--river);padding:14px 16px;margin-bottom:10px}
+  .data-item .dname{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--river);margin-bottom:6px}
+  .data-item .dval{font-size:15px;line-height:1.85}
+  .data-item .dval b{font-family:var(--disp)}
+  .src{margin-top:10px;padding-top:9px;border-top:1px dashed var(--contour);font-family:var(--mono);font-size:11px;color:var(--ink-soft);line-height:1.9;word-break:break-all}
+  .src a{color:var(--river);text-decoration:underline}
+  .src .chkd{color:var(--red);font-weight:700}
+
+  .checklist{background:var(--river-deep);color:#E8EDE7;padding:30px 26px;margin-top:56px}
+  .checklist h2{font-family:var(--disp);font-weight:900;font-size:19px;margin:0 0 6px}
+  .checklist p.lead2{font-size:14px;color:rgba(232,237,231,.7);margin:0 0 18px}
+  .checklist ul{margin:0;padding-left:1.1em;font-size:15px;line-height:2}
+  .checklist li::marker{color:var(--marker)}
+
+  footer.note{margin-top:34px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;border-top:1px solid var(--contour);padding-top:16px}
+
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important}
+    html{scroll-behavior:auto}
+  }
+
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ink:#E4E9E2;
+      --ink-soft:#A9B6AE;
+      --paper:#12211D;
+      --paper-hi:#1A2E27;
+      --river:#7FC7B4;
+      --river-deep:#0C1815;
+      --contour:#2E463D;
+      --marker:#DCE94F;
+      --marker-soft:#2B3320;
+      --red:#F0968A;
+      --red-soft:#33201D;
+      --fab-bg:rgba(18,33,29,.86);
+    }
+    table.sched th{color:#12211D}
+    .compare .good{background:#1D2E1A;border-color:#3E6B2A}
+    .tech-item .ticon{color:#0C1815}
+    .fab:hover{color:#0C1815}
+  }
+
+  @media print{
+    body{background:#fff;font-size:11pt;line-height:1.6}
+    .grid-bg{background-image:none}
+    header.cover{background:#fff;color:#000;border-bottom:2px solid #000}
+    .stamp,.progress,.done,.chev,.toc,.fab,.back-toc{display:none}
+    .cover-meta{color:#333;border-color:#999}
+    details.qa{break-inside:avoid;background:#fff;border-color:#999}
+    .checklist{background:#fff;color:#000;border:1px solid #000}
+    .checklist p.lead2{color:#333}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="stamp">FIELD NOTE — 選考対策（個人面接以外）</div>
+    <h1><span class="thin">柏原市役所 採用試験｜土木職B</span>選考対策マニュアル</h1>
+    <div class="cover-meta">
+      <span>対象：ES／録画動画面接／集団面接・集団討論／柏原市データシート</span>
+      <span>作成：2026.08</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap grid-bg">
+
+  <div class="howto">
+    <b>この資料の範囲</b><br>
+    本資料は柏原市役所 採用試験（土木職B）のうち<b>個人面接を除く全選考段階</b>をカバーします。エントリーシート、録画動画面接（第1次）、集団面接・集団討論（実施される年度のみ）、そして面接直前に見返す柏原市データシートの4部構成です。個人面接の想定問答は別資料を参照してください。回答例は<b>丸暗記しないこと</b>。骨子だけ頭に入れて、自分の経験と言葉に置き換えてください。
+  </div>
+
+  <nav class="toc" id="toc">
+    <a href="#ch1"><b>CH.1</b>選考フロー全体像／逆算スケジュール</a>
+    <a href="#ch2"><b>CH.2</b>エントリーシート</a>
+    <a href="#ch3"><b>CH.3</b>録画動画面接（最重要）</a>
+    <a href="#ch4"><b>CH.4</b>集団面接・集団討論</a>
+    <a href="#ch5"><b>CH.5</b>柏原市データシート</a>
+  </nav>
+
+  <div class="progress">
+    <div class="progress-row1"><span id="curChNo">CH.1</span><span id="curChName" class="ch-name"></span></div>
+    <div class="progress-row2">
+      <span id="count">0 / 0</span>
+      <div class="bar"><span id="fill"></span></div>
+      <button class="ctrl" id="toggleAll">すべて開く</button>
+    </div>
+  </div>
+
+  <!-- ============ 第1章 ============ -->
+  <div class="chapter" id="ch1"><span class="ch-no">CH.1</span><h2>選考フロー全体像</h2></div>
+  <p class="lead">柏原市の採用試験は「冬ラウンド」（今回受験予定）と「春ラウンド」の実績があり、段階の数が年度によって違います。まず全体の地図を頭に入れてから、各章の対策に入ってください。</p>
+
+  <h3 class="sub">1-1. 選考ステップ図</h3>
+  <p class="lead">令和8年4月採用 追加試験（冬ラウンド）の実績と、令和9年4月採用（春ラウンド）の実績を重ねた図です。<b>黄色マーカーの段階が「通過・不通過」を分ける関門</b>です。</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-body">
+        <div class="flow-head"><span class="flow-title">申込・エントリーシート提出</span><span class="flow-date">11月頃</span></div>
+        <div class="flow-desc">採用試験の申込とエントリーシートの提出は、いずれもウェブ上のみ。書類の郵送や持参はありません。この時点で書く内容が、この後すべての面接段階の土台になります。</div>
+        <div class="flow-see"><b>対策</b>CH.2 エントリーシート</div>
+      </div>
+    </div>
+    <div class="flow-step is-gate">
+      <div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-body">
+        <div class="flow-head"><span class="flow-title">第1次｜録画動画面接</span><span class="flow-date">動画提出締切 12/18</span></div>
+        <div class="flow-desc">あらかじめ設定された質問に、スマートフォン等で自分で撮影して回答する方式。何度でも撮り直しができます。事実上の<b>足切り選考</b>で、ここを越えないと次に進めません。</div>
+        <div class="flow-see"><b>対策</b>CH.3 録画動画面接（本資料で最も厚く扱う章）</div>
+      </div>
+    </div>
+    <div class="flow-step is-gate">
+      <div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-body">
+        <div class="flow-head"><span class="flow-title">第2次｜基礎能力検査（SCOA）</span><span class="flow-date">1/6〜1/25</span></div>
+        <div class="flow-desc">SCOA総合適性検査。テストセンター方式で受験する。公務員の専門試験ではなく、基礎能力（言語・数理・論理・常識等）を問う適性検査。</div>
+        <div class="flow-see"><b>対策</b>本資料の対象外（SCOAトレーナー scoa-trainer.html で全420問を周回）</div>
+      </div>
+    </div>
+    <div class="flow-step is-gate">
+      <div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+      <div class="flow-body">
+        <div class="flow-head"><span class="flow-title">第3次｜集団面接・集団討論（1日）</span><span class="flow-date">実施は年度による</span></div>
+        <div class="flow-desc">春ラウンド（令和9年4月採用）の実績では、第2次と最終面接の間にこの段階が入った。冬ラウンドは応募者が少なく省略されたとみられるが、<b>実施される前提で準備しておく</b>のが安全。</div>
+        <div class="flow-see"><b>対策</b>CH.4 集団面接・集団討論</div>
+      </div>
+    </div>
+    <div class="flow-step is-gate">
+      <div class="flow-rail"><div class="flow-dot"></div></div>
+      <div class="flow-body">
+        <div class="flow-head"><span class="flow-title">最終｜個人面接</span><span class="flow-date">2/6</span></div>
+        <div class="flow-desc">最終選考。ここまでのES・録画動画面接・（実施されれば）集団討論での発言との一貫性も見られる。</div>
+        <div class="flow-see"><b>対策</b>個人面接想定問答集（別資料）</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="warn"><b>倍率について</b>／令和7年度 土木職A・B・C合計は、募集3名程度に対しエントリー6名・最終合格3名で倍率2.0倍。令和8年4月採用の追加試験ではエントリー1名で1次受験者0名（辞退）でした。倍率自体は高くありません。<b>準備不足だけが唯一の落選要因</b>になり得る、という前提でこの資料は書かれています。</div>
+
+  <h3 class="sub">1-2. 逆算スケジュール（8月の今から準備する場合）</h3>
+  <p class="lead">今日から数えて、何を・いつまでに仕上げるかの目安です。録画動画面接は「締切直前に慌てて撮る」が最も失敗しやすいパターンなので、12月に入る前に一度リハーサルを終えておくのが理想です。</p>
+
+  <div class="tbl-wrap">
+    <table class="sched">
+      <thead><tr><th style="width:18%">時期</th><th>やること</th></tr></thead>
+      <tbody>
+        <tr><td class="when">8月（今）</td><td>柏原市のデータ収集（CH.5）、職務経歴の棚卸し、志望動機の骨子固め。実務経験・保有資格・担当した工種と規模を書き出しておく。</td></tr>
+        <tr><td class="when">9月</td><td>ESの下書き。自己PR・志望動機を「1分＝約300字」で声に出して言う練習を始める。録画動画面接を意識した話し方の癖づけもここから。</td></tr>
+        <tr><td class="when">10月</td><td>ES完成。録画動画面接の想定設問（CH.3）に対する骨子を全問分そろえる。スマホの撮影環境（背景・照明・音）を一度テスト撮影して確認。</td></tr>
+        <tr><td class="when">11月</td><td><b>採用試験申込・エントリーシート提出（ウェブ）</b>。提出後は控えを保存し、面接段階で話す内容と食い違えないようにする。</td></tr>
+        <tr><td class="when">12月上旬</td><td>録画動画面接の本番撮影。3テイクまでのルールで、一番自然なテイクを選ぶ（CH.3-6）。<b>提出締切 12/18</b>の1週間前には撮り終える。</td></tr>
+        <tr><td class="when">12月中旬〜下旬</td><td>録画動画面接提出後、SCOA対策に切り替える。</td></tr>
+        <tr><td class="when">1月</td><td>SCOA総合適性検査（テストセンター方式、1/6〜1/25の間で受験）。</td></tr>
+        <tr><td class="when">1月下旬〜2月上旬</td><td>（実施年度のみ）集団討論・集団面接の練習。頻出テーマ10本（CH.4-4）のインプットと、討論の進め方の型を声に出して練習。</td></tr>
+        <tr><td class="when">2月上旬</td><td>個人面接の最終確認。身だしなみ、持ち物、当日の移動経路の確認。<b>最終個人面接 2/6</b>。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch1-schedule">逆算スケジュールを自分のカレンダーに落とし込んだ</label>
+
+  <p class="back-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ 第2章 ============ -->
+  <div class="chapter" id="ch2"><span class="ch-no">CH.2</span><h2>エントリーシート</h2></div>
+  <p class="lead">柏原市の採用試験は申込・ES提出がウェブのみで、この後の録画動画面接・個人面接は<b>ESに書いた内容を前提に</b>進みます。つまりESは「提出して終わり」の書類ではなく、<b>この先すべての面接の台本</b>です。ここで書いたエピソードと、面接で話す内容がずれると、それだけで一貫性を疑われます。書く前に「この一文は、面接でどう聞き返されるか」を必ず自問してください。</p>
+
+  <h3 class="sub">2-1. 定番設問の書き方</h3>
+
+  <details class="qa">
+    <summary><span class="qno">2.1</span><span class="qtext">志望動機</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">何を見られているか</div>
+      <p class="aim">「なぜ公務員か」ではなく「なぜ柏原市か」。近隣市や大阪府ではなくここを選んだ理由に、個人的な接点と具体的な事実（地形・計画・施策）が入っているかを見られています。中途採用枠なので、定着して長く働く意思があるかも合わせて見られます。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>柏原との接点（居住・通勤・実家・工事で関わった等、事実ベースで）</li>
+        <li>市の課題や施策を一つ具体的に挟む（CH.5のデータシートを使う）</li>
+        <li>土木職Bとして、これまでの実務経験を活かしてどう関わりたいかで着地</li>
+      </ul>
+      <div class="lbl">面接でどう深掘りされるか</div>
+      <p class="aim">録画動画面接・個人面接の両方で「なぜ柏原市ですか」はほぼ確実に聞かれます。ESの文章そのままを読み上げると棒読みに聞こえるので、<b>ESでは書ける事実を、面接では自分の言葉で話す</b>という前提で書き分けてください。また「他市でもできるのでは」という切り返しに耐えられるよう、柏原固有の理由を最低一つ用意します。</p>
+      <div class="lbl">字数配分の考え方</div>
+      <p class="aim">300字なら「接点1割・市の事実3割・自分がどう関わりたいか6割」。接点や事実の紹介に字数を使いすぎると、肝心の「だから何をしたいか」が書けなくなります。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch2-q1">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">2.2</span><span class="qtext">自己PR（あなたの強み）</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">何を見られているか</div>
+      <p class="aim">強みそのものより、「その強みを裏づける具体的な事実」があるかどうかです。土木職Bは実務経験者採用なので、性格の話だけでなく<b>仕事上の場面</b>で発揮した強みが求められます。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>強みを一言で言い切る（欲張って複数出さない）</li>
+        <li>裏づけとなる仕事上のエピソードを一つ、状況→行動→結果の順で</li>
+        <li>その強みを柏原市の仕事でどう使えるかを一文添える</li>
+      </ul>
+      <div class="lbl">面接でどう深掘りされるか</div>
+      <p class="aim">「その強みが発揮できなかった場面はありますか」「反対の短所は何ですか」と聞かれる前提で、強みの裏返しになる弱点も自分の中で整理しておいてください。ESに書いた強みと、録画動画面接で語る強みの言葉が違うと「本当の強みを分かっていない人」に見えます。<b>同じ言葉を使い回す</b>意識を持つこと。</p>
+      <div class="lbl">字数配分の考え方</div>
+      <p class="aim">結論1割・エピソード7割・柏原市での活かし方2割。エピソードは詳しく書きたくなりますが、状況説明を削り「自分が何をしたか」に字数を寄せてください。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch2-q2">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">2.3</span><span class="qtext">これまでに力を入れて取り組んだこと</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">何を見られているか</div>
+      <p class="aim">成果の大きさより、課題にどう向き合い、周囲とどう関わったかという<b>過程</b>です。役所は組織で動くので、一人で完結する武勇伝より、他人を巻き込んだ工夫が評価されます。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>課題（何に困っていたか）→ 自分の工夫 → 周囲との関わり → 結果・学び</li>
+        <li>実務経験者採用なので、仕事上のエピソードを優先する（学生時代の話は補助的に）</li>
+        <li>数字が使える場面（工期短縮、手戻り削減、コスト等）があれば入れる</li>
+      </ul>
+      <div class="lbl">面接でどう深掘りされるか</div>
+      <p class="aim">「具体的にどう工夫したのですか」「反対する人はいませんでしたか」「同じことを柏原市でもできますか」の3つは想定しておいてください。特に3つ目は、ESで語ったエピソードを柏原市の仕事につなげる橋渡しの練習になります。</p>
+      <div class="lbl">字数配分の考え方</div>
+      <p class="aim">課題2割・工夫と行動5割・関わり方2割・学び1割。「大変だった」という感情の記述より、「何をしたか」という行動の記述に字数を使う。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch2-q3">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">2.4</span><span class="qtext">柏原市でやりたいこと・実現したいこと</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">何を見られているか</div>
+      <p class="aim">柏原市を下調べしているか、そして実務経験を「使える形」で言語化できているかです。抽象的な理想論だけだと、経験者採用としての強みが伝わりません。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>柏原市の地形・施設・課題を一つ具体的に挙げる（CH.5参照。断定せず「〜と理解しています」で書く）</li>
+        <li>その課題に対して、自分のどの実務経験が役立つかをつなげる</li>
+        <li>「まず現場を知ることから」など、入庁直後の謙虚さも一言添える</li>
+      </ul>
+      <div class="lbl">面接でどう深掘りされるか</div>
+      <p class="aim">「それは具体的にどんな業務ですか」「他の自治体でも同じことが言えるのでは」と聞かれます。柏原固有の地形（大和川と石川の合流、生駒山地、亀の瀬地すべり等）に紐づけて答えられると強い。ただし数値や制度名は必ず面接前に市公式サイトで再確認してから話すこと。</p>
+      <div class="lbl">字数配分の考え方</div>
+      <p class="aim">柏原市の課題紹介3割・自分の経験との接続5割・入庁後の姿勢2割。課題紹介が長くなりすぎて評論家のような文章にならないよう注意。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch2-q4">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">2.5</span><span class="qtext">挫折経験・困難を乗り越えた経験</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">何を見られているか</div>
+      <p class="aim">失敗そのものより、失敗をどう受け止め、次にどう活かしたかです。土木の現場は工程の遅延やトラブルがつきものなので、経験者採用では「立ち直り方」に説得力があるかが特に見られます。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>本当に困難だった具体的な場面を一つ（美談に加工しすぎない）</li>
+        <li>その時どう感じ、どう行動を変えたかを正直に書く</li>
+        <li>今、同じ場面が来たらどうするかで着地する（成長の証明）</li>
+      </ul>
+      <div class="lbl">面接でどう深掘りされるか</div>
+      <p class="aim">「なぜそうなってしまったと思いますか（原因の自己分析）」「今なら同じ失敗を避けられますか」と必ず聞かれます。他責（会社が悪い、上司が悪い）で終わる説明は評価されないので、<b>自分の側の要因</b>を一つは言えるようにしておいてください。</p>
+      <div class="lbl">字数配分の考え方</div>
+      <p class="aim">状況説明2割・自分の行動と葛藤5割・そこからの学びと今への活かし方3割。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch2-q5">確認済み</label>
+    </div>
+  </details>
+
+  <h3 class="sub">2-2. 職務経歴の書き方（土木職Bならではのポイント）</h3>
+  <p class="lead">土木職Bは1級土木施工管理技士等の有資格者、または土木課程卒の実務経験者枠です。職務経歴欄は自己PRと違い、<b>事実を過不足なく、採用側が評価しやすい形</b>で示す欄だと考えてください。</p>
+
+  <h4 class="subsub">実務経験の示し方</h4>
+  <ul class="points">
+    <li>会社名は必須でなければ無理に強調しなくてよいが、<b>業種（土木工事業／建設コンサルタント等）・在籍期間・担当職種</b>は明確に書く</li>
+    <li>「現場代理人」「主任技術者」「施工管理担当」など、自分の立場・役割を役職名で示す</li>
+    <li>元請か下請か、公共工事か民間工事かも書けると、発注者側の視点で読む面接官に伝わりやすい</li>
+  </ul>
+
+  <h4 class="subsub">保有資格の示し方</h4>
+  <ul class="points">
+    <li>正式名称で書く（例：1級土木施工管理技士）。略称のみは避ける</li>
+    <li>取得年を添えると、実務経験との時系列が伝わる</li>
+    <li>資格名の羅列で終えず、「点検・監督の場面で必要になった」など取得理由を一言添えられると印象づけられる</li>
+  </ul>
+
+  <h4 class="subsub">担当した工種・規模の示し方</h4>
+  <ul class="points">
+    <li>工種を具体的に（道路改良、下水道管路、河川護岸、造成、橋梁補修 等）</li>
+    <li>規模を数字で示す（延長〇m、請負金額の規模感、工期〇か月 等。守秘義務に触れない範囲で概数にする）</li>
+    <li>「担当した」で終わらせず、その中で自分が何を判断・調整したかを一文添える</li>
+  </ul>
+  <div class="warn"><b>注意</b>／取引先名や具体的な契約金額など、守秘義務・個人情報に関わる内容は書かない。工種・規模・自分の役割が伝われば十分で、固有名詞の多さは評価されません。</div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch2-career">職務経歴欄の下書きを実際に書いた</label>
+
+  <p class="back-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ 第3章 ============ -->
+  <div class="chapter" id="ch3"><span class="ch-no">CH.3</span><h2>録画動画面接</h2></div>
+  <p class="lead">これが実質的な<b>第1次＝足切り選考</b>です。柏原市の公式情報によれば、あらかじめ設定された質問に自分で撮影して回答する方式で、スマートフォンでの撮影が前提、<b>何度でも撮り直しができます</b>。対面ではないので緊張は少ない一方、「話す内容」「尺の使い方」「撮影の技術」の3つがすべて自分の責任になります。この章を資料全体の中で最も厚く扱います。</p>
+
+  <h3 class="sub">3-1. 想定設問と回答の骨子</h3>
+  <p class="lead">自治体の録画面接で定番の設問を10問。<b>骨子（何を言うか）が主、回答例（言い回し）は従</b>です。回答例は「1分＝約300字」を目安にした分量で書いています。丸暗記せず、自分の経験に差し替えてください。</p>
+
+  <details class="qa">
+    <summary><span class="qno">3.1</span><span class="qtext">自己PRをお願いします。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>結論＝強みを一言で言い切る</li>
+        <li>根拠＝仕事上の具体的な場面を一つ</li>
+        <li>着地＝柏原市の仕事でどう活かすか</li>
+      </ul>
+      <div class="sample">私の強みは、現場の状況を整理して周囲に共有する調整力です。前職の工事現場で、資材搬入の時間帯が近隣の生活動線と重なり、苦情が出かけたことがありました。近隣への周知文書を作り直し、搬入時間帯を調整することで、大きな苦情なく工事を終えることができました。柏原市役所でも、住民の生活に配慮しながら現場を動かす場面が多いと考えています。この調整力を活かして、信頼関係を築きながら仕事を進めていきたいです。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q1">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.2</span><span class="qtext">なぜ柏原市役所を志望するのですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>柏原との接点（居住・通勤・工事等、事実ベース）</li>
+        <li>市の課題や施策を一つ具体的に（CH.5の裏取り済みデータを使う）</li>
+        <li>実務経験を活かしてどう関わりたいかで着地</li>
+      </ul>
+      <div class="sample">柏原市は大和川と石川が合流し、東は生駒山地に接する土地で、河川・斜面・市街地の課題が一つの市に凝縮されていると理解しています。これまで民間の建設会社で道路や造成工事の施工管理に携わってきましたが、発注者側として計画段階から維持管理まで一つのまちに長く関わりたいと考えるようになりました。これまでの現場経験を活かし、住み続けられるまちづくりの土台を支える仕事がしたく、志望しました。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q2">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.3</span><span class="qtext">これまでで最も力を入れて取り組んだ仕事について教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>課題（何に困っていたか）を一言で</li>
+        <li>自分がとった行動を具体的に</li>
+        <li>結果と、そこから得た学びで着地</li>
+      </ul>
+      <div class="sample">前職で担当した道路改良工事で、地元説明会での住民合意に苦労した経験です。工期短縮を優先したい会社側と、生活道路への影響を心配する住民側の間で、当初は話が平行線でした。私は施工計画を工区ごとに分け、影響が大きい区間を先に丁寧に説明する順番に組み替えることを提案し、現場代理人として住民説明を重ねました。最終的に大きなトラブルなく工事を完了でき、事前の合意形成の重要性を学びました。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q3">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.4</span><span class="qtext">柏原市で挑戦したいことは何ですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>柏原市の課題を一つ、断定せず「〜と理解しています」の形で</li>
+        <li>自分の実務経験がどう役立つかを接続する</li>
+        <li>入庁後はまず現場を知りたいという謙虚さを添える</li>
+      </ul>
+      <div class="sample">柏原市は山地が市域の多くを占め、斜面地の住宅地や道路の維持管理が今後の課題の一つになると理解しています。前職では擁壁や法面のある現場を複数担当し、点検や補修の実務に携わってきました。この経験を活かし、限られた財源の中で優先順位をつけながら、市民が安心して暮らせる道路や水路の維持管理に関わりたいと考えています。まずは現場を歩き、地域の実情を知ることから始めたいです。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q4">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.5</span><span class="qtext">あなたの強みと弱みを教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>強みは仕事上のエピソード付きで一つ</li>
+        <li>弱みは実在するものを一つ、改善のために今していることを添える</li>
+        <li>「弱みはありません」は最も避けるべき回答</li>
+      </ul>
+      <div class="sample">強みは、周囲の意見を一度受け止めてから調整する冷静さです。現場で意見が対立した際も、感情的にならず双方の言い分を整理することを心がけてきました。弱みは、慎重になりすぎて判断に時間がかかることがある点です。工期が迫る場面では、判断の期限を自分で先に決めてから検討するようにし、遅れを出さない工夫をしています。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q5">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.6</span><span class="qtext">民間の建設会社の経験を経て、なぜ公務員（市役所）を目指すのですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>民間での経験を否定しない（学んだことを先に述べる）</li>
+        <li>発注者側として長く一つのまちに関わりたい、という視点に移す</li>
+        <li>「安定志向」に聞こえないよう、地域への責任で着地する</li>
+      </ul>
+      <div class="sample">民間の現場では、施工の質と工程を守る難しさと達成感の両方を学びました。一方で、どの工事を優先し、どこまでの予算をかけるかという判断は発注者側が担っています。採算だけでは進めにくい生活道路の整備なども、行政だからこそ公平に取り組めると考え、発注者側の立場で地域に関わりたいと思うようになりました。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q6">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.7</span><span class="qtext">チームで仕事を進める上で大切にしていることは何ですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>大切にしている考え方を一言で</li>
+        <li>裏づけとなる場面を一つ、簡潔に</li>
+        <li>柏原市の組織で働く上でも同じ姿勢を持つと結ぶ</li>
+      </ul>
+      <div class="sample">こまめな情報共有を大切にしています。現場では、職人・協力会社・社内の担当者など立場の違う人が同じ工程で動くため、進捗や変更点を後回しにすると必ずどこかで手戻りが起きます。小さな変更でもその日のうちに関係者へ伝えることを徹底してきました。組織で仕事を進める市役所でも、同じ姿勢を大切にしたいです。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q7">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.8</span><span class="qtext">ストレスを感じたとき、どのように対処していますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>具体的な切り替え方法を一つ</li>
+        <li>一人で抱え込まず相談できる相手がいることを添える</li>
+        <li>「ストレスを感じない」とは言わない</li>
+      </ul>
+      <div class="sample">工程が詰まった時期は、その日のうちに翌日の優先順位を書き出してから帰るようにしています。頭の中に残したままにすると、休んでも気になってしまうためです。それでも解決しない不安があるときは、一人で抱え込まず上司や同僚に早めに相談することを心がけています。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q8">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.9</span><span class="qtext">あなたを一言で表すとどんな人ですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>比喩や一言表現を先に出す（考え込ませない）</li>
+        <li>なぜそう言えるかを短いエピソードで裏づける</li>
+        <li>自己PR（3.1）と矛盾しない言葉を選ぶ</li>
+      </ul>
+      <div class="sample">「縁の下の力持ち」だと思います。現場では目立つ役割より、資材の手配や関係者間の調整など、工事が滞りなく進むための下支えを担うことが多くありました。派手さはありませんが、誰かが困る前に手を打つことにやりがいを感じています。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q9">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">3.10</span><span class="qtext">最後に、アピールをお願いします。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>30秒版で用意する（他の設問より短くてよい）</li>
+        <li>志望動機の要点をもう一度、短く言い直す</li>
+        <li>「柏原市で働きたい」という意思を最後に明言して締める</li>
+      </ul>
+      <div class="sample">これまでの現場経験を、柏原市の道路や水路といった生活の基盤を守る仕事に活かしたいと考えています。地域に長く関わり続けられる発注者側の立場から、市民の暮らしを支える仕事がしたいです。ぜひ柏原市役所で働かせてください。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="ch3-q10">確認済み</label>
+    </div>
+  </details>
+
+  <h3 class="sub">3-2. 尺の型 — 30秒／1分／90秒</h3>
+  <p class="lead">設問ごとに指定される時間はまちまちです。どの尺で聞かれても「結論→根拠→具体→着地」の骨組みは変えず、<b>肉付けの厚さだけを変える</b>という考え方で準備してください。目安は「1分＝約300字」。</p>
+
+  <div class="dur-grid">
+    <div class="dur-card">
+      <div class="dtitle">30秒版</div>
+      <div class="dchar">目安：約150字</div>
+      <ol>
+        <li>結論（5秒・約25字）</li>
+        <li>根拠（10秒・約50字）</li>
+        <li>具体（10秒・約50字）</li>
+        <li>着地（5秒・約25字）</li>
+      </ol>
+    </div>
+    <div class="dur-card">
+      <div class="dtitle">1分版</div>
+      <div class="dchar">目安：約300字</div>
+      <ol>
+        <li>結論（5秒・約25字）</li>
+        <li>根拠（20秒・約100字）</li>
+        <li>具体（25秒・約125字）</li>
+        <li>着地（10秒・約50字）</li>
+      </ol>
+    </div>
+    <div class="dur-card">
+      <div class="dtitle">90秒版</div>
+      <div class="dchar">目安：約450字</div>
+      <ol>
+        <li>結論（5秒・約25字）</li>
+        <li>根拠（30秒・約150字）</li>
+        <li>具体（40秒・約200字）</li>
+        <li>着地（15秒・約75字）</li>
+      </ol>
+    </div>
+  </div>
+  <div class="warn"><b>使い方</b>／短い尺ほど「具体」を削りたくなりますが、実際に削るべきは「根拠」の説明の長さです。エピソードが一つも入らない自己PRは印象に残りません。尺が短いときほど、エピソードを一段階シンプルにする発想で調整してください。</div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch3-duration">3つの尺で自己PRを言えるようにした</label>
+
+  <h3 class="sub">3-3. 撮影技術</h3>
+  <div class="tech-grid">
+    <div class="tech-item"><span class="ticon">高さ</span><div class="tbody"><b>カメラは目線の高さに固定する</b><p>スマホを机や本の上に立てかけ、レンズが自分の目の高さと同じか、わずかに高い位置にくるように調整する。見下ろす角度は威圧的に、見上げる角度は幼く見えるので避ける。</p></div></div>
+    <div class="tech-item"><span class="ticon">構図</span><div class="tbody"><b>胸から上を映し、頭上に少し余白を残す</b><p>顔がフレームいっぱいにならないようにする。頭の上に指2本分程度の余白があると、圧迫感のない自然な構図になる。</p></div></div>
+    <div class="tech-item"><span class="ticon">背景</span><div class="tbody"><b>無地の壁を選ぶ</b><p>本棚や生活用品が映り込む背景は避ける。白またはベージュ系の無地の壁の前で撮影するのが最も安全。</p></div></div>
+    <div class="tech-item"><span class="ticon">照明</span><div class="tbody"><b>光源は自分の正面に。逆光は絶対に避ける</b><p>窓を背にして座ると顔が暗く沈む逆光になる。窓や照明に自分から向き合う位置に座り、顔全体に光が回るようにする。</p></div></div>
+    <div class="tech-item"><span class="ticon">音</span><div class="tbody"><b>静かな部屋で、口元とスマホの距離は1m以内</b><p>エアコンや冷蔵庫、換気扇など常時稼働する家電の音は録音に乗りやすいので、撮影中は止める。スマホのマイクは口元から離れるほど声を拾いにくくなる。</p></div></div>
+    <div class="tech-item"><span class="ticon">服装</span><div class="tbody"><b>対面の面接と同じ服装で撮る</b><p>スーツまたはそれに準ずる服装。画面越しでも第一印象は対面と同じ基準で見られていると考える。</p></div></div>
+    <div class="tech-item"><span class="ticon">向き</span><div class="tbody"><b>縦向き（スマホを立てて）で撮影する</b><p>提出先のフォーマットが横向き指定でない限り、スマホ撮影の録画面接は縦向きが基本。事前に案内の撮影方法・提出形式の指定を必ず確認する。</p></div></div>
+  </div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch3-tech">撮影環境を実際にセットしてテスト撮影した</label>
+
+  <h3 class="sub">3-4. 話し方</h3>
+  <ul class="points">
+    <li><b>レンズを見る</b>／画面に映る自分の顔を見て話すと、視線が伏し目がちに映る。カメラのレンズそのものを見る意識を持つ</li>
+    <li><b>冒頭5秒で結論を言う</b>／「えー、そうですね」で始めない。話し始めた瞬間に結論が来るように</li>
+    <li><b>普段より少しゆっくり話す</b>／緊張すると早口になりやすい。録音では早口はさらに聞き取りにくくなる</li>
+    <li><b>口角を上げる</b>／表情がこわばると声のトーンも硬くなる。話し始める前に一度口角を上げておく</li>
+    <li><b>手振りは肩幅の中に収める</b>／画角から手がはみ出すと落ち着きなく見える。ジェスチャーは小さく、フレームの中で完結させる</li>
+    <li><b>語尾を切る</b>／「〜だと思いますので…」と語尾を伸ばさず、「〜と考えます。」で言い切って止める</li>
+  </ul>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch3-speaking">話し方の6か条を声に出して練習した</label>
+
+  <h3 class="sub">3-5. 撮り直せるからこその罠</h3>
+  <p class="lead">「何度でも撮り直せる」は利点であると同時に、最も自滅しやすいポイントです。次の3つの罠に注意してください。</p>
+  <ul class="points">
+    <li><b>完璧を狙って棒読みになる</b>／台本を一言一句覚えようとすると、本番で思い出すことに意識が向き、抑揚のない読み上げになる</li>
+    <li><b>制限時間ギリギリまで詰め込む</b>／伝えたいことを全部入れようとして早口になり、結局何も印象に残らない</li>
+    <li><b>テイクを重ねすぎて表情が死ぬ</b>／10回、20回と撮り直すうちに、疲れと惰性で表情も声も硬くなっていく</li>
+  </ul>
+  <div class="alert-red">推奨ルール：<b>3テイクまで、一番自然なものを出す。</b>完璧な1本を狙わず、及第点の中で一番自然な1本を選ぶ発想に切り替える。</div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch3-trap">3テイクルールを理解した</label>
+
+  <h3 class="sub">3-6. 提出前チェックリスト</h3>
+  <ul class="checkline">
+    <li><input type="checkbox" class="chk" data-k="ch3-c1"><span>音声が最初から最後まで途切れず入っているか</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c2"><span>顔が暗くなっていないか（逆光になっていないか）</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c3"><span>指定された時間内に収まっているか（超過・大幅な余りがないか）</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c4"><span>ファイル形式・ファイルサイズが指定の条件を満たしているか</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c5"><span>冒頭・末尾に不自然な無言や映像の乱れがないか</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c6"><span>声の大きさが十分で、聞き取りやすいか（イヤホンなしで確認）</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c7"><span>背景に生活感のあるもの・私物が映り込んでいないか</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c8"><span>服装・髪型が対面の面接と同じ基準で整っているか</span></li>
+    <li><input type="checkbox" class="chk" data-k="ch3-c9"><span>ファイル名・提出方法が案内どおりか、提出締切に余裕を持てているか</span></li>
+  </ul>
+
+  <h3 class="sub">3-7. 練習手順（撮影→自己採点→撮り直し）</h3>
+  <ol class="steps">
+    <li>骨子だけをメモに書く。一言一句の台本は作らない（棒読み防止）</li>
+    <li>声に出して2回、時間を計りながら練習する</li>
+    <li>1テイク目を本番のつもりで撮る</li>
+    <li>再生して3-6のチェックリストに照らし、直すべき点を<b>一つだけ</b>決める</li>
+    <li>その一点だけを意識して2テイク目を撮る</li>
+    <li>3テイク目まで撮ったら、迷ったら後のテイクではなく<b>一番自然だったテイク</b>を選ぶ</li>
+  </ol>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch3-practice">撮影→自己採点→撮り直しを一度通しで練習した</label>
+
+  <p class="back-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ 第4章 ============ -->
+  <div class="chapter" id="ch4"><span class="ch-no">CH.4</span><h2>集団面接・集団討論</h2></div>
+  <p class="lead">年度により実施される段階です（春ラウンドの実績では第3次）。柏原市は公式に「コミュニケーション能力や協調性、積極性、リーダーシップなどを重視」すると明言しており、<b>個人面接よりもこの段階の方が、市が本当に見たい評価軸に近い</b>と考えて対策してください。</p>
+
+  <h3 class="sub">4-1. 集団面接で見られていること</h3>
+  <ul class="points">
+    <li><b>回答の長さ</b>／他の受験者と並ぶ場では、一人あたりの持ち時間は短くなります。1分以内でまとめる意識を持ち、聞かれたことに一番早くたどり着く順番で話す</li>
+    <li><b>前の人と答えが被ったときの処理</b>／内容を丸ごと変える必要はない。「〇〇さんと近い意見ですが、私は特に〜の点を大切にしています」のように、<b>重なりを認めた上で自分の視点を一言足す</b>。無理に違う答えをひねり出そうとして話が破綻するのが一番よくない</li>
+    <li><b>他人の話を聞く態度</b>／自分が話していない時間も評価対象です。頷き、姿勢、視線。他の受験者が話している間に気を抜いた表情をしていると、それだけで協調性を疑われます</li>
+  </ul>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch4-group-interview">集団面接の3つの注意点を理解した</label>
+
+  <h3 class="sub">4-2. 集団討論の進め方の型</h3>
+  <p class="lead">討論が始まったら、内容そのものより先に<b>進め方の合意</b>を取ることが重要です。以下の順番を頭に入れておくと、初対面のメンバーとでも議論が組み立てやすくなります。</p>
+  <ol class="steps">
+    <li><b>時間配分の合意</b>／討論全体の残り時間を確認し、「意見出しに〇分、まとめに〇分」とおおまかに合意してから始める</li>
+    <li><b>論点整理</b>／お題をそのまま議論せず、「何を決める討論なのか」を全員で確認する（例：課題を挙げる討論なのか、対策を一つに絞る討論なのか）</li>
+    <li><b>意見出し</b>／否定せずに一人ずつ意見を出す時間。この段階では収束させようとしない</li>
+    <li><b>収束</b>／出た意見を共通点・対立点で整理し、絞り込んでいく</li>
+    <li><b>まとめ</b>／発表担当が話す内容を全員で確認し、時間内に着地させる</li>
+  </ol>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch4-discussion-flow">討論の5段階の型を理解した</label>
+
+  <h4 class="subsub">役割ごとの立ち回り</h4>
+  <div class="role-grid">
+    <div class="role-card">
+      <b>司会</b>
+      <ul>
+        <li>最初に時間配分を提案する</li>
+        <li>発言が偏らないよう、話していない人に話を振る</li>
+        <li>論点がずれたら「今は〜を話す時間です」と戻す</li>
+        <li>自分の意見を言う機会が減りがちなので、要所で一言は自分の考えも入れる</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <b>書記</b>
+      <ul>
+        <li>出た意見を要点だけメモし、可視化する（使えるならホワイトボードや紙に書く）</li>
+        <li>まとめの段階で「ここまでの意見はこの3点でよいですか」と確認を取る</li>
+        <li>書くことに集中しすぎず、区切りごとに一言意見も挟む</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <b>タイムキーパー</b>
+      <ul>
+        <li>フェーズごとの時間配分を最初に声に出して提案する</li>
+        <li>「残り5分です」など、節目で都度アナウンスする</li>
+        <li>時間管理だけの役割にせず、発言のきっかけとしても使う</li>
+      </ul>
+    </div>
+    <div class="role-card">
+      <b>一般参加</b>
+      <ul>
+        <li>役割がなくても、進行に協力する一言（「そろそろ意見をまとめる方向に行きませんか」等）で同等に評価される</li>
+        <li>他の人の意見に上乗せする発言を意識する</li>
+        <li>役割を持つ人より発言回数が少なくならないようにする</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn"><b>無理に司会をやらなくてよい</b>／司会・書記・タイムキーパーは「やった人が評価される」役割ではありません。役割の有無に関係なく、議論にどれだけ実質的な貢献をしたかが見られています。役割を取りに行くことより、良い発言を一つでも多くすることを優先してください。</div>
+
+  <h4 class="subsub">評価される発言／されない発言</h4>
+  <div class="compare">
+    <div class="good">
+      <span class="tag">評価される</span>
+      「先ほどの意見に賛成です。加えて、実務の立場からは〜という制約もあると思います」（他者の意見に上乗せする）
+    </div>
+    <div class="bad">
+      <span class="tag">評価されない</span>
+      「それは違うと思います」で終わる（対案のない否定）
+    </div>
+    <div class="good">
+      <span class="tag">評価される</span>
+      「時間が限られているので、まず論点を整理してから意見を出しませんか」（進行への貢献）
+    </div>
+    <div class="bad">
+      <span class="tag">評価されない</span>
+      一度も発言せず、最後まで黙っている
+    </div>
+    <div class="good">
+      <span class="tag">評価される</span>
+      「〇〇さんの意見を、こういう理解でよいですか」（他者の意見を確認し、議論を前に進める）
+    </div>
+    <div class="bad">
+      <span class="tag">評価されない</span>
+      一人で長く話し続け、他の人の発言時間を奪う
+    </div>
+  </div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch4-role">役割ごとの立ち回りと発言例を理解した</label>
+
+  <h3 class="sub">4-3. やってはいけないこと</h3>
+  <ul class="points">
+    <li><b>他人の意見を否定する</b>／「違うと思います」で終わらせず、必ず代案とセットで話す</li>
+    <li><b>黙る</b>／発言しないことは「協調性がない」ではなく「評価する材料がない」という扱いになる。一度も発言しなければ、それだけで大きく不利になる</li>
+    <li><b>喋りすぎる</b>／自分の意見を通そうとして長く話し続けると、チームでの協力ができない人という印象になる</li>
+    <li><b>結論を急ぐ</b>／時間が気になっても「もう時間がないのでこれでいいですね」と強引に打ち切ると、他の意見を切り捨てる人に見える</li>
+  </ul>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch4-ng">やってはいけない4つを理解した</label>
+
+  <h3 class="sub">4-4. 自治体系 頻出テーマ10本</h3>
+  <p class="lead">討論・集団面接のお題として自治体試験で繰り返し出るテーマです。対立軸（何と何が対立するのか）を先に押さえておくと、その場で意見を組み立てやすくなります。土木職としての切り口も添えていますが、討論の場で専門知識をひけらかす必要はありません。あくまで視点の引き出しとして使ってください。</p>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">01</span><span class="topic-name">人口減少</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">転入・定住を増やす「攻め」の施策を優先するか、今住んでいる人の暮らしの質を守る「守り」の施策を優先するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">人口が減っても、道路や公共施設の延長・面積はすぐには減らない。将来の人口規模に合わせて施設の総量を見直す「集約・再編」の視点を、実務に近い立場から提示できる。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">02</span><span class="topic-name">公共施設の老朽化</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">すべての施設を維持更新するか、利用実態に応じて統廃合するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">壊れてから直す事後保全ではなく、点検・診断・措置・記録のサイクルを回す予防保全への転換。財源が限られる中での優先順位づけという視点（CH.5の財政データとも接続できる）。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">03</span><span class="topic-name">防災</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">堤防や治山などハード整備を優先するか、避難計画や周知などソフト対策を優先するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">柏原市は河川・土砂・地すべりの複合的なリスクを抱える地形だと理解している。ハード整備だけで完全に防ぐことはできないため、施設整備とハザードマップ・避難行動といったソフト対策を組み合わせる必要がある、という考え方。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">04</span><span class="topic-name">DX（行政デジタル化）</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">効率化・省力化を優先するか、対面でのきめ細かい対応を維持するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">点検・測量へのICT活用や省力化技術の話と、住民説明・用地交渉のような対人業務はデジタルで代替しにくいという話を切り分けて話せると、視野の広さが伝わる。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">05</span><span class="topic-name">シティプロモーション</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">知名度向上・転入者獲得を狙う外向きの発信を優先するか、今住む人の満足度を高める内向きの取り組みを優先するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">まちの魅力（自然や産業、歴史資源など）は、安全に歩ける道や整備された公園といった基盤があって初めて発信・体験できる。プロモーションの「舞台」を整えるのが基盤整備の役割だという接続ができる。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">06</span><span class="topic-name">子育て支援</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">給付や補助といった経済的支援を拡充するか、施設や通学路といった環境整備を拡充するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">通学路の交通安全対策や公園施設の維持更新など、子育て環境の物理的な土台を整えるのは土木職の担当領域だという視点で語れる。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">07</span><span class="topic-name">高齢化</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">住み慣れた場所で暮らし続けられるよう支援するか、利便性の高い地域への居住誘導を進めるか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">歩道のバリアフリー化や坂道の多い地形での移動負担、公共交通との接続など、高齢者の生活を支える基盤整備の視点。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">08</span><span class="topic-name">住民協働</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">行政が主導して進めるか、住民や地域団体に権限や役割を委ねるか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">道路の異常を知らせる通報や、公園の愛護活動など、住民との協働があってこそ広い市域の維持管理が現実的に回るという実務目線の話ができる。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">09</span><span class="topic-name">観光振興</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">観光客誘致による経済効果を優先するか、混雑やマナーなど住民の生活環境への配慮を優先するか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">観光資源へのアクセス道路や駐車場、歩行空間の整備は土木の領域。観光振興と日常の生活道路の両立という視点で語れる。</p>
+    </div>
+  </div>
+
+  <div class="topic-card">
+    <div class="topic-head"><span class="topic-no">10</span><span class="topic-name">職員の働き方</span></div>
+    <div class="topic-body">
+      <div class="lbl">対立軸</div>
+      <p class="aim">人員を増やして対応力を高めるか、限られた人員の中で業務効率化を図るか。</p>
+      <div class="lbl">土木職としての切り口</div>
+      <p class="aim">発注者側の技術職員が減れば、災害時の初動対応や工事監督の質にも影響しうる。担い手不足は建設業界だけでなく、発注者側の技術職員にも共通する課題だという視点。</p>
+    </div>
+  </div>
+
+  <label class="done"><input type="checkbox" class="chk" data-k="ch4-topics">10テーマの対立軸と切り口に目を通した</label>
+
+  <p class="back-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ 第5章 ============ -->
+  <div class="chapter" id="ch5"><span class="ch-no">CH.5</span><h2>柏原市データシート</h2></div>
+  <p class="lead">面接直前に見返すための一覧です。すべて柏原市公式サイト（city.kashiwara.lg.jp）で裏取りした数値のみを載せています。確認できなかった数値（令和8年度当初予算の総額など）はあえて載せていません。</p>
+  <div class="alert-red"><b>数値は面接前に必ず市公式サイトで再確認すること。</b>統計は更新され、計画は改定されます。この一覧の確認日以降に新しい数値が公表されている可能性があります。</div>
+
+  <div class="data-item">
+    <div class="dname">人口・世帯数</div>
+    <div class="dval">
+      人口<b>65,916人</b>（男性31,619人・女性34,297人）、世帯数<b>33,003世帯</b>（令和8年3月末現在）。年齢構成は0〜14歳6,899人（10.47％）、15〜64歳38,953人（59.09％）、65歳以上20,064人（30.44％）。<br>
+      <b>傾向</b>：平成10年の79,860人をピークに、その後は継続的な減少傾向。令和5年時点の66,880人から、令和8年3月末までの間もわずかに減少している。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2026040900030/" target="_blank" rel="noopener">年齢男女別人口（令和8年3月末現在）</a>／<a href="https://www.city.kashiwara.lg.jp/docs/2026041400034/" target="_blank" rel="noopener">町丁字別人口及び世帯数（令和8年3月末現在）</a>／<a href="https://www.city.kashiwara.lg.jp/docs/2013122400939/" target="_blank" rel="noopener">人口・世帯数の推移</a>（いずれも city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">面積</div>
+    <div class="dval">
+      <b>25.33平方キロメートル</b>（東西6.60km、南北6.63km）。市域の<b>3分の2を山地</b>が占め、中央部を大和川が流れる。大阪平野の南東部、大阪府と奈良県の府県境に位置する。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2014012900324/" target="_blank" rel="noopener">柏原市の見どころ</a>（city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">市長</div>
+    <div class="dval">
+      <b>冨宅正浩</b>（ふけ まさひろ）氏。平成29年（2017年）3月に柏原市長に就任。令和7年（2025年）2月の市長選挙は無投票で3選。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2014012900355/" target="_blank" rel="noopener">市長プロフィール</a>／<a href="https://www.city.kashiwara.lg.jp/mayor/" target="_blank" rel="noopener">ようこそ市長室へ</a>（city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">総合計画</div>
+    <div class="dval">
+      名称は<b>第5次柏原市総合計画</b>。計画期間は<b>令和3年度（2021年度）〜令和12年度（2030年度）</b>の10年間で、前期基本計画（令和3〜7年度）・後期基本計画（令和8〜12年度）に分かれる。<b>今はちょうど後期基本計画がスタートした年度</b>にあたる。<br>
+      2030年のまちの将来像は「<b>選ばれるまち柏原　～豊かな自然　伝統ある産業　歴史・文化、教育　みんな笑顔で住みよい　柏笑（かしわら）～</b>」。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2021101200036/" target="_blank" rel="noopener">第５次柏原市総合計画</a>（基本構想PDFを含む、city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">市の主要施策（令和6年度実績の例）</div>
+    <div class="dval">
+      <b>子育てを応援する環境づくり</b>：中学校給食費の無償化（市内全6校）、小学校給食費物価高騰等対策補助、小学校体育館への空調設備設置。<br>
+      <b>健やかな暮らしをサポート</b>：公園施設長寿命化事業、がん患者医療用補正具購入費助成金の新設、高齢者補聴器購入費助成金の新設。<br>
+      <b>デジタルを活用した市民サービスの向上</b>：放課後児童会 児童支援システムの導入、公立認定こども園等へのICT導入、「行かない窓口」（オンライン決済導入）、「書かない窓口」。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2022081600045/" target="_blank" rel="noopener">柏原市の財政状況について～令和6年度決算～</a>（財務部財政課、city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">地形</div>
+    <div class="dval">
+      大和川は奈良盆地の諸流を集め、<b>生駒山脈と金剛山脈の切れ目である亀の瀬</b>を経て大阪平野に流れ出る。市内では<b>大和川と石川の合流点</b>があり、玉手山がこれを見下ろす位置にある。<br>
+      <b>亀の瀬地すべり</b>：明治36年（1903）、昭和6年（1931）、昭和42年（1967）に大規模な地すべりが発生した記録が残る。もっとも大きかった昭和6年の地すべりでは大和川の河床が9m隆起して河道が完全に閉塞し、鉄道トンネルも破壊された。現在も60年近くにわたり850億円以上の費用を投じて地すべり対策工事が続けられている。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2014082100068/" target="_blank" rel="noopener">大和川物語</a>／<a href="https://www.city.kashiwara.lg.jp/docs/2020040800345/" target="_blank" rel="noopener">龍田古道（14）亀の瀬の地すべり</a>（city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">産業</div>
+    <div class="dval">
+      <b>柏原ぶどう</b>（堅下ぶどう）：大阪府内で屈指のぶどう産地で、30品種以上が栽培されている。品質向上のための「柏原ぶどう品評会」を開催し、マレーシアなどへの輸出実績もある。<br>
+      ぶどうを利用した<b>地ワインの生産</b>にも力を入れており、知名度が高まっている。地元のワイナリーは市主催のワインフェスにも出展している。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2020040800079/" target="_blank" rel="noopener">【柏原ぶどう情報ガイド】柏原ぶどうとは</a>／<a href="https://www.city.kashiwara.lg.jp/docs/2024011500029/" target="_blank" rel="noopener">おおさかワインフェス2024 in 柏原</a>（city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">主な公共交通</div>
+    <div class="dval">
+      鉄道は<b>JR西日本（大和路線）</b>と<b>近畿日本鉄道（大阪線・道明寺線）</b>。バスは市内循環バス「<b>きらめき号</b>」と近鉄バス。タクシーは近鉄タクシー等。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2023071200047/" target="_blank" rel="noopener">市内の公共交通機関の情報ページ</a>（city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="data-item">
+    <div class="dname">財政の概況（令和6年度決算）</div>
+    <div class="dval">
+      歳入総額<b>292億819万円</b>、歳出総額<b>291億4,496万円</b>（いずれも前年度より増加）。<br>
+      <b>経常収支比率 100.9％</b>（類似団体平均93.6％より高く、悪化傾向が続いている）。<b>実質公債費比率 5.6％</b>（類似団体平均5.8％よりやや低い）。<br>
+      地方債残高<b>98.6億円</b>（市民一人当たり29.6万円、類似団体より少ない水準）。基金残高<b>53.1億円</b>（うち財政調整基金22.5億円）。<br>
+      市自身の説明では、令和6年度は財政調整基金を6億円取り崩して収支を黒字にしており実質的には赤字。令和7年度以降は社会保障関係費や人件費の増加により<b>収支不足が続く見込み</b>で、現在の試算のまま財政調整基金だけで補うと<b>令和8年度中に同基金が枯渇する</b>とされている。
+    </div>
+    <div class="src">
+      出典：<a href="https://www.city.kashiwara.lg.jp/docs/2022081600045/" target="_blank" rel="noopener">柏原市の財政状況について～令和6年度決算～</a>（財務部財政課、city.kashiwara.lg.jp）　<span class="chkd">確認日：2026年8月12日</span>
+    </div>
+  </div>
+
+  <div class="warn"><b>面接での使い方</b>／財政の数値は「暗い話」に見えますが、面接では「柏原市の課題を理解しているか」を示す材料になります。「収支不足が見込まれるからこそ、予防保全型の維持管理や優先順位づけが重要だと理解しています」のように、CH.4の頻出テーマ（公共施設の老朽化）とセットで話せると説得力が増します。</div>
+  <label class="done"><input type="checkbox" class="chk" data-k="ch5-review">データシートを面接前日に見直す予定を決めた</label>
+
+  <p class="back-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ 締めチェックリスト ============ -->
+  <div class="checklist">
+    <h2>個人面接以外・直前確認リスト</h2>
+    <p class="lead2">録画動画面接の提出前、集団討論の当日朝に見返す。</p>
+    <ul>
+      <li>ESに書いた内容と、録画動画面接で話す内容に矛盾がないか</li>
+      <li>録画動画面接は3テイク以内で撮り、一番自然なものを提出したか</li>
+      <li>ファイル形式・容量・提出期限（12/18目安）を確認したか</li>
+      <li>集団討論の役割（司会・書記・タイムキーパー）は無理に取りにいかなくてよいと理解しているか</li>
+      <li>柏原市データシートの数値は、提出直前に市公式サイトで再確認したか</li>
+    </ul>
+  </div>
+
+  <footer class="note">
+    本資料は選考対策用の参考メモです。制度・数値は変更されることがあります。柏原市に関する数値・固有名詞は必ず柏原市公式サイト（city.kashiwara.lg.jp）で最新情報を確認してください。個人面接の想定問答は別資料でカバーしています。
+  </footer>
+
+</div>
+
+<a href="#toc" class="fab" id="backToToc" aria-label="目次へ戻る">▲ 目次</a>
+
+<script>
+  (function(){
+    var STORAGE_KEY = 'kashiwara-senko-v1';
+    var all = document.querySelectorAll('details.qa');
+    var chks = document.querySelectorAll('.chk');
+    var count = document.getElementById('count');
+    var fill = document.getElementById('fill');
+    var btn = document.getElementById('toggleAll');
+
+    function loadState(){
+      try{
+        var raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : {};
+      }catch(e){ return {}; }
+    }
+    function saveState(state){
+      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+    }
+
+    var state = loadState();
+    chks.forEach(function(c){
+      var k = c.getAttribute('data-k');
+      if(k && state[k]) c.checked = true;
+    });
+
+    function update(){
+      var n = 0;
+      chks.forEach(function(c){ if(c.checked) n++; });
+      count.textContent = n + ' / ' + chks.length;
+      fill.style.width = (chks.length ? (n / chks.length * 100) : 0) + '%';
+    }
+    chks.forEach(function(c){
+      c.addEventListener('change', function(){
+        var k = c.getAttribute('data-k');
+        if(k){
+          var st = loadState();
+          if(c.checked) st[k] = true; else delete st[k];
+          saveState(st);
+        }
+        update();
+      });
+    });
+    update();
+
+    if(btn){
+      btn.addEventListener('click', function(){
+        var open = btn.textContent.indexOf('開く') !== -1;
+        all.forEach(function(d){ d.open = open; });
+        btn.textContent = open ? 'すべて閉じる' : 'すべて開く';
+      });
+    }
+
+    window.addEventListener('beforeprint', function(){
+      all.forEach(function(d){ d.open = true; });
+    });
+
+    // ---- 現在地インジケータ（sticky進捗バーの章名）----
+    var progressBar = document.querySelector('.progress');
+    var curChNo = document.getElementById('curChNo');
+    var curChName = document.getElementById('curChName');
+    var chapters = Array.prototype.map.call(document.querySelectorAll('.chapter[id]'), function(el){
+      var noEl = el.querySelector('.ch-no');
+      var h2El = el.querySelector('h2');
+      return {
+        el: el,
+        no: noEl ? noEl.textContent.trim() : '',
+        name: h2El ? h2El.textContent.trim() : ''
+      };
+    });
+
+    function setCurrentChapter(idx){
+      var c = chapters[idx];
+      if(!c || !curChNo) return;
+      curChNo.textContent = c.no;
+      if(curChName) curChName.textContent = c.name;
+    }
+    if(chapters.length){ setCurrentChapter(0); }
+
+    if(chapters.length){
+      if('IntersectionObserver' in window){
+        var barH = progressBar ? progressBar.offsetHeight : 64;
+        var io = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting){
+              for(var i=0;i<chapters.length;i++){
+                if(chapters[i].el === entry.target){ setCurrentChapter(i); break; }
+              }
+            }
+          });
+        }, { rootMargin: (-(barH+2)) + 'px 0px -75% 0px', threshold:0 });
+        chapters.forEach(function(c){ io.observe(c.el); });
+      }else{
+        // フォールバック：IntersectionObserver非対応環境ではスクロール位置から算出
+        var spyTicking = false;
+        function spyOnScroll(){
+          if(spyTicking) return;
+          spyTicking = true;
+          (window.requestAnimationFrame || function(fn){ setTimeout(fn,50); })(function(){
+            var barH2 = progressBar ? progressBar.offsetHeight : 64;
+            var y = window.pageYOffset + barH2 + 4;
+            var idx = 0;
+            for(var i=0;i<chapters.length;i++){
+              if(chapters[i].el.getBoundingClientRect().top + window.pageYOffset <= y) idx = i;
+            }
+            setCurrentChapter(idx);
+            spyTicking = false;
+          });
+        }
+        window.addEventListener('scroll', spyOnScroll, { passive:true });
+        window.addEventListener('resize', spyOnScroll);
+        spyOnScroll();
+      }
+    }
+
+    // ---- 右下「▲ 目次」ボタンの表示切替 ----
+    var fab = document.getElementById('backToToc');
+    if(fab){
+      var fabTicking = false;
+      function fabOnScroll(){
+        if(fabTicking) return;
+        fabTicking = true;
+        (window.requestAnimationFrame || function(fn){ setTimeout(fn,50); })(function(){
+          if(window.pageYOffset > 480){ fab.classList.add('show'); }
+          else{ fab.classList.remove('show'); }
+          fabTicking = false;
+        });
+      }
+      window.addEventListener('scroll', fabOnScroll, { passive:true });
+      fabOnScroll();
+    }
+  })();
+</script>
+
+<script>
+(function(){
+"use strict";
+if(location.protocol === 'file:') return;
+if(!('serviceWorker' in navigator)) return;
+
+function showUpdateBanner(reg){
+  try{
+    if(document.getElementById('swUpdateBanner')) return;
+    var bar = document.createElement('div');
+    bar.id = 'swUpdateBanner';
+    bar.setAttribute('role','status');
+    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;'+
+      'display:flex;align-items:center;justify-content:space-between;gap:12px;'+
+      'background:#173630;color:#E8EDE7;'+
+      'font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;'+
+      'font-size:13px;line-height:1.6;'+
+      'padding:10px 14px calc(10px + env(safe-area-inset-bottom));'+
+      'box-shadow:0 -2px 12px rgba(0,0,0,.25)';
+    var txt = document.createElement('span');
+    txt.textContent = '新しい版があります';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = '再読み込み';
+    btn.style.cssText = 'flex:none;min-height:36px;padding:6px 14px;border-radius:8px;'+
+      'border:1px solid #E8EDE7;background:transparent;color:#E8EDE7;font-size:13px;cursor:pointer';
+    btn.addEventListener('click', function(){
+      try{ if(reg.waiting){ reg.waiting.postMessage('SKIP_WAITING'); } }catch(e){}
+      bar.remove();
+    });
+    bar.appendChild(txt);
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }catch(e){ /* no-op */ }
+}
+
+try{
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').then(function(reg){
+      if(reg.waiting && navigator.serviceWorker.controller){ showUpdateBanner(reg); }
+      reg.addEventListener('updatefound', function(){
+        var nw = reg.installing;
+        if(!nw) return;
+        nw.addEventListener('statechange', function(){
+          if(nw.state === 'installed' && navigator.serviceWorker.controller){
+            showUpdateBanner(reg);
+          }
+        });
+      });
+    }).catch(function(){ /* SW登録に失敗してもアプリ本体は通常どおり動作する */ });
+
+    var refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if(refreshing) return;
+      refreshing = true;
+      location.reload();
+    });
+  });
+}catch(e){ /* no-op */ }
+})();
+</script>
+
+</body>
+</html>
