@@ -277,6 +277,16 @@
   .switch input:checked + span{background:var(--accent)}
   .switch input:checked + span::before{transform:translateX(18px);background:var(--accent-ink)}
   @media (prefers-reduced-motion:no-preference){ .switch span::before{transition:transform .15s ease} }
+
+  .home-disclaimer{margin:18px 0 8px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);overflow:hidden}
+  .home-disclaimer summary{padding:13px 14px;min-height:44px;display:flex;align-items:center;cursor:pointer;font-size:13px;color:var(--ink-soft);list-style:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  .home-disclaimer summary::-webkit-details-marker{display:none}
+  .home-disclaimer summary::before{content:'▶';margin-right:8px;font-size:10px;transition:transform .2s ease}
+  .home-disclaimer[open] summary::before{transform:rotate(90deg)}
+  .home-disclaimer p{margin:0;padding:0 14px 12px;font-size:13px;line-height:1.75;color:var(--ink-soft)}
+  .home-disclaimer p b{color:var(--ink)}
+  .home-disclaimer .dis-link a{color:var(--accent)}
+  @media (prefers-reduced-motion:reduce){.home-disclaimer summary::before{transition:none}}
 </style>
 </head>
 <body>
@@ -349,6 +359,15 @@
     </div>
 
     <div class="today-strip" id="todayStrip"></div>
+
+    <details class="home-disclaimer">
+      <summary>この問題集について（必ず一度お読みください）</summary>
+      <p>収録している420問は、SCOAで公表されている出題尺度（言語・数理・論理・一般常識・基礎英語）をもとに作成した<b>練習用のオリジナル問題</b>です。<b>実際の試験問題ではありません。</b></p>
+      <p>「120問60分」「1問あたり30秒」「尺度別の配分（言語20・数理25・論理25・英語30・常識20）」は、SCOAの仕様として一般に知られている数字を採用したものです。<b>柏原市が公表しているものではありません。</b>市が公表しているのは「基礎能力検査（テストセンター方式）」と5つの尺度までです。</p>
+      <p>出題数・試験時間・実施方式は<b>年度や職種で変わることがあります</b>。次回の受験案内が公表されたら、必ずそちらで確認してください。</p>
+      <p>常識分野の制度や数値は改正されることがあります。収録内容は<b>2026年8月時点</b>のものです。</p>
+      <p class="dis-link">→ <a href="https://www.city.kashiwara.lg.jp/category/zokusei/saiyo/" rel="noopener">柏原市 採用・募集 一覧</a></p>
+    </details>
   </div>
 </section>
 
