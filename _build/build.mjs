@@ -21,6 +21,10 @@ const OUT_FILE = process.env.SCOA_OUT_FILE
   : path.join(REPO_ROOT, 'scoa-trainer.html');
 
 const INJECT_MARK = '/*__BANK_INJECT__*/';
+const VERSION_FILE = path.join(__dirname, 'VERSION');   // 例: v2.20260903（唯一の版元）
+const VERSION_MARK = '__APP_VERSION__';                 // app-shell.html 内の差し込み位置
+const INDEX_FILE = path.join(REPO_ROOT, 'index.html');
+const SW_FILE = path.join(REPO_ROOT, 'sw.js');
 const KNOWN_CATS = ['言語', '数理', '論理', '常識', '英語'];
 
 // 文字列リテラルを考慮しつつ、開始 '[' から対応する ']' までを抜き出す。
@@ -81,7 +85,46 @@ function extractCatCounts(text) {
   return counts;
 }
 
+// _build/VERSION を読む。形式は v<数字>.<数字>（例 v2.20260903）。無ければ null。
+function readVersion() {
+  if (!fs.existsSync(VERSION_FILE)) {
+    console.error('[build] ' + VERSION_FILE + ' がありません。例: v2.20260903');
+    process.exitCode = 1;
+    return null;
+  }
+  const v = fs.readFileSync(VERSION_FILE, 'utf8').trim();
+  if (!/^v\d+(\.\d+)+$/.test(v)) {
+    console.error('[build] VERSION の形式が不正です（例 v2.20260903）: ' + v);
+    process.exitCode = 1;
+    return null;
+  }
+  return v;
+}
+
+// 既存ファイルの中のバージョン表記だけを置き換える（index.html の表示、sw.js のキャッシュ名）。
+function stampFile(file, re, replacement, label) {
+  if (!fs.existsSync(file)) {
+    console.error('[build] ' + label + ' が見つかりません: ' + file);
+    process.exitCode = 1;
+    return;
+  }
+  const src = fs.readFileSync(file, 'utf8');
+  if (!re.test(src)) {
+    console.error('[build] ' + label + ' にバージョンの差し込み位置が見つかりません: ' + file);
+    process.exitCode = 1;
+    return;
+  }
+  const out = src.replace(re, replacement);
+  if (out !== src) {
+    fs.writeFileSync(file, out, 'utf8');
+    console.log('[build] ' + label + ' のバージョン表記を更新しました');
+  }
+}
+
 function main() {
+  const version = readVersion();
+  if (!version) return;
+
   if (!fs.existsSync(SHELL_FILE)) {
     console.error('[build] app-shell.html が見つかりません: ' + SHELL_FILE);
     process.exitCode = 1;
@@ -133,10 +176,21 @@ function main() {
     process.exitCode = 1;
     return;
   }
-  const output = shell.replace(INJECT_MARK, () => allQText);
+  if (!shell.includes(VERSION_MARK)) {
+    console.error('[build] app-shell.html に ' + VERSION_MARK + ' が見つかりません。');
+    process.exitCode = 1;
+    return;
+  }
+  const output = shell.replace(INJECT_MARK, () => allQText).split(VERSION_MARK).join(version);
 
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, output, 'utf8');
+
+  // 出力先がリポジトリ既定の場所のときだけ、index.html と sw.js のバージョンも揃える。
+  if (!process.env.SCOA_OUT_FILE) {
+    stampFile(INDEX_FILE, /(<span id="appVersion">)[^<]*(<\/span>)/, '$1' + version + '$2', 'index.html');
+    stampFile(SW_FILE, /(const CACHE_VERSION = ')[^']*(';)/, '$1kashiwara-' + version + '$2', 'sw.js');
+  }
 
   // --- 集計 ---
   const ids = extractIds(combined);
@@ -144,6 +198,7 @@ function main() {
   const catCounts = extractCatCounts(combined);
 
   console.log('');
+  console.log('[build] バージョン: ' + version);
   console.log('[build] 出力: ' + OUT_FILE);
   console.log('[build] 総問題数: ' + ids.length);
   console.log('[build] 尺度別内訳: ' + KNOWN_CATS.map((c) => c + ':' + (catCounts[c] || 0)).join(' / '));

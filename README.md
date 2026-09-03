@@ -44,15 +44,18 @@
 
 ## 内容を更新するとき
 
+1. `_build/VERSION` の版を上げる（形式 `v<版>.<日付>`、例 `v2.20260903`）
+2. 以下を実行して push
+
 ```sh
 node _build/check.mjs      # 問題バンクを検査
-node _build/build.mjs      # scoa-trainer.html を再生成
+node _build/build.mjs      # scoa-trainer.html を再生成し、index.html と sw.js の版表記も揃える
 git add -A && git commit -m "..." && git push
 ```
 
 pushの1〜2分後に公開サイトへ反映されます。利用者側には「新しい版があります」の案内が出て、押すと更新されます（学習記録は保持されます）。
 
-Service Worker のキャッシュを確実に入れ替えたい場合は、`sw.js` の `CACHE_VERSION` を上げてから push してください。
+版は **対策ハブの表紙** と **SCOAトレーナーのホーム画面の見出し下** に表示されます。本人に「今どの版か」を聞けば、更新が届いたか確認できます。Service Worker のキャッシュ名も `kashiwara-<版>` に自動で揃うので、`sw.js` を手で編集する必要はありません。
 
 ---
 
@@ -129,7 +132,8 @@ _build/
   SPEC-interview.md  面接資料の前提条件
   QA-findings.md     品質検査で摘出した指摘の記録
   check.mjs          問題バンクの検査スクリプト
-  build.mjs          バンクを注入して scoa-trainer.html を生成
+  build.mjs          バンクを注入して scoa-trainer.html を生成。VERSION を各ファイルに差し込む
+  VERSION            現在の版（例 v2.20260903）。更新時はここだけ書き換える
   render-test.mjs    生成した scoa-trainer.html をheadless Chromiumで開き、各画面と回答後の解説表示を検証（要 Playwright のChromium）
   app-shell.html     アプリのテンプレート
   bank/*.js          問題データ（8ファイル・420問）
