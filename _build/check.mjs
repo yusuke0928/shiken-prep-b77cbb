@@ -65,6 +65,13 @@ for (const file of targets) {
   const noE = b.filter(x => !x.e || !x.e.trim());
   if (noE.length) p.push(`解説なし ${noE.length}件 (${noE.slice(0,3).map(x=>x.id)})`);
 
+  const noK = b.filter(x => !x.k || !x.k.trim());
+  if (noK.length) p.push(`関連知識(k)なし ${noK.length}件 (${noK.slice(0,3).map(x=>x.id)})`);
+  const badK = b.filter(x => x.k && (x.k.replace(/\n/g, '').length > 240 || /<[a-z\/]|\*\*/.test(x.k)));
+  if (badK.length) p.push(`関連知識(k)が長すぎ/記法混入 ${badK.length}件 (${badK.slice(0,3).map(x=>x.id)})`);
+  const kEqE = b.filter(x => x.k && x.e && x.k.trim() === x.e.trim());
+  if (kEqE.length) p.push(`関連知識(k)が解説と同一 ${kEqE.length}件`);
+
   const noSub = b.filter(x => !x.sub || !x.sub.trim());
   if (noSub.length) p.push(`sub欠落 ${noSub.length}件`);
 
