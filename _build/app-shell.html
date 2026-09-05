@@ -162,7 +162,10 @@
     overflow:hidden;
   }
   .quiz-hud{flex:0 0 auto;padding:10px 16px 4px;max-width:560px;width:100%;margin:0 auto}
-  .quiz-scroll-wrap{position:relative;flex:1 1 auto;min-height:0;max-width:560px;width:100%;margin:0 auto;display:flex}
+  .quiz-scroll-wrap{position:relative;flex:1 1 0;max-width:560px;width:100%;margin:0 auto;display:flex;
+    /* 問題文＋提示文の最低表示高さ。これを下回るほど選択肢欄が大きい場合は選択肢側が内部スクロールする
+       （2026-09 本人報告：模擬×文字大×小画面で英文・本文が選択肢に押し潰され「問題が出ない」状態になった） */
+    min-height:clamp(170px, 34dvh, 280px);}
   .quiz-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 10px}
   .scroll-hint{
     position:absolute;left:0;right:0;bottom:0;height:26px;
@@ -177,7 +180,7 @@
        （回答後のfocus()移動で選択肢自体が隠れてしまうため）。
        縮んでよいのは解説文（.fb-exp）だけとし、選択肢・★・正誤・次へは
        常にflex-shrink:0で確保する。 */
-    flex:0 0 auto;display:flex;flex-direction:column;gap:8px;min-height:0;
+    flex:0 1 auto;display:flex;flex-direction:column;gap:8px;min-height:0;
     padding:8px 16px calc(14px + env(safe-area-inset-bottom));
     max-width:560px;width:100%;margin:0 auto;
     max-height:82vh; max-height:82dvh;
@@ -199,6 +202,7 @@
   .qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;margin-top:10px}
   .qtext{font-size:1.05rem;font-weight:700;line-height:1.65}
   .qsub{margin-top:12px;font-family:var(--font-mono);font-size:.92rem;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;white-space:pre-wrap;overflow-x:auto}
+  .ul{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;font-weight:700}
   .qtbl{margin-top:12px}
   .tblscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:10px}
   .qtbl table{border-collapse:collapse;width:100%;min-width:280px}
@@ -847,6 +851,16 @@ function setFlagBtn(on){
   b.textContent = on ? '★ 見返す問題に登録中' : '☆ 見返す問題に追加';
 }
 
+/* 「【…】」で囲まれた部分を下線（.ul）にして流し込む。設問の「下線部」はこの記法で表す */
+function setMarkedText(el, text){
+  el.textContent='';
+  String(text).split(/(【[^】]*】)/).forEach(function(part){
+    if(!part) return;
+    if(part.charAt(0)==='【' && part.slice(-1)==='】'){
+      var u=document.createElement('span'); u.className='ul'; u.textContent=part.slice(1,-1); el.appendChild(u);
+    } else { el.appendChild(document.createTextNode(part)); }
+  });
+}
 function renderQuestion(){
   if(!S.resume){ showView('home'); renderHome(); return; }
   var ids = S.resume.ids;
@@ -865,7 +879,7 @@ function renderQuestion(){
 
   $('#qText').textContent = q.q;
   var qSub=$('#qSub');
-  if(q.s){ qSub.hidden=false; qSub.textContent=q.s; } else { qSub.hidden=true; qSub.textContent=''; }
+  if(q.s){ qSub.hidden=false; setMarkedText(qSub, q.s); } else { qSub.hidden=true; qSub.textContent=''; }
 
   var qTbl=$('#qTbl');
   qTbl.innerHTML='';
@@ -895,7 +909,7 @@ function renderQuestion(){
     var b=document.createElement('button');
     b.type='button'; b.className='opt-btn';
     var mk=document.createElement('span'); mk.className='opt-mk'; mk.textContent=LETTERS[pos];
-    var tx=document.createElement('span'); tx.className='opt-tx'; tx.textContent=q.o[origIdx];
+    var tx=document.createElement('span'); tx.className='opt-tx'; setMarkedText(tx, q.o[origIdx]);
     b.appendChild(mk); b.appendChild(tx);
     b.addEventListener('click', function(){ answerOption(origIdx, b); });
     optsEl.appendChild(b);

@@ -162,7 +162,10 @@
     overflow:hidden;
   }
   .quiz-hud{flex:0 0 auto;padding:10px 16px 4px;max-width:560px;width:100%;margin:0 auto}
-  .quiz-scroll-wrap{position:relative;flex:1 1 auto;min-height:0;max-width:560px;width:100%;margin:0 auto;display:flex}
+  .quiz-scroll-wrap{position:relative;flex:1 1 0;max-width:560px;width:100%;margin:0 auto;display:flex;
+    /* 問題文＋提示文の最低表示高さ。これを下回るほど選択肢欄が大きい場合は選択肢側が内部スクロールする
+       （2026-09 本人報告：模擬×文字大×小画面で英文・本文が選択肢に押し潰され「問題が出ない」状態になった） */
+    min-height:clamp(170px, 34dvh, 280px);}
   .quiz-scroll{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px 10px}
   .scroll-hint{
     position:absolute;left:0;right:0;bottom:0;height:26px;
@@ -177,7 +180,7 @@
        （回答後のfocus()移動で選択肢自体が隠れてしまうため）。
        縮んでよいのは解説文（.fb-exp）だけとし、選択肢・★・正誤・次へは
        常にflex-shrink:0で確保する。 */
-    flex:0 0 auto;display:flex;flex-direction:column;gap:8px;min-height:0;
+    flex:0 1 auto;display:flex;flex-direction:column;gap:8px;min-height:0;
     padding:8px 16px calc(14px + env(safe-area-inset-bottom));
     max-width:560px;width:100%;margin:0 auto;
     max-height:82vh; max-height:82dvh;
@@ -199,6 +202,7 @@
   .qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 16px;margin-top:10px}
   .qtext{font-size:1.05rem;font-weight:700;line-height:1.65}
   .qsub{margin-top:12px;font-family:var(--font-mono);font-size:.92rem;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;white-space:pre-wrap;overflow-x:auto}
+  .ul{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px;font-weight:700}
   .qtbl{margin-top:12px}
   .tblscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:10px}
   .qtbl table{border-collapse:collapse;width:100%;min-width:280px}
@@ -320,7 +324,7 @@
     <header class="topbar">
       <div class="brand">SCOA トレーナー</div>
       <div class="brand-sub">柏原市役所 技術職（土木） 基礎能力検査対策</div>
-      <div class="brand-ver">v2.20260903</div>
+      <div class="brand-ver">v3.20260905</div>
     </header>
 
     <div id="noBankNotice" class="no-bank" hidden>問題データが読み込まれていません。</div>
@@ -557,9 +561,9 @@ const ALL_Q = [
  {id:"eig-009",cat:"英語",sub:"語彙・意味",q:"次の空欄に入る語として正しいものはどれか。",s:"The bridge ( ) built in 1990.",o:["is","was","has","were"],a:1,e:"1990年という過去の時点なので過去形の受動態 was built。主語が単数なので were は不可です。", k:"・受動態は「be動詞＋過去分詞」。時制は be動詞で表す: is built（現在）・was built（過去）・will be built（未来）\n・build − built − built。同じ型の不規則動詞に send − sent、spend − spent、lend − lent\n・完了形の受動態は has been built（すでに建てられている）。has built だけでは能動「建てた」になる",lv:2 },
  {id:"eig-010",cat:"英語",sub:"前置詞",q:"次の空欄に入る語句として正しいものはどれか。",s:"This bag is ( ) than that one.",o:["expensive","more expensive","most expensive","the most expensive"],a:1,e:"than があるので比較級。expensive のような長い語は more をつけます。", k:"・短い語は -er／-est（cheap−cheaper−cheapest）、長い語は more／most。最上級には the をつける\n・不規則変化は good−better−best、bad−worse−worst、many／much−more−most\n・強調は much／far／even＋比較級（much more expensive）。very は比較級には使えない\n・同等比較は as＋原級＋as（as expensive as）",lv:1 },
  {id:"eig-011",cat:"英語",sub:"熟語・句動詞",q:"次の動詞の過去形として正しいものはどれか。",s:"bring",o:["bringed","brang","brought","braught"],a:2,e:"bring − brought − brought と変化する不規則動詞です。",t:"buy−bought、think−thought と同じ型でまとめて覚える。", k:"・-ought／-aught 型: catch−caught、teach−taught、fight−fought。過去形＝過去分詞\n・bring は「持って来る」、take は「持って行く」。come／go と同じ方向の対\n・bring up（育てる・話題を出す）、bring about（引き起こす）、bring back（返す・思い出させる）が仲間\n・似た綴りの ring は ring−rang−rung 型",lv:2 },
- {id:"eig-012",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"They decided to put off the meeting.",o:["中止する","延期する","開催する","短縮する"],a:1,e:"put off は「延期する」で postpone と同義。中止は call off です。",t:"put off と call off は対で出題されやすい。", k:"・off のコアは「離れる・切れる」。take off（離陸する・脱ぐ）、set off（出発する）、go off（鳴る・爆発する）\n・put の仲間: put on（着る）、put away（片づける）、put up with（我慢する）、put out（火を消す）\n・put off ~ing（〜するのを先延ばしする）と動名詞をとる。delay（遅らせる）も類義",lv:2 },
- {id:"eig-013",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"I am looking forward to seeing you.",o:["会うのを楽しみにしている","会うのをためらっている","会う予定を立てている","会うのを忘れていた"],a:0,e:"look forward to ~ing で「〜を楽しみに待つ」。to のあとは動名詞になる点が頻出です。", k:"・この to は前置詞。同じ型: be used to ~ing（〜に慣れている）、object to ~ing（〜に反対する）\n・be used to ~ing（慣れている）と used to＋原形（かつて〜した）は別物。ひっかけの定番\n・look の仲間: look after（世話をする）、look for（探す）、look up（調べる）、look into（調査する）",lv:2 },
- {id:"eig-014",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"Don't give up so easily.",o:["油断する","あきらめる","言い返す","引き受ける"],a:1,e:"give up は「あきらめる、放棄する」。", k:"・up のコアは「上昇・完了・すっかり」。use up（使い切る）、eat up（食べ尽くす）も「すっかり」の up\n・give up ~ing（〜するのをやめる: give up smoking）。目的語は動名詞で to 不定詞は不可\n・give の仲間: give in（屈する）、give away（ただで与える）、give back（返す）\n・類義語は abandon（断念する）・quit（やめる）。反意は keep on（続ける）",lv:1 },
+ {id:"eig-012",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"They decided to 【put off】 the meeting.",o:["中止する","延期する","開催する","短縮する"],a:1,e:"put off は「延期する」で postpone と同義。中止は call off です。",t:"put off と call off は対で出題されやすい。", k:"・off のコアは「離れる・切れる」。take off（離陸する・脱ぐ）、set off（出発する）、go off（鳴る・爆発する）\n・put の仲間: put on（着る）、put away（片づける）、put up with（我慢する）、put out（火を消す）\n・put off ~ing（〜するのを先延ばしする）と動名詞をとる。delay（遅らせる）も類義",lv:2 },
+ {id:"eig-013",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"I am 【looking forward to】 seeing you.",o:["会うのを楽しみにしている","会うのをためらっている","会う予定を立てている","会うのを忘れていた"],a:0,e:"look forward to ~ing で「〜を楽しみに待つ」。to のあとは動名詞になる点が頻出です。", k:"・この to は前置詞。同じ型: be used to ~ing（〜に慣れている）、object to ~ing（〜に反対する）\n・be used to ~ing（慣れている）と used to＋原形（かつて〜した）は別物。ひっかけの定番\n・look の仲間: look after（世話をする）、look for（探す）、look up（調べる）、look into（調査する）",lv:2 },
+ {id:"eig-014",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"Don't 【give up】 so easily.",o:["油断する","あきらめる","言い返す","引き受ける"],a:1,e:"give up は「あきらめる、放棄する」。", k:"・up のコアは「上昇・完了・すっかり」。use up（使い切る）、eat up（食べ尽くす）も「すっかり」の up\n・give up ~ing（〜するのをやめる: give up smoking）。目的語は動名詞で to 不定詞は不可\n・give の仲間: give in（屈する）、give away（ただで与える）、give back（返す）\n・類義語は abandon（断念する）・quit（やめる）。反意は keep on（続ける）",lv:1 },
 
  {id:"eig-015",cat:"英語",sub:"語彙・同意語",q:"次の語の同意語として正しいものはどれか。",s:"begin",o:["end","stop","start","continue"],a:2,e:"begin と start はどちらも「始める」という意味の同意語。end は反対の意味です。", k:"・begin − began − begun（A−B−C型）。start は規則変化。名詞は beginning（始まり）\n・両語とも目的語に動名詞・to 不定詞のどちらもとれる（begin to rain／begin raining）\n・「始める」の仲間: commence（開始する・硬い語）、launch（立ち上げる・発売する）\n・stop to do（〜するために止まる）と stop doing（〜するのをやめる）は別",lv:2 },
  {id:"eig-016",cat:"英語",sub:"語彙・同意語",q:"次の語の同意語として正しいものはどれか。",s:"huge",o:["enormous","tiny","average","narrow"],a:0,e:"huge と enormous はどちらも「巨大な」という意味。tiny は正反対の意味です。",t:"反意語に見える選択肢を混ぜたひっかけに注意。", k:"・「巨大な」の仲間: vast（広大な）、immense（莫大な）、gigantic（巨大な）、massive（大量の・巨大な）\n・「小さい」側: tiny、minute（微小な）。average は「平均的な」で大小のどちらでもない\n・-ous は形容詞を作る接尾辞: enormous、famous（有名な）、dangerous（危険な）、various（様々な）\n・big／large は中立の「大きい」、huge は程度が強い",lv:2 },
@@ -587,12 +591,12 @@ const ALL_Q = [
  {id:"eig-036",cat:"英語",sub:"語彙・意味",q:"次の語の意味として正しいものはどれか。",s:"polite",o:["失礼な","礼儀正しい","親しい","厳しい"],a:1,e:"polite は「礼儀正しい」という意味の形容詞です。", k:"・反意語は impolite／rude（失礼な）。名詞は politeness（礼儀正しさ）、副詞 politely（丁寧に）\n・否定の im- がつくのは p・b・m の前: impossible、impatient（せっかちな）、imbalance（不均衡）\n・「礼儀」の仲間: courteous（礼儀正しい）、manners（作法）。「厳しい」は strict、「親しい」は close",lv:2 },
  {id:"eig-037",cat:"英語",sub:"語彙・意味",q:"次の語の意味として正しいものはどれか。",s:"avoid",o:["避ける","求める","受け入れる","直面する"],a:0,e:"avoid は「避ける」という意味。face（直面する）とは逆の意味合いです。",t:"avoid のあとは動名詞（~ing）が続く。", k:"・名詞は avoidance（回避）、形容詞 avoidable（避けられる）⇔ unavoidable（避けられない）\n・動名詞のみをとる動詞の仲間: enjoy、finish、mind（気にする）、consider（検討する）\n・「避ける」の仲間: escape（逃れる）、evade（言い逃れる）、prevent A from ~ing（Aが〜するのを防ぐ）\n・「直面する」は face／confront、「求める」は seek",lv:3 },
 
- {id:"eig-038",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"Please turn off the light before you leave.",o:["消す","つける","直す","壊す"],a:0,e:"turn off は「（電気などを）消す」という意味。反対は turn on（つける）です。", k:"・off＝「切れる・離れる」、on＝「接続・継続」。switch off／switch on も同じ意味で使える\n・turn の仲間: turn up（音量を上げる・現れる）、turn down（下げる・断る）、turn out（〜と判明する）\n・turn into ~（〜に変わる）。turn は「回す」から「変える」へ意味が広がる\n・put out は「火を消す」。電気は turn off、火は put out と対象で使い分ける",lv:1 },
- {id:"eig-039",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"I ran into an old friend at the station.",o:["無視する","追いかける","偶然出会う","避ける"],a:2,e:"run into ~ は「〜に偶然出会う」という意味。run away（逃げる）と混同しないように。",t:"run into と come across は同じ意味でよく言い換えられる。", k:"・into は「中へ」→「ぶつかる」イメージ。run into a wall（壁に衝突する）の文字通りの意味もある\n・「偶然会う」の仲間: bump into（ばったり会う）、meet by chance（偶然会う）\n・run の仲間: run out of ~（〜を切らす）、run over（ひく）、run after（追いかける）\n・run into trouble（困難にぶつかる）も「陥る」の用法",lv:2 },
- {id:"eig-040",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"She takes after her mother.",o:["世話をする","似ている","反抗する","尊敬する"],a:1,e:"take after ~ は「（主に家族に）〜に似ている」という意味です。", k:"・take after は血縁の類似に使う。resemble（〜に似ている）は他動詞で前置詞不要\n・take の仲間: take off（離陸する・脱ぐ）、take over（引き継ぐ）、take part in（参加する）\n・take care of／look after が「世話をする」。take after と look after の混同がひっかけの定番\n・be named after ~（〜にちなんで名づける）も同じ after",lv:3 },
- {id:"eig-041",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"He was brought up in a small town.",o:["雇われた","教育した","生まれた","育てられた"],a:3,e:"be brought up は「育てられる」。bring up は「育てる」という意味の熟語です。",t:"bring up には「話題を持ち出す」という意味もある。", k:"・「育つ」は grow up（自動詞）、「育てる」は bring up／raise（他動詞）\n・rise（上がる・自動詞、rise−rose−risen）と raise（上げる・他動詞、規則変化）は混同しやすい対\n・up の「上へ・成長」イメージ: grow up（成長する）、set up（設立する）、build up（築き上げる）\n・「生まれる」は be born（bear−bore−born）",lv:3 },
- {id:"eig-042",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"They came across a beautiful lake during the hike.",o:["偶然見つける","横切る","登る","避けて通る"],a:0,e:"come across ~ は「〜を偶然見つける」という意味です。", k:"・across は「横切って」。come across は「横切る途中で出くわす」イメージで、人にも物にも使える\n・come の仲間: come up with（思いつく）、come about（起こる）、come true（実現する）\n・「見つける」の仲間: find out（知る・突き止める）、discover（発見する）、encounter（遭遇する）\n・come across as ~ は「〜という印象を与える」の別義",lv:2 },
- {id:"eig-043",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"Please fill out this form.",o:["提出する","破棄する","記入する","確認する"],a:2,e:"fill out ~ は「（書類に）記入する」という意味。fill in も同義で使われます。",t:"fill out と fill in はどちらも「記入する」で言い換え可能。", k:"・out は「すっかり・最後まで」の完了イメージ: work out（解決する）、find out（突き止める）\n・fill in には fill in for ~（〜の代理をする）の別義もある\n・form（用紙）、application（申込書）、blank（空欄）、submit（提出する）が書類の頻出語\n・fill A with B（AをBで満たす）、be filled with ~＝be full of ~（〜でいっぱい）",lv:1 },
+ {id:"eig-038",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"Please 【turn off】 the light before you leave.",o:["消す","つける","直す","壊す"],a:0,e:"turn off は「（電気などを）消す」という意味。反対は turn on（つける）です。", k:"・off＝「切れる・離れる」、on＝「接続・継続」。switch off／switch on も同じ意味で使える\n・turn の仲間: turn up（音量を上げる・現れる）、turn down（下げる・断る）、turn out（〜と判明する）\n・turn into ~（〜に変わる）。turn は「回す」から「変える」へ意味が広がる\n・put out は「火を消す」。電気は turn off、火は put out と対象で使い分ける",lv:1 },
+ {id:"eig-039",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"I 【ran into】 an old friend at the station.",o:["無視する","追いかける","偶然出会う","避ける"],a:2,e:"run into ~ は「〜に偶然出会う」という意味。run away（逃げる）と混同しないように。",t:"run into と come across は同じ意味でよく言い換えられる。", k:"・into は「中へ」→「ぶつかる」イメージ。run into a wall（壁に衝突する）の文字通りの意味もある\n・「偶然会う」の仲間: bump into（ばったり会う）、meet by chance（偶然会う）\n・run の仲間: run out of ~（〜を切らす）、run over（ひく）、run after（追いかける）\n・run into trouble（困難にぶつかる）も「陥る」の用法",lv:2 },
+ {id:"eig-040",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"She 【takes after】 her mother.",o:["世話をする","似ている","反抗する","尊敬する"],a:1,e:"take after ~ は「（主に家族に）〜に似ている」という意味です。", k:"・take after は血縁の類似に使う。resemble（〜に似ている）は他動詞で前置詞不要\n・take の仲間: take off（離陸する・脱ぐ）、take over（引き継ぐ）、take part in（参加する）\n・take care of／look after が「世話をする」。take after と look after の混同がひっかけの定番\n・be named after ~（〜にちなんで名づける）も同じ after",lv:3 },
+ {id:"eig-041",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"He was 【brought up】 in a small town.",o:["雇われた","教育した","生まれた","育てられた"],a:3,e:"be brought up は「育てられる」。bring up は「育てる」という意味の熟語です。",t:"bring up には「話題を持ち出す」という意味もある。", k:"・「育つ」は grow up（自動詞）、「育てる」は bring up／raise（他動詞）\n・rise（上がる・自動詞、rise−rose−risen）と raise（上げる・他動詞、規則変化）は混同しやすい対\n・up の「上へ・成長」イメージ: grow up（成長する）、set up（設立する）、build up（築き上げる）\n・「生まれる」は be born（bear−bore−born）",lv:3 },
+ {id:"eig-042",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"They 【came across】 a beautiful lake during the hike.",o:["偶然見つける","横切る","登る","避けて通る"],a:0,e:"come across ~ は「〜を偶然見つける」という意味です。", k:"・across は「横切って」。come across は「横切る途中で出くわす」イメージで、人にも物にも使える\n・come の仲間: come up with（思いつく）、come about（起こる）、come true（実現する）\n・「見つける」の仲間: find out（知る・突き止める）、discover（発見する）、encounter（遭遇する）\n・come across as ~ は「〜という印象を与える」の別義",lv:2 },
+ {id:"eig-043",cat:"英語",sub:"熟語・句動詞",q:"下線部の熟語の意味として正しいものはどれか。",s:"Please 【fill out】 this form.",o:["提出する","破棄する","記入する","確認する"],a:2,e:"fill out ~ は「（書類に）記入する」という意味。fill in も同義で使われます。",t:"fill out と fill in はどちらも「記入する」で言い換え可能。", k:"・out は「すっかり・最後まで」の完了イメージ: work out（解決する）、find out（突き止める）\n・fill in には fill in for ~（〜の代理をする）の別義もある\n・form（用紙）、application（申込書）、blank（空欄）、submit（提出する）が書類の頻出語\n・fill A with B（AをBで満たす）、be filled with ~＝be full of ~（〜でいっぱい）",lv:1 },
 
  {id:"eig-044",cat:"英語",sub:"前置詞",q:"次の空欄に入る語として正しいものはどれか。",s:"He is interested ( ) history.",o:["on","in","at","to"],a:1,e:"be interested in ~ で「〜に興味がある」という意味です。", k:"・interest は名詞で「興味」「利子」。interesting（興味深い）と interested（興味を持って）を区別\n・in は「範囲の中」→「〜の分野に」: be involved in ~（〜に関わる）\n・感情の -ed／-ing の対: excited／exciting、bored／boring、surprised／surprising\n・類義: be keen on ~、be into ~（口語）",lv:1 },
  {id:"eig-045",cat:"英語",sub:"前置詞",q:"次の空欄に入る語として正しいものはどれか。",s:"This train is bound ( ) Osaka.",o:["to","at","in","for"],a:3,e:"be bound for ~ で「〜行きである」という意味。駅や空港の案内でよく使われます。",t:"bound for ~ は乗り物の行き先を表す決まり文句。", k:"・for は「〜に向かって」の方向: leave for Tokyo（東京へ出発する）、a train for Osaka（大阪行き）\n・bound は bind（縛る）の過去分詞でもあり、be bound to do（きっと〜する）は別義\n・leave Tokyo（東京を離れる）と leave for Tokyo（東京へ向かう）は for の有無で意味が逆になる\n・head for ~（〜へ向かう）も同じ for",lv:3 },
@@ -1343,6 +1347,16 @@ function setFlagBtn(on){
   b.textContent = on ? '★ 見返す問題に登録中' : '☆ 見返す問題に追加';
 }
 
+/* 「【…】」で囲まれた部分を下線（.ul）にして流し込む。設問の「下線部」はこの記法で表す */
+function setMarkedText(el, text){
+  el.textContent='';
+  String(text).split(/(【[^】]*】)/).forEach(function(part){
+    if(!part) return;
+    if(part.charAt(0)==='【' && part.slice(-1)==='】'){
+      var u=document.createElement('span'); u.className='ul'; u.textContent=part.slice(1,-1); el.appendChild(u);
+    } else { el.appendChild(document.createTextNode(part)); }
+  });
+}
 function renderQuestion(){
   if(!S.resume){ showView('home'); renderHome(); return; }
   var ids = S.resume.ids;
@@ -1361,7 +1375,7 @@ function renderQuestion(){
 
   $('#qText').textContent = q.q;
   var qSub=$('#qSub');
-  if(q.s){ qSub.hidden=false; qSub.textContent=q.s; } else { qSub.hidden=true; qSub.textContent=''; }
+  if(q.s){ qSub.hidden=false; setMarkedText(qSub, q.s); } else { qSub.hidden=true; qSub.textContent=''; }
 
   var qTbl=$('#qTbl');
   qTbl.innerHTML='';
@@ -1391,7 +1405,7 @@ function renderQuestion(){
     var b=document.createElement('button');
     b.type='button'; b.className='opt-btn';
     var mk=document.createElement('span'); mk.className='opt-mk'; mk.textContent=LETTERS[pos];
-    var tx=document.createElement('span'); tx.className='opt-tx'; tx.textContent=q.o[origIdx];
+    var tx=document.createElement('span'); tx.className='opt-tx'; setMarkedText(tx, q.o[origIdx]);
     b.appendChild(mk); b.appendChild(tx);
     b.addEventListener('click', function(){ answerOption(origIdx, b); });
     optsEl.appendChild(b);
