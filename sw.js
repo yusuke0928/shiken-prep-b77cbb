@@ -7,7 +7,7 @@
 //    届いたときだけ呼ぶ（学習中に中身が急に入れ替わって混乱しないように）。
 //  - バージョンを変えたら CACHE_VERSION を上げる。古いキャッシュは activate で削除。
 
-const CACHE_VERSION = 'kashiwara-v3.20260905';
+const CACHE_VERSION = 'kashiwara-v4.20260907';
 
 const PRECACHE_URLS = [
   './',

@@ -72,6 +72,10 @@ for (const file of targets) {
   const kEqE = b.filter(x => x.k && x.e && x.k.trim() === x.e.trim());
   if (kEqE.length) p.push(`関連知識(k)が解説と同一 ${kEqE.length}件`);
 
+  const noX = b.filter(x => !Array.isArray(x.x) || x.x.length !== 4 || x.x.some(v => typeof v !== 'string' || !v.trim()));
+  if (noX.length) p.push(`選択肢別解説(x)なし/不正 ${noX.length}件 (${noX.slice(0,3).map(x=>x.id)})`);
+  const longX = b.filter(x => Array.isArray(x.x) && x.x.some(v => typeof v === 'string' && v.length > 70));
+  if (longX.length) p.push(`選択肢別解説(x)が70字超 ${longX.length}件 (${longX.slice(0,3).map(x=>x.id)})`);
   const noSub = b.filter(x => !x.sub || !x.sub.trim());
   if (noSub.length) p.push(`sub欠落 ${noSub.length}件`);
 

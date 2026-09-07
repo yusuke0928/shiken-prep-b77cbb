@@ -252,6 +252,14 @@
   .fb-exp{flex:0 0 auto}
   .fb-e{color:var(--ink);margin-top:4px}
   .fb-t{color:var(--ink-soft);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+  .fb-x{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+  .fb-x-row{display:flex;gap:8px;padding:6px 0;border-top:1px dashed var(--line)}
+  .fb-x-row:first-of-type{border-top:none}
+  .fb-x-mk{flex:none;font-family:var(--font-mono);font-weight:800;font-size:.85rem;color:var(--ng);min-width:2.6em;padding-top:2px}
+  .fb-x-row.is-a .fb-x-mk{color:var(--ok)}
+  .fb-x-body{min-width:0;flex:1}
+  .fb-x-opt{font-size:.86rem;font-weight:700;line-height:1.5;overflow-wrap:anywhere}
+  .fb-x-note{font-size:.86rem;line-height:1.65;color:var(--ink);overflow-wrap:anywhere}
   .fb-k{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
   .fb-k-title{font-size:.74rem;font-weight:700;letter-spacing:.06em;color:var(--ink-soft);margin-bottom:4px}
   .fb-k-body{color:var(--ink);font-size:.88rem;line-height:1.7;white-space:pre-line;overflow-wrap:anywhere}
@@ -935,6 +943,24 @@ function renderExplanation(container){
   if(currentQ.t){
     var t=document.createElement('p'); t.className='fb-t'; t.textContent='ポイント: '+currentQ.t;
     container.appendChild(t);
+  }
+  // 選択肢ごとの解説（x）。正解・不正解どちらのときも、画面に出ている順（シャッフル後）で全選択肢を出す
+  if(Array.isArray(currentQ.x) && currentQ.x.length===currentQ.o.length){
+    var xw=document.createElement('div'); xw.className='fb-x';
+    var xt=document.createElement('div'); xt.className='fb-k-title'; xt.textContent='選択肢ごとの解説';
+    xw.appendChild(xt);
+    var order = (currentOptMap && currentOptMap.length===currentQ.o.length) ? currentOptMap : currentQ.o.map(function(_,i){return i;});
+    var LETTERS=['A','B','C','D'];
+    order.forEach(function(origIdx, pos){
+      var row=document.createElement('div'); row.className='fb-x-row'+(origIdx===currentQ.a?' is-a':'');
+      var mk=document.createElement('span'); mk.className='fb-x-mk'; mk.textContent=LETTERS[pos]+(origIdx===currentQ.a?' ○':' ×');
+      var body=document.createElement('div'); body.className='fb-x-body';
+      var op=document.createElement('div'); op.className='fb-x-opt'; setMarkedText(op, currentQ.o[origIdx]);
+      var note=document.createElement('div'); note.className='fb-x-note'; note.textContent=currentQ.x[origIdx];
+      body.appendChild(op); body.appendChild(note);
+      row.appendChild(mk); row.appendChild(body); xw.appendChild(row);
+    });
+    container.appendChild(xw);
   }
   if(currentQ.k){
     var k=document.createElement('div'); k.className='fb-k';
