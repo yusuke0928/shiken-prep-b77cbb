@@ -25,6 +25,7 @@ const VERSION_FILE = path.join(__dirname, 'VERSION');   // 例: v2.20260903（�
 const VERSION_MARK = '__APP_VERSION__';                 // app-shell.html 内の差し込み位置
 const INDEX_FILE = path.join(REPO_ROOT, 'index.html');
 const SW_FILE = path.join(REPO_ROOT, 'sw.js');
+const JIMU_FILE = path.join(REPO_ROOT, 'scoa-jimu.html');     // 事務能力トレーナー（単体HTML。版表記だけ差し込む）
 const KNOWN_CATS = ['言語', '数理', '論理', '常識', '英語'];
 
 // 文字列リテラルを考慮しつつ、開始 '[' から対応する ']' までを抜き出す。
@@ -101,7 +102,7 @@ function readVersion() {
   return v;
 }
 
-// 既存ファイルの中のバージョン表記だけを置き換える（index.html の表示、sw.js のキャッシュ名）。
+// 既存ファイルの中のバージョン表記だけを置き換える（index.html・scoa-jimu.html の表示、sw.js のキャッシュ名）。
 function stampFile(file, re, replacement, label) {
   if (!fs.existsSync(file)) {
     console.error('[build] ' + label + ' が見つかりません: ' + file);
@@ -189,6 +190,7 @@ function main() {
   // 出力先がリポジトリ既定の場所のときだけ、index.html と sw.js のバージョンも揃える。
   if (!process.env.SCOA_OUT_FILE) {
     stampFile(INDEX_FILE, /(<span id="appVersion">)[^<]*(<\/span>)/, '$1' + version + '$2', 'index.html');
+    stampFile(JIMU_FILE, /(<span id="appVersion">)[^<]*(<\/span>)/, '$1' + version + '$2', 'scoa-jimu.html');
     stampFile(SW_FILE, /(const CACHE_VERSION = ')[^']*(';)/, '$1kashiwara-' + version + '$2', 'sw.js');
   }
 

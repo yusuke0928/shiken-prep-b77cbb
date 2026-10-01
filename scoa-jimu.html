@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#173630" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C1815" media="(prefers-color-scheme: dark)">
+<title>事務能力トレーナー｜柏原市役所 採用試験対策</title>
+<style>
+  :root{
+    --ink:#16211F; --ink-soft:#4A5854;
+    --paper:#EEF0EA; --paper-hi:#F7F8F4;
+    --river:#24504B; --river-deep:#173630;
+    --contour:#C4CCC2; --marker:#DCE94F; --marker-soft:#F0F5B8;
+    --ok:#1F7A45; --ok-bg:#E3F3E8; --ng:#9A2B1F; --ng-bg:#F7E4E0;
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+    --disp:"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Meiryo",sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ink:#E4E9E2; --ink-soft:#A9B6AE;
+      --paper:#12211D; --paper-hi:#1A2E27;
+      --river:#7FC7B4; --river-deep:#0C1815;
+      --contour:#2E463D; --marker:#DCE94F; --marker-soft:#2B3320;
+      --ok:#6FD39A; --ok-bg:#16382A; --ng:#F0968A; --ng-bg:#33201D;
+      --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--disp);font-size:16px;line-height:1.7;-webkit-tap-highlight-color:transparent}
+  [hidden]{display:none!important}
+  button{font-family:inherit;color:inherit;font-size:inherit}
+  h1,h2,h3,p{margin:0}
+  a{color:var(--river)}
+
+  .view{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+  .wrap{max-width:560px;width:100%;margin:0 auto;padding:0 16px calc(28px + env(safe-area-inset-bottom))}
+
+  header.cover{background:var(--river-deep);color:#E8EDE7;border-bottom:5px solid var(--marker);padding-top:env(safe-area-inset-top)}
+  .cover-inner{max-width:560px;margin:0 auto;padding:22px 16px 18px}
+  .cover-inner h1{font-weight:900;font-size:24px;line-height:1.35}
+  .cover-inner .thin{display:block;font-size:12px;font-weight:500;letter-spacing:.12em;opacity:.75;margin-bottom:4px}
+  .cover-meta{font-family:var(--mono);font-size:11.5px;color:rgba(232,237,231,.72);margin-top:8px}
+
+  .card{background:var(--paper-hi);border:1px solid var(--contour);padding:14px 16px;margin-top:14px}
+  .card h2{font-size:15px;font-weight:900;margin-bottom:6px}
+  .card p{font-size:13.5px;color:var(--ink-soft);line-height:1.8}
+  .card p + p{margin-top:8px}
+  .card ul{margin:6px 0 0;padding-left:1.2em;font-size:13.5px;color:var(--ink-soft);line-height:1.8}
+  .card.key{border-left:3px solid var(--marker)}
+  details.card summary{cursor:pointer;font-size:14px;font-weight:700}
+  .label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--river);margin:22px 0 8px}
+
+  .seg{display:flex;gap:6px}
+  .seg button{flex:1;min-height:44px;background:var(--paper-hi);border:1px solid var(--contour);cursor:pointer;font-size:14px;font-weight:700}
+  .seg button[aria-pressed="true"]{background:var(--river);color:var(--paper-hi);border-color:var(--river)}
+
+  .sec-list{display:flex;flex-direction:column;gap:8px}
+  .sec-btn{display:flex;align-items:center;gap:12px;width:100%;min-height:62px;text-align:left;cursor:pointer;
+    background:var(--paper-hi);border:1px solid var(--contour);border-left:3px solid var(--river);padding:10px 14px}
+  .sec-btn:active{background:var(--marker-soft)}
+  .sec-btn:focus-visible,.opt:focus-visible,.seg button:focus-visible,.btn:focus-visible{outline:2px solid var(--river);outline-offset:2px}
+  .sec-no{font-family:var(--mono);font-size:11px;color:var(--river);flex:none;width:1.6em}
+  .sec-main{flex:1;min-width:0}
+  .sec-name{font-weight:900;font-size:16px;line-height:1.4}
+  .sec-desc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+  .sec-rec{flex:none;font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-align:right;line-height:1.5}
+  .sec-btn.all{border-left-color:var(--marker);background:var(--river-deep);color:#E8EDE7;border-color:var(--river-deep)}
+  .sec-btn.all .sec-desc,.sec-btn.all .sec-no{color:rgba(232,237,231,.75)}
+
+  .btn{min-height:48px;padding:10px 18px;background:var(--paper-hi);border:1px solid var(--contour);cursor:pointer;font-weight:700}
+  .btn-primary{background:var(--river);color:var(--paper-hi);border-color:var(--river)}
+  .btn-row{display:flex;gap:8px;margin-top:16px}
+  .btn-row .btn{flex:1}
+  .foot{margin-top:26px;font-size:12px;color:var(--ink-soft);line-height:1.9;border-top:1px solid var(--contour);padding-top:14px}
+
+  /* ---- 出題画面 ---- */
+  .hud{position:sticky;top:0;z-index:5;background:var(--river-deep);color:#E8EDE7;padding:calc(8px + env(safe-area-inset-top)) 14px 8px}
+  .hud-row{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:10px}
+  .hud-name{font-weight:900;font-size:15px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hud-count{font-family:var(--mono);font-size:12px;opacity:.8}
+  .hud-time{font-family:var(--mono);font-size:17px;font-weight:700;min-width:3.2em;text-align:right}
+  .hud-quit{min-height:36px;padding:4px 10px;background:transparent;border:1px solid rgba(232,237,231,.5);color:#E8EDE7;font-size:12px;cursor:pointer}
+  .hud-bar{max-width:560px;margin:7px auto 0;height:4px;background:rgba(232,237,231,.2)}
+  .hud-bar span{display:block;height:100%;background:var(--marker);width:100%}
+
+  .stage{flex:1;display:flex;flex-direction:column;max-width:560px;width:100%;margin:0 auto;padding:12px 14px calc(14px + env(safe-area-inset-bottom))}
+  .prompt{font-size:15px;font-weight:700;line-height:1.6;margin-bottom:10px}
+  .stim{background:var(--paper-hi);border:1px solid var(--contour);padding:12px;margin-bottom:12px;overflow-x:auto}
+  .pair{font-family:var(--mono);font-size:17px;line-height:1.5;letter-spacing:.04em}
+  .pair .tag{display:block;font-family:var(--disp);font-size:10.5px;letter-spacing:.1em;color:var(--river);margin-top:8px}
+  .pair .tag:first-child{margin-top:0}
+  .item{font-family:var(--mono);font-size:24px;font-weight:700;text-align:center;letter-spacing:.06em;padding:4px 0}
+  table.t{border-collapse:collapse;width:100%;font-size:13.5px}
+  table.t th,table.t td{border:1px solid var(--contour);padding:5px 8px;text-align:center;line-height:1.5}
+  table.t th{background:var(--river-deep);color:#E8EDE7;font-weight:500;font-size:12px}
+  table.t td.l{text-align:left}
+  table.t td.num{font-family:var(--mono)}
+  .memo{font-size:14.5px;line-height:1.9}
+  .memo b{font-weight:900}
+  .memo-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
+  .opts.one{grid-template-columns:1fr}
+  .opts.three{grid-template-columns:1fr 1fr 1fr}
+  .opt{min-height:52px;padding:8px 10px;background:var(--paper-hi);border:1px solid var(--contour);border-bottom-width:3px;cursor:pointer;font-size:16px;font-weight:700;line-height:1.4;touch-action:manipulation}
+  .opt.mono{font-family:var(--mono);font-size:15.5px;letter-spacing:.03em;text-align:left;font-weight:500}
+  .opt.sel{border-color:var(--river);background:var(--marker-soft)}
+  .opt.ok{border-color:var(--ok);background:var(--ok-bg);color:var(--ok)}
+  .opt.ng{border-color:var(--ng);background:var(--ng-bg);color:var(--ng)}
+  .opt:disabled{cursor:default;opacity:1}
+  .fb{margin-top:10px;display:flex;align-items:center;gap:10px}
+  .fb-text{flex:1;font-size:13.5px;color:var(--ng);font-weight:700;line-height:1.5}
+
+  /* ---- グラフ ---- */
+  .chart-title{font-size:13px;font-weight:700;margin-bottom:2px}
+  .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--ink);margin-bottom:2px}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  svg.chart{display:block;width:100%;height:auto}
+  svg.chart text{font-family:var(--mono);font-size:10px;fill:var(--ink-soft)}
+  svg.chart .g-major{stroke:var(--contour);stroke-width:1}
+  svg.chart .g-minor{stroke:var(--contour);stroke-width:1;opacity:.45;stroke-dasharray:2 3}
+  svg.chart .axis{stroke:var(--ink-soft);stroke-width:1}
+
+  /* ---- 結果 ---- */
+  table.res{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
+  table.res th,table.res td{border-bottom:1px solid var(--contour);padding:8px 6px;text-align:right}
+  table.res th{font-size:11px;font-weight:500;color:var(--ink-soft)}
+  table.res th:first-child,table.res td:first-child{text-align:left;font-weight:700}
+  table.res td{font-family:var(--mono)}
+  table.res td:first-child{font-family:var(--disp)}
+  .res-note{font-size:13px;color:var(--ink-soft);line-height:1.8;margin-top:12px}
+  .center{text-align:center}
+  .big{font-size:20px;font-weight:900;line-height:1.5}
+</style>
+</head>
+<body>
+
+<!-- ================= ホーム ================= -->
+<section id="view-home" class="view">
+  <header class="cover">
+    <div class="cover-inner">
+      <h1><span class="thin">柏原市役所 採用試験｜第2次対策</span>事務能力トレーナー</h1>
+      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v6.20261001</span></div>
+    </div>
+  </header>
+  <div class="wrap">
+
+    <div class="card key">
+      <h2>この検査は「速く、正確に」</h2>
+      <p>今回の第2次は<b>事務処理能力検査</b>です。問題は難しくありませんが時間が短く、全部は解ききれないという受験者の報告もあります。<b>当てずっぽうで押さず、確実に合う答えを速く選ぶ</b>練習をしてください。結果には「誤答率」が出ます。まず誤答を減らし、次に回答数を伸ばします。</p>
+    </div>
+
+    <div class="label">1分野あたりの時間（本番は各4分とされる）</div>
+    <div class="seg" id="durSeg">
+      <button data-dur="60">1分</button>
+      <button data-dur="120">2分</button>
+      <button data-dur="240">4分</button>
+    </div>
+
+    <div class="label">分野を選んで練習</div>
+    <div class="sec-list" id="secList"></div>
+
+    <div class="label">通しで練習</div>
+    <div class="sec-list">
+      <button class="sec-btn all" id="btnAll">
+        <span class="sec-no">ALL</span>
+        <span class="sec-main"><span class="sec-name">6分野を通しで</span><br><span class="sec-desc" id="allDesc"></span></span>
+      </button>
+    </div>
+
+    <details class="card">
+      <summary>この検査について分かっていること・いないこと</summary>
+      <p><b>公式に分かっていること</b>　柏原市の募集要項は第2次を「事務処理能力検査（SCOA総合適性検査）、約60分、テストセンター方式」としています。SCOAを作っているNOMA総研は、事務能力検査を「照合・分類・言語・計算・読図・記憶の6領域で、速さと確実性を測る検査（約50分）」と説明しています。</p>
+      <p><b>公式には出ていないこと</b>　問題の細かい形式、問題数、分野ごとの時間は公表されていません。「各分野4分」「誤答は評価を下げる」「記憶は先に資料を覚え、後で答える」は、対策サイトや受験者の報告によるものです。</p>
+      <p>このトレーナーの問題は、上の情報をもとに<b>形式を想定して自動で作った練習問題</b>で、本番の問題そのものではありません。本番では、各分野の最初に出る説明と例題をよく読んでください。</p>
+      <p>市販の対策本では、講談社『これが本当のSCOAだ！』の2028年度版が事務能力検査（SCOA-C）を扱っていると紹介されています。買う前に、書店で目次に「照合・分類」などがあるか確かめてください。</p>
+    </details>
+
+    <details class="card">
+      <summary>分野ごとのコツ</summary>
+      <ul>
+        <li><b>照合</b>：全体を眺めず、3〜4文字ずつ区切って左から順に見比べる。数字と、形の似た字（シ・ツ、末・未）に注意</li>
+        <li><b>分類</b>：先に手引きの並びをつかむ。範囲の境目（〜以上・〜以下）を取り違えない</li>
+        <li><b>言語</b>：対義語・類義語の組を知っているかどうか。迷ったら長考せず次へ</li>
+        <li><b>計算</b>：選択肢の一の位だけで絞れることが多い。□の問題は逆算する</li>
+        <li><b>読図</b>：問いを先に読み、必要な系列と月だけを見る。凡例の印（●■▲）を取り違えない</li>
+        <li><b>記憶</b>：数字（時刻・日付・数量）と固有名詞を声に出さず唱える。変更があった項目は「変更後」を覚える</li>
+      </ul>
+    </details>
+
+    <p class="foot">記録はこのブラウザの中にだけ保存されます。　<a href="./index.html">‹ 対策ハブへ戻る</a></p>
+  </div>
+</section>
+
+<!-- ================= 出題 ================= -->
+<section id="view-play" class="view" hidden>
+  <div class="hud">
+    <div class="hud-row">
+      <span class="hud-name" id="hudName"></span>
+      <span class="hud-count" id="hudCount"></span>
+      <span class="hud-time" id="hudTime"></span>
+      <button class="hud-quit" id="btnQuit">やめる</button>
+    </div>
+    <div class="hud-bar"><span id="hudBar"></span></div>
+  </div>
+  <div class="stage">
+    <div class="prompt" id="prompt"></div>
+    <div class="stim" id="stim"></div>
+    <div class="opts" id="opts"></div>
+    <div class="fb" id="fb" hidden>
+      <span class="fb-text" id="fbText"></span>
+      <button class="btn btn-primary" id="btnNext">次へ</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 分野の切り替え ================= -->
+<section id="view-gate" class="view" hidden>
+  <div class="wrap" style="margin-top:18vh">
+    <p class="label center" id="gateNo"></p>
+    <p class="big center" id="gateName"></p>
+    <p class="res-note center" id="gateDesc"></p>
+    <div class="btn-row"><button class="btn btn-primary" id="btnGateGo">始める</button></div>
+    <div class="btn-row"><button class="btn" id="btnGateQuit">ここでやめる</button></div>
+  </div>
+</section>
+
+<!-- ================= 結果 ================= -->
+<section id="view-result" class="view" hidden>
+  <header class="cover"><div class="cover-inner"><h1><span class="thin">事務能力トレーナー</span>結果</h1></div></header>
+  <div class="wrap">
+    <table class="res" id="resTable"></table>
+    <p class="res-note" id="resNote"></p>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btnAgain">もう一度</button>
+      <button class="btn" id="btnHome">ホーム</button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== 共通 ===================== */
+var LS_KEY = 'scoa-jimu-v1';
+function ri(a, b){ return a + Math.floor(Math.random() * (b - a + 1)); }
+function pick(arr){ return arr[ri(0, arr.length - 1)]; }
+function shuffle(arr){ var a = arr.slice(); for(var i = a.length - 1; i > 0; i--){ var j = ri(0, i); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+function sample(arr, n){ return shuffle(arr).slice(0, n); }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function $(id){ return document.getElementById(id); }
+
+function loadState(){
+  var d = { v:1, hist:{}, dur:240 };
+  try{
+    var raw = localStorage.getItem(LS_KEY);
+    var s = raw ? JSON.parse(raw) : null;
+    if(s && typeof s === 'object'){
+      if(s.hist && typeof s.hist === 'object') d.hist = s.hist;
+      if([60,120,240].indexOf(s.dur) !== -1) d.dur = s.dur;
+    }
+  }catch(e){}
+  return d;
+}
+function saveState(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
+var state = loadState();
+
+/* ===================== 照合 ===================== */
+var KANA = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン'.split('');
+var SIM = {
+  '0':'8','1':'7','2':'3','3':'8','4':'9','5':'6','6':'5','7':'1','8':'3','9':'4',
+  'O':'Q','Q':'O','E':'F','F':'E','B':'R','R':'B','C':'G','G':'C','M':'N','N':'M','U':'V','V':'U','P':'R','K':'X','X':'K','I':'L','L':'I',
+  'b':'d','d':'b','p':'q','q':'p','m':'n','n':'m','u':'v','v':'u','a':'e','e':'a','c':'e','i':'l','l':'i','h':'k','k':'h',
+  'シ':'ツ','ツ':'シ','ソ':'ン','ン':'ソ','ク':'ケ','ケ':'ク','ワ':'ウ','ウ':'ワ','ヌ':'ス','ス':'ヌ','チ':'テ','テ':'チ','ル':'レ','レ':'ル','コ':'ユ','ユ':'コ','ナ':'メ','メ':'ナ','マ':'ム','ム':'マ','ハ':'ヘ','ヘ':'ハ','タ':'ク','ロ':'コ','ラ':'フ','フ':'ラ',
+  '末':'未','未':'末','土':'士','士':'土','千':'干','干':'千','日':'目','目':'日','大':'太','太':'大','田':'由','由':'田','島':'鳥','鳥':'島','東':'束','木':'本','本':'木','村':'材','材':'村','石':'右','右':'石','原':'源','崎':'埼','藤':'籐','斉':'斎','斎':'斉','松':'枚','井':'丼','王':'玉','玉':'王','古':'吉','吉':'古','平':'半','上':'土','清':'晴','円':'丹','山':'出','国':'図','片':'斤','高':'嵩','明':'朋'
+};
+function isDigit(c){ return c >= '0' && c <= '9'; }
+function isAlpha(c){ return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
+function isKana(c){ return KANA.indexOf(c) !== -1; }
+function mutable(c){ return isDigit(c) || isAlpha(c) || isKana(c) || !!SIM[c]; }
+function mutateChar(c){
+  if(SIM[c] && Math.random() < 0.7) return SIM[c];
+  var r;
+  if(isDigit(c)){ do{ r = String(ri(0, 9)); }while(r === c); return r; }
+  if(isKana(c)){ do{ r = pick(KANA); }while(r === c); return r; }
+  if(isAlpha(c)){
+    var base = c >= 'a' ? 'abcdefghijklmnopqrstuvwxyz' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    do{ r = base.charAt(ri(0, 25)); }while(r === c); return r;
+  }
+  return SIM[c];
+}
+// s の中の k か所を別の字に置き換える（置き換えは必ず元と違う字になる）
+function mutate(s, k){
+  var chars = s.split(''), idx = [];
+  for(var i = 0; i < chars.length; i++) if(mutable(chars[i])) idx.push(i);
+  sample(idx, k).forEach(function(i){ chars[i] = mutateChar(chars[i]); });
+  return chars.join('');
+}
+function digits(n){ var s = ''; for(var i = 0; i < n; i++) s += ri(0, 9); return s; }
+function kanaName(n){ var s = ''; for(var i = 0; i < n; i++) s += pick(KANA); return s; }
+var CITY = ['柏原市','八尾市','藤井寺市','羽曳野市','松原市','富田林市','東大阪市','大東市','河内長野市','香芝市'];
+var TOWN = ['安堂町','大県','国分本町','旭ケ丘','上市','法善寺','太平寺','玉手町','古町','清州','本郷','高井田','田辺','円明町','石川町','片山町','山ノ井町','平野'];
+var SEI = ['藤原','松本','石田','島田','吉田','東','木村','大原','山田','高田','平井','古川','田村','上田','石原','清水','斉藤','王子','国本','片山'];
+var MEI = ['健太','大輔','明','由美','千尋','日向','太一','未来','吉男','平','清','玉緒','高志','本子','末広','目黒'];
+var SUFFIX = ['工業','建設','商事','設備','測量','電機','物流'];
+var GEN = [
+  function(){ return '0' + digits(ri(1, 2)) + '-' + digits(ri(3, 4)) + '-' + digits(4); },
+  function(){ return 'ABCDEFGHKLMNPQRUVX'.charAt(ri(0, 17)) + digits(3) + 'abdehkmnpquv'.charAt(ri(0, 11)) + '-' + digits(4); },
+  function(){ return pick(CITY) + pick(TOWN) + ri(1, 9) + '丁目' + ri(1, 29) + '番' + ri(1, 19) + '号'; },
+  function(){ return pick(SEI) + ' ' + pick(MEI) + '（No.' + digits(4) + '）'; },
+  function(){ return '株式会社' + kanaName(ri(3, 5)) + pick(SUFFIX); },
+  function(){ return '¥' + ri(1, 9) + ',' + digits(3) + ',' + digits(3); },
+  function(){ return '令和' + ri(5, 9) + '年' + ri(1, 12) + '月' + ri(1, 28) + '日 ' + ri(8, 18) + ':' + digits(1).replace(/[6-9]/, '3') + digits(1); }
+];
+function genShogo(){
+  var src = pick(GEN)();
+  if(Math.random() < 0.55){
+    var k = ri(0, 3);
+    return {
+      prompt: '原本と写しで、違っている文字はいくつありますか。',
+      stim: '<div class="pair"><span class="tag">原本</span>' + esc(src) + '<span class="tag">写し</span>' + esc(mutate(src, k)) + '</div>',
+      opts: ['0（同じ）', '1', '2', '3'], ans: k, cols: 2
+    };
+  }
+  var set = {}; set[src] = 1;
+  var opts = [src];
+  while(opts.length < 4){
+    var m = mutate(src, ri(1, 2));
+    if(!set[m]){ set[m] = 1; opts.push(m); }
+  }
+  opts = shuffle(opts);
+  return {
+    prompt: '原本とまったく同じものを選んでください。',
+    stim: '<div class="pair"><span class="tag">原本</span>' + esc(src) + '</div>',
+    opts: opts, ans: opts.indexOf(src), cols: 1, mono: true
+  };
+}
+
+/* ===================== 分類 ===================== */
+var WORDS = {
+  '文房具': ['ホチキス','付箋','消しゴム','定規','クリップ','蛍光ペン','修正テープ','バインダー'],
+  '食料品': ['小麦粉','缶詰','食用油','冷凍食品','調味料','乾麺','牛乳','砂糖'],
+  '衣料品': ['作業着','靴下','手袋','雨合羽','帽子','上着','ネクタイ','防寒着'],
+  '家電製品': ['掃除機','冷蔵庫','電子レンジ','扇風機','加湿器','炊飯器','洗濯機','電気ポット'],
+  '家具': ['本棚','机','椅子','食器棚','ソファ','ロッカー','書庫','ベッド'],
+  '工具': ['スパナ','ドライバー','ペンチ','金づち','のこぎり','電動ドリル','水準器','巻尺'],
+  '建設資材': ['セメント','鉄筋','砕石','型枠','アスファルト','側溝ふた','土のう','コンクリート管']
+};
+var bunrui = { left: 0, kind: 0, html: '', data: null };
+function newHandbook(){
+  bunrui.left = 6;
+  bunrui.kind = ri(0, 2);
+  var h = '';
+  if(bunrui.kind === 0){
+    // 数の範囲：10区間を5分類に2つずつ割り当てる
+    var cuts = {}; while(Object.keys(cuts).length < 9){ cuts[ri(11, 98) * 100] = 1; }
+    var b = Object.keys(cuts).map(Number).sort(function(x, y){ return x - y; });
+    var iv = [], lo = 1000;
+    b.forEach(function(c){ iv.push([lo, c - 1]); lo = c; }); iv.push([lo, 9999]);
+    var cls = shuffle([1,1,2,2,3,3,4,4,5,5]);
+    var rows = {1:[],2:[],3:[],4:[],5:[]};
+    iv.forEach(function(r, i){ rows[cls[i]].push(r); });
+    h = '<table class="t"><tr><th>分類</th><th colspan="2">番号の範囲</th></tr>';
+    for(var c = 1; c <= 5; c++) h += '<tr><td>' + c + '</td>' + rows[c].map(function(r){ return '<td class="num">' + r[0] + '〜' + r[1] + '</td>'; }).join('') + '</tr>';
+    h += '</table>';
+    bunrui.data = { iv: iv, cls: cls };
+  } else if(bunrui.kind === 1){
+    // 英字×数字の表
+    var L = [['A','F'],['G','M'],['N','S'],['T','Z']];
+    var c1 = ri(3, 4) * 100, c2 = ri(6, 7) * 100;
+    var N = [[100, c1 - 1], [c1, c2 - 1], [c2, 999]];
+    var cells = shuffle([1,2,3,4,5,1,2,3,4,5,ri(1,5),ri(1,5)]);
+    h = '<table class="t"><tr><th>英字＼数字</th>' + N.map(function(r){ return '<th>' + r[0] + '〜' + r[1] + '</th>'; }).join('') + '</tr>';
+    L.forEach(function(l, i){
+      h += '<tr><td>' + l[0] + '〜' + l[1] + '</td>' + [0,1,2].map(function(j){ return '<td class="num">' + cells[i * 3 + j] + '</td>'; }).join('') + '</tr>';
+    });
+    h += '</table>';
+    bunrui.data = { L: L, N: N, cells: cells };
+  } else {
+    var cats = sample(Object.keys(WORDS), 5);
+    h = '<table class="t"><tr>' + cats.map(function(c, i){ return '<th>' + (i + 1) + '</th>'; }).join('') + '</tr><tr>' + cats.map(function(c){ return '<td>' + c + '</td>'; }).join('') + '</tr></table>';
+    bunrui.data = { cats: cats };
+  }
+  bunrui.html = h;
+}
+function genBunrui(){
+  if(bunrui.left <= 0) newHandbook();
+  bunrui.left--;
+  var d = bunrui.data, item, ans;
+  if(bunrui.kind === 0){
+    var i = ri(0, d.iv.length - 1), r = d.iv[i];
+    // 境目の数を多めに出す
+    var n = Math.random() < 0.4 ? pick([r[0], r[1]]) : ri(r[0], r[1]);
+    item = String(n); ans = d.cls[i] - 1;
+  } else if(bunrui.kind === 1){
+    var li = ri(0, 3), ni = ri(0, 2);
+    var a = d.L[li][0].charCodeAt(0), z = d.L[li][1].charCodeAt(0);
+    var num = Math.random() < 0.4 ? pick(d.N[ni]) : ri(d.N[ni][0], d.N[ni][1]);
+    item = String.fromCharCode(ri(a, z)) + '-' + num; ans = d.cells[li * 3 + ni] - 1;
+  } else {
+    var ci = ri(0, 4);
+    item = pick(WORDS[d.cats[ci]]); ans = ci;
+  }
+  return {
+    prompt: '手引きに従うと、次のものは何番に分類されますか。',
+    stim: bunrui.html + '<div class="item" style="margin-top:10px">' + esc(item) + '</div>',
+    opts: ['1','2','3','4','5'], ans: ans, cols: 3
+  };
+}
+
+/* ===================== 言語 ===================== */
+// [語, 語, 系統]。同じ系統の組は同じ問題に出さない（別の正解ができるのを防ぐ）
+var ANT = [
+  ['増加','減少','ud'],['拡大','縮小','ud'],['膨張','収縮','ud'],['上昇','下降','ud'],['急騰','急落','ud'],['延長','短縮','ud'],['好況','不況','ud'],['豊富','欠乏','ud'],['過剰','不足','ud'],['促進','抑制','ud'],
+  ['収入','支出','ec'],['利益','損失','ec'],['黒字','赤字','ec'],['需要','供給','ec'],['輸入','輸出','ec'],['生産','消費','ec'],['債権','債務','ec'],
+  ['開始','終了','se'],['出発','到着','se'],['起点','終点','se'],['着工','竣工','se'],['入学','卒業','se'],['就任','辞任','se'],['加入','脱退','se'],['採用','解雇','se'],['前進','後退','se'],['往路','復路','se'],['過去','未来','se'],
+  ['賛成','反対','yn'],['肯定','否定','yn'],['可決','否決','yn'],['承諾','拒絶','yn'],['許可','禁止','yn'],
+  ['成功','失敗','wl'],['勝利','敗北','wl'],['優勢','劣勢','wl'],['長所','短所','wl'],['有利','不利','wl'],['攻撃','防御','wl'],
+  ['積極','消極','at'],['楽観','悲観','at'],['能動','受動','at'],['軽率','慎重','at'],['勤勉','怠惰','at'],['謙虚','傲慢','at'],['寛大','厳格','at'],['保守','革新','at'],
+  ['単純','複雑','ab'],['具体','抽象','ab'],['一般','特殊','ab'],['絶対','相対','ab'],['主観','客観','ab'],['理論','実践','ab'],['原因','結果','ab'],['形式','内容','ab'],['理性','感情','ab'],['必然','偶然','ab'],['現実','理想','ab'],['直接','間接','ab'],['全体','部分','ab'],
+  ['集中','分散','jn'],['統一','分裂','jn'],['結合','分離','jn'],['総合','分析','jn'],['建設','破壊','jn'],['固定','流動','jn'],
+  ['義務','権利','lw'],['加害','被害','lw'],['原告','被告','lw'],['善意','悪意','lw'],['故意','過失','lw'],['公的','私的','lw'],
+  ['温暖','寒冷','nt'],['乾燥','湿潤','nt'],['上流','下流','nt'],['満潮','干潮','nt'],['安全','危険','nt'],['正常','異常','nt'],
+  ['濃厚','希薄','sn'],['鋭敏','鈍感','sn'],['明瞭','曖昧','sn'],['親密','疎遠','sn'],['巧妙','拙劣','sn'],['緊張','弛緩','sn'],
+  ['送信','受信','cm'],['質疑','応答','cm'],['縦断','横断','cm'],['創造','模倣','jn'],['自立','依存','cm'],['永遠','一瞬','cm']
+];
+// 類義語の組（2語または3語）と系統
+var SYN = [
+  [['欠点','短所','弱点'],'flaw'],[['美点','利点','長所'],'merit'],[['永久','永遠','恒久'],'ever'],[['手段','方法','方策'],'way'],[['我慢','辛抱','忍耐'],'bear'],
+  [['準備','用意','支度'],'prep'],[['賛成','同意','賛同'],'agree'],[['了解','承知','了承'],'agree'],[['許可','認可','承認'],'agree'],[['突然','不意','唐突'],'sudden'],
+  [['普通','通常','平常'],'usual'],[['重要','大切','肝心'],'main'],[['簡単','容易','平易'],'easy'],[['心配','不安','懸念'],'worry'],[['進歩','発達','向上'],'grow'],
+  [['失望','落胆','失意'],'down'],[['丁寧','丹念','入念'],'care'],[['綿密','緻密','精密'],'care'],[['著名','有名','高名'],'fame'],[['釈明','弁解','弁明'],'excuse'],
+  [['遺憾','残念','無念'],'regret'],[['案外','意外','存外'],'sudden'],[['沈着','冷静','平静'],'calm'],[['推測','推量','憶測'],'guess'],[['計画','企画','構想'],'plan'],
+  [['決心','決意','覚悟'],'will'],[['風習','習慣','慣習'],'custom'],[['給料','賃金','俸給'],'pay'],[['継続','持続','続行'],'keep'],[['援助','支援','助力'],'help'],
+  [['抜群','卓越','傑出'],'excel'],[['屈指','有数','指折り'],'excel'],[['概略','大略','概要'],'outline'],[['妥当','適切','適当'],'fit'],[['所持','所有','保有'],'own'],
+  [['外国','異国','海外'],'abroad'],[['機敏','敏捷','迅速'],'quick'],[['順調','好調','快調'],'smooth'],[['風景','景色','眺望'],'view'],[['委任','委託','委嘱'],'entrust'],
+  [['完全','完璧','万全'],'perfect'],[['輸送','運送','運搬'],'carry'],[['関心','興味'],'interest'],[['貢献','寄与'],'contrib'],[['省略','割愛'],'omit'],
+  [['倹約','節約'],'save'],[['価格','値段'],'price'],[['天気','天候'],'weather'],[['帰郷','帰省'],'home'],[['改善','改良'],'improve'],
+  [['架空','虚構'],'fiction'],[['質素','簡素'],'plain'],[['寡黙','無口'],'quiet'],[['介入','干渉'],'meddle'],[['精読','熟読'],'read'],
+  [['督促','催促'],'urge'],[['異議','異論'],'object'],[['互角','対等'],'equal'],[['安全','無事'],'safe']
+];
+function pickOthers(list, tagIdx, tag, n){
+  var used = {}; used[tag] = 1;
+  var out = [];
+  shuffle(list).some(function(e){
+    if(used[e[tagIdx]]) return false;
+    used[e[tagIdx]] = 1; out.push(e);
+    return out.length >= n;
+  });
+  return out;
+}
+function genGengo(){
+  var r = Math.random(), words, a, b;
+  if(r < 0.45){
+    var p = pick(ANT);
+    var ds = pickOthers(ANT, 2, p[2], 3).map(function(e){ return e[ri(0, 1)]; });
+    words = shuffle([p[0], p[1]].concat(ds));
+    a = words.indexOf(p[0]); b = words.indexOf(p[1]);
+    return { prompt: '5つの語のうち、対義語（反対の意味）の関係にある2語を選んでください。', stim: '', opts: words, ans: [a, b].sort(), pick2: true, cols: 2 };
+  }
+  if(r < 0.75){
+    var g = pick(SYN);
+    var two = sample(g[0], 2);
+    var ds2 = pickOthers(SYN, 1, g[1], 3).map(function(e){ return pick(e[0]); });
+    words = shuffle(two.concat(ds2));
+    a = words.indexOf(two[0]); b = words.indexOf(two[1]);
+    return { prompt: '5つの語のうち、類義語（似た意味）の関係にある2語を選んでください。', stim: '', opts: words, ans: [a, b].sort(), pick2: true, cols: 2 };
+  }
+  var g3; do{ g3 = pick(SYN); }while(g3[0].length < 3);
+  var odd = pick(pickOthers(SYN, 1, g3[1], 1)[0][0]);
+  words = shuffle(g3[0].concat([odd]));
+  return { prompt: '4つの語のうち、ほかの3つと意味が違うものを選んでください。', stim: '', opts: words, ans: words.indexOf(odd), cols: 2 };
+}
+
+/* ===================== 計算 ===================== */
+function numOpts(ans){
+  var set = {}; set[ans] = 1;
+  var cand = shuffle([ans + 1, ans - 1, ans + 2, ans - 2, ans + 10, ans - 10, ans + 9, ans - 9, ans + 11, ans + 20, ans - 20, ans + 100, ans - 100]);
+  var out = [ans];
+  cand.some(function(c){ if(c > 0 && !set[c]){ set[c] = 1; out.push(c); } return out.length >= 5; });
+  out.sort(function(x, y){ return x - y; });
+  return out;
+}
+function genKeisan(){
+  var t = ri(0, 7), expr, ans, a, b, c;
+  if(t === 0){ a = ri(120, 899); b = ri(120, 899); expr = a + ' ＋ ' + b; ans = a + b; }
+  else if(t === 1){ a = ri(300, 999); b = ri(100, a - 50); expr = a + ' − ' + b; ans = a - b; }
+  else if(t === 2){ a = ri(12, 49); b = ri(3, 19); expr = a + ' × ' + b; ans = a * b; }
+  else if(t === 3){ b = ri(3, 12); ans = ri(12, 95); expr = (b * ans) + ' ÷ ' + b; }
+  else if(t === 4){ a = ri(15, 89); ans = ri(8, 60); expr = '□ ＋ ' + a + ' ＝ ' + (ans + a); }
+  else if(t === 5){ ans = ri(8, 60); a = ans + ri(10, 80); expr = a + ' − □ ＝ ' + (a - ans); }
+  else if(t === 6){ ans = ri(6, 25); a = ri(3, 12); expr = '□ × ' + a + ' ＝ ' + (ans * a); }
+  else { a = ri(20, 99); b = ri(20, 99); c = ri(10, a + b - 5); expr = a + ' ＋ ' + b + ' − ' + c; ans = a + b - c; }
+  var opts = numOpts(ans);
+  return {
+    prompt: t >= 4 && t <= 6 ? '□に入る数を選んでください。' : '計算の答えを選んでください。',
+    stim: '<div class="item">' + expr + '</div>',
+    opts: opts.map(String), ans: opts.indexOf(ans), cols: 3
+  };
+}
+
+/* ===================== 読図 ===================== */
+var SERIES = [['電話機','FAX','コピー機'],['A支店','B支店','C支店'],['商品X','商品Y','商品Z']];
+var MONTHS = ['4月','5月','6月','7月','8月','9月'];
+var dokuzu = { left: 0, html: '', names: null, v: null, unit: '' };
+function markerSvg(i, x, y){
+  var c = 'var(--s' + (i + 1) + ')', ring = ' stroke="var(--paper-hi)" stroke-width="2"';
+  if(i === 0) return '<circle cx="' + x + '" cy="' + y + '" r="5" fill="' + c + '"' + ring + '/>';
+  if(i === 1) return '<rect x="' + (x - 4.5) + '" y="' + (y - 4.5) + '" width="9" height="9" fill="' + c + '"' + ring + '/>';
+  return '<path d="M' + x + ' ' + (y - 6) + 'L' + (x + 5.5) + ' ' + (y + 4.5) + 'L' + (x - 5.5) + ' ' + (y + 4.5) + 'Z" fill="' + c + '"' + ring + '/>';
+}
+function chartHtml(names, v, unit){
+  var W = 340, H = 210, L = 30, R = 10, T = 10, B = 24, pw = W - L - R, ph = H - T - B;
+  var X = function(m){ return L + pw * (m + 0.5) / 6; };
+  var Y = function(val){ return T + ph * (1 - val / 100); };
+  var s = '<div class="legend">' + names.map(function(n, i){
+    return '<span><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">' + markerSvg(i, 7, 7) + '</svg>' + esc(n) + '</span>';
+  }).join('') + '</div>';
+  s += '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="月別の折れ線グラフ">';
+  for(var g = 0; g <= 100; g += 10){
+    s += '<line class="' + (g % 20 ? 'g-minor' : 'g-major') + '" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(g) + '" y2="' + Y(g) + '"/>';
+    if(g % 20 === 0) s += '<text x="' + (L - 5) + '" y="' + (Y(g) + 3.5) + '" text-anchor="end">' + g + '</text>';
+  }
+  s += '<line class="axis" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(0) + '" y2="' + Y(0) + '"/>';
+  MONTHS.forEach(function(m, i){ s += '<text x="' + X(i) + '" y="' + (H - 7) + '" text-anchor="middle">' + m + '</text>'; });
+  names.forEach(function(n, i){
+    s += '<polyline fill="none" stroke="var(--s' + (i + 1) + ')" stroke-width="2" stroke-linejoin="round" points="' + v[i].map(function(val, m){ return X(m) + ',' + Y(val); }).join(' ') + '"/>';
+  });
+  names.forEach(function(n, i){ v[i].forEach(function(val, m){ s += markerSvg(i, X(m), Y(val)); }); });
+  return s + '</svg>';
+}
+function tableHtml(names, v){
+  var s = '<table class="t"><tr><th></th>' + MONTHS.map(function(m){ return '<th>' + m + '</th>'; }).join('') + '</tr>';
+  names.forEach(function(n, i){ s += '<tr><td class="l">' + esc(n) + '</td>' + v[i].map(function(x){ return '<td class="num">' + x + '</td>'; }).join('') + '</tr>'; });
+  return s + '</table>';
+}
+function newFigure(){
+  dokuzu.left = 5;
+  var names = pick(SERIES), asChart = Math.random() < 0.6, v, ok;
+  do{
+    v = [0,1,2].map(function(){ return MONTHS.map(function(){ return asChart ? ri(2, 10) * 10 : ri(21, 98); }); });
+    ok = MONTHS.every(function(m, i){ return v[0][i] !== v[1][i] && v[1][i] !== v[2][i] && v[0][i] !== v[2][i]; });
+  }while(!ok);
+  dokuzu.names = names; dokuzu.v = v;
+  dokuzu.unit = names === SERIES[0] ? '台' : (names === SERIES[1] ? '件' : '個');
+  var title = (names === SERIES[1] ? '支店別の契約件数' : '月別の販売数') + '（単位：' + dokuzu.unit + '）';
+  dokuzu.html = '<div class="chart-title">' + title + '</div>' + (asChart ? chartHtml(names, v, dokuzu.unit) : tableHtml(names, v));
+}
+function uniqueMax(arr){ var mx = Math.max.apply(null, arr); return arr.filter(function(x){ return x === mx; }).length === 1 ? arr.indexOf(mx) : -1; }
+function sum(arr){ return arr.reduce(function(s, x){ return s + x; }, 0); }
+function windowOpts(ans, lo, hi){ var start = Math.max(lo, Math.min(ans - ri(0, 3), hi - 3)); var o = []; for(var i = start; i < start + 4; i++) o.push(i); return o; }
+function genDokuzu(){
+  if(dokuzu.left <= 0) newFigure();
+  dokuzu.left--;
+  var n = dokuzu.names, v = dokuzu.v, u = dokuzu.unit, q;
+  for(;;){
+    var t = ri(0, 5), i = ri(0, 2), j = (i + ri(1, 2)) % 3, m = ri(0, 5), o, a;
+    if(t === 0){
+      a = MONTHS.filter(function(x, k){ return v[i][k] > v[j][k]; }).length;
+      o = windowOpts(a, 0, 6);
+      q = { prompt: n[i] + 'が' + n[j] + 'を上回っている月は、いくつありますか。', opts: o.map(function(x){ return x + 'か月'; }), ans: o.indexOf(a), cols: 2 };
+    } else if(t === 1){
+      a = uniqueMax(v[i]); if(a < 0) continue;
+      q = { prompt: n[i] + 'が最も多い月はどれですか。', opts: MONTHS.slice(), ans: a, cols: 3 };
+    } else if(t === 2){
+      a = v[0][m] + v[1][m] + v[2][m];
+      o = numOpts(a).slice(0, 4); if(o.indexOf(a) < 0) o[ri(0, 3)] = a;
+      o.sort(function(x, y){ return x - y; });
+      q = { prompt: MONTHS[m] + 'の3つの合計はいくつですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(a), cols: 2 };
+    } else if(t === 3){
+      var m2 = (m + ri(1, 5)) % 6, d = Math.abs(v[i][m] - v[i][m2]);
+      if(d === 0) continue;
+      var step = d % 10 === 0 ? 10 : 1;
+      var set = {}; set[d] = 1; o = [d];
+      shuffle([d + step, d - step, d + 2 * step, d - 2 * step, d + 10, d - 10]).concat([d + 3 * step, d + 4 * step]).some(function(c){ if(c > 0 && !set[c]){ set[c] = 1; o.push(c); } return o.length >= 4; });
+      o.sort(function(x, y){ return x - y; });
+      q = { prompt: n[i] + 'の' + MONTHS[m] + 'と' + MONTHS[m2] + 'の差はいくつですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(d), cols: 2 };
+    } else if(t === 4){
+      a = uniqueMax([sum(v[0]), sum(v[1]), sum(v[2])]); if(a < 0) continue;
+      q = { prompt: '6か月の合計が最も多いのはどれですか。', opts: n.slice(), ans: a, cols: 3 };
+    } else {
+      var th = Math.round(sum(v[i]) / 6 / 10) * 10;
+      a = v[i].filter(function(x){ return x >= th; }).length;
+      o = windowOpts(a, 0, 6);
+      q = { prompt: n[i] + 'が' + th + u + '以上の月は、いくつありますか。', opts: o.map(function(x){ return x + 'か月'; }), ans: o.indexOf(a), cols: 2 };
+    }
+    break;
+  }
+  q.stim = dokuzu.html;
+  return q;
+}
+
+/* ===================== 記憶 ===================== */
+var ROOMS = ['第1会議室','第2会議室','第3会議室','大会議室','応接室','研修室'];
+var DAYS = ['月','火','水','木','金'];
+var TOPICS = ['道路補修計画の打ち合わせ','下水道工事の工程会議','防災訓練の事前説明','橋りょう点検の報告会','予算要求の検討会'];
+var BRING = ['筆記用具','前回の議事録','工程表','名刺','ノートパソコン'];
+var TITLES = ['部長','課長','係長','主任','所長'];
+var GOODS = ['コピー用紙','トナー','ファイル','封筒','作業用手袋','安全ベスト','カラーコーン','軍手'];
+function optsFrom(ans, pool, n){
+  var o = [ans];
+  shuffle(pool).some(function(x){ if(o.indexOf(x) < 0) o.push(x); return o.length >= n; });
+  return shuffle(o);
+}
+function mkQ(prompt, ans, pool){
+  var o = optsFrom(ans, pool, 4);
+  return { prompt: prompt, stim: '<div class="memo-note">覚えた資料をもとに答えてください（資料はもう見られません）。</div>', opts: o, ans: o.indexOf(ans), cols: 2 };
+}
+function newMemo(){
+  var kind = ri(0, 2), html, qs = [];
+  if(kind === 0){
+    var topic = pick(TOPICS), mo = ri(10, 12), day = ri(1, 28), wd = pick(DAYS), h0 = ri(9, 15), h1, room = pick(ROOMS), num = ri(6, 24), br = pick(BRING);
+    do{ h1 = ri(9, 16); }while(h1 === h0);
+    html = '<div class="memo"><b>会議のお知らせ</b><br>件名：' + topic + '<br>日時：' + mo + '月' + day + '日（' + wd + '）' + h0 + '時から<br>場所：' + room + '<br>出席者：' + num + '名<br>持ち物：' + br +
+      '<br><b>※変更：開始時刻は' + h1 + '時からになりました。</b></div>';
+    qs = [
+      mkQ('会議の場所はどこでしたか。', room, ROOMS),
+      mkQ('会議は何曜日でしたか。', wd + '曜日', DAYS.map(function(d){ return d + '曜日'; })),
+      mkQ('変更後の開始時刻は何時でしたか。', h1 + '時', [h0, h1 + 1, h1 - 1, h0 + 1, h0 - 1].map(function(h){ return h + '時'; })),
+      mkQ('出席者は何名でしたか。', num + '名', [num + 2, num - 2, num + 4, num - 4, num + 6].map(function(x){ return x + '名'; })),
+      mkQ('持ち物は何でしたか。', br, BRING),
+      mkQ('会議の日付はいつでしたか。', mo + '月' + day + '日', [[mo, day + 1], [mo, day - 1], [mo === 12 ? 11 : mo + 1, day], [mo, day > 10 ? day - 10 : day + 10]].map(function(x){ return x[0] + '月' + Math.max(1, x[1]) + '日'; })),
+      mkQ('会議の件名はどれでしたか。', topic, TOPICS)
+    ];
+  } else if(kind === 1){
+    var hs = sample([9, 10, 11, 13, 14, 15, 16], 3).sort(function(x, y){ return x - y; });
+    var cos = sample(SUFFIX, 3).map(function(s){ return pick(SEI) + s; });
+    var ts = sample(TITLES, 3), ss = sample(SEI, 3);
+    html = '<div class="memo"><b>本日の来客予定</b><table class="t" style="margin-top:6px"><tr><th>時刻</th><th>会社</th><th>役職</th><th>氏名</th></tr>' +
+      [0,1,2].map(function(i){ return '<tr><td>' + hs[i] + '時</td><td>' + cos[i] + '</td><td>' + ts[i] + '</td><td>' + ss[i] + '様</td></tr>'; }).join('') + '</table></div>';
+    [0,1,2].forEach(function(i){
+      qs.push(mkQ(hs[i] + '時に来社するのは、どの会社でしたか。', cos[i], cos.concat(sample(SUFFIX, 5).map(function(s){ return pick(SEI) + s; }))));
+      qs.push(mkQ(cos[i] + 'から来るのは、どの役職の方でしたか。', ts[i], TITLES));
+      qs.push(mkQ(ss[i] + '様の来社は何時でしたか。', hs[i] + '時', [9, 10, 11, 13, 14, 15, 16].map(function(h){ return h + '時'; })));
+    });
+    qs = shuffle(qs).slice(0, 7);
+  } else {
+    var gs = sample(GOODS, 4), ns = [];
+    while(ns.length < 4){ var x = ri(2, 30) * 10; if(ns.indexOf(x) < 0) ns.push(x); }
+    var ds = [0,1,2,3].map(function(){ return ri(1, 28); }), mo2 = ri(10, 12);
+    html = '<div class="memo"><b>納品の予定（' + mo2 + '月）</b><table class="t" style="margin-top:6px"><tr><th>品名</th><th>数量</th><th>納品日</th></tr>' +
+      [0,1,2,3].map(function(i){ return '<tr><td class="l">' + gs[i] + '</td><td class="num">' + ns[i] + '</td><td>' + ds[i] + '日</td></tr>'; }).join('') + '</table></div>';
+    [0,1,2,3].forEach(function(i){
+      qs.push(mkQ(gs[i] + 'の数量はいくつでしたか。', String(ns[i]), ns.concat([ns[i] + 10, ns[i] + 20]).map(String)));
+    });
+    qs.push(mkQ('数量が最も多い品はどれでしたか。', gs[ns.indexOf(Math.max.apply(null, ns))], gs));
+    qs.push(mkQ('数量が最も少ない品はどれでしたか。', gs[ns.indexOf(Math.min.apply(null, ns))], gs));
+    qs.push(mkQ('予定に入っていなかった品はどれですか。', pick(GOODS.filter(function(g){ return gs.indexOf(g) < 0; })), gs));
+    qs = shuffle(qs);
+  }
+  return { html: html, qs: qs };
+}
+
+/* ===================== 分野の定義 ===================== */
+var SECS = [
+  { id:'shogo',  name:'照合', desc:'2つの文字列を見比べる', gen: genShogo },
+  { id:'bunrui', name:'分類', desc:'手引きに従って番号をつける', gen: genBunrui },
+  { id:'gengo',  name:'言語', desc:'対義語・類義語を見つける', gen: genGengo },
+  { id:'keisan', name:'計算', desc:'四則計算と□の穴埋め', gen: genKeisan },
+  { id:'dokuzu', name:'読図', desc:'グラフと表を読み取る', gen: genDokuzu },
+  { id:'kioku',  name:'記憶', desc:'資料を覚えてから答える', gen: null }
+];
+var MEMO_SEC = 45;      // 分野別練習で資料を覚える時間（秒）
+var MEMO_SEC_ALL = 90;  // 通し練習の最初に資料を覚える時間（秒）
+function secById(id){ return SECS.filter(function(s){ return s.id === id; })[0]; }
+
+/* ===================== 進行 ===================== */
+var run = null;   // { queue:[分野id], idx, results:[], all:bool, memo }
+var cur = null;   // 出題中の分野の状態
+var tick = null;
+
+function showView(id){
+  ['home','play','gate','result'].forEach(function(v){ $('view-' + v).hidden = (v !== id); });
+  window.scrollTo(0, 0);
+}
+function fmtTime(sec){ sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
+
+function startRun(ids, all){
+  run = { queue: ids, idx: 0, results: [], all: all, memo: null };
+  bunrui.left = 0; dokuzu.left = 0;
+  if(all){ run.memo = newMemo(); startMemoPhase(run.memo, MEMO_SEC_ALL, '記憶（覚える）', function(){ gate(); }); }
+  else startSection();
+}
+function gate(){
+  var s = secById(run.queue[run.idx]);
+  $('gateNo').textContent = (run.idx + 1) + ' / ' + run.queue.length;
+  $('gateName').textContent = s.name;
+  $('gateDesc').textContent = (s.id === 'kioku' && run.all ? '最初に覚えた資料について答えます。' : s.desc + '。') + ' 制限時間 ' + fmtTime(state.dur);
+  showView('gate');
+}
+function startSection(){
+  var s = secById(run.queue[run.idx]);
+  cur = { sec: s, n: 0, c: 0, endAt: Date.now() + state.dur * 1000, dur: state.dur, memoQs: null, locked: false, pausedAt: 0 };
+  $('hudName').textContent = s.name;
+  showView('play');
+  startTick();
+  if(s.id === 'kioku'){
+    if(run.all){ cur.memoQs = run.memo.qs.slice(); nextQuestion(); }
+    else memoCycle();
+  } else nextQuestion();
+}
+// 分野別の記憶：資料を覚える→問題、を時間いっぱい繰り返す
+function memoCycle(){
+  var memo = newMemo();
+  cur.locked = true;
+  showMemo(memo.html, Math.min(MEMO_SEC, Math.max(5, (cur.endAt - Date.now()) / 1000)), function(){
+    cur.memoQs = memo.qs.slice(0, 5); cur.locked = false; nextQuestion();
+  });
+}
+// 通し練習の最初：制限時間のカウントとは別に資料を覚える
+function startMemoPhase(memo, sec, title, done){
+  cur = { sec: { id:'memo', name: title }, n: 0, c: 0, endAt: Date.now() + sec * 1000, dur: sec, locked: true, pausedAt: 0, memoOnly: true, onEnd: done };
+  $('hudName').textContent = title;
+  showView('play');
+  startTick();
+  showMemo(memo.html, sec, done);
+}
+var memoTimer = null;
+function showMemo(html, sec, done){
+  $('prompt').textContent = '次の資料を覚えてください。メモは取れません。このあと資料を見ずに答えます。';
+  $('stim').hidden = false; $('stim').innerHTML = html;
+  $('fb').hidden = true;
+  var o = $('opts'); o.className = 'opts one';
+  o.innerHTML = '<button class="opt" id="btnMemoDone">覚えた（問題へ進む）</button>';
+  var fired = false;
+  function go(){ if(fired) return; fired = true; clearTimeout(memoTimer); done(); }
+  $('btnMemoDone').addEventListener('click', go);
+  clearTimeout(memoTimer);
+  memoTimer = setTimeout(go, sec * 1000);
+}
+
+function onTick(){
+  if(!cur || cur.pausedAt) return;
+  var left = (cur.endAt - Date.now()) / 1000;
+  $('hudTime').textContent = fmtTime(left);
+  $('hudBar').style.width = Math.max(0, left / cur.dur * 100) + '%';
+  $('hudCount').textContent = cur.memoOnly ? '' : cur.n + '問';
+  if(left <= 0 && !cur.memoOnly) endSection();
+}
+function startTick(){
+  stopTick();
+  onTick();
+  tick = setInterval(onTick, 200);
+}
+function stopTick(){ if(tick){ clearInterval(tick); tick = null; } }
+
+function nextQuestion(){
+  if(!cur || cur.memoOnly) return;
+  var q;
+  if(cur.sec.id === 'kioku'){
+    if(!cur.memoQs.length){ if(run.all) return endSection(); return memoCycle(); }
+    q = cur.memoQs.shift();
+  } else q = cur.sec.gen();
+  cur.q = q; cur.sel = []; cur.locked = false;
+  $('prompt').textContent = q.prompt;
+  $('stim').hidden = !q.stim; $('stim').innerHTML = q.stim || '';
+  $('fb').hidden = true;
+  var o = $('opts');
+  o.className = 'opts' + (q.cols === 1 ? ' one' : q.cols === 3 ? ' three' : '');
+  o.innerHTML = q.opts.map(function(t, i){ return '<button class="opt' + (q.mono ? ' mono' : '') + '" data-i="' + i + '">' + esc(t) + '</button>'; }).join('');
+}
+$('opts').addEventListener('click', function(ev){
+  var b = ev.target.closest ? ev.target.closest('.opt[data-i]') : null;
+  if(!b || !cur || cur.locked || !cur.q) return;
+  var i = +b.getAttribute('data-i'), q = cur.q;
+  if(q.pick2){
+    var k = cur.sel.indexOf(i);
+    if(k >= 0){ cur.sel.splice(k, 1); b.classList.remove('sel'); return; }
+    cur.sel.push(i); b.classList.add('sel');
+    if(cur.sel.length < 2) return;
+    var s = cur.sel.slice().sort();
+    judge(s[0] === q.ans[0] && s[1] === q.ans[1], q.ans, cur.sel);
+  } else judge(i === q.ans, [q.ans], [i]);
+});
+function judge(ok, ansIdx, selIdx){
+  cur.locked = true; cur.n++; if(ok) cur.c++;
+  var btns = $('opts').querySelectorAll('.opt');
+  Array.prototype.forEach.call(btns, function(b, i){
+    b.disabled = true; b.classList.remove('sel');
+    if(ansIdx.indexOf(i) >= 0) b.classList.add('ok');
+    else if(selIdx.indexOf(i) >= 0) b.classList.add('ng');
+  });
+  if(ok){ setTimeout(function(){ if(cur && cur.locked) nextQuestion(); }, 220); return; }
+  // 誤答のときは時計を止めて正解を確認する
+  cur.pausedAt = Date.now();
+  $('fbText').textContent = '誤答。緑が正解です（確認中は時計が止まります）';
+  $('fb').hidden = false;
+}
+$('btnNext').addEventListener('click', function(){
+  if(!cur || !cur.pausedAt) return;
+  cur.endAt += Date.now() - cur.pausedAt; cur.pausedAt = 0;
+  nextQuestion();
+});
+
+function endSection(){
+  stopTick(); clearTimeout(memoTimer);
+  var used = cur.dur - Math.max(0, (cur.endAt - (cur.pausedAt || Date.now())) / 1000);
+  var r = { id: cur.sec.id, n: cur.n, c: cur.c, dur: cur.dur, used: Math.round(used) };
+  run.results.push(r);
+  if(r.n > 0 && !(run.all && r.id === 'kioku')){
+    var h = state.hist[r.id] || (state.hist[r.id] = []);
+    h.push({ t: Date.now(), dur: r.dur, n: r.n, c: r.c });
+    if(h.length > 40) h.splice(0, h.length - 40);
+    saveState();
+  }
+  cur = null;
+  run.idx++;
+  if(run.idx < run.queue.length) gate(); else showResult();
+}
+function showResult(){
+  var h = '<tr><th>分野</th><th>回答</th><th>正答</th><th>誤答</th><th>誤答率</th><th>1問</th></tr>', tn = 0, tc = 0;
+  run.results.forEach(function(r){
+    tn += r.n; tc += r.c;
+    h += '<tr><td>' + secById(r.id).name + '</td><td>' + r.n + '</td><td>' + r.c + '</td><td>' + (r.n - r.c) + '</td><td>' + (r.n ? Math.round((r.n - r.c) / r.n * 100) + '%' : '—') + '</td><td>' + (r.n ? (r.used / r.n).toFixed(1) + '秒' : '—') + '</td></tr>';
+  });
+  $('resTable').innerHTML = h;
+  var rate = tn ? (tn - tc) / tn : 0;
+  $('resNote').textContent = !tn ? '回答がありませんでした。' :
+    rate > 0.1 ? '誤答率が10%を超えています。速さより先に、確かめてから押すことを優先してください。' :
+    rate > 0.03 ? '誤答が少し出ています。迷った問題は一呼吸おいて確かめてください。' :
+    '誤答はほとんどありません。この正確さのまま、回答数を伸ばしていきましょう。';
+  showView('result');
+}
+function quit(){
+  if(!window.confirm('練習をやめてホームに戻りますか？（この回の記録は残りません）')) return;
+  stopTick(); clearTimeout(memoTimer); cur = null; run = null; renderHome(); showView('home');
+}
+$('btnQuit').addEventListener('click', quit);
+$('btnGateQuit').addEventListener('click', quit);
+$('btnGateGo').addEventListener('click', startSection);
+$('btnHome').addEventListener('click', function(){ run = null; renderHome(); showView('home'); });
+$('btnAgain').addEventListener('click', function(){ if(run) startRun(run.queue, run.all); });
+
+/* ===================== ホーム ===================== */
+function recText(id){
+  var h = (state.hist[id] || []).filter(function(x){ return x.dur === state.dur; });
+  if(!h.length) return '';
+  var last = h[h.length - 1], best = Math.max.apply(null, h.map(function(x){ return x.c; }));
+  return '前回 ' + last.c + '/' + last.n + '<br>最高 ' + best + '問';
+}
+function renderHome(){
+  Array.prototype.forEach.call($('durSeg').querySelectorAll('button'), function(b){
+    b.setAttribute('aria-pressed', String(+b.getAttribute('data-dur') === state.dur));
+  });
+  $('secList').innerHTML = SECS.map(function(s, i){
+    return '<button class="sec-btn" data-sec="' + s.id + '"><span class="sec-no">' + (i + 1) + '</span><span class="sec-main"><span class="sec-name">' + s.name + '</span><br><span class="sec-desc">' + s.desc + '</span></span><span class="sec-rec">' + recText(s.id) + '</span></button>';
+  }).join('');
+  $('allDesc').textContent = '記憶の資料を覚える → 5分野 → 記憶の回答（約' + Math.round((state.dur * 6 + MEMO_SEC_ALL) / 60) + '分）';
+}
+$('durSeg').addEventListener('click', function(ev){
+  var b = ev.target.closest ? ev.target.closest('button[data-dur]') : null;
+  if(!b) return;
+  state.dur = +b.getAttribute('data-dur'); saveState(); renderHome();
+});
+$('secList').addEventListener('click', function(ev){
+  var b = ev.target.closest ? ev.target.closest('button[data-sec]') : null;
+  if(b) startRun([b.getAttribute('data-sec')], false);
+});
+$('btnAll').addEventListener('click', function(){ startRun(['shogo','bunrui','gengo','keisan','dokuzu','kioku'], true); });
+renderHome();
+
+// 検証用（_build の表示テストから問題生成を呼ぶ）
+window.__jimu = { SECS: SECS, newMemo: newMemo, ANT: ANT, SYN: SYN };
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+if(location.protocol === 'file:') return;
+if(!('serviceWorker' in navigator)) return;
+try{
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){ /* SW登録に失敗しても本体は動く */ });
+  });
+}catch(e){ /* no-op */ }
+})();
+</script>
+
+</body>
+</html>
