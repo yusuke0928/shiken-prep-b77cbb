@@ -109,6 +109,7 @@
     margin:24px 0 0;
   }
   @media (max-width:420px){.count-grid{grid-template-columns:1fr}}
+  .count-grid[hidden],.count-card[hidden]{display:none}
   .count-card{
     background:var(--paper-hi);border:1px solid var(--contour);border-top:3px solid var(--river);
     padding:15px 16px;
@@ -117,6 +118,17 @@
   .count-num{font-family:var(--disp);font-weight:900;font-size:28px;line-height:1;color:var(--ink)}
   .count-num .unit{font-size:.5em;font-weight:700;margin-left:3px;color:var(--ink-soft)}
   .count-sub{font-size:12px;color:var(--ink-soft);margin-top:6px;line-height:1.6}
+
+  /* ---- 日程一覧 ---- */
+  .sched-card{background:var(--paper-hi);border:1px solid var(--contour);padding:13px 16px;margin:10px 0 0}
+  .sched-title{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;color:var(--river);margin-bottom:4px}
+  .sched-list{list-style:none;margin:0;padding:0}
+  .sched-list li{display:flex;gap:12px;padding:7px 0;border-top:1px dashed var(--contour);font-size:13.5px;line-height:1.6}
+  .sched-list li:first-child{border-top:none}
+  .sched-when{flex:none;width:9.5em;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink);padding-top:1px}
+  .sched-what{color:var(--ink-soft)}
+  .sched-list li.is-past{opacity:.45}
+  .sched-list li.is-past .sched-what::after{content:"（終了）"}
 
   /* ---- ツールカード ---- */
   .tool-list{display:flex;flex-direction:column;gap:12px;margin:28px 0 0}
@@ -142,6 +154,7 @@
   }
   footer.note p{margin:0 0 8px}
   footer.note p:last-child{margin-bottom:0}
+  footer.note a{color:var(--river)}
 
   @media (prefers-color-scheme:dark){
     :root{
@@ -166,11 +179,11 @@
 <header class="cover">
   <div class="cover-inner">
     <div class="stamp">FIELD NOTE — 採用試験対策一式</div>
-    <h1><span class="thin">柏原市役所 採用試験｜土木職B</span>対策ハブ</h1>
+    <h1><span class="thin">柏原市役所 採用試験｜土木職</span>対策ハブ</h1>
     <div class="cover-meta">
       <span>SCOA対策／選考対策／個人面接想定問答</span>
       <span>3ツールとも外部通信ゼロ・単一ファイル完結</span>
-      <span>版 <span id="appVersion">v4.20260907</span></span>
+      <span>版 <span id="appVersion">v5.20261001</span></span>
     </div>
   </div>
 </header>
@@ -182,17 +195,27 @@
     <button id="btnAddToHomeClose" class="addhome-close" aria-label="閉じる">×</button>
   </div>
 
-  <section class="count-grid" aria-label="試験までの残り日数の目安">
-    <div class="count-card">
-      <div class="count-label">SCOA基礎能力検査</div>
-      <div class="count-num" id="scoaCountNum">—</div>
-      <div class="count-sub" id="scoaCountSub"></div>
+  <section class="count-grid" id="countGrid" aria-label="次の締切までの残り日数">
+    <div class="count-card" id="countCard0">
+      <div class="count-label" id="countLabel0"></div>
+      <div class="count-num" id="countNum0">—</div>
+      <div class="count-sub" id="countSub0"></div>
     </div>
-    <div class="count-card">
-      <div class="count-label">個人面接（最終）</div>
-      <div class="count-num" id="ivCountNum">—</div>
-      <div class="count-sub" id="ivCountSub"></div>
+    <div class="count-card" id="countCard1">
+      <div class="count-label" id="countLabel1"></div>
+      <div class="count-num" id="countNum1">—</div>
+      <div class="count-sub" id="countSub1"></div>
     </div>
+  </section>
+
+  <section class="sched-card" aria-label="今回の日程">
+    <div class="sched-title">今回の日程（令和9年4月採用 追加試験）</div>
+    <ol class="sched-list" id="schedList">
+      <li data-due="2026-10-16T17:00:00"><span class="sched-when">〜10/16（金）17時</span><span class="sched-what">申込（ウェブのみ）</span></li>
+      <li data-due="2026-10-19T12:00:00"><span class="sched-when">〜10/19（月）正午</span><span class="sched-what">第1次｜録画動画面接の投稿</span></li>
+      <li data-due="2026-11-09T00:00:00"><span class="sched-when">10/31（土）〜11/8（日）</span><span class="sched-what">第2次｜SCOA（テストセンター。日時と会場は自分で予約）</span></li>
+      <li data-due="2026-12-01T00:00:00"><span class="sched-when">11月下旬</span><span class="sched-what">最終｜個人面接（柏原市役所）</span></li>
+    </ol>
   </section>
 
   <nav class="tool-list" aria-label="対策ツール">
@@ -207,10 +230,10 @@
 
     <a class="tool-card" href="./kashiwara-senko-taisaku.html">
       <div class="tool-head">
-        <span class="tool-tag">ES・第1次・第3次対策</span>
+        <span class="tool-tag">申込・第1次対策</span>
         <span class="tool-name">選考対策マニュアル</span>
       </div>
-      <p class="tool-desc">録画動画面接・エントリーシート・集団討論・柏原市データシート</p>
+      <p class="tool-desc">録画動画面接・エントリーシート・柏原市データシート</p>
       <span class="tool-arrow">開く ›</span>
     </a>
 
@@ -219,15 +242,15 @@
         <span class="tool-tag">最終対策</span>
         <span class="tool-name">個人面接想定問答</span>
       </div>
-      <p class="tool-desc">土木職B（経験者）向け55問</p>
+      <p class="tool-desc">土木職（経験者）向け55問</p>
       <span class="tool-arrow">開く ›</span>
     </a>
   </nav>
 
   <footer class="note">
-    <p><b>日程について</b>　上に表示している日程は、<b>前回の冬ラウンド（令和8年4月採用 追加試験）の実績にもとづく想定</b>です。次回の受験案内はまだ公表されていません。11月頃に公表され次第、必ず柏原市公式サイトで日程・選考の段階・受験資格を確認してください。春ラウンドには集団面接・集団討論がありましたが冬ラウンドにはなく、<b>年度と回によって構成が変わります</b>。</p>
-    <p><b>受験案内のPDFは募集終了後に取り下げられます</b>（前回分は現在リンク切れです）。公表されたらすぐ手元に保存しておいてください。<br>
-    → <a href="https://www.city.kashiwara.lg.jp/category/zokusei/saiyo/" rel="noopener">柏原市 採用・募集 一覧</a>　／　人事課 072-971-5196</p>
+    <p><b>日程について</b>　上の日程は、2026年9月28日に柏原市が公表した<b>令和9年4月採用 追加試験（土木職ほか）の募集要項</b>によるものです。今回は集団面接・集団討論はありません。要項にも「日程等は全て予定」とあるので、市からのメールと市サイトのお知らせを見落とさないでください。</p>
+    <p><b>募集要項のPDFは募集終了後に取り下げられることがあります。</b>今のうちに手元に保存しておいてください。<br>
+    → <a href="https://www.city.kashiwara.lg.jp/docs/2026091400077/" rel="noopener">今回の募集ページ（申込・募集要項PDF）</a>　／　人事課 072-971-5196</p>
     <p>すべてブラウザ内（localStorage）に学習記録を保存します。同じブラウザで開き続けてください。プライベートブラウズでは記録が消えます。</p>
     <p>各ツール内の「データを書き出す」機能で、定期的にバックアップを取ることをおすすめします。</p>
   </footer>
@@ -239,10 +262,18 @@
 "use strict";
 
 /* ===================== 残り日数 ===================== */
-// 目標日は定数として持ち、日数は毎回ここから計算する（ハードコードしない）。
-var SCOA_WINDOW_START = '2027-01-06'; // SCOA受験期間 開始
-var SCOA_WINDOW_END   = '2027-01-25'; // SCOA受験期間 終了
-var INTERVIEW_DATE    = '2027-02-06'; // 最終個人面接（予定）
+// 令和9年4月採用 追加試験の募集要項（2026-09-28公表）の日程。
+// 日数は毎回ここから計算する（ハードコードしない）。due を過ぎた項目は飛ばし、
+// まだ来ていない直近の2項目をカードに出す。
+//  - start があるもの：受験期間（start〜last）
+//  - approx があるもの：日付未定（「11月下旬」などをそのまま表示）
+var MILESTONES = [
+  { label:'申込締切', due:'2026-10-16T17:00:00', when:'10/16（金）午後5時' },
+  { label:'録画動画の投稿締切', due:'2026-10-19T12:00:00', when:'10/19（月）正午' },
+  { label:'SCOA受験期間', start:'2026-10-31', last:'2026-11-08', due:'2026-11-09T00:00:00', when:'10/31（土）〜11/8（日）' },
+  { label:'個人面接（最終）', approx:'11月下旬', due:'2026-12-01T00:00:00', when:'日時は第2次の合格者に通知' },
+  { label:'最終結果', approx:'12月上旬', due:'2026-12-11T00:00:00', when:'までにシステム上で通知' }
+];
 
 function daysUntil(isoDate){
   var target = new Date(isoDate + 'T00:00:00');
@@ -252,35 +283,51 @@ function daysUntil(isoDate){
   return Math.round(diffMs / 86400000);
 }
 
-function renderCountdown(){
-  var scoaNum = document.getElementById('scoaCountNum');
-  var scoaSub = document.getElementById('scoaCountSub');
-  var ivNum = document.getElementById('ivCountNum');
-  var ivSub = document.getElementById('ivCountSub');
+function isPast(dueIso){
+  return new Date(dueIso).getTime() <= Date.now();
+}
 
-  var toStart = daysUntil(SCOA_WINDOW_START);
-  var toEnd = daysUntil(SCOA_WINDOW_END);
-  if(toStart > 0){
-    scoaNum.innerHTML = toStart + '<span class="unit">日</span>';
-    scoaSub.textContent = '受験期間（1/6〜1/25予定）開始まで';
-  } else if(toEnd >= 0){
-    scoaNum.textContent = '受験期間中';
-    scoaSub.textContent = '受験期間の終了まであと' + toEnd + '日';
+function fillCard(i, m){
+  var num = document.getElementById('countNum' + i);
+  var sub = document.getElementById('countSub' + i);
+  document.getElementById('countLabel' + i).textContent = m.label;
+  if(m.approx){
+    num.textContent = m.approx;
+    sub.textContent = m.when;
+  } else if(m.start){
+    var toStart = daysUntil(m.start);
+    var toLast = daysUntil(m.last);
+    if(toStart > 0){
+      num.innerHTML = toStart + '<span class="unit">日</span>';
+      sub.textContent = '受験期間 ' + m.when + ' の開始まで';
+    } else {
+      num.textContent = '受験期間中';
+      sub.textContent = toLast > 0 ? '最終日まであと' + toLast + '日' : '本日が最終日';
+    }
   } else {
-    scoaNum.textContent = '受験期間終了';
-    scoaSub.textContent = '';
+    var d = daysUntil(m.due.slice(0, 10));
+    if(d > 0){
+      num.innerHTML = d + '<span class="unit">日</span>';
+      sub.textContent = m.when + 'まで';
+    } else {
+      num.textContent = '本日';
+      sub.textContent = m.when + 'が締切';
+    }
   }
+}
 
-  var toIv = daysUntil(INTERVIEW_DATE);
-  if(toIv > 0){
-    ivNum.innerHTML = toIv + '<span class="unit">日</span>';
-    ivSub.textContent = '個人面接（2/6予定）まで';
-  } else if(toIv === 0){
-    ivNum.textContent = '本日';
-    ivSub.textContent = '個人面接（予定日）';
-  } else {
-    ivNum.textContent = '終了';
-    ivSub.textContent = '';
+function renderCountdown(){
+  var upcoming = MILESTONES.filter(function(m){ return !isPast(m.due); });
+  document.getElementById('countGrid').hidden = upcoming.length === 0;
+  for(var i = 0; i < 2; i++){
+    var card = document.getElementById('countCard' + i);
+    card.hidden = !upcoming[i];
+    if(i === 0) card.style.gridColumn = upcoming.length === 1 ? '1 / -1' : '';
+    if(upcoming[i]) fillCard(i, upcoming[i]);
+  }
+  var rows = document.querySelectorAll('#schedList li');
+  for(var j = 0; j < rows.length; j++){
+    rows[j].classList.toggle('is-past', isPast(rows[j].getAttribute('data-due')));
   }
 }
 renderCountdown();
