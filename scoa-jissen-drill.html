@@ -115,12 +115,20 @@
   footer.note{margin-top:34px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;border-top:1px solid var(--contour);padding-top:16px}
   [hidden]{display:none!important}
   @media (prefers-reduced-motion:reduce){.card{animation:none}.timer.over i{animation:none}}
+  /* ---- 対策ハブへ戻るボタン ---- */
+  .hub-btn{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;margin:0 0 16px;border:1px solid rgba(232,237,231,.55);color:#E8EDE7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.02em}
+  .hub-btn:active{background:rgba(232,237,231,.15)}
+  .hub-btn:focus-visible{outline:2px solid #DCE94F;outline-offset:2px}
+  .hub-mini{flex:none;display:inline-flex;align-items:center;min-height:32px;padding:3px 9px;border:1px solid var(--contour);color:var(--ink);font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .cover-top{display:block}
+  @media print{.hub-btn,.hub-mini{display:none}}
 </style>
 </head>
 <body>
 
 <header class="cover">
   <div class="cover-inner">
+    <div class="cover-top"><a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a></div>
     <div class="stamp">DRILL — 基礎能力検査</div>
     <h1><span class="thin">柏原市役所 技術職（土木）</span>SCOA 実戦ドリル</h1>
     <div class="cover-meta"><span>全60問</span><span>5分野</span><span>制限30秒／問</span></div>

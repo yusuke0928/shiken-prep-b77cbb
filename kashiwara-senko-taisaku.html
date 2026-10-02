@@ -358,12 +358,22 @@
     .checklist{background:#fff;color:#000;border:1px solid #000}
     .checklist p.lead2{color:#333}
   }
+  /* ---- 対策ハブへ戻るボタン ---- */
+  .hub-btn{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;margin:0 0 16px;border:1px solid rgba(232,237,231,.55);color:#E8EDE7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.02em}
+  .hub-btn:active{background:rgba(232,237,231,.15)}
+  .hub-btn:focus-visible{outline:2px solid #DCE94F;outline-offset:2px}
+  .progress-row1{display:flex;align-items:center}
+  .progress-row1 .ch-name{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .hub-mini{flex:none;display:inline-flex;align-items:center;min-height:32px;padding:3px 9px;border:1px solid var(--contour);color:var(--ink);font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .cover-top{display:block}
+  @media print{.hub-btn,.hub-mini{display:none}}
 </style>
 </head>
 <body>
 
 <header class="cover">
   <div class="cover-inner">
+    <div class="cover-top"><a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a></div>
     <div class="stamp">FIELD NOTE — 選考対策（個人面接以外）</div>
     <h1><span class="thin">柏原市役所 採用試験｜土木職</span>選考対策マニュアル</h1>
     <div class="cover-meta">
@@ -389,7 +399,7 @@
   </nav>
 
   <div class="progress">
-    <div class="progress-row1"><span id="curChNo">CH.1</span><span id="curChName" class="ch-name"></span></div>
+    <div class="progress-row1"><span id="curChNo">CH.1</span><span id="curChName" class="ch-name"></span><span style="flex:1"></span><a class="hub-mini" href="./index.html" aria-label="対策ハブ（トップページ）へ戻る">‹ ハブ</a></div>
     <div class="progress-row2">
       <span id="count">0 / 0</span>
       <div class="bar"><span id="fill"></span></div>

@@ -138,6 +138,13 @@
   .res-note{font-size:13px;color:var(--ink-soft);line-height:1.8;margin-top:12px}
   .center{text-align:center}
   .big{font-size:20px;font-weight:900;line-height:1.5}
+  /* ---- 対策ハブへ戻るボタン ---- */
+  .hub-btn{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;margin:0 0 16px;border:1px solid rgba(232,237,231,.55);color:#E8EDE7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.02em}
+  .hub-btn:active{background:rgba(232,237,231,.15)}
+  .hub-btn:focus-visible{outline:2px solid #DCE94F;outline-offset:2px}
+  .hub-mini{flex:none;display:inline-flex;align-items:center;min-height:32px;padding:3px 9px;border:1px solid var(--contour);color:var(--ink);font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .cover-top{display:block}
+  @media print{.hub-btn,.hub-mini{display:none}}
 </style>
 </head>
 <body>
@@ -146,8 +153,9 @@
 <section id="view-home" class="view">
   <header class="cover">
     <div class="cover-inner">
+      <a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a>
       <h1><span class="thin">柏原市役所 採用試験｜第2次対策</span>事務能力トレーナー</h1>
-      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v7.20261002</span></div>
+      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v8.20261002</span></div>
     </div>
   </header>
   <div class="wrap">
@@ -242,6 +250,7 @@
       <button class="btn btn-primary" id="btnAgain">もう一度</button>
       <button class="btn" id="btnHome">ホーム</button>
     </div>
+    <p class="foot"><a href="./index.html">‹ 対策ハブ（トップ）へ戻る</a></p>
   </div>
 </section>
 
