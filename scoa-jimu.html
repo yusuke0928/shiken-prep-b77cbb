@@ -105,6 +105,11 @@
   .memo{font-size:14.5px;line-height:1.9}
   .memo b{font-weight:900}
   .memo-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+  /* 幅の狭い画面：表の余白を詰めて「4月」「A支店」が折り返さないようにする */
+  @media (max-width:360px){
+    .stim{padding:10px}
+    table.t th,table.t td{padding:4px 4px}
+  }
 
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
   .opts.one{grid-template-columns:1fr}
@@ -155,7 +160,7 @@
     <div class="cover-inner">
       <a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a>
       <h1><span class="thin">柏原市役所 採用試験｜第2次対策</span>事務能力トレーナー</h1>
-      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v9.20261024</span></div>
+      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v10.20261024</span></div>
     </div>
   </header>
   <div class="wrap">
@@ -743,6 +748,7 @@ function startMemoPhase(memo, sec, title, done, note){
 var memoTimer = null;
 function showMemo(html, sec, done, note){
   $('prompt').textContent = '次の資料を覚えてください。メモは取れません。このあと資料を見ずに答えます。' + (note ? note : '');
+  if(window.scrollY) window.scrollTo(0, 0);
   $('stim').hidden = false; $('stim').innerHTML = html;
   $('fb').hidden = true;
   var o = $('opts'); o.className = 'opts one';
@@ -777,6 +783,8 @@ function nextQuestion(){
     q = cur.memoQs.shift();
   } else q = cur.sec.gen();
   cur.q = q; cur.sel = []; cur.locked = false;
+  // 前の問題で下までスクロールしていても、新しい問題文が上のバーに隠れないよう先頭に戻す
+  if(window.scrollY) window.scrollTo(0, 0);
   $('prompt').textContent = q.prompt;
   $('stim').hidden = !q.stim; $('stim').innerHTML = q.stim || '';
   $('fb').hidden = true;
