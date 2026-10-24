@@ -155,7 +155,7 @@
     <div class="cover-inner">
       <a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a>
       <h1><span class="thin">柏原市役所 採用試験｜第2次対策</span>事務能力トレーナー</h1>
-      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v8.20261002</span></div>
+      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v9.20261024</span></div>
     </div>
   </header>
   <div class="wrap">
@@ -679,6 +679,7 @@ var SECS = [
 ];
 var MEMO_SEC = 45;      // 分野別練習で資料を覚える時間（秒）
 var MEMO_SEC_ALL = 90;  // 通し練習の最初に資料を覚える時間（秒）
+var MEMO_MIN_LEFT = 20; // 分野別練習で、残りがこれより短ければ新しい資料は出さずに終える（秒）
 function secById(id){ return SECS.filter(function(s){ return s.id === id; })[0]; }
 
 /* ===================== 進行 ===================== */
@@ -695,14 +696,15 @@ function fmtTime(sec){ sec = Math.max(0, Math.ceil(sec)); return Math.floor(sec 
 function startRun(ids, all){
   run = { queue: ids, idx: 0, results: [], all: all, memo: null };
   bunrui.left = 0; dokuzu.left = 0;
-  if(all){ run.memo = newMemo(); startMemoPhase(run.memo, MEMO_SEC_ALL, '記憶（覚える）', function(){ gate(); }); }
+  if(all){ run.memo = newMemo(); startMemoPhase(run.memo, MEMO_SEC_ALL, '記憶（覚える）', function(){ gate(); }, 'この資料の問題は、5分野が終わったあと、最後の「記憶」で出ます。'); }
   else startSection();
 }
 function gate(){
   var s = secById(run.queue[run.idx]);
   $('gateNo').textContent = (run.idx + 1) + ' / ' + run.queue.length;
   $('gateName').textContent = s.name;
-  $('gateDesc').textContent = (s.id === 'kioku' && run.all ? '最初に覚えた資料について答えます。' : s.desc + '。') + ' 制限時間 ' + fmtTime(state.dur);
+  $('gateDesc').textContent = (s.id === 'kioku' && run.all ? '最初に覚えた資料について答えます。' : s.desc + '。') + ' 制限時間 ' + fmtTime(state.dur) +
+    (run.all && s.id !== 'kioku' ? '（最初に覚えた資料の問題は、最後の「記憶」で出ます）' : '');
   showView('gate');
 }
 function startSection(){
@@ -716,25 +718,31 @@ function startSection(){
     else memoCycle();
   } else nextQuestion();
 }
-// 分野別の記憶：資料を覚える→問題、を時間いっぱい繰り返す
+// 分野別の記憶：資料を覚える→問題、を時間いっぱい繰り返す。
+// 覚えている間は回答の制限時間を減らさない（覚えたのに問題が出ずに時間切れ、を防ぐ）
 function memoCycle(){
-  var memo = newMemo();
-  cur.locked = true;
-  showMemo(memo.html, Math.min(MEMO_SEC, Math.max(5, (cur.endAt - Date.now()) / 1000)), function(){
-    cur.memoQs = memo.qs.slice(0, 5); cur.locked = false; nextQuestion();
-  });
+  var left = (cur.endAt - Date.now()) / 1000;
+  if(left < MEMO_MIN_LEFT) return endSection();
+  var memo = newMemo(), sc = cur;
+  startMemoPhase(memo, MEMO_SEC, '記憶（覚える）', function(){
+    if(!cur || !cur.memoOnly) return;
+    cur = sc; cur.endAt = Date.now() + left * 1000;
+    cur.memoQs = memo.qs.slice(0, 5); cur.locked = false;
+    $('hudName').textContent = sc.sec.name;
+    startTick(); nextQuestion();
+  }, '覚える時間は、回答の制限時間に含みません。');
 }
-// 通し練習の最初：制限時間のカウントとは別に資料を覚える
-function startMemoPhase(memo, sec, title, done){
+// 資料を覚える画面：制限時間のカウントとは別に数える
+function startMemoPhase(memo, sec, title, done, note){
   cur = { sec: { id:'memo', name: title }, n: 0, c: 0, endAt: Date.now() + sec * 1000, dur: sec, locked: true, pausedAt: 0, memoOnly: true, onEnd: done };
   $('hudName').textContent = title;
   showView('play');
   startTick();
-  showMemo(memo.html, sec, done);
+  showMemo(memo.html, sec, done, note);
 }
 var memoTimer = null;
-function showMemo(html, sec, done){
-  $('prompt').textContent = '次の資料を覚えてください。メモは取れません。このあと資料を見ずに答えます。';
+function showMemo(html, sec, done, note){
+  $('prompt').textContent = '次の資料を覚えてください。メモは取れません。このあと資料を見ずに答えます。' + (note ? note : '');
   $('stim').hidden = false; $('stim').innerHTML = html;
   $('fb').hidden = true;
   var o = $('opts'); o.className = 'opts one';
