@@ -60,6 +60,7 @@
   .seg{display:flex;gap:6px}
   .seg button{flex:1;min-height:44px;background:var(--paper-hi);border:1px solid var(--contour);cursor:pointer;font-size:14px;font-weight:700}
   .seg button[aria-pressed="true"]{background:var(--river);color:var(--paper-hi);border-color:var(--river)}
+  .seg-note{font-size:12.5px;color:var(--ink-soft);line-height:1.7;margin-top:6px}
 
   .sec-list{display:flex;flex-direction:column;gap:8px}
   .sec-btn{display:flex;align-items:center;gap:12px;width:100%;min-height:62px;text-align:left;cursor:pointer;
@@ -105,6 +106,9 @@
   .memo{font-size:14.5px;line-height:1.9}
   .memo b{font-weight:900}
   .memo-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+  table.t.mono td{font-family:var(--mono);font-size:15px;letter-spacing:.03em;text-align:left}
+  table.t td.sm{font-size:12px;line-height:1.45}
+  .rule{font-size:13px;font-weight:700;line-height:1.6;margin-top:8px;padding:6px 8px;border-left:3px solid var(--marker);background:var(--marker-soft)}
   /* 幅の狭い画面：表の余白を詰めて「4月」「A支店」が折り返さないようにする */
   @media (max-width:360px){
     .stim{padding:10px}
@@ -114,6 +118,7 @@
   .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto}
   .opts.one{grid-template-columns:1fr}
   .opts.three{grid-template-columns:1fr 1fr 1fr}
+  .opts.five{grid-template-columns:repeat(5,1fr);gap:6px}
   .opt{min-height:52px;padding:8px 10px;background:var(--paper-hi);border:1px solid var(--contour);border-bottom-width:3px;cursor:pointer;font-size:16px;font-weight:700;line-height:1.4;touch-action:manipulation}
   .opt.mono{font-family:var(--mono);font-size:15.5px;letter-spacing:.03em;text-align:left;font-weight:500}
   .opt.sel{border-color:var(--river);background:var(--marker-soft)}
@@ -160,7 +165,7 @@
     <div class="cover-inner">
       <a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a>
       <h1><span class="thin">柏原市役所 採用試験｜第2次対策</span>事務能力トレーナー</h1>
-      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v10.20261024</span></div>
+      <div class="cover-meta">照合／分類／言語／計算／読図／記憶　版 <span id="appVersion">v11.20261028</span></div>
     </div>
   </header>
   <div class="wrap">
@@ -176,6 +181,13 @@
       <button data-dur="120">2分</button>
       <button data-dur="240">4分</button>
     </div>
+
+    <div class="label">難易度</div>
+    <div class="seg" id="lvlSeg">
+      <button data-lvl="std">標準</button>
+      <button data-lvl="hard">難しい</button>
+    </div>
+    <p class="seg-note" id="lvlNote"></p>
 
     <div class="label">分野を選んで練習</div>
     <div class="sec-list" id="secList"></div>
@@ -200,9 +212,9 @@
       <summary>分野ごとのコツ</summary>
       <ul>
         <li><b>照合</b>：全体を眺めず、3〜4文字ずつ区切って左から順に見比べる。数字と、形の似た字（シ・ツ、末・未）に注意</li>
-        <li><b>分類</b>：先に手引きの並びをつかむ。範囲の境目（〜以上・〜以下）を取り違えない</li>
-        <li><b>言語</b>：対義語・類義語の組を知っているかどうか。迷ったら長考せず次へ</li>
-        <li><b>計算</b>：選択肢の一の位だけで絞れることが多い。□の問題は逆算する</li>
+        <li><b>分類</b>：先に手引きの並びをつかむ。範囲の境目（〜以上・〜以下）を取り違えない。「ただし」の例外があれば、表より先に例外に当てはまるかを見る</li>
+        <li><b>言語</b>：対義語・類義語の組を知っているかどうか。「2語の関係」は、原料と製品・職業と職場などの関係を言葉にしてから選ぶ（前後の順番も同じか確かめる）。迷ったら長考せず次へ</li>
+        <li><b>計算</b>：標準では選択肢の一の位だけで絞れることが多い。「難しい」では一の位がそろえてあるので、上の位まで計算する。□の問題は逆算する</li>
         <li><b>読図</b>：問いを先に読み、必要な系列と月だけを見る。凡例の印（●■▲）を取り違えない</li>
         <li><b>記憶</b>：数字（時刻・日付・数量）と固有名詞を声に出さず唱える。変更があった項目は「変更後」を覚える</li>
       </ul>
@@ -247,7 +259,7 @@
 
 <!-- ================= 結果 ================= -->
 <section id="view-result" class="view" hidden>
-  <header class="cover"><div class="cover-inner"><h1><span class="thin">事務能力トレーナー</span>結果</h1></div></header>
+  <header class="cover"><div class="cover-inner"><h1><span class="thin" id="resSub">事務能力トレーナー</span>結果</h1></div></header>
   <div class="wrap">
     <table class="res" id="resTable"></table>
     <p class="res-note" id="resNote"></p>
@@ -273,19 +285,22 @@ function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&
 function $(id){ return document.getElementById(id); }
 
 function loadState(){
-  var d = { v:1, hist:{}, dur:240 };
+  var d = { v:1, hist:{}, dur:240, lvl:'std' };
   try{
     var raw = localStorage.getItem(LS_KEY);
     var s = raw ? JSON.parse(raw) : null;
     if(s && typeof s === 'object'){
       if(s.hist && typeof s.hist === 'object') d.hist = s.hist;
       if([60,120,240].indexOf(s.dur) !== -1) d.dur = s.dur;
+      if(s.lvl === 'hard') d.lvl = 'hard';
     }
   }catch(e){}
   return d;
 }
 function saveState(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){} }
 var state = loadState();
+function hard(){ return state.lvl === 'hard'; }
+var LVL_NAME = { std:'標準', hard:'難しい' };
 
 /* ===================== 照合 ===================== */
 var KANA = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワン'.split('');
@@ -300,8 +315,9 @@ function isDigit(c){ return c >= '0' && c <= '9'; }
 function isAlpha(c){ return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'); }
 function isKana(c){ return KANA.indexOf(c) !== -1; }
 function mutable(c){ return isDigit(c) || isAlpha(c) || isKana(c) || !!SIM[c]; }
-function mutateChar(c){
-  if(SIM[c] && Math.random() < 0.7) return SIM[c];
+// simP：形の似た字に置き換える確率（「難しい」では上げる）
+function mutateChar(c, simP){
+  if(SIM[c] && Math.random() < (simP || 0.7)) return SIM[c];
   var r;
   if(isDigit(c)){ do{ r = String(ri(0, 9)); }while(r === c); return r; }
   if(isKana(c)){ do{ r = pick(KANA); }while(r === c); return r; }
@@ -312,12 +328,22 @@ function mutateChar(c){
   return SIM[c];
 }
 // s の中の k か所を別の字に置き換える（置き換えは必ず元と違う字になる）
-function mutate(s, k){
+function mutate(s, k, simP){
   var chars = s.split(''), idx = [];
   for(var i = 0; i < chars.length; i++) if(mutable(chars[i])) idx.push(i);
-  sample(idx, k).forEach(function(i){ chars[i] = mutateChar(chars[i]); });
+  sample(idx, k).forEach(function(i){ chars[i] = mutateChar(chars[i], simP); });
   return chars.join('');
 }
+// 隣り合う2字を入れ替える（例 4725 → 4752）。入れ替えられる所がなければ null
+function swapAdj(s){
+  var chars = s.split(''), idx = [];
+  for(var i = 0; i + 1 < chars.length; i++) if(mutable(chars[i]) && mutable(chars[i + 1]) && chars[i] !== chars[i + 1]) idx.push(i);
+  if(!idx.length) return null;
+  var j = pick(idx), t = chars[j]; chars[j] = chars[j + 1]; chars[j + 1] = t;
+  return chars.join('');
+}
+// 1か所だけ違う写しを作る。「難しい」では入れ替えも混ぜる
+function oneDiff(s, H){ return (H && Math.random() < 0.3 && swapAdj(s)) || mutate(s, 1, H ? 0.95 : 0.7); }
 function digits(n){ var s = ''; for(var i = 0; i < n; i++) s += ri(0, 9); return s; }
 function kanaName(n){ var s = ''; for(var i = 0; i < n; i++) s += pick(KANA); return s; }
 var CITY = ['柏原市','八尾市','藤井寺市','羽曳野市','松原市','富田林市','東大阪市','大東市','河内長野市','香芝市'];
@@ -332,22 +358,61 @@ var GEN = [
   function(){ return pick(SEI) + ' ' + pick(MEI) + '（No.' + digits(4) + '）'; },
   function(){ return '株式会社' + kanaName(ri(3, 5)) + pick(SUFFIX); },
   function(){ return '¥' + ri(1, 9) + ',' + digits(3) + ',' + digits(3); },
-  function(){ return '令和' + ri(5, 9) + '年' + ri(1, 12) + '月' + ri(1, 28) + '日 ' + ri(8, 18) + ':' + digits(1).replace(/[6-9]/, '3') + digits(1); }
+  function(){ return '令和' + ri(5, 9) + '年' + ri(1, 12) + '月' + ri(1, 28) + '日 ' + ri(8, 18) + ':' + digits(1).replace(/[6-9]/, '3') + digits(1); },
+  function(){ return 'ABCDEFGHKLMNPQRUVX'.charAt(ri(0, 17)) + 'ABCDEFGHKLMNPQRUVX'.charAt(ri(0, 17)) + '-' + digits(4) + '-' + 'ABCDEFGHKLMNPQRUVX'.charAt(ri(0, 17)) + digits(1); },
+  function(){ return '普通 ' + digits(7) + '（' + pick(TOWN) + '支店）'; }
 ];
+// 「難しい」で使う長い文字列
+var ROMA = ['tanaka','yamada','sato','suzuki','takeda','ito','watanabe','nakamura','kobayashi','kato','yoshida','matsumoto','inoue','kimura','okada'];
+var BLDG = ['柏原ハイツ','コーポ大県','メゾン国分','サンハイム高井田','グリーンコート'];
+var GEN_HARD = [
+  function(){ return '0' + digits(2) + '-' + digits(4) + '-' + digits(4) + '（内線' + digits(3) + '）'; },
+  function(){ return pick(ROMA).charAt(0) + '.' + pick(ROMA) + digits(2) + '@' + pick(['city','pref','kensetsu','office']) + '.' + pick(['lg.jp','co.jp','or.jp','ne.jp']); },
+  function(){ var L = 'ABCDEFGHKLMNPQRUVX', l = 'abdehkmnpquv'; return L.charAt(ri(0, 17)) + L.charAt(ri(0, 17)) + '-' + digits(2) + l.charAt(ri(0, 11)) + digits(1) + '-' + digits(1) + L.charAt(ri(0, 17)) + l.charAt(ri(0, 11)) + digits(2); },
+  function(){ return pick(CITY) + pick(TOWN) + ri(1, 9) + '丁目' + ri(1, 29) + '番' + ri(1, 19) + '号 ' + pick(BLDG) + ri(1, 9) + '0' + ri(1, 9) + '号室'; },
+  function(){ return '¥' + ri(10, 99) + ',' + digits(3) + ',' + digits(3) + '（' + pick(SEI) + pick(SUFFIX) + '）'; },
+  function(){ return '普通 ' + digits(7) + ' ' + pick(SEI) + pick(MEI) + '（' + pick(TOWN) + '支店）'; }
+];
+// 一覧の照合で使う短い文字列（1行ずつ見比べる）
+var ROW_GEN = [
+  function(){ return '0' + digits(ri(1, 2)) + '-' + digits(ri(3, 4)) + '-' + digits(4); },
+  function(){ return 'ABCDEFGHKLMNPQRUVX'.charAt(ri(0, 17)) + digits(3) + '-' + 'abdehkmnpquv'.charAt(ri(0, 11)) + digits(3); },
+  function(){ return pick(SEI) + pick(MEI); },
+  function(){ return kanaName(ri(4, 6)); },
+  function(){ return '¥' + ri(1, 99) + ',' + digits(3); }
+];
+// 選択肢ボタン（等幅15.5px）に並べたときのおおよその幅（px）。幅320pxの画面で1行に収まるのは265pxまで
+function textW(s){ var w = 0; for(var i = 0; i < s.length; i++) w += s.charCodeAt(i) < 0x100 ? 9.3 : 15.5; return w; }
+function shogoRows(H){
+  var g = pick(ROW_GEN), n = H ? 5 : 4, k = ri(0, n), rows = [], seen = {};
+  while(rows.length < n){ var s = g(); if(!seen[s]){ seen[s] = 1; rows.push(s); } }
+  var diff = {}; sample(rows.map(function(x, i){ return i; }), k).forEach(function(i){ diff[i] = 1; });
+  var h = '<table class="t mono"><tr><th>原本</th><th>写し</th></tr>' + rows.map(function(s, i){
+    return '<tr><td>' + esc(s) + '</td><td>' + esc(diff[i] ? oneDiff(s, H) : s) + '</td></tr>';
+  }).join('') + '</table>';
+  var opts = ['0（なし）']; for(var i = 1; i <= n; i++) opts.push(String(i));
+  return { prompt: '左右で違っている行は、いくつありますか。', stim: h, opts: opts, ans: k, cols: 3 };
+}
 function genShogo(){
-  var src = pick(GEN)();
-  if(Math.random() < 0.55){
-    var k = ri(0, 3);
+  var H = hard(), r = Math.random();
+  if(r < (H ? 0.34 : 0.25)) return shogoRows(H);
+  var src, isCount = r < (H ? 0.67 : 0.62);
+  // 違いを最大4か所作れるだけの、置き換えられる字がある文字列にする。
+  // 選択肢に並べる形式では、小さい画面で5つの選択肢が収まるよう長すぎる文字列（建物名つき住所など）を避ける
+  do{ src = H && Math.random() < 0.7 ? pick(GEN_HARD)() : pick(GEN)(); }while(src.split('').filter(mutable).length < 4 || (!isCount && textW(src) > 265));
+  if(isCount){
+    var k = ri(0, H ? 4 : 3), copts = ['0（同じ）', '1', '2', '3'];
+    if(H) copts.push('4');
     return {
       prompt: '原本と写しで、違っている文字はいくつありますか。',
-      stim: '<div class="pair"><span class="tag">原本</span>' + esc(src) + '<span class="tag">写し</span>' + esc(mutate(src, k)) + '</div>',
-      opts: ['0（同じ）', '1', '2', '3'], ans: k, cols: 2
+      stim: '<div class="pair"><span class="tag">原本</span>' + esc(src) + '<span class="tag">写し</span>' + esc(mutate(src, k, H ? 0.95 : 0.7)) + '</div>',
+      opts: copts, ans: k, cols: H ? 3 : 2
     };
   }
   var set = {}; set[src] = 1;
   var opts = [src];
-  while(opts.length < 4){
-    var m = mutate(src, ri(1, 2));
+  while(opts.length < (H ? 5 : 4)){
+    var m = H ? oneDiff(src, true) : mutate(src, ri(1, 2));
     if(!set[m]){ set[m] = 1; opts.push(m); }
   }
   opts = shuffle(opts);
@@ -368,24 +433,59 @@ var WORDS = {
   '工具': ['スパナ','ドライバー','ペンチ','金づち','のこぎり','電動ドリル','水準器','巻尺'],
   '建設資材': ['セメント','鉄筋','砕石','型枠','アスファルト','側溝ふた','土のう','コンクリート管']
 };
-var bunrui = { left: 0, kind: 0, html: '', data: null };
+var KOSHU = ['道路','水道','下水道'];
+var MLEN = [30, 31, 30, 31, 31, 30];   // 4月〜9月の日数
+// 4月1日からの通し日数 d（0〜182）を「5/3」の形にする
+function md(d){ var m = 0; while(d >= MLEN[m]){ d -= MLEN[m]; m++; } return (m + 4) + '/' + (d + 1); }
+function mdParts(d){ var m = 0; while(d >= MLEN[m]){ d -= MLEN[m]; m++; } return [m + 4, d + 1]; }
+var bunrui = { left: 0, kind: 0, html: '', data: null, ex: null };
+// 範囲の手引き：lo〜hi を nIv 個の区間に切り、5分類に割り当てる（10区間なら2つずつ）
+function rangeBook(lo, hi, nIv, cutFn, fmt, head){
+  var cuts = {}; while(Object.keys(cuts).length < nIv - 1){ cuts[cutFn()] = 1; }
+  var b = Object.keys(cuts).map(Number).sort(function(x, y){ return x - y; });
+  var iv = [], s = lo;
+  b.forEach(function(c){ iv.push([s, c - 1]); s = c; }); iv.push([s, hi]);
+  var cls = shuffle(nIv === 10 ? [1,1,2,2,3,3,4,4,5,5] : [1,2,3,4,5]);
+  var rows = {1:[],2:[],3:[],4:[],5:[]};
+  iv.forEach(function(r, i){ rows[cls[i]].push(r); });
+  var h = '<table class="t"><tr><th>分類</th><th' + (nIv === 10 ? ' colspan="2"' : '') + '>' + head + '</th></tr>';
+  for(var c = 1; c <= 5; c++) h += '<tr><td>' + c + '</td>' + rows[c].map(function(r){ return '<td class="num">' + fmt(r[0]) + '〜' + fmt(r[1]) + '</td>'; }).join('') + '</tr>';
+  bunrui.data = { iv: iv, cls: cls, fmt: fmt };
+  return h + '</table>';
+}
 function newHandbook(){
-  bunrui.left = 6;
-  bunrui.kind = ri(0, 2);
+  var H = hard();
+  bunrui.left = H ? 5 : 6;
+  // 0:番号の範囲 1:英字×数字 2:品名 3:受付日の範囲 4:地区×工種。「難しい」は品名を出さず、例外の決まりを付ける
+  bunrui.kind = H ? pick([0, 1, 3, 4]) : ri(0, 4);
+  bunrui.ex = null;
   var h = '';
   if(bunrui.kind === 0){
-    // 数の範囲：10区間を5分類に2つずつ割り当てる
-    var cuts = {}; while(Object.keys(cuts).length < 9){ cuts[ri(11, 98) * 100] = 1; }
-    var b = Object.keys(cuts).map(Number).sort(function(x, y){ return x - y; });
-    var iv = [], lo = 1000;
-    b.forEach(function(c){ iv.push([lo, c - 1]); lo = c; }); iv.push([lo, 9999]);
-    var cls = shuffle([1,1,2,2,3,3,4,4,5,5]);
-    var rows = {1:[],2:[],3:[],4:[],5:[]};
-    iv.forEach(function(r, i){ rows[cls[i]].push(r); });
-    h = '<table class="t"><tr><th>分類</th><th colspan="2">番号の範囲</th></tr>';
-    for(var c = 1; c <= 5; c++) h += '<tr><td>' + c + '</td>' + rows[c].map(function(r){ return '<td class="num">' + r[0] + '〜' + r[1] + '</td>'; }).join('') + '</tr>';
+    h = rangeBook(1000, 9999, 10, function(){ return ri(11, 98) * 100; }, String, '番号の範囲');
+    if(H){
+      var dg = ri(1, 8);
+      bunrui.ex = { text: '一の位が ' + dg + ' の番号', test: function(n){ return n % 10 === dg; }, gen: function(){ return ri(100, 999) * 10 + dg; } };
+    }
+  } else if(bunrui.kind === 3){
+    h = rangeBook(0, 182, H ? 10 : 5, function(){ return ri(1, 182); }, md, '受付日の範囲');
+    if(H){
+      var dd = ri(10, 20);
+      bunrui.ex = { text: '毎月 ' + dd + ' 日の受付', test: function(d){ return mdParts(d)[1] === dd; }, gen: function(){ var m = ri(0, 5), s = 0; for(var i = 0; i < m; i++) s += MLEN[i]; return s + dd - 1; } };
+    }
+  } else if(bunrui.kind === 4){
+    // 地区（町名のグループ）×工種の表
+    var towns = sample(TOWN, 12), groups = [towns.slice(0, 3), towns.slice(3, 6), towns.slice(6, 9), towns.slice(9, 12)];
+    var cells4 = shuffle([1,2,3,4,5,1,2,3,4,5,ri(1,5),ri(1,5)]);
+    h = '<table class="t"><tr><th>地区＼工種</th>' + KOSHU.map(function(k){ return '<th>' + k + '</th>'; }).join('') + '</tr>';
+    groups.forEach(function(g, i){
+      h += '<tr><td class="l sm">' + g.join('・') + '</td>' + [0,1,2].map(function(j){ return '<td class="num">' + cells4[i * 3 + j] + '</td>'; }).join('') + '</tr>';
+    });
     h += '</table>';
-    bunrui.data = { iv: iv, cls: cls };
+    bunrui.data = { groups: groups, cells: cells4 };
+    if(H){
+      var tw = pick(towns);
+      bunrui.ex = { text: '「' + tw + '」のもの', test: function(it){ return it.town === tw; }, gen: function(){ return { town: tw, k: ri(0, 2) }; } };
+    }
   } else if(bunrui.kind === 1){
     // 英字×数字の表
     var L = [['A','F'],['G','M'],['N','S'],['T','Z']];
@@ -398,35 +498,63 @@ function newHandbook(){
     });
     h += '</table>';
     bunrui.data = { L: L, N: N, cells: cells };
+    if(H){
+      var pair = [pick('ABCDEFGHIJKLM'.split('')), pick('NOPQRSTUVWXYZ'.split(''))];
+      bunrui.ex = { text: '英字が ' + pair[0] + ' または ' + pair[1] + ' のもの', test: function(it){ return pair.indexOf(it.l) >= 0; }, gen: function(){ return { l: pick(pair), n: ri(100, 999) }; } };
+    }
   } else {
     var cats = sample(Object.keys(WORDS), 5);
     h = '<table class="t"><tr>' + cats.map(function(c, i){ return '<th>' + (i + 1) + '</th>'; }).join('') + '</tr><tr>' + cats.map(function(c){ return '<td>' + c + '</td>'; }).join('') + '</tr></table>';
     bunrui.data = { cats: cats };
   }
+  // 例外の分類番号。表のどの分類とも同じになりうるが、例外が優先なので答えは1つに決まる
+  if(bunrui.ex){
+    bunrui.ex.cls = ri(1, 5);
+    h += '<p class="rule">ただし、' + bunrui.ex.text + 'は、表にかかわらず ' + bunrui.ex.cls + ' とする。</p>';
+  }
   bunrui.html = h;
 }
+function rangeIndex(iv, n){ for(var i = 0; i < iv.length; i++) if(n >= iv[i][0] && n <= iv[i][1]) return i; return -1; }
 function genBunrui(){
   if(bunrui.left <= 0) newHandbook();
   bunrui.left--;
-  var d = bunrui.data, item, ans;
-  if(bunrui.kind === 0){
-    var i = ri(0, d.iv.length - 1), r = d.iv[i];
-    // 境目の数を多めに出す
-    var n = Math.random() < 0.4 ? pick([r[0], r[1]]) : ri(r[0], r[1]);
-    item = String(n); ans = d.cls[i] - 1;
+  var d = bunrui.data, ex = bunrui.ex, useEx = ex && Math.random() < 0.3, item, ans, it;
+  if(bunrui.kind === 0 || bunrui.kind === 3){
+    var n;
+    if(useEx) n = ex.gen();
+    else {
+      var r = d.iv[ri(0, d.iv.length - 1)];
+      // 境目の数を多めに出す
+      n = Math.random() < 0.4 ? pick([r[0], r[1]]) : ri(r[0], r[1]);
+    }
+    item = d.fmt(n); ans = d.cls[rangeIndex(d.iv, n)] - 1; it = n;
   } else if(bunrui.kind === 1){
-    var li = ri(0, 3), ni = ri(0, 2);
-    var a = d.L[li][0].charCodeAt(0), z = d.L[li][1].charCodeAt(0);
-    var num = Math.random() < 0.4 ? pick(d.N[ni]) : ri(d.N[ni][0], d.N[ni][1]);
-    item = String.fromCharCode(ri(a, z)) + '-' + num; ans = d.cells[li * 3 + ni] - 1;
+    var li, ni, num, ch;
+    if(useEx){ it = ex.gen(); ch = it.l; num = it.n; }
+    else {
+      li = ri(0, 3); ni = ri(0, 2);
+      var a = d.L[li][0].charCodeAt(0), z = d.L[li][1].charCodeAt(0);
+      num = Math.random() < 0.4 ? pick(d.N[ni]) : ri(d.N[ni][0], d.N[ni][1]);
+      ch = String.fromCharCode(ri(a, z));
+    }
+    // 英字と数字から表のマスを引き直す（例外用に作った項目にも同じ手順を使う）
+    li = d.L.map(function(x){ return ch >= x[0] && ch <= x[1]; }).indexOf(true);
+    ni = d.N.map(function(x){ return num >= x[0] && num <= x[1]; }).indexOf(true);
+    it = { l: ch, n: num };
+    item = ch + '-' + num; ans = d.cells[li * 3 + ni] - 1;
+  } else if(bunrui.kind === 4){
+    it = useEx ? ex.gen() : { town: pick(pick(d.groups)), k: ri(0, 2) };
+    var gi = d.groups.map(function(g){ return g.indexOf(it.town) >= 0; }).indexOf(true);
+    item = it.town + '・' + KOSHU[it.k]; ans = d.cells[gi * 3 + it.k] - 1;
   } else {
     var ci = ri(0, 4);
     item = pick(WORDS[d.cats[ci]]); ans = ci;
   }
+  if(ex && ex.test(it)) ans = ex.cls - 1;
   return {
     prompt: '手引きに従うと、次のものは何番に分類されますか。',
     stim: bunrui.html + '<div class="item" style="margin-top:10px">' + esc(item) + '</div>',
-    opts: ['1','2','3','4','5'], ans: ans, cols: 3
+    opts: ['1','2','3','4','5'], ans: ans, cols: 5
   };
 }
 
@@ -444,7 +572,19 @@ var ANT = [
   ['義務','権利','lw'],['加害','被害','lw'],['原告','被告','lw'],['善意','悪意','lw'],['故意','過失','lw'],['公的','私的','lw'],
   ['温暖','寒冷','nt'],['乾燥','湿潤','nt'],['上流','下流','nt'],['満潮','干潮','nt'],['安全','危険','nt'],['正常','異常','nt'],
   ['濃厚','希薄','sn'],['鋭敏','鈍感','sn'],['明瞭','曖昧','sn'],['親密','疎遠','sn'],['巧妙','拙劣','sn'],['緊張','弛緩','sn'],
-  ['送信','受信','cm'],['質疑','応答','cm'],['縦断','横断','cm'],['創造','模倣','jn'],['自立','依存','cm'],['永遠','一瞬','cm']
+  ['送信','受信','cm'],['質疑','応答','cm'],['縦断','横断','cm'],['創造','模倣','jn'],['自立','依存','cm'],['永遠','一瞬','cm'],
+  ['進化','退化','ud'],['向上','低下','ud'],['長期','短期','tm'],['事前','事後','tm'],['既知','未知','tm'],['先天','後天','tm'],['新式','旧式','tm'],['祖先','子孫','tm'],
+  ['都市','農村','pl'],['屋内','屋外','pl'],['国内','国外','pl'],['内陸','沿岸','pl'],['人工','自然','nt'],
+  ['精神','物質','ab'],['目的','手段','ab'],['本音','建前','ab'],['容易','困難','ab'],['単数','複数','ab'],
+  ['売却','購入','ec'],['与党','野党','lw'],['任意','強制','lw'],['違法','合法','lw'],['好意','敵意','lw'],
+  ['悲劇','喜劇','em'],['安心','不安','em'],['尊敬','軽蔑','em']
+];
+// 「難しい」で加わる対義語（系統は上と共通。紛らわしい組は同じ系統に入れて同じ問題に出さない）
+var ANT_HARD = [
+  ['栄転','左遷','se'],['斬新','陳腐','sn'],['凡庸','非凡','at'],['寡黙','饒舌','at'],['緩慢','迅速','sn'],['漠然','判然','sn'],['冗長','簡潔','ab'],['質素','華美','sn'],
+  ['謙遜','尊大','at'],['急進','漸進','at'],['演繹','帰納','ab'],['顕在','潜在','ab'],['隆起','沈降','ud'],['騰貴','下落','ud'],['好転','悪化','ud'],['過疎','過密','pl'],
+  ['興隆','衰退','ud'],['獲得','喪失','ec'],['決裂','妥結','yn'],['受諾','拒否','yn'],['是認','否認','yn'],['召集','解散','jn'],['凝固','融解','nt'],
+  ['緩和','強化','ud'],['寛容','狭量','at'],['利己','利他','at'],['軽減','加重','ud']
 ];
 // 類義語の組（2語または3語）と系統
 var SYN = [
@@ -459,7 +599,25 @@ var SYN = [
   [['完全','完璧','万全'],'perfect'],[['輸送','運送','運搬'],'carry'],[['関心','興味'],'interest'],[['貢献','寄与'],'contrib'],[['省略','割愛'],'omit'],
   [['倹約','節約'],'save'],[['価格','値段'],'price'],[['天気','天候'],'weather'],[['帰郷','帰省'],'home'],[['改善','改良'],'improve'],
   [['架空','虚構'],'fiction'],[['質素','簡素'],'plain'],[['寡黙','無口'],'quiet'],[['介入','干渉'],'meddle'],[['精読','熟読'],'read'],
-  [['督促','催促'],'urge'],[['異議','異論'],'object'],[['互角','対等'],'equal'],[['安全','無事'],'safe']
+  [['督促','催促'],'urge'],[['異議','異論'],'object'],[['互角','対等'],'equal'],[['安全','無事'],'safe'],
+  [['使命','任務','責務'],'duty'],[['用心','注意','警戒'],'care'],[['感心','敬服','感服'],'admire'],[['手本','模範','規範'],'model'],[['刊行','出版','発行'],'publish'],
+  [['作者','著者','筆者'],'author'],[['返事','返答','応答'],'reply'],[['熟練','老練','円熟'],'skill'],[['公平','公正'],'fit'],[['原料','材料'],'material'],
+  [['将来','未来'],'future'],[['無料','無償'],'free'],[['素直','従順'],'obey']
+];
+// 「難しい」で加わる類義語（意味の近い組は系統をそろえて、同じ問題に出さない）
+var SYN_HARD = [
+  [['看過','黙過','見過ごし'],'overlook'],[['相違','差異'],'diff'],[['示唆','暗示'],'hint'],[['刹那','瞬間','一瞬'],'moment'],[['逸材','俊才','英才'],'excel'],
+  [['踏襲','継承'],'keep'],[['危惧','懸念','憂慮'],'worry'],[['杞憂','取り越し苦労'],'worry'],[['折衝','交渉'],'negotiate'],[['払拭','一掃'],'wipe'],
+  [['顛末','経緯','いきさつ'],'course'],[['吟味','精査'],'care'],[['奔走','尽力'],'help'],[['逡巡','躊躇'],'hesitate'],[['矜持','自負','誇り'],'pride'],
+  [['瑕疵','欠陥'],'flaw'],[['畢竟','結局'],'after'],[['憤慨','立腹'],'angry'],[['恐縮','恐れ入る'],'humble']
+];
+// 2語の関係（前の語：後の語）。同じ関係の組を選ぶ問題に使う
+var REL = [
+  ['raw',  [['小麦','パン'],['大豆','豆腐'],['牛乳','チーズ'],['ぶどう','ワイン'],['羊毛','セーター'],['カカオ','チョコレート'],['米','もち'],['粘土','れんが']]],
+  ['job',  [['医師','病院'],['教員','学校'],['消防士','消防署'],['裁判官','裁判所'],['司書','図書館'],['薬剤師','薬局'],['学芸員','博物館']]],
+  ['tool', [['はさみ','切る'],['ほうき','掃く'],['ペン','書く'],['消しゴム','消す'],['スコップ','掘る'],['金づち','打つ'],['ぞうきん','拭く']]],
+  ['part', [['ページ','本'],['車輪','自転車'],['鍵盤','ピアノ'],['秒針','時計'],['花びら','花'],['指','手'],['枝','木'],['弦','ギター']]],
+  ['kind', [['りんご','果物'],['鉄','金属'],['いわし','魚'],['すずめ','鳥'],['野球','球技'],['バイオリン','楽器'],['杉','樹木'],['俳句','詩']]]
 ];
 function pickOthers(list, tagIdx, tag, n){
   var used = {}; used[tag] = 1;
@@ -471,58 +629,139 @@ function pickOthers(list, tagIdx, tag, n){
   });
   return out;
 }
+// 正解に使う組：「難しい」では6割を難しい語から選ぶ
+function coreAnt(H){ return H && Math.random() < 0.6 ? pick(ANT_HARD) : pick(ANT); }
+function coreSyn(H, minLen){ var g; do{ g = H && Math.random() < 0.6 ? pick(SYN_HARD) : pick(SYN); }while(g[0].length < (minLen || 2)); return g; }
+function relStr(p){ return p[0] + '：' + p[1]; }
+function genRel(H){
+  // ant は対義語の組を関係の1つとして使う（前後を入れ替えても同じ関係なので、入れ替えのひっかけには使わない）
+  var rels = REL.concat([['ant', ANT.map(function(e){ return [e[0], e[1]]; })]]);
+  var ri0 = ri(0, rels.length - 1), R = rels[ri0], two = sample(R[1], 2), stem = two[0], ans = two[1];
+  // 「難しい」は選択肢5つ。同じ関係の組を前後逆にしたもの（例 病院：医師）を1つ混ぜる
+  var rev = H && R[0] !== 'ant';
+  var others = shuffle(rels.filter(function(x, i){ return i !== ri0; })).slice(0, H && !rev ? 4 : 3).map(function(x){ return pick(x[1]); });
+  if(rev){ var rv = pick(R[1].filter(function(p){ return p !== stem && p !== ans; })); others.push([rv[1], rv[0]]); }
+  var opts = shuffle([ans].concat(others)).map(relStr);
+  return { prompt: '「' + relStr(stem) + '」と同じ関係になっている組を選んでください。', stim: '', opts: opts, ans: opts.indexOf(relStr(ans)), cols: 2 };
+}
+// 別の表に載っている組（例：類義語の問題に紛れた「長所・短所」）で別解ができていないかを確かめる
+function antOf(a, b){ return ANT.concat(ANT_HARD).some(function(p){ return (p[0] === a && p[1] === b) || (p[0] === b && p[1] === a); }); }
+function synOf(a, b){ return SYN.concat(SYN_HARD).some(function(g){ return g[0].indexOf(a) >= 0 && g[0].indexOf(b) >= 0; }); }
+function gengoOk(q){
+  var w = q.opts;
+  if(q.pick2){
+    for(var i = 0; i < w.length; i++) for(var j = i + 1; j < w.length; j++){
+      if(q.ans[0] === i && q.ans[1] === j) continue;
+      if(antOf(w[i], w[j]) || synOf(w[i], w[j])) return false;
+    }
+  } else if(q.target){
+    var f = q.rel === 'syn' ? synOf : antOf;
+    if(w.some(function(x, i){ return i !== q.ans && f(q.target, x); })) return false;
+  }
+  return true;
+}
 function genGengo(){
-  var r = Math.random(), words, a, b;
-  if(r < 0.45){
-    var p = pick(ANT);
-    var ds = pickOthers(ANT, 2, p[2], 3).map(function(e){ return e[ri(0, 1)]; });
+  for(;;){ var q = genGengo1(); if(gengoOk(q)) return q; }
+}
+function genGengo1(){
+  var H = hard(), A = H ? ANT.concat(ANT_HARD) : ANT, S = H ? SYN.concat(SYN_HARD) : SYN;
+  var nw = H ? 6 : 5, no = H ? 5 : 4, r = Math.random(), words, a, b, p, g, t, w;
+  if(r < 0.28){
+    p = coreAnt(H);
+    var ds = pickOthers(A, 2, p[2], nw - 2).map(function(e){ return e[ri(0, 1)]; });
     words = shuffle([p[0], p[1]].concat(ds));
     a = words.indexOf(p[0]); b = words.indexOf(p[1]);
-    return { prompt: '5つの語のうち、対義語（反対の意味）の関係にある2語を選んでください。', stim: '', opts: words, ans: [a, b].sort(), pick2: true, cols: 2 };
+    return { prompt: nw + 'つの語のうち、対義語（反対の意味）の関係にある2語を選んでください。', stim: '', opts: words, ans: [a, b].sort(), pick2: true, cols: 2 };
   }
-  if(r < 0.75){
-    var g = pick(SYN);
+  if(r < 0.48){
+    g = coreSyn(H);
     var two = sample(g[0], 2);
-    var ds2 = pickOthers(SYN, 1, g[1], 3).map(function(e){ return pick(e[0]); });
+    var ds2 = pickOthers(S, 1, g[1], nw - 2).map(function(e){ return pick(e[0]); });
     words = shuffle(two.concat(ds2));
     a = words.indexOf(two[0]); b = words.indexOf(two[1]);
-    return { prompt: '5つの語のうち、類義語（似た意味）の関係にある2語を選んでください。', stim: '', opts: words, ans: [a, b].sort(), pick2: true, cols: 2 };
+    return { prompt: nw + 'つの語のうち、類義語（似た意味）の関係にある2語を選んでください。', stim: '', opts: words, ans: [a, b].sort(), pick2: true, cols: 2 };
   }
-  var g3; do{ g3 = pick(SYN); }while(g3[0].length < 3);
-  var odd = pick(pickOthers(SYN, 1, g3[1], 1)[0][0]);
-  words = shuffle(g3[0].concat([odd]));
-  return { prompt: '4つの語のうち、ほかの3つと意味が違うものを選んでください。', stim: '', opts: words, ans: words.indexOf(odd), cols: 2 };
+  if(r < 0.62){
+    var g3 = coreSyn(H, 3);
+    var odd = pick(pickOthers(S, 1, g3[1], 1)[0][0]);
+    words = shuffle(g3[0].concat([odd]));
+    return { prompt: '4つの語のうち、ほかの3つと意味が違うものを選んでください。', stim: '', opts: words, ans: words.indexOf(odd), cols: 2 };
+  }
+  if(r < 0.74){
+    // 1語を示して、似た意味の語を選ぶ
+    g = coreSyn(H); var tw = sample(g[0], 2); t = tw[0]; w = tw[1];
+    words = shuffle([w].concat(pickOthers(S, 1, g[1], no - 1).map(function(e){ return pick(e[0]); })));
+    return { prompt: '「' + t + '」と最も近い意味の語を選んでください。', stim: '', opts: words, ans: words.indexOf(w), cols: 2, target: t, rel: 'syn' };
+  }
+  if(r < 0.86){
+    // 1語を示して、反対の意味の語を選ぶ
+    p = coreAnt(H); var x = ri(0, 1); t = p[x]; w = p[1 - x];
+    words = shuffle([w].concat(pickOthers(A, 2, p[2], no - 1).map(function(e){ return e[ri(0, 1)]; })));
+    return { prompt: '「' + t + '」と反対の意味の語を選んでください。', stim: '', opts: words, ans: words.indexOf(w), cols: 2, target: t, rel: 'ant' };
+  }
+  return genRel(H);
 }
 
 /* ===================== 計算 ===================== */
-function numOpts(ans){
-  var set = {}; set[ans] = 1;
-  var cand = shuffle([ans + 1, ans - 1, ans + 2, ans - 2, ans + 10, ans - 10, ans + 9, ans - 9, ans + 11, ans + 20, ans - 20, ans + 100, ans - 100]);
-  var out = [ans];
-  cand.some(function(c){ if(c > 0 && !set[c]){ set[c] = 1; out.push(c); } return out.length >= 5; });
+// 選択肢5つを小さい順に並べる。正解が真ん中に偏って当てられないよう、正解の位置（下から何番目か）を先に決める
+function spreadOpts(ans, mags, round, n){
+  n = n || 5;
+  var lo = [], hi = [];
+  mags.forEach(function(m){ var a = round(ans - m); if(a > 0) lo.push(a); hi.push(round(ans + m)); });
+  var ks = []; for(var k = 0; k < n; k++) if(lo.length >= k && hi.length >= n - 1 - k) ks.push(k);
+  var p = pick(ks);
+  var out = sample(lo, p).concat([ans], sample(hi, n - 1 - p));
   out.sort(function(x, y){ return x - y; });
   return out;
 }
+function asIs(x){ return x; }
+// sameOnes のときは一の位がすべて同じになるよう10の倍数だけずらす（一の位で絞れないようにする）
+function numOpts(ans, sameOnes, n){
+  return spreadOpts(ans, sameOnes ? [10, 20, 30, 90, 100, 110] : [1, 2, 9, 10, 11, 20, 100], asIs, n);
+}
+// 小数の答え用。小数第1位がそろうよう整数だけずらす
+function decOpts(ans){
+  return spreadOpts(ans, [1, 2, 3, 10], function(x){ return Math.round(x * 10) / 10; });
+}
+var PCT_STD = [10, 20, 25, 50, 75];
 function genKeisan(){
-  var t = ri(0, 7), expr, ans, a, b, c;
-  if(t === 0){ a = ri(120, 899); b = ri(120, 899); expr = a + ' ＋ ' + b; ans = a + b; }
-  else if(t === 1){ a = ri(300, 999); b = ri(100, a - 50); expr = a + ' − ' + b; ans = a - b; }
-  else if(t === 2){ a = ri(12, 49); b = ri(3, 19); expr = a + ' × ' + b; ans = a * b; }
-  else if(t === 3){ b = ri(3, 12); ans = ri(12, 95); expr = (b * ans) + ' ÷ ' + b; }
-  else if(t === 4){ a = ri(15, 89); ans = ri(8, 60); expr = '□ ＋ ' + a + ' ＝ ' + (ans + a); }
-  else if(t === 5){ ans = ri(8, 60); a = ans + ri(10, 80); expr = a + ' − □ ＝ ' + (a - ans); }
-  else if(t === 6){ ans = ri(6, 25); a = ri(3, 12); expr = '□ × ' + a + ' ＝ ' + (ans * a); }
-  else { a = ri(20, 99); b = ri(20, 99); c = ri(10, a + b - 5); expr = a + ' ＋ ' + b + ' − ' + c; ans = a + b - c; }
-  var opts = numOpts(ans);
+  var H = hard(), t, expr, ans, a, b, c, d, blank = false, dec = false;
+  if(!H){
+    t = ri(0, 9);
+    if(t === 0){ a = ri(120, 899); b = ri(120, 899); expr = a + ' ＋ ' + b; ans = a + b; }
+    else if(t === 1){ a = ri(300, 999); b = ri(100, a - 50); expr = a + ' − ' + b; ans = a - b; }
+    else if(t === 2){ a = ri(12, 49); b = ri(3, 19); expr = a + ' × ' + b; ans = a * b; }
+    else if(t === 3){ b = ri(3, 12); ans = ri(12, 95); expr = (b * ans) + ' ÷ ' + b; }
+    else if(t === 4){ a = ri(15, 89); ans = ri(8, 60); expr = '□ ＋ ' + a + ' ＝ ' + (ans + a); blank = true; }
+    else if(t === 5){ ans = ri(8, 60); a = ans + ri(10, 80); expr = a + ' − □ ＝ ' + (a - ans); blank = true; }
+    else if(t === 6){ ans = ri(6, 25); a = ri(3, 12); expr = '□ × ' + a + ' ＝ ' + (ans * a); blank = true; }
+    else if(t === 7){ a = ri(20, 99); b = ri(20, 99); c = ri(10, a + b - 5); expr = a + ' ＋ ' + b + ' − ' + c; ans = a + b - c; }
+    else if(t === 8){ a = ri(11, 29); b = ri(3, 9); c = ri(10, 99); expr = a + ' × ' + b + ' ＋ ' + c; ans = a * b + c; }
+    else { a = ri(5, 45) * 20; b = pick(PCT_STD); expr = a + ' の ' + b + '％'; ans = a * b / 100; }
+  } else {
+    t = ri(0, 9);
+    if(t === 0){ a = ri(1200, 8999); b = ri(1200, 8999); expr = a + ' ＋ ' + b; ans = a + b; }
+    else if(t === 1){ a = ri(3000, 9999); b = ri(1100, a - 200); expr = a + ' − ' + b; ans = a - b; }
+    else if(t === 2){ a = ri(23, 98); b = ri(13, 89); expr = a + ' × ' + b; ans = a * b; }
+    else if(t === 3){ b = ri(6, 24); ans = ri(45, 399); expr = (b * ans) + ' ÷ ' + b; }
+    else if(t === 4){ do{ a = ri(12, 39); b = ri(3, 9); c = ri(6, 19); d = ri(2, 9); }while(a * b <= c * d); expr = a + ' × ' + b + ' − ' + c + ' × ' + d; ans = a * b - c * d; }
+    else if(t === 5){ a = ri(12, 89); b = ri(12, 89); c = ri(3, 12); expr = '（' + a + ' ＋ ' + b + '）× ' + c; ans = (a + b) * c; }
+    else if(t === 6){ ans = ri(6, 40); a = ri(3, 12); b = ri(10, 90); if(ans * a <= b) b = ri(1, ans * a - 1); expr = '□ × ' + a + ' − ' + b + ' ＝ ' + (ans * a - b); blank = true; }
+    else if(t === 7){ ans = ri(8, 60); a = ri(5, 40); b = ri(3, 9); expr = '（□ ＋ ' + a + '）× ' + b + ' ＝ ' + ((ans + a) * b); blank = true; }
+    else if(t === 8){ a = ri(3, 40) * 100; b = ri(3, 95); expr = a + ' の ' + b + '％'; ans = a * b / 100; }
+    else { a = ri(12, 99) / 10; b = ri(3, 9); expr = a + ' × ' + b; ans = Math.round(a * b * 10) / 10; dec = true; }
+  }
+  var opts = dec ? decOpts(ans) : numOpts(ans, H);
   return {
-    prompt: t >= 4 && t <= 6 ? '□に入る数を選んでください。' : '計算の答えを選んでください。',
+    prompt: blank ? '□に入る数を選んでください。' : '計算の答えを選んでください。',
     stim: '<div class="item">' + expr + '</div>',
     opts: opts.map(String), ans: opts.indexOf(ans), cols: 3
   };
 }
 
 /* ===================== 読図 ===================== */
-var SERIES = [['電話機','FAX','コピー機'],['A支店','B支店','C支店'],['商品X','商品Y','商品Z']];
+var SERIES = [['電話機','FAX','コピー機','プリンター'],['A支店','B支店','C支店','D支店'],['商品X','商品Y','商品Z','商品W']];
+var UNITS = ['台','件','個'];
 var MONTHS = ['4月','5月','6月','7月','8月','9月'];
 var dokuzu = { left: 0, html: '', names: null, v: null, unit: '' };
 function markerSvg(i, x, y){
@@ -551,22 +790,45 @@ function chartHtml(names, v, unit){
   names.forEach(function(n, i){ v[i].forEach(function(val, m){ s += markerSvg(i, X(m), Y(val)); }); });
   return s + '</svg>';
 }
+// 月ごとに3系列を並べた棒グラフ（左から凡例の順）
+function barHtml(names, v){
+  var W = 340, H = 210, L = 30, R = 10, T = 10, B = 24, pw = W - L - R, ph = H - T - B, gw = pw / 6, bw = 11;
+  var Y = function(val){ return T + ph * (1 - val / 100); };
+  var s = '<div class="legend">' + names.map(function(n, i){
+    return '<span><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="10" height="10" fill="var(--s' + (i + 1) + ')"/></svg>' + esc(n) + '</span>';
+  }).join('') + '<span>（各月とも左から順）</span></div>';
+  s += '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="月別の棒グラフ">';
+  for(var g = 0; g <= 100; g += 10){
+    s += '<line class="' + (g % 20 ? 'g-minor' : 'g-major') + '" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(g) + '" y2="' + Y(g) + '"/>';
+    if(g % 20 === 0) s += '<text x="' + (L - 5) + '" y="' + (Y(g) + 3.5) + '" text-anchor="end">' + g + '</text>';
+  }
+  MONTHS.forEach(function(m, k){
+    var x0 = L + gw * k + (gw - bw * 3 - 4) / 2;
+    names.forEach(function(n, i){ s += '<rect x="' + (x0 + i * (bw + 2)) + '" y="' + Y(v[i][k]) + '" width="' + bw + '" height="' + (Y(0) - Y(v[i][k])) + '" fill="var(--s' + (i + 1) + ')"/>'; });
+    s += '<text x="' + (L + gw * (k + 0.5)) + '" y="' + (H - 7) + '" text-anchor="middle">' + m + '</text>';
+  });
+  s += '<line class="axis" x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(0) + '" y2="' + Y(0) + '"/>';
+  return s + '</svg>';
+}
 function tableHtml(names, v){
   var s = '<table class="t"><tr><th></th>' + MONTHS.map(function(m){ return '<th>' + m + '</th>'; }).join('') + '</tr>';
   names.forEach(function(n, i){ s += '<tr><td class="l">' + esc(n) + '</td>' + v[i].map(function(x){ return '<td class="num">' + x + '</td>'; }).join('') + '</tr>'; });
   return s + '</table>';
 }
 function newFigure(){
+  var H = hard();
   dokuzu.left = 5;
-  var names = pick(SERIES), asChart = Math.random() < 0.6, v, ok;
+  // 図の種類：折れ線・棒・表。「難しい」の表は4系列で3けたの数
+  var r = Math.random(), style = r < 0.35 ? 'line' : r < 0.6 ? 'bar' : 'table';
+  var si = ri(0, 2), ns = style === 'table' && H ? 4 : 3, names = SERIES[si].slice(0, ns), v, ok;
   do{
-    v = [0,1,2].map(function(){ return MONTHS.map(function(){ return asChart ? ri(2, 10) * 10 : ri(21, 98); }); });
-    ok = MONTHS.every(function(m, i){ return v[0][i] !== v[1][i] && v[1][i] !== v[2][i] && v[0][i] !== v[2][i]; });
+    v = names.map(function(){ return MONTHS.map(function(){ return style !== 'table' ? ri(2, 10) * 10 : H ? ri(105, 980) : ri(21, 98); }); });
+    ok = MONTHS.every(function(m, k){ var col = v.map(function(row){ return row[k]; }); return col.every(function(x, i){ return col.indexOf(x) === i; }); });
   }while(!ok);
   dokuzu.names = names; dokuzu.v = v;
-  dokuzu.unit = names === SERIES[0] ? '台' : (names === SERIES[1] ? '件' : '個');
-  var title = (names === SERIES[1] ? '支店別の契約件数' : '月別の販売数') + '（単位：' + dokuzu.unit + '）';
-  dokuzu.html = '<div class="chart-title">' + title + '</div>' + (asChart ? chartHtml(names, v, dokuzu.unit) : tableHtml(names, v));
+  dokuzu.unit = UNITS[si];
+  var title = (si === 1 ? '支店別の契約件数' : '月別の販売数') + '（単位：' + dokuzu.unit + '）';
+  dokuzu.html = '<div class="chart-title">' + title + '</div>' + (style === 'line' ? chartHtml(names, v, dokuzu.unit) : style === 'bar' ? barHtml(names, v) : tableHtml(names, v));
 }
 function uniqueMax(arr){ var mx = Math.max.apply(null, arr); return arr.filter(function(x){ return x === mx; }).length === 1 ? arr.indexOf(mx) : -1; }
 function sum(arr){ return arr.reduce(function(s, x){ return s + x; }, 0); }
@@ -574,9 +836,9 @@ function windowOpts(ans, lo, hi){ var start = Math.max(lo, Math.min(ans - ri(0, 
 function genDokuzu(){
   if(dokuzu.left <= 0) newFigure();
   dokuzu.left--;
-  var n = dokuzu.names, v = dokuzu.v, u = dokuzu.unit, q;
+  var n = dokuzu.names, v = dokuzu.v, u = dokuzu.unit, ns = n.length, H = hard(), q;
   for(;;){
-    var t = ri(0, 5), i = ri(0, 2), j = (i + ri(1, 2)) % 3, m = ri(0, 5), o, a;
+    var t = ri(0, H ? 10 : 7), i = ri(0, ns - 1), j = (i + ri(1, ns - 1)) % ns, m = ri(0, 5), o, a;
     if(t === 0){
       a = MONTHS.filter(function(x, k){ return v[i][k] > v[j][k]; }).length;
       o = windowOpts(a, 0, 6);
@@ -585,10 +847,9 @@ function genDokuzu(){
       a = uniqueMax(v[i]); if(a < 0) continue;
       q = { prompt: n[i] + 'が最も多い月はどれですか。', opts: MONTHS.slice(), ans: a, cols: 3 };
     } else if(t === 2){
-      a = v[0][m] + v[1][m] + v[2][m];
-      o = numOpts(a).slice(0, 4); if(o.indexOf(a) < 0) o[ri(0, 3)] = a;
-      o.sort(function(x, y){ return x - y; });
-      q = { prompt: MONTHS[m] + 'の3つの合計はいくつですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(a), cols: 2 };
+      a = sum(v.map(function(row){ return row[m]; }));
+      o = numOpts(a, H, 4);
+      q = { prompt: MONTHS[m] + 'の' + ns + 'つの合計はいくつですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(a), cols: 2 };
     } else if(t === 3){
       var m2 = (m + ri(1, 5)) % 6, d = Math.abs(v[i][m] - v[i][m2]);
       if(d === 0) continue;
@@ -598,13 +859,38 @@ function genDokuzu(){
       o.sort(function(x, y){ return x - y; });
       q = { prompt: n[i] + 'の' + MONTHS[m] + 'と' + MONTHS[m2] + 'の差はいくつですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(d), cols: 2 };
     } else if(t === 4){
-      a = uniqueMax([sum(v[0]), sum(v[1]), sum(v[2])]); if(a < 0) continue;
-      q = { prompt: '6か月の合計が最も多いのはどれですか。', opts: n.slice(), ans: a, cols: 3 };
-    } else {
+      a = uniqueMax(v.map(sum)); if(a < 0) continue;
+      q = { prompt: '6か月の合計が最も多いのはどれですか。', opts: n.slice(), ans: a, cols: ns === 4 ? 2 : 3 };
+    } else if(t === 5){
       var th = Math.round(sum(v[i]) / 6 / 10) * 10;
       a = v[i].filter(function(x){ return x >= th; }).length;
       o = windowOpts(a, 0, 6);
       q = { prompt: n[i] + 'が' + th + u + '以上の月は、いくつありますか。', opts: o.map(function(x){ return x + 'か月'; }), ans: o.indexOf(a), cols: 2 };
+    } else if(t === 6){
+      a = MONTHS.filter(function(x, k){ return k > 0 && v[i][k] < v[i][k - 1]; }).length;
+      o = windowOpts(a, 0, 5);
+      q = { prompt: n[i] + 'が前の月より減った月は、いくつありますか。', opts: o.map(function(x){ return x + 'か月'; }), ans: o.indexOf(a), cols: 2 };
+    } else if(t === 7){
+      var inc = v[i].map(function(x, k){ return k ? x - v[i][k - 1] : -Infinity; });
+      a = uniqueMax(inc); if(a < 0 || inc[a] <= 0) continue;
+      q = { prompt: n[i] + 'が前の月から最も増えたのは何月ですか。', opts: MONTHS.slice(1), ans: a - 1, cols: 3 };
+    } else if(t === 8){
+      // 6か月の平均（割り切れるときだけ出す）
+      var s8 = sum(v[i]); if(s8 % 6) continue;
+      a = s8 / 6;
+      o = numOpts(a, true, 4);
+      q = { prompt: n[i] + 'の6か月の平均はいくつですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(a), cols: 2 };
+    } else if(t === 9){
+      a = uniqueMax(v[i].map(function(x, k){ return Math.abs(x - v[j][k]); }));
+      if(a < 0) continue;
+      q = { prompt: n[i] + 'と' + n[j] + 'の差が最も大きいのは何月ですか。', opts: MONTHS.slice(), ans: a, cols: 3 };
+    } else {
+      var si9 = sum(v[i]), sj9 = sum(v[j]);
+      if(si9 === sj9) continue;
+      if(si9 < sj9){ var tmp = i; i = j; j = tmp; }
+      a = Math.abs(si9 - sj9);
+      o = numOpts(a, true, 4);
+      q = { prompt: '6か月の合計で、' + n[i] + 'は' + n[j] + 'よりいくつ多いですか。', opts: o.map(function(x){ return x + u; }), ans: o.indexOf(a), cols: 2 };
     }
     break;
   }
@@ -628,15 +914,27 @@ function mkQ(prompt, ans, pool){
   var o = optsFrom(ans, pool, 4);
   return { prompt: prompt, stim: '<div class="memo-note">覚えた資料をもとに答えてください（資料はもう見られません）。</div>', opts: o, ans: o.indexOf(ans), cols: 2 };
 }
+var YOKEN = ['見積書の送付について','工事日程の変更について','打ち合わせ日時の確認','請求書の再発行について','資材の納期について','現場立ち会いの依頼'];
+var TSUIKI = ['見積書をFAXで送ってほしい','資料をメールで送ってほしい','担当者の携帯電話に連絡してほしい','明日の午前中は不在とのこと'];
+var KOJI = ['水道管の取り替え工事','舗装の補修工事','側溝の改修工事','街路灯の取り替え工事','下水道管の点検工事'];
+var KISEI = ['片側交互通行','全面通行止め','歩道のみ通行止め','夜間通行止め'];
+var KA = ['道路課','上下水道課','土木管理課','建設課','都市計画課'];
+var UTEN = ['翌日に延期','中止','翌週に延期'];
+// 1けただけ違う数字の候補（電話番号・内線の下けた用）
+function nearDigits(s, n){ var o = [], g = 0; while(o.length < n && g++ < 200){ var m = mutate(s, 1); if(m !== s && o.indexOf(m) < 0) o.push(m); } return o; }
+function hm(h, m){ return h + '時' + (m ? m + '分' : ''); }
 function newMemo(){
-  var kind = ri(0, 2), html, qs = [];
+  // 0:会議 1:来客 2:納品 3:電話の伝言 4:工事のお知らせ。「難しい」は項目や変更点が増える
+  var H = hard(), kind = ri(0, 4), html, qs = [];
   if(kind === 0){
-    var topic = pick(TOPICS), mo = ri(10, 12), day = ri(1, 28), wd = pick(DAYS), h0 = ri(9, 15), h1, room = pick(ROOMS), num = ri(6, 24), br = pick(BRING);
+    var topic = pick(TOPICS), mo = ri(10, 12), day = ri(1, 28), wd = pick(DAYS), h0 = ri(9, 15), h1, room = pick(ROOMS), room2, num = ri(6, 24), br = pick(BRING), tan = pick(SEI), ext0 = digits(3);
     do{ h1 = ri(9, 16); }while(h1 === h0);
+    do{ room2 = pick(ROOMS); }while(room2 === room);
     html = '<div class="memo"><b>会議のお知らせ</b><br>件名：' + topic + '<br>日時：' + mo + '月' + day + '日（' + wd + '）' + h0 + '時から<br>場所：' + room + '<br>出席者：' + num + '名<br>持ち物：' + br +
-      '<br><b>※変更：開始時刻は' + h1 + '時からになりました。</b></div>';
+      (H ? '<br>担当：' + tan + '（内線' + ext0 + '）' : '') +
+      '<br><b>※変更：開始時刻は' + h1 + '時からになりました。</b>' + (H ? '<br><b>※変更：場所は' + room2 + 'になりました。</b>' : '') + '</div>';
     qs = [
-      mkQ('会議の場所はどこでしたか。', room, ROOMS),
+      H ? mkQ('変更後の会議の場所はどこでしたか。', room2, ROOMS) : mkQ('会議の場所はどこでしたか。', room, ROOMS),
       mkQ('会議は何曜日でしたか。', wd + '曜日', DAYS.map(function(d){ return d + '曜日'; })),
       mkQ('変更後の開始時刻は何時でしたか。', h1 + '時', [h0, h1 + 1, h1 - 1, h0 + 1, h0 - 1].map(function(h){ return h + '時'; })),
       mkQ('出席者は何名でしたか。', num + '名', [num + 2, num - 2, num + 4, num - 4, num + 6].map(function(x){ return x + '名'; })),
@@ -644,41 +942,86 @@ function newMemo(){
       mkQ('会議の日付はいつでしたか。', mo + '月' + day + '日', [[mo, day + 1], [mo, day - 1], [mo === 12 ? 11 : mo + 1, day], [mo, day > 10 ? day - 10 : day + 10]].map(function(x){ return x[0] + '月' + Math.max(1, x[1]) + '日'; })),
       mkQ('会議の件名はどれでしたか。', topic, TOPICS)
     ];
+    if(H){
+      qs.push(mkQ('会議の担当者は誰でしたか。', tan, SEI));
+      qs.push(mkQ('担当者の内線番号はどれでしたか。', ext0, nearDigits(ext0, 5)));
+    }
+    qs = shuffle(qs);
   } else if(kind === 1){
-    var hs = sample([9, 10, 11, 13, 14, 15, 16], 3).sort(function(x, y){ return x - y; });
-    var cos = sample(SUFFIX, 3).map(function(s){ return pick(SEI) + s; });
-    var ts = sample(TITLES, 3), ss = sample(SEI, 3);
+    var nv = H ? 4 : 3, iv = [];
+    for(var k = 0; k < nv; k++) iv.push(k);
+    var hs = sample([9, 10, 11, 13, 14, 15, 16], nv).sort(function(x, y){ return x - y; });
+    var cos = sample(SUFFIX, nv).map(function(s){ return pick(SEI) + s; });
+    var ts = sample(TITLES, nv), ss = sample(SEI, nv);
     html = '<div class="memo"><b>本日の来客予定</b><table class="t" style="margin-top:6px"><tr><th>時刻</th><th>会社</th><th>役職</th><th>氏名</th></tr>' +
-      [0,1,2].map(function(i){ return '<tr><td>' + hs[i] + '時</td><td>' + cos[i] + '</td><td>' + ts[i] + '</td><td>' + ss[i] + '様</td></tr>'; }).join('') + '</table></div>';
-    [0,1,2].forEach(function(i){
+      iv.map(function(i){ return '<tr><td>' + hs[i] + '時</td><td>' + cos[i] + '</td><td>' + ts[i] + '</td><td>' + ss[i] + '様</td></tr>'; }).join('') + '</table></div>';
+    iv.forEach(function(i){
       qs.push(mkQ(hs[i] + '時に来社するのは、どの会社でしたか。', cos[i], cos.concat(sample(SUFFIX, 5).map(function(s){ return pick(SEI) + s; }))));
       qs.push(mkQ(cos[i] + 'から来るのは、どの役職の方でしたか。', ts[i], TITLES));
       qs.push(mkQ(ss[i] + '様の来社は何時でしたか。', hs[i] + '時', [9, 10, 11, 13, 14, 15, 16].map(function(h){ return h + '時'; })));
     });
-    qs = shuffle(qs).slice(0, 7);
-  } else {
-    var gs = sample(GOODS, 4), ns = [];
-    while(ns.length < 4){ var x = ri(2, 30) * 10; if(ns.indexOf(x) < 0) ns.push(x); }
-    var ds = [0,1,2,3].map(function(){ return ri(1, 28); }), mo2 = ri(10, 12);
+    qs = shuffle(qs);
+  } else if(kind === 2){
+    var ng = H ? 5 : 4, gi = [];
+    for(var k2 = 0; k2 < ng; k2++) gi.push(k2);
+    var gs = sample(GOODS, ng), ns = [];
+    while(ns.length < ng){ var x = ri(2, 30) * 10; if(ns.indexOf(x) < 0) ns.push(x); }
+    var ds = gi.map(function(){ return ri(1, 28); }), mo2 = ri(10, 12);
     html = '<div class="memo"><b>納品の予定（' + mo2 + '月）</b><table class="t" style="margin-top:6px"><tr><th>品名</th><th>数量</th><th>納品日</th></tr>' +
-      [0,1,2,3].map(function(i){ return '<tr><td class="l">' + gs[i] + '</td><td class="num">' + ns[i] + '</td><td>' + ds[i] + '日</td></tr>'; }).join('') + '</table></div>';
-    [0,1,2,3].forEach(function(i){
+      gi.map(function(i){ return '<tr><td class="l">' + gs[i] + '</td><td class="num">' + ns[i] + '</td><td>' + ds[i] + '日</td></tr>'; }).join('') + '</table></div>';
+    gi.forEach(function(i){
       qs.push(mkQ(gs[i] + 'の数量はいくつでしたか。', String(ns[i]), ns.concat([ns[i] + 10, ns[i] + 20]).map(String)));
+      if(H) qs.push(mkQ(gs[i] + 'の納品日はいつでしたか。', ds[i] + '日', ds.concat([ds[i] + 1, ds[i] + 2, ds[i] + 10]).map(function(x){ return x + '日'; })));
     });
     qs.push(mkQ('数量が最も多い品はどれでしたか。', gs[ns.indexOf(Math.max.apply(null, ns))], gs));
     qs.push(mkQ('数量が最も少ない品はどれでしたか。', gs[ns.indexOf(Math.min.apply(null, ns))], gs));
     qs.push(mkQ('予定に入っていなかった品はどれですか。', pick(GOODS.filter(function(g){ return gs.indexOf(g) < 0; })), gs));
     qs = shuffle(qs);
+  } else if(kind === 3){
+    var nm = sample(SEI, 3), to = nm[0] + pick(TITLES), co = nm[1] + pick(SUFFIX), who = nm[2], yk = pick(YOKEN), tel4 = digits(4), telHead = '06-' + digits(4) + '-';
+    var th = ri(9, 15), tm = pick([0, 15, 30, 45]), dl = ri(th + 1, 17), tk = pick(TSUIKI);
+    html = '<div class="memo"><b>電話の伝言メモ</b><br>' + to + 'へ<br>' + hm(th, tm) + '、' + co + 'の' + who + '様から電話がありました。<br>用件：' + yk +
+      '<br>折り返し先：' + telHead + tel4 + '<br>' + dl + '時までに折り返してほしいとのこと。' + (H ? '<br>追記：' + tk : '') + '</div>';
+    qs = [
+      mkQ('伝言は誰あてでしたか。', to, sample(SEI, 4).map(function(s){ return s + pick(TITLES); }).concat([nm[0] + pick(TITLES), nm[1] + to.slice(nm[0].length)])),
+      mkQ('電話をかけてきたのは、どの会社でしたか。', co, sample(SEI, 3).map(function(s){ return s + co.slice(nm[1].length); }).concat(sample(SUFFIX, 3).map(function(s){ return nm[1] + s; }))),
+      mkQ('電話をかけてきた人の名前はどれでしたか。', who + '様', SEI.map(function(s){ return s + '様'; })),
+      mkQ('用件は何でしたか。', yk, YOKEN),
+      mkQ('折り返し先の電話番号の下4けたはどれでしたか。', tel4, nearDigits(tel4, 5)),
+      mkQ('何時までに折り返してほしいとのことでしたか。', dl + '時', [dl - 1, dl + 1, dl + 2, th, th + 1].map(function(h){ return h + '時'; })),
+      mkQ('電話を受けたのは何時でしたか。', hm(th, tm), [hm(th, (tm + 15) % 60), hm(th + 1, tm), hm(th - 1, tm), hm(th, (tm + 30) % 60)])
+    ];
+    if(H) qs.push(mkQ('追記の内容はどれでしたか。', tk, TSUIKI));
+    qs = shuffle(qs);
+  } else {
+    var tw = pick(TOWN), ch = ri(1, 9), ko = pick(KOJI), mo3 = ri(10, 12), d1 = ri(1, 18), d2 = d1 + ri(3, 9), w0 = ri(8, 9), w1 = ri(16, 17), ks = pick(KISEI), ka = pick(KA), ext = digits(3), ut = pick(UTEN);
+    html = '<div class="memo"><b>工事のお知らせ</b><br>場所：' + tw + ch + '丁目付近<br>内容：' + ko + '<br>期間：' + mo3 + '月' + d1 + '日〜' + mo3 + '月' + d2 + '日<br>時間：' + w0 + '時〜' + w1 + '時<br>交通規制：' + ks +
+      '<br>問い合わせ：' + ka + '（内線' + ext + '）' + (H ? '<br>※雨天の場合は' + ut + 'します。' : '') + '</div>';
+    qs = [
+      mkQ('工事の場所はどこでしたか。', tw + ch + '丁目', [tw + (ch % 9 + 1) + '丁目', tw + ((ch + 1) % 9 + 1) + '丁目'].concat(sample(TOWN, 3).map(function(t){ return t + ch + '丁目'; }))),
+      mkQ('工事の内容は何でしたか。', ko, KOJI),
+      mkQ('工事が始まるのはいつでしたか。', mo3 + '月' + d1 + '日', [d1 + 1, d1 + 2, d2, d1 + 10].map(function(d){ return mo3 + '月' + d + '日'; })),
+      mkQ('工事が終わるのはいつでしたか。', mo3 + '月' + d2 + '日', [d2 + 1, d2 - 1, d1, d2 + 10].map(function(d){ return mo3 + '月' + d + '日'; })),
+      mkQ('作業は何時まででしたか。', w1 + '時', [w1 - 1, w1 + 1, w1 - 2, w0 + 1].map(function(h){ return h + '時'; })),
+      mkQ('交通規制はどれでしたか。', ks, KISEI),
+      mkQ('問い合わせ先はどの課でしたか。', ka, KA)
+    ];
+    if(H){
+      qs.push(mkQ('問い合わせ先の内線番号はどれでしたか。', ext, nearDigits(ext, 5)));
+      qs.push(mkQ('雨天の場合はどうなると書かれていましたか。', ut + 'する', UTEN.map(function(u){ return u + 'する'; }).concat(['予定どおり行う'])));
+    }
+    qs = shuffle(qs);
   }
-  return { html: html, qs: qs };
+  // 通し練習では1つの資料から出す問題数をこれまでどおり抑える
+  return { html: html, qs: qs.slice(0, H ? 9 : 7) };
 }
 
 /* ===================== 分野の定義 ===================== */
 var SECS = [
   { id:'shogo',  name:'照合', desc:'2つの文字列を見比べる', gen: genShogo },
   { id:'bunrui', name:'分類', desc:'手引きに従って番号をつける', gen: genBunrui },
-  { id:'gengo',  name:'言語', desc:'対義語・類義語を見つける', gen: genGengo },
-  { id:'keisan', name:'計算', desc:'四則計算と□の穴埋め', gen: genKeisan },
+  { id:'gengo',  name:'言語', desc:'対義語・類義語・2語の関係', gen: genGengo },
+  { id:'keisan', name:'計算', desc:'四則計算・□の穴埋め・割合', gen: genKeisan },
   { id:'dokuzu', name:'読図', desc:'グラフと表を読み取る', gen: genDokuzu },
   { id:'kioku',  name:'記憶', desc:'資料を覚えてから答える', gen: null }
 ];
@@ -732,7 +1075,7 @@ function memoCycle(){
   startMemoPhase(memo, MEMO_SEC, '記憶（覚える）', function(){
     if(!cur || !cur.memoOnly) return;
     cur = sc; cur.endAt = Date.now() + left * 1000;
-    cur.memoQs = memo.qs.slice(0, 5); cur.locked = false;
+    cur.memoQs = memo.qs.slice(0, hard() ? 6 : 5); cur.locked = false;
     $('hudName').textContent = sc.sec.name;
     startTick(); nextQuestion();
   }, '覚える時間は、回答の制限時間に含みません。');
@@ -789,7 +1132,7 @@ function nextQuestion(){
   $('stim').hidden = !q.stim; $('stim').innerHTML = q.stim || '';
   $('fb').hidden = true;
   var o = $('opts');
-  o.className = 'opts' + (q.cols === 1 ? ' one' : q.cols === 3 ? ' three' : '');
+  o.className = 'opts' + (q.cols === 1 ? ' one' : q.cols === 3 ? ' three' : q.cols === 5 ? ' five' : '');
   o.innerHTML = q.opts.map(function(t, i){ return '<button class="opt' + (q.mono ? ' mono' : '') + '" data-i="' + i + '">' + esc(t) + '</button>'; }).join('');
 }
 $('opts').addEventListener('click', function(ev){
@@ -828,11 +1171,11 @@ $('btnNext').addEventListener('click', function(){
 function endSection(){
   stopTick(); clearTimeout(memoTimer);
   var used = cur.dur - Math.max(0, (cur.endAt - (cur.pausedAt || Date.now())) / 1000);
-  var r = { id: cur.sec.id, n: cur.n, c: cur.c, dur: cur.dur, used: Math.round(used) };
+  var r = { id: cur.sec.id, n: cur.n, c: cur.c, dur: cur.dur, used: Math.round(used), lvl: state.lvl };
   run.results.push(r);
   if(r.n > 0 && !(run.all && r.id === 'kioku')){
     var h = state.hist[r.id] || (state.hist[r.id] = []);
-    h.push({ t: Date.now(), dur: r.dur, n: r.n, c: r.c });
+    h.push({ t: Date.now(), dur: r.dur, n: r.n, c: r.c, lvl: r.lvl });
     if(h.length > 40) h.splice(0, h.length - 40);
     saveState();
   }
@@ -847,6 +1190,7 @@ function showResult(){
     h += '<tr><td>' + secById(r.id).name + '</td><td>' + r.n + '</td><td>' + r.c + '</td><td>' + (r.n - r.c) + '</td><td>' + (r.n ? Math.round((r.n - r.c) / r.n * 100) + '%' : '—') + '</td><td>' + (r.n ? (r.used / r.n).toFixed(1) + '秒' : '—') + '</td></tr>';
   });
   $('resTable').innerHTML = h;
+  $('resSub').textContent = '事務能力トレーナー｜' + LVL_NAME[state.lvl] + '・各' + fmtTime(state.dur);
   var rate = tn ? (tn - tc) / tn : 0;
   $('resNote').textContent = !tn ? '回答がありませんでした。' :
     rate > 0.1 ? '誤答率が10%を超えています。速さより先に、確かめてから押すことを優先してください。' :
@@ -866,7 +1210,8 @@ $('btnAgain').addEventListener('click', function(){ if(run) startRun(run.queue, 
 
 /* ===================== ホーム ===================== */
 function recText(id){
-  var h = (state.hist[id] || []).filter(function(x){ return x.dur === state.dur; });
+  // 記録は時間と難易度が同じものだけ比べる（難易度の記録がない古い記録は標準）
+  var h = (state.hist[id] || []).filter(function(x){ return x.dur === state.dur && (x.lvl || 'std') === state.lvl; });
   if(!h.length) return '';
   var last = h[h.length - 1], best = Math.max.apply(null, h.map(function(x){ return x.c; }));
   return '前回 ' + last.c + '/' + last.n + '<br>最高 ' + best + '問';
@@ -875,6 +1220,12 @@ function renderHome(){
   Array.prototype.forEach.call($('durSeg').querySelectorAll('button'), function(b){
     b.setAttribute('aria-pressed', String(+b.getAttribute('data-dur') === state.dur));
   });
+  Array.prototype.forEach.call($('lvlSeg').querySelectorAll('button'), function(b){
+    b.setAttribute('aria-pressed', String(b.getAttribute('data-lvl') === state.lvl));
+  });
+  $('lvlNote').textContent = hard()
+    ? '似た字の入れ替えや長い文字列、例外のある手引き、桁の大きい計算、項目の多い資料が出ます。本番で焦らないよう、あえて難しくしています。'
+    : '本番の形式を想定した基本の問題です。誤答をなくせるようになったら「難しい」へ。';
   $('secList').innerHTML = SECS.map(function(s, i){
     return '<button class="sec-btn" data-sec="' + s.id + '"><span class="sec-no">' + (i + 1) + '</span><span class="sec-main"><span class="sec-name">' + s.name + '</span><br><span class="sec-desc">' + s.desc + '</span></span><span class="sec-rec">' + recText(s.id) + '</span></button>';
   }).join('');
@@ -885,6 +1236,11 @@ $('durSeg').addEventListener('click', function(ev){
   if(!b) return;
   state.dur = +b.getAttribute('data-dur'); saveState(); renderHome();
 });
+$('lvlSeg').addEventListener('click', function(ev){
+  var b = ev.target.closest ? ev.target.closest('button[data-lvl]') : null;
+  if(!b) return;
+  state.lvl = b.getAttribute('data-lvl') === 'hard' ? 'hard' : 'std'; saveState(); renderHome();
+});
 $('secList').addEventListener('click', function(ev){
   var b = ev.target.closest ? ev.target.closest('button[data-sec]') : null;
   if(b) startRun([b.getAttribute('data-sec')], false);
@@ -893,7 +1249,7 @@ $('btnAll').addEventListener('click', function(){ startRun(['shogo','bunrui','ge
 renderHome();
 
 // 検証用（_build の表示テストから問題生成を呼ぶ）
-window.__jimu = { SECS: SECS, newMemo: newMemo, ANT: ANT, SYN: SYN };
+window.__jimu = { SECS: SECS, newMemo: newMemo, ANT: ANT, SYN: SYN, ANT_HARD: ANT_HARD, SYN_HARD: SYN_HARD, REL: REL, state: state };
 })();
 </script>
 
