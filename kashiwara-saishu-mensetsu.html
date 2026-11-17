@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="柏原市対策">
+<meta name="theme-color" content="#173630" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C1815" media="(prefers-color-scheme: dark)">
+<title>柏原市役所 土木職 最終面接 直前対策（25分）</title>
+<style>
+  :root{
+    --ink:#16211F;
+    --ink-soft:#4A5854;
+    --paper:#EEF0EA;
+    --paper-hi:#F7F8F4;
+    --river:#24504B;
+    --river-deep:#173630;
+    --contour:#C4CCC2;
+    --marker:#DCE94F;
+    --marker-soft:#F0F5B8;
+    --red:#9A2B1F;
+    --disp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Hiragino Sans","Noto Sans JP",sans-serif;
+    --body:"BIZ UDPGothic","Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.85;
+    font-feature-settings:"palt";
+  }
+
+  .grid-bg{
+    background-image:
+      linear-gradient(to right, var(--contour) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--contour) 1px, transparent 1px);
+    background-size:19px 19px;
+  }
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px calc(80px + env(safe-area-inset-bottom))}
+
+  /* ---- 表紙帯 ---- */
+  header.cover{
+    background:var(--river-deep);
+    color:#E8EDE7;
+    border-bottom:6px solid var(--marker);
+    padding-top:env(safe-area-inset-top);
+  }
+  .cover-inner{max-width:760px;margin:0 auto;padding:36px 18px 30px}
+  .stamp{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:11px;letter-spacing:.22em;
+    border:1px solid rgba(232,237,231,.5);
+    padding:5px 11px;
+    margin-bottom:20px;
+  }
+  h1{
+    font-family:var(--disp);
+    font-weight:900;
+    font-size:clamp(26px,6.6vw,40px);
+    line-height:1.3;
+    margin:0 0 14px;
+    letter-spacing:.01em;
+  }
+  h1 .thin{display:block;font-size:.44em;font-weight:500;letter-spacing:.14em;opacity:.75;margin-bottom:10px}
+  .cover-meta{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    color:rgba(232,237,231,.72);
+    border-top:1px solid rgba(232,237,231,.25);
+    padding-top:14px;
+    margin-top:20px;
+    display:flex;flex-wrap:wrap;gap:6px 22px;
+  }
+  .cover-flow{font-size:13px;color:rgba(232,237,231,.82);margin-top:16px;line-height:1.9}
+  .cover-flow b{color:#E8EDE7}
+  .dday{
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    margin-top:18px;
+  }
+  .dday-num{font-family:var(--disp);font-weight:900;font-size:34px;line-height:1;color:var(--marker)}
+  .dday-sub{font-size:13px;color:rgba(232,237,231,.82)}
+
+  /* ---- 案内ボックス ---- */
+  .howto{
+    background:var(--paper-hi);
+    border:1px solid var(--contour);
+    padding:18px 20px;
+    margin:26px 0 8px;
+    font-size:14.5px;
+    line-height:1.9;
+  }
+  .howto + .howto{margin-top:14px}
+  .howto b{font-family:var(--disp);font-weight:700}
+  .howto.hier{border-left:3px solid var(--river)}
+  .howto a{color:var(--river)}
+
+  /* ---- 進捗 ---- */
+  .progress{
+    position:sticky;top:0;z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--contour);
+    margin:0 -18px 0;
+    padding:11px 18px;
+    display:flex;align-items:center;gap:12px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  }
+  #count{white-space:nowrap;flex:none}
+  .bar{flex:1;height:5px;background:var(--contour);position:relative;overflow:hidden;min-width:20px}
+  .bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--river);transition:width .3s ease}
+  .ctrl{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    background:none;border:1px solid var(--river);color:var(--river);
+    padding:5px 10px;cursor:pointer;white-space:nowrap;
+  }
+  .ctrl:hover{background:var(--river);color:var(--paper-hi)}
+  .ctrl:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .ch-now{
+    font-family:var(--mono);font-size:11px;color:var(--ink-soft);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    max-width:30vw;flex:0 1 auto;
+  }
+  .hub-btn{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;margin:0 0 16px;border:1px solid rgba(232,237,231,.55);color:#E8EDE7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.02em}
+  .hub-btn:active{background:rgba(232,237,231,.15)}
+  .hub-btn:focus-visible{outline:2px solid #DCE94F;outline-offset:2px}
+  .hub-mini{flex:none;display:inline-flex;align-items:center;min-height:32px;padding:3px 9px;border:1px solid var(--contour);color:var(--ink);font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+
+  /* ---- 目次 ---- */
+  .toc{
+    background:var(--paper-hi);border:1px solid var(--contour);
+    padding:18px 20px;margin:18px 0 8px;scroll-margin-top:64px;
+  }
+  .toc-title{font-family:var(--disp);font-weight:700;font-size:14px;margin:0 0 10px;letter-spacing:.04em}
+  .toc ol{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+  .toc a{
+    display:flex;gap:10px;align-items:baseline;padding:9px 6px;
+    color:var(--ink);text-decoration:none;font-size:14.5px;
+    border-bottom:1px dashed var(--contour);
+  }
+  .toc li:last-child a{border-bottom:none}
+  .toc a:hover{color:var(--river)}
+  .toc a:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .toc-no{font-family:var(--mono);font-size:11px;color:var(--river);flex:none;letter-spacing:.06em;min-width:3.2em}
+
+  /* ---- 章 ---- */
+  .chapter{margin:52px 0 16px;display:flex;align-items:baseline;gap:14px;scroll-margin-top:64px}
+  .chapter .ch-no{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--river);white-space:nowrap}
+  .chapter h2{font-family:var(--disp);font-weight:900;font-size:20px;margin:0;letter-spacing:.02em}
+  .chapter::after{content:"";flex:1;height:1px;background:var(--contour)}
+
+  .chapter-warn{
+    background:var(--marker-soft);
+    border-left:3px solid var(--marker);
+    padding:14px 16px;
+    font-size:14px;line-height:1.85;
+    margin:0 0 18px;
+  }
+  .chapter-warn b{font-family:var(--disp)}
+
+  .back-to-toc{margin:8px 0 30px;text-align:right}
+  .back-to-toc a{
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--river);
+    text-decoration:none;border-bottom:1px solid var(--river);padding-bottom:2px;
+  }
+
+  /* ---- 設問カード ---- */
+  details.qa{
+    background:var(--paper-hi);
+    border:1px solid var(--contour);
+    border-left:3px solid var(--river);
+    margin-bottom:12px;
+  }
+  details.qa[open]{border-left-color:var(--marker)}
+  details.qa summary{
+    list-style:none;cursor:pointer;
+    padding:16px 18px 16px 16px;
+    display:flex;gap:13px;align-items:flex-start;
+  }
+  details.qa summary::-webkit-details-marker{display:none}
+  summary:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .qno{
+    font-family:var(--mono);font-weight:700;font-size:12px;
+    color:var(--river);padding-top:5px;letter-spacing:.04em;flex:none;min-width:2.1em;
+  }
+  .qtext{font-family:var(--disp);font-weight:700;font-size:16.5px;line-height:1.65;flex:1}
+  .chev{flex:none;color:var(--ink-soft);font-family:var(--mono);font-size:13px;padding-top:4px;transition:transform .2s}
+  details.qa[open] .chev{transform:rotate(90deg)}
+  .qbody{border-top:1px dashed var(--contour);margin:0 18px 0 47px;padding:0 0 22px}
+
+  .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--river);margin:18px 0 7px}
+  .aim{font-size:14px;color:var(--ink-soft);line-height:1.8;margin:0}
+  ul.points{margin:0;padding-left:1.15em;font-size:15px}
+  ul.points li{margin-bottom:5px}
+  ul.points li::marker{color:var(--river)}
+
+  .sample{
+    background:var(--paper);
+    border:1px solid var(--contour);
+    padding:15px 17px;
+    font-size:15px;line-height:1.9;
+  }
+  .sample::before{
+    content:attr(data-label);
+    display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+    color:var(--ink-soft);margin-bottom:8px;
+  }
+  .sample + .sample{margin-top:10px}
+
+  .warn{
+    background:var(--marker-soft);
+    border-left:3px solid var(--marker);
+    padding:12px 15px;
+    font-size:14px;line-height:1.8;
+    margin-top:16px;
+  }
+  .warn b{font-family:var(--disp)}
+
+  .tag{
+    display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+    border:1px solid var(--river);color:var(--river);
+    padding:1px 7px;margin:0 6px 4px 0;white-space:nowrap;
+  }
+  .tag.src{border-color:var(--ink-soft);color:var(--ink-soft)}
+
+  .done{
+    margin-top:18px;display:flex;align-items:center;gap:9px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);cursor:pointer;
+    min-height:32px;
+  }
+  .done input{width:17px;height:17px;accent-color:var(--river);cursor:pointer}
+
+  /* ---- 自分メモ ---- */
+  .memo{margin-top:16px}
+  .memo label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--river);margin-bottom:6px}
+  .memo textarea{
+    display:block;width:100%;min-height:92px;
+    font:inherit;font-size:16px;line-height:1.7;
+    color:var(--ink);background:var(--paper);
+    border:1px solid var(--contour);border-left:3px solid var(--river);
+    padding:10px 12px;border-radius:0;resize:vertical;
+    -webkit-appearance:none;appearance:none;
+  }
+  .memo textarea:focus{outline:2px solid var(--river);outline-offset:1px}
+  .memo .memo-note{font-size:12px;color:var(--ink-soft);margin-top:4px}
+
+  /* ---- 進行表 ---- */
+  .flow{list-style:none;margin:0 0 8px;padding:0;background:var(--paper-hi);border:1px solid var(--contour)}
+  .flow li{display:flex;gap:14px;padding:12px 16px;border-top:1px dashed var(--contour);font-size:14.5px;line-height:1.75}
+  .flow li:first-child{border-top:none}
+  .flow .t{flex:none;width:5.6em;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--river);padding-top:3px}
+  .flow .w b{font-family:var(--disp)}
+  .flow .w span{display:block;font-size:13px;color:var(--ink-soft)}
+
+  /* ---- 言ったことの整理 ---- */
+  .said{background:var(--paper-hi);border:1px solid var(--contour);border-top:3px solid var(--river);padding:16px 18px;margin-bottom:12px}
+  .said h3{font-family:var(--disp);font-weight:900;font-size:16px;margin:0 0 8px}
+  .said ul{margin:0;padding-left:1.15em;font-size:14.5px}
+  .said li{margin-bottom:4px}
+  .said li::marker{color:var(--river)}
+
+  .pairs{list-style:none;margin:0;padding:0}
+  .pairs li{background:var(--paper-hi);border:1px solid var(--contour);border-left:3px solid var(--marker);padding:13px 16px;margin-bottom:10px;font-size:14.5px;line-height:1.8}
+  .pairs .said-word{font-family:var(--disp);font-weight:700;display:block}
+  .pairs .then{display:block;color:var(--ink-soft);font-size:14px}
+
+  /* ---- 一言目で答える表 ---- */
+  .quick{list-style:none;margin:0;padding:0;background:var(--paper-hi);border:1px solid var(--contour)}
+  .quick li{padding:13px 16px;border-top:1px dashed var(--contour);font-size:14.5px;line-height:1.8}
+  .quick li:first-child{border-top:none}
+  .quick .q{font-family:var(--disp);font-weight:700;display:block}
+  .quick .a{display:block}
+  .quick .r{display:block;font-size:12.5px;color:var(--ink-soft);font-family:var(--mono);letter-spacing:.04em}
+
+  /* ---- 模擬面接 ---- */
+  .mock{
+    background:var(--paper-hi);border:1px solid var(--contour);border-top:3px solid var(--river);
+    padding:20px 18px;scroll-margin-top:64px;
+  }
+  .mock p{margin:0 0 12px;font-size:14.5px}
+  .mock-opt{display:flex;align-items:center;gap:10px;font-size:14.5px;min-height:44px;cursor:pointer}
+  .mock-opt input{width:20px;height:20px;accent-color:var(--river)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:52px;padding:10px 20px;
+    font-family:var(--disp);font-weight:700;font-size:16px;
+    border:1px solid var(--river);background:var(--river);color:#F7F8F4;
+    cursor:pointer;border-radius:0;-webkit-appearance:none;appearance:none;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .btn.ghost{background:transparent;color:var(--river)}
+  .btn.small{min-height:40px;font-size:13px;padding:6px 14px}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .btn[disabled]{opacity:.4;cursor:default}
+  .mock-hud{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
+    font-family:var(--mono);margin-bottom:16px;
+  }
+  .mock-hud div{background:var(--paper);border:1px solid var(--contour);padding:8px 10px;text-align:center}
+  .mock-hud .k{display:block;font-size:10px;letter-spacing:.12em;color:var(--ink-soft)}
+  .mock-hud .v{display:block;font-size:20px;font-weight:700;line-height:1.3}
+  .mock-hud .v.over{color:var(--red)}
+  .mock-phase{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--river);margin-bottom:6px}
+  .mock-parent{font-size:13px;color:var(--ink-soft);margin:0 0 6px}
+  .mock-q{font-family:var(--disp);font-weight:900;font-size:20px;line-height:1.6;margin:0 0 10px;min-height:3.2em}
+  .mock-hint{font-size:13.5px;color:var(--ink-soft);min-height:1.8em;margin:0 0 14px}
+  .mock-hint.over{color:var(--red);font-weight:700}
+  .mock-actions{display:grid;gap:10px}
+  .mock-end{margin-top:14px;text-align:right}
+  .mock-result{list-style:none;margin:14px 0;padding:0}
+  .mock-result li{padding:10px 0;border-top:1px dashed var(--contour);font-size:14px;line-height:1.7}
+  .mock-result .rt{font-family:var(--mono);font-weight:700;margin-right:8px}
+  .mock-result .rr{display:block;font-size:12px;color:var(--ink-soft);font-family:var(--mono)}
+  .mock-result .flag{font-family:var(--mono);font-size:10.5px;border:1px solid var(--red);color:var(--red);padding:0 6px;margin-left:6px;white-space:nowrap}
+  .mock-result .sub{display:block;padding-left:1em;color:var(--ink-soft);font-size:13px}
+  [hidden]{display:none!important}
+
+  /* ---- 予定 ---- */
+  .plan{list-style:none;margin:0;padding:0;background:var(--paper-hi);border:1px solid var(--contour)}
+  .plan li{padding:13px 16px;border-top:1px dashed var(--contour);font-size:14.5px;line-height:1.8}
+  .plan li:first-child{border-top:none}
+  .plan .d{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--river);display:block;letter-spacing:.04em}
+  .plan li.is-past{opacity:.45}
+  .plan li.is-today{background:var(--marker-soft);border-left:3px solid var(--marker)}
+  .plan li.is-today .d::after{content:"　← 今日"}
+  .plan label{display:flex;gap:9px;align-items:flex-start;cursor:pointer;margin-top:3px}
+  .plan input{width:17px;height:17px;margin-top:5px;flex:none;accent-color:var(--river)}
+
+  /* ---- 直前の1枚 ---- */
+  .checklist{background:var(--river-deep);color:#E8EDE7;padding:28px 24px;margin-top:20px}
+  .checklist h3{font-family:var(--disp);font-weight:900;font-size:16px;margin:20px 0 6px;color:var(--marker)}
+  .checklist h3:first-child{margin-top:0}
+  .checklist ul{margin:0;padding-left:1.1em;font-size:15px;line-height:1.95}
+  .checklist li::marker{color:var(--marker)}
+
+  footer.note{
+    margin-top:34px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;
+    border-top:1px solid var(--contour);padding-top:16px;
+  }
+  footer.note a{color:var(--river)}
+
+  .toc-fab{
+    position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));
+    z-index:30;
+    display:flex;align-items:center;gap:6px;
+    min-height:44px;min-width:44px;
+    padding:11px 18px;
+    background:var(--river-deep);color:#E8EDE7;
+    border:1px solid rgba(232,237,231,.35);
+    border-radius:999px;
+    font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+    cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,.28);
+    opacity:0;transform:translateY(10px);pointer-events:none;
+    transition:opacity .22s ease,transform .22s ease;
+  }
+  .toc-fab.show{opacity:.92;transform:translateY(0);pointer-events:auto}
+
+  @media (max-width:520px){
+    .qbody{margin-left:16px;margin-right:16px}
+    details.qa summary{padding:14px}
+    .qtext{font-size:15.5px}
+    .ch-now{max-width:22vw}
+    .toc-fab{right:12px;padding:11px 14px;font-size:11px}
+    .mock-q{font-size:18.5px}
+    .flow .t{width:4.9em}
+  }
+  @media (max-width:360px){.ch-now{display:none}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ink:#E7ECE7;
+      --ink-soft:#A9B6AF;
+      --paper:#121613;
+      --paper-hi:#191F1B;
+      --river:#7FC2A6;
+      --river-deep:#0B1210;
+      --contour:#2E3A33;
+      --marker:#DCE94F;
+      --marker-soft:#242C1B;
+      --red:#F0968A;
+    }
+    .stamp{border-color:rgba(231,236,231,.35)}
+    .ctrl:hover{color:var(--river-deep)}
+    .btn{color:#0B1210}
+    .btn.ghost{color:var(--river)}
+  }
+
+  @media print{
+    body{background:#fff;font-size:11pt;line-height:1.6}
+    .grid-bg{background-image:none}
+    header.cover{background:#fff;color:#000;border-bottom:2px solid #000}
+    .stamp,.progress,.done,.chev,.toc,.toc-fab,.back-to-toc,.hub-btn,.mock,.dday{display:none}
+    .cover-meta,.cover-flow{color:#333;border-color:#999}
+    details.qa{break-inside:avoid;background:#fff;border-color:#999}
+    .checklist{background:#fff;color:#000;border:1px solid #000}
+    .checklist h3{color:#000}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-top"><a class="hub-btn" href="./index.html">‹ 対策ハブ（トップ）へ戻る</a></div>
+    <div class="stamp">FIELD NOTE — 最終面接</div>
+    <h1><span class="thin">柏原市役所 採用試験｜土木職</span>最終面接 直前対策</h1>
+    <div class="dday" id="dday" hidden>
+      <span class="dday-num" id="ddayNum"></span>
+      <span class="dday-sub" id="ddaySub"></span>
+    </div>
+    <div class="cover-meta">
+      <span>個人面接：2026年11月25日（水）</span>
+      <span>面接時間：25分</span>
+      <span>作成：2026.11.17</span>
+    </div>
+    <div class="cover-flow">
+      提出した<b>エントリーシート2本</b>（自己PR／過去2年間に取り組み成果が上がったこと）と、<b>録画動画面接で話した内容</b>をもとに、25分の個人面接に絞って作った資料です。想定問答の全体は「個人面接想定問答」（全69問）にあります。この資料は、その中から<b>当日までに何を、どの順番で仕上げるか</b>をまとめたものです。
+    </div>
+  </div>
+</header>
+
+<div class="wrap grid-bg">
+
+  <div class="howto hier">
+    <b>今の状況</b><br>
+    市の採用ページの途中経過（2026年11月13日更新、11月17日に確認）では、土木職はエントリーシートを提出した<b>3名全員が第1次・第2次を通過</b>し、最終面接に進んでいます。募集は「若干名」です。つまり最終面接は、3名の中で、<b>書類と動画で話した内容を、自分の言葉で落ち着いて説明できるか</b>の勝負になります。新しい知識を増やすより、言ったことを固めるほうが効きます。<br>
+    <a href="https://www.city.kashiwara.lg.jp/docs/2026091400077/" rel="noopener">市の採用ページ（途中経過）</a>
+  </div>
+
+  <div class="howto">
+    <b>使い方</b><br>
+    ① CH.1〜2 を一度読む　② CH.3〜4 の質問を<b>声に出して</b>答える　③「自分メモ」に実際の出来事を書く　④ CH.7 の模擬面接で25分を通す。<br>
+    回答例は言い回しの一例です。<b>丸暗記はしないでください</b>。骨子だけ覚えて、自分の言葉で話すほうが、深掘りされたときに崩れません。エントリーシートと動画の全文はこのページには載せていません。<b>手元の控えを必ず読み返してください</b>。
+  </div>
+
+  <div class="progress">
+    <span id="count">0 / 0</span>
+    <span id="chNow" class="ch-now"></span>
+    <div class="bar"><span id="fill"></span></div>
+    <button class="ctrl" id="toggleAll">すべて開く</button>
+    <a class="hub-mini" href="./index.html" aria-label="対策ハブ（トップページ）へ戻る">‹ ハブ</a>
+  </div>
+
+  <nav class="toc" id="toc" aria-label="章目次">
+    <div class="toc-title">目次</div>
+    <ol>
+      <li><a href="#ch1"><span class="toc-no">CH.1</span>25分の流れと答え方</a></li>
+      <li><a href="#ch2"><span class="toc-no">CH.2</span>書類と動画で言ったことの整理</a></li>
+      <li><a href="#ch3"><span class="toc-no">CH.3</span>最初の5分で聞かれる4問</a></li>
+      <li><a href="#ch4"><span class="toc-no">CH.4</span>動画とESからの深掘り14問</a></li>
+      <li><a href="#ch5"><span class="toc-no">CH.5</span>一言目で答える確認の質問</a></li>
+      <li><a href="#ch6"><span class="toc-no">CH.6</span>逆質問と最後の一言</a></li>
+      <li><a href="#ch7"><span class="toc-no">CH.7</span>模擬面接（25分）</a></li>
+      <li><a href="#ch8"><span class="toc-no">CH.8</span>11月25日までの予定</a></li>
+      <li><a href="#ch9"><span class="toc-no">CH.9</span>当日の動き</a></li>
+      <li><a href="#ch10"><span class="toc-no">直前</span>控室で見る1枚</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ CH.1 ============ -->
+  <div class="chapter" id="ch1" data-ch-label="CH.1 25分の流れ"><span class="ch-no">CH.1</span><h2>25分の流れと答え方</h2></div>
+
+  <div class="chapter-warn">
+    <b>25分で答えるのは、12〜15問ほど</b><br>
+    面接官が話す時間を除くと、自分が話せるのは15〜17分ほどが目安です。1つの答えを<b>40〜60秒</b>にすると、深掘りを含めて12〜15問になります。1つの答えが2分になると、聞いてもらえる質問は半分に減り、面接官が確かめたかったことが残ったまま終わります。
+  </div>
+
+  <ol class="flow">
+    <li><span class="t">0〜2分</span><span class="w"><b>入室・導入</b><span>受験番号と氏名。「柏原市にお住まいなんですね」など、緊張をほぐす問いかけ</span></span></li>
+    <li><span class="t">2〜5分</span><span class="w"><b>志望動機・自己PR</b><span>動画とエントリーシートの内容を、本人の口から確かめる</span></span></li>
+    <li><span class="t">5〜12分</span><span class="w"><b>職務経験の深掘り</b><span>いちばん長い。「具体的には」「そのときどうしましたか」が続く</span></span></li>
+    <li><span class="t">12〜16分</span><span class="w"><b>転職理由・条件の確認</b><span>なぜ今の会社を辞めるのか、年収、年下の上司、いつから働けるか</span></span></li>
+    <li><span class="t">16〜21分</span><span class="w"><b>柏原市・土木職の理解</b><span>市の課題、発注者の仕事、場面を想定した質問</span></span></li>
+    <li><span class="t">21〜24分</span><span class="w"><b>人物</b><span>長所と短所、ストレス、チームでの働き方</span></span></li>
+    <li><span class="t">24〜25分</span><span class="w"><b>逆質問・最後に一言</b></span></li>
+  </ol>
+  <p class="aim">この配分は、経験者採用の個人面接でよくある流れをもとにした<b>想定</b>です。市は面接の進め方を公表していません。順番が入れ替わっても、聞かれる中身はこの6つの中に収まります。</p>
+
+  <details class="qa">
+    <summary><span class="qno">型</span><span class="qtext">答え方の型（3種類だけ覚える）</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">共通</div>
+      <ul class="points">
+        <li><b>最初の一文で結論</b>を言う。「はい、あります」「私の強みは〜です」から始める</li>
+        <li>40〜60秒で止める。足りなければ面接官が聞いてくれる。聞かれたら、それが深掘りに答える機会になる</li>
+        <li>語尾まで言い切る。「〜と思うんですけど……」で終わらせない</li>
+      </ul>
+      <div class="lbl">経験を聞かれたとき（〜したことはありますか）</div>
+      <ul class="points">
+        <li>結論 → どんな場面だったか → 自分がどう動いたか → 結果 → そこから変えたこと</li>
+      </ul>
+      <div class="lbl">考えを聞かれたとき（〜をどう思いますか）</div>
+      <ul class="points">
+        <li>結論 → 理由 → 現場での具体例を一つ → 市の仕事でどう活かすか</li>
+      </ul>
+      <div class="lbl">場面を想定した質問（〜のとき、どうしますか）</div>
+      <ul class="points">
+        <li>まず事実を確かめる → 安全を先に確保する → 自分だけで決めず上司に報告・相談する → 相手に結果を伝え、記録を残す</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk" data-k="kata">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">困</span><span class="qtext">答えに詰まったときの言い方</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <ul class="points">
+        <li><b>質問の意味が取れなかった</b>／「恐れ入ります。〜というご質問でよろしいでしょうか」と確かめる。聞き返して構わない。ずれた答えを長く話すほうが不利</li>
+        <li><b>考える時間がほしい</b>／「少し考えさせてください」と言ってから、数秒おいて話す</li>
+        <li><b>知らないことを聞かれた</b>／「申し訳ありません、存じません。入庁までに確認します」。知っているふりをしない。現場を知っている面接官には伝わる</li>
+        <li><b>話が長くなってしまった</b>／「まとめますと、〜です」と自分で切る</li>
+        <li><b>否定された・重ねて突っ込まれた</b>／言い返さない。「ご指摘のとおり、その点は足りていないと思います。そのうえで〜」と受けてから続ける。態度が崩れないかを見ている場合がある</li>
+        <li><b>経験がないことを聞かれた</b>／「その経験はありません」と先に言い、近い経験と、これからどう身につけるかを話す</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk" data-k="komatta">確認済み</label>
+    </div>
+  </details>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.2 ============ -->
+  <div class="chapter" id="ch2" data-ch-label="CH.2 言ったことの整理"><span class="ch-no">CH.2</span><h2>書類と動画で言ったことの整理</h2></div>
+
+  <div class="chapter-warn">
+    <b>面接官の手元には、この3つがあります</b><br>
+    面接は、すでに提出した内容の確認から始まります。<b>書いたこと・話したことより強く言わない、違う話をしない</b>。この2つを守るだけで、深掘りの大半は落ち着いて答えられます。下は内容の要約です。面接前に、手元の控えの全文を声に出して読んでください。
+  </div>
+
+  <div class="said">
+    <h3>① 自己PR</h3>
+    <ul>
+      <li>強み＝仕事を最後まで責任を持って、正確にやり遂げる</li>
+      <li>今の仕事＝現場の安全管理、他業者との工程調整、官公庁へ出す申請書類の作成</li>
+      <li>やり方＝施工マニュアルや安全基準を毎回確認。自作のチェックリストでダブルチェック（数量、図面との整合性）</li>
+      <li>人との関わり＝分かりやすく伝える、必要な情報を確実に共有する</li>
+      <li>結果＝大きな事故や工期の遅れを出すことなく現場を進めている。発注者や関係者から信頼をいただいている</li>
+      <li>市の仕事の理解＝工事を発注し監督する立場。施工する側以上に正確さと調整が求められる</li>
+      <li>柏原市＝大和川と石川が合流し、市域の約3分の2が山地。道路や下水道などの整備と維持管理で、安全な暮らしを支えたい</li>
+    </ul>
+  </div>
+
+  <div class="said">
+    <h3>② 過去2年間に取り組み、成果が上がったこと</h3>
+    <ul>
+      <li>何を＝新築物件に伴う給排水引込み工事、道路法第24条に基づく歩道切下げ工事の施工管理</li>
+      <li>条件＝昼夜を問わず交通量の多い幹線道路など。無事故かつ工期内の竣工を<b>目標</b>にした</li>
+      <li>難しさ＝第三者災害や渋滞のおそれ、他の埋設管、騒音・振動、建物の引き渡し日に直結する工程、限られた交通規制時間</li>
+      <li>力を入れた点1＝埋設物管理者との事前協議と立ち会い。試掘で位置と深さを自分の目で確認し、防護した</li>
+      <li>力を入れた点2＝近隣の住民や店舗に直接足を運び、図面や資料で説明。理解をいただいてから着工</li>
+      <li>結果＝近隣との大きなトラブルや事故を出すことなく、工期内に完了</li>
+      <li>学び＝行政・民間企業・地域住民など、立場の異なる関係者と意思疎通を図る調整力</li>
+      <li>着地＝老朽化対策や浸水への備えで、市民の声を受け止め、関係部署や施工業者と調整し、即戦力として貢献したい</li>
+    </ul>
+  </div>
+
+  <div class="said">
+    <h3>③ 録画動画面接で話したこと</h3>
+    <ul>
+      <li>志望理由＝<b>現在柏原市に住んでいる市民として</b>、民間で培った経験を活かして、安全・安心なまちづくりに貢献したい</li>
+      <li>経験＝給排水の引込み工事、歩道の切下げ工事の施工管理。埋設物管理者との事前協議と、近隣への直接の説明</li>
+      <li>暮らす中で感じていること＝大雨の際の浸水対策、土砂災害への備え、インフラの老朽化対策の重要性</li>
+      <li>自分の立ち位置＝施工側・申請側として現場に立ってきたので、民間側の視点や現場の苦労が分かる</li>
+      <li>やりたいこと＝<b>業者の方々と同じ目線に立って寄り添った指導</b>、市民の声を真摯に受け止める、円滑な調整</li>
+      <li>締め＝柏原市民の目線を持ちながら、技術職の即戦力として</li>
+    </ul>
+  </div>
+
+  <div class="lbl">言い方に気をつける言葉（自分が使った言葉なので、必ず聞かれる前提で）</div>
+  <ul class="pairs">
+    <li><span class="said-word">「大きな事故や工期の遅れを出すことなく」「工期内に竣工させる実績を積み重ねてきました」</span><span class="then">3つの中で一番控えめな言い方に合わせる。口頭で「一度もありません」「ゼロです」とは言わない。「小さいものは？」と聞かれたら、あったことを認めて話す → 問答集 E3・E4</span></li>
+    <li><span class="said-word">「無事故かつ工期内での竣工を目標に」</span><span class="then">これは目標として書いた言葉。結果として「無事故でした」と言い換えない</span></li>
+    <li><span class="said-word">「業者の方々と同じ目線に立って寄り添った指導」（動画だけで言った言葉）</span><span class="then">発注者が業者に甘くなる、と受け取られるおそれがある。基準は緩めない、という説明を必ず添える → F3</span></li>
+    <li><span class="said-word">「柏原市に住んでいる市民として」（動画だけで言った言葉）</span><span class="then">最初の話題になりやすい。いつから、どこで何を感じたか、知人に頼まれたらどうするか → F1・F2・F4</span></li>
+    <li><span class="said-word">「即戦力として」（ES②と動画の2回）</span><span class="then">強い言葉。すぐできることと、一から学ぶことを分けて話す → 問答集 E13</span></li>
+    <li><span class="said-word">「発注者や関係者からも信頼をいただいています」</span><span class="then">「どんな場面でそう感じましたか」と聞かれる。実際の場面を一つ決めておく → F5</span></li>
+    <li><span class="said-word">「給排水引込み工事」と「道路や下水道」</span><span class="then">柏原市の水道は令和7年4月に大阪広域水道企業団へ統合された。市の仕事は下水道と道路。「上下水道」とは言わない → 問答集 E11</span></li>
+    <li><span class="said-word">「浸水や土砂災害への備え」</span><span class="then">大和川の本体は国の管理。市が担うのは雨水を流す下水道や水路、市道。「大和川の治水をしたい」とは言わない → 問答集 E12</span></li>
+  </ul>
+  <label class="done"><input type="checkbox" class="chk" data-k="said">3つの控えを声に出して読み返した</label>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.3 ============ -->
+  <div class="chapter" id="ch3" data-ch-label="CH.3 最初の5分の4問"><span class="ch-no">CH.3</span><h2>最初の5分で聞かれる4問</h2></div>
+
+  <div class="chapter-warn">
+    <b>この4問だけは、何も見ずに言えるようにする</b><br>
+    最初の5分で落ち着いて話せると、残りの20分が楽になります。「簡潔に」と言われたときのために、<b>30秒版</b>も用意しておきます。
+  </div>
+
+  <details class="qa">
+    <summary><span class="qno">C1</span><span class="qtext">柏原市を志望した理由を教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">動画で話した内容を、目の前でもう一度話せるかを見ています。動画と違う理由を持ち出さないでください。同じ骨子で、言葉は多少変わって構いません。</p>
+      <div class="lbl">骨子（動画と同じ順番）</div>
+      <ul class="points">
+        <li>柏原市に住んでいる市民として、まちづくりに貢献したい</li>
+        <li>施工管理の経験（給排水引込み、歩道切下げ。事前協議と近隣への説明）</li>
+        <li>暮らす中で感じていること（浸水、土砂災害、老朽化）</li>
+        <li>申請する側・施工する側の経験を、行政の立場で活かす</li>
+      </ul>
+      <div class="sample" data-label="1分版（約250字）">現在柏原市に住んでおり、一人の市民として、また民間で培った経験を活かして、安全・安心なまちづくりに貢献したいと考え、志望しました。これまで給排水の引込み工事や歩道の切下げ工事の施工管理を担当し、埋設物の管理者との事前協議や、近隣の方への説明を大切にしてきました。柏原市で暮らす中で、大雨のときの浸水や土砂災害への備え、インフラの老朽化対策の大切さを感じています。申請する側、施工する側として行政と関わってきた経験を、今度は行政の立場で活かし、道路や下水道の整備と維持管理に長く携わりたいと考えています。</div>
+      <div class="sample" data-label="30秒版（約120字）">柏原市に住む一人の市民として、まちの安全を支える仕事がしたいと考え、志望しました。道路を掘削する工事の施工管理で身につけた、関係者との調整や近隣への説明の経験を、今度は行政の立場で、道路や下水道の整備と維持管理に活かしたいと考えています。</div>
+      <div class="warn"><b>続けて聞かれること</b>／「住んでいることと、働くことは別ではありませんか」「近くの市でも同じ仕事はできますが」。住んでいることは<b>きっかけ</b>であって、採用される理由ではありません。経験をどう活かせるかに話を戻してください（F1、問答集 Q02）。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="C1">何も見ずに言えた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">C2</span><span class="qtext">自己PRをお願いします。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子（ESと同じ順番）</div>
+      <ul class="points">
+        <li>強み＝最後まで責任を持って、正確にやり遂げる</li>
+        <li>裏づけ＝自作のチェックリストでダブルチェック（数量、図面との整合性）</li>
+        <li>結果＝大きな事故や工期の遅れを出さずに現場を進めてきた</li>
+        <li>着地＝工事を発注し監督する市の仕事で活かす</li>
+      </ul>
+      <div class="sample" data-label="30秒版（約140字）">私の強みは、仕事を最後まで責任を持って、正確にやり遂げることです。施工管理として、自分で作ったチェックリストで数量や図面との整合性を確かめることを習慣にしており、大きな事故や工期の遅れを出さずに現場を進めてきました。この姿勢を、工事を発注し監督する市の仕事でも活かしたいと考えています。</div>
+      <p class="aim">1分版（約300字）は、問答集の E1 にあります。次に来るのは「チェックリストは具体的にどんなものですか」（E2）です。実物を思い浮かべて、項目を2〜3個言えるようにしておいてください。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="C2">何も見ずに言えた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">C3</span><span class="qtext">この2年間で力を入れたことを教えてください。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子（ESと同じ順番）</div>
+      <ul class="points">
+        <li>何を＝給排水引込み工事と歩道切下げ工事の施工管理</li>
+        <li>難しさ＝交通量の多い道路、埋設管、近隣、引き渡し日に関わる工程</li>
+        <li>二つの取り組み＝埋設物の確認（協議・立ち会い・試掘）／近隣への直接の説明</li>
+        <li>結果と学び＝大きなトラブルや事故なく工期内に完了。立場の違う人と調整する力</li>
+      </ul>
+      <div class="sample" data-label="30秒版（約140字）">給排水の引込み工事と歩道切下げ工事の施工管理です。交通量の多い道路を掘削するため、埋設物の管理者との協議と試掘での確認、近隣の方への直接の説明の二つに力を入れました。その結果、大きなトラブルや事故なく工期内に終えることができ、立場の違う方々と調整する力が身につきました。</div>
+      <p class="aim">1分版は問答集の E5 にあります。次に来るのは「試掘して図面と違っていたことは」（E6）、「近隣に納得してもらえなかったことは」（E7）です。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="C3">何も見ずに言えた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">C4</span><span class="qtext">なぜ今の会社を辞めて、市役所で働こうと思ったのですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">経験者の面接で、合否にいちばん響く質問です。エントリーシートにも動画にも<b>退職の理由は出てきません</b>。だから面接で必ず聞かれます。「また辞めないか」「本気で行政を選んだのか」の両方を見ています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>今の仕事への不満から入らない。今の仕事で得たものを先に言う</li>
+        <li>その中で気づいたこと（例：建物が引き渡されると現場を離れる。つくった後の維持管理までは関われない）</li>
+        <li>だから、自分が住むまちの道路や下水道に、計画から維持管理まで長く関わりたい</li>
+        <li>今回の募集を知って、受験を決めた</li>
+      </ul>
+      <div class="sample" data-label="型の一例（自分の本当の理由に置き換える）">今の仕事では、道路を掘削する工事の段取りや、関係者との調整を一通り経験させてもらいました。ただ、新築に伴う工事は、建物が引き渡されると現場を離れることになり、その後の道路や管がどう使われ、どう傷んでいくかまでは関われません。自分が住んでいる柏原市で、つくるところから維持管理まで長く関わる仕事がしたいと考えるようになり、今回の募集を知って受験を決めました。</div>
+      <div class="warn"><b>必ず自分の理由で</b>／上の例は型です。当てはまらない部分は使わないでください。本当の理由が労働時間や待遇であっても構いませんが、それだけを話さず、「その中で何を考えるようになったか」を一段はさんでください。会社や上司への不満は口にしない（問答集 Q04）。</div>
+      <div class="memo">
+        <label for="memoC4">自分メモ：辞める理由と、なぜ今なのか（2〜3行で）</label>
+        <textarea id="memoC4" data-memo="C4" placeholder="例）今の仕事で得たもの／気づいたこと／なぜ柏原市で、なぜ今か"></textarea>
+        <div class="memo-note">この端末の中だけに保存されます（どこにも送信されません）</div>
+      </div>
+      <label class="done"><input type="checkbox" class="chk" data-k="C4">自分の理由で言えた</label>
+    </div>
+  </details>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.4 ============ -->
+  <div class="chapter" id="ch4" data-ch-label="CH.4 深掘り14問"><span class="ch-no">CH.4</span><h2>動画とESからの深掘り14問</h2></div>
+
+  <div class="chapter-warn">
+    <b>問答集の E1〜E14 に入っていない質問です</b><br>
+    動画で話した内容と、提出した最終版のエントリーシートの言葉から、新しく出てくる質問を並べました。<span class="tag src">動画</span><span class="tag src">ES①</span><span class="tag src">ES②</span> は、その質問の元になった資料です。「自分メモ」がある質問は、<b>実際にあったことを一つ決めて書いておく</b>と、当日その場で作らずに済みます。
+  </div>
+
+  <details class="qa">
+    <summary><span class="qno">F1</span><span class="qtext">柏原市にお住まいとのことですが、いつからですか。住んでみていかがですか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">動画</span></div>
+      <p class="aim">面接の入り口で、場をほぐすために聞かれやすい質問です。ここで構えずに話せると、後が楽になります。同時に、「住んでいるから志望した」だけで終わらないかも見ています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>いつから、どのあたりに（町名までで十分）、住むことになったきっかけ</li>
+        <li>住んでいて良いと感じる点を一つ（山と川が近い、鉄道の便がよい、など自分の実感で）</li>
+        <li>技術者の目で気になる点を一つ（F2 につなげる）</li>
+        <li>市内に住んでいるので、災害のときにすぐ駆けつけられる</li>
+      </ul>
+      <div class="warn"><b>注意</b>／住んでいることは志望のきっかけで、採用の決め手ではありません。「市民なので採ってほしい」と聞こえないように、最後は「経験をどう活かすか」に戻してください。市への不満を並べるのも避けます。</div>
+      <div class="memo">
+        <label for="memoF1">自分メモ：いつから／きっかけ／良いと感じる点</label>
+        <textarea id="memoF1" data-memo="F1" placeholder="例）〇年前から／仕事や家族の都合で／良いと感じること"></textarea>
+        <div class="memo-note">この端末の中だけに保存されます</div>
+      </div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F1">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F2</span><span class="qtext">暮らす中で浸水対策や老朽化対策の重要性を感じている、とのことですが、具体的にどこで、どんなときに感じましたか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">動画</span></div>
+      <p class="aim">動画で自分から言ったことなので、<b>ほぼ確実に聞かれます</b>。ここで実際の場所が出てくれば、市民としての実感と技術者の目の両方が伝わります。出てこなければ、動画の言葉が借り物に聞こえます。この資料の中で、準備の効果がいちばん大きい質問です。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>実際に見た場所と場面を一つ（大雨のときに水がたまりやすい道路、あふれそうな側溝や水路、山沿いの古い擁壁、ひび割れや段差のある舗装、など）</li>
+        <li>技術者としてどう見えたか（なぜ水が集まるのか、どこが傷みやすいのか）</li>
+        <li>市の職員になったら、どう関わりたいか（点検、優先順位づけ、維持管理）</li>
+      </ul>
+      <div class="lbl">準備（面接までに実際にやること）</div>
+      <ul class="points">
+        <li>市のハザードマップで、<b>自宅のある地区</b>が洪水・土砂災害でどう色分けされているかを確かめる</li>
+        <li>話す場所を実際に歩いて見ておく。その道路が<b>市道か、国道・府道か</b>も確かめる（国道や府道は市の管理ではない）</li>
+      </ul>
+      <div class="warn"><b>言い方</b>／「市の管理が悪い」という話にしないでください。目の前の面接官が、その道路や水路を管理している本人かもしれません。「気になった」「自分ならこう見る」という言い方にします。実際に見ていない場所の話はしないこと。</div>
+      <div class="memo">
+        <label for="memoF2">自分メモ：どこで／いつ／何を見たか／どう関わりたいか</label>
+        <textarea id="memoF2" data-memo="F2" placeholder="例）〇〇のあたりの道路で、大雨のときに……"></textarea>
+        <div class="memo-note">この端末の中だけに保存されます</div>
+      </div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F2">場所を一つ決めた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F3</span><span class="qtext">「業者と同じ目線に立って寄り添った指導」とは、具体的にどういうことですか。業者に甘くなりませんか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">動画</span></div>
+      <p class="aim">動画の中で、面接官がいちばん引っかかる言葉です。市の技術職は、業者の仕事を検査し、税金で代金を支払う立場です。施工側から来た人が「寄り添う」と言うと、<b>なれ合いにならないか</b>を必ず確かめられます。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>最初に「基準を緩めるという意味ではありません」と言う</li>
+        <li>意味は、相手が動きやすいようにすること。協議に早く応じる、指示の理由を伝える、現場で起きそうな問題を先に確かめる</li>
+        <li>施工側にいたから分かること。発注者の回答を待つあいだ現場が止まる、指示があいまいだと手戻りになる</li>
+        <li>品質と安全の基準、検査は、どの業者にも同じ目で行う。一人で判断せず、記録を残す</li>
+      </ul>
+      <div class="sample" data-label="回答例（約230字）">寄り添うというのは、基準を緩めるという意味ではありません。施工する側にいたとき、発注者の方からの回答が早かったり、指示の理由を説明していただけたりすると、現場はとても動きやすくなりました。同じように、協議には早く応じ、なぜその指示なのかを伝えることを心掛けたい、という意味です。一方で、品質や安全の基準、検査は、どの業者に対しても同じ目で行います。施工側にいた経験があるからこそ、なれ合いと受け取られないよう、公平さには特に気をつけたいと考えています。</div>
+      <div class="warn"><b>続けて聞かれること</b>／「知り合いの業者が市の工事を受注したらどうしますか」。答えは同じです。他の業者と同じ対応をし、気になることがあれば上司に報告する。発注者と受注者は、上下ではなく対等な契約の関係です（問答集 Q48）。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F3">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F4</span><span class="qtext">市内に住んでいると、近所の方や知人から「うちの前の道を先に直してほしい」と頼まれることもあります。どうしますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">動画</span></div>
+      <p class="aim">「市民の目線」を強みとして話したので、その裏側を聞く質問です。地元に住む職員は、頼みごとをされやすい立場にあります。公平さを保てるかを見ています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>話は丁寧に聴く。危険な状態なら、場所と状況を聞いて担当に伝える</li>
+        <li>ただし、知り合いだからといって順番は変えない。その場で「やります」と約束しない</li>
+        <li>直す順番は、点検の結果や危険の度合いで決まることを説明する</li>
+        <li>通常の窓口や手続きを案内し、頼まれたことは上司に報告する</li>
+      </ul>
+      <div class="sample" data-label="回答例（約190字）">お話は丁寧に伺います。危険な状態であれば、場所と状況を確認して担当に伝えます。ただ、知り合いだからといって順番を変えることはしません。その場で約束はせず、補修の順番は点検の結果や危険の度合いで決めていることを説明し、通常の窓口をご案内します。頼まれたことは上司にも報告します。市内に住んでいるからこそ、誰に対しても同じ対応をすることを意識したいと考えています。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F4">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F5</span><span class="qtext">「発注者や関係者から信頼をいただいている」とありますが、どんな場面でそう感じましたか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES①</span></div>
+      <p class="aim">自分で書いた評価なので、根拠を聞かれます。大きな話は要りません。実際にあった小さな場面で十分です。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>実際にあった場面を一つ（次の現場も任された、役所の窓口で書類の直しが少ないと言われた、近隣の方から声をかけてもらった、協力業者から相談されるようになった、など）</li>
+        <li>なぜそう言ってもらえたと思うか（確認を怠らなかった、連絡を早くした、など自己PRの強みにつなげる）</li>
+        <li>自分一人の力ではなく、職人や協力業者と一緒にやった結果だと添える</li>
+      </ul>
+      <div class="warn"><b>盛らない</b>／実際に言われた言葉、実際にあった出来事だけを話してください。思い当たる場面がなければ、「大きな評価をいただいたわけではありませんが、同じ発注者から続けて仕事をいただいています」のように、事実の範囲で答えれば十分です。</div>
+      <div class="memo">
+        <label for="memoF5">自分メモ：信頼されていると感じた実際の場面</label>
+        <textarea id="memoF5" data-memo="F5" placeholder="例）誰から／どんな場面で／何と言われたか"></textarea>
+        <div class="memo-note">この端末の中だけに保存されます</div>
+      </div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F5">場面を一つ決めた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F6</span><span class="qtext">官公庁へ提出する申請書類とは、どのような書類ですか。柏原市に提出したことはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES①</span></div>
+      <p class="aim">市の土木職は、その書類を受け取り、審査する側です。何を、どこに出していたかを具体的に言えると、入庁後の仕事とのつながりがはっきり伝わります。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>書類の名前を2〜3個、提出先と合わせて言う。自分が実際に作って出していたものだけ</li>
+        <li>例：道路の承認工事の申請（道路法第24条）、道路占用の許可申請（同第32条）、道路使用許可の申請（警察署）、排水設備の計画の確認申請（下水道の管理者）、給水装置工事の申込み（水道事業者）</li>
+        <li>作るときに気をつけていること（図面と現地の整合、数量、復旧の方法）</li>
+        <li>柏原市に出したことがあれば、そのときの経験を。なければ「ありません」と答え、提出していた自治体を言う</li>
+      </ul>
+      <div class="warn"><b>注意</b>／書類の名前や様式は、自治体によって違います。「私が担当した現場では」と前置きしてください。道路法第24条の中身と手続きの流れは、問答集の E8 にあります。</div>
+      <div class="memo">
+        <label for="memoF6">自分メモ：実際に出していた書類と提出先</label>
+        <textarea id="memoF6" data-memo="F6" placeholder="例）書類の名前／提出先（どこの役所・警察署）／気をつけていること"></textarea>
+        <div class="memo-note">この端末の中だけに保存されます</div>
+      </div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F6">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F7</span><span class="qtext">「相手に分かりやすく伝える」ために、具体的にどんな工夫をしていますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES①</span></div>
+      <p class="aim">市が公表している評価の軸は、コミュニケーション能力と協調性です。ここは評価に直結します。「心掛けています」で終わらせず、<b>実際にやっていること</b>を言ってください。</p>
+      <div class="lbl">骨子（相手ごとに一つずつ）</div>
+      <ul class="points">
+        <li>職人・協力業者に＝図面に書き込んで渡す、現地で指をさして確かめる、朝の打合せで「今日の危ない場所」を一つに絞る、など</li>
+        <li>近隣の方に＝専門用語を使わない。いつ、何時から何時まで、どんな音がするか、困ったときの連絡先、の順で話す</li>
+        <li>発注者・役所に＝結論を先に言う。写真や図面を添える</li>
+        <li>伝えたあとに、相手が分かったかを確かめる（復唱してもらう、質問がないか聞く）</li>
+      </ul>
+      <p class="aim">上は例です。自分が実際にやっているものだけを選んでください。今この面接での話し方そのものが、この答えの証拠になります。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="F7">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F8</span><span class="qtext">工程を遅らせられない現場で、安全と工期がぶつかったことはありますか。どう判断しましたか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES②</span></div>
+      <p class="aim">「絶対に工程を遅らせられないという強いプレッシャー」と書いたので、その中で安全を後回しにしなかったかを確かめる質問です。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>最初に「安全を優先します」と言う</li>
+        <li>実際の場面を一つ（雨、想定外の埋設物、資材の遅れ、など）</li>
+        <li>作業を止める判断をしたこと。止めたあと、すぐに関係者へ連絡し、工程を組み直したこと</li>
+        <li>自分一人で決めず、会社や発注者に報告して決めたこと</li>
+      </ul>
+      <div class="sample" data-label="型の一例（実際の出来事に置き換える）">安全を優先します。私が担当した現場でも、引き渡しの日が決まっている中で、掘削してみると想定と違う状況が出てきたことがありました。その日は作業を止め、関係する方にすぐ連絡して状況を共有し、翌日以降の工程を組み直しました。早く知らせたことで、後の工程で調整していただくことができました。遅れそうなときほど、早く伝えることが大事だと考えています。</div>
+      <div class="warn"><b>注意</b>／上の例の出来事は仮のものです。自分の現場で実際にあったことに置き換えてください。「工期のために多少は無理をした」と受け取られる話は選ばないこと。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F8">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F9</span><span class="qtext">交通規制の時間内に作業が終わりそうにないとき、どうしますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES②</span></div>
+      <p class="aim">「限られた交通規制時間内に」と書いたことへの確認です。許可の条件を守る人かどうかを見ています。市は、その条件を付ける側、守らせる側です。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>規制の時間は、許可の条件なので必ず守る</li>
+        <li>終わらない見込みが出た時点で、その日の作業範囲を切り上げる。仮の復旧をして、時間内に道路を開ける</li>
+        <li>残りは翌日以降に回し、関係者に連絡して工程を調整する</li>
+        <li>そうならないよう、1日の作業量に余裕を持たせて計画している</li>
+      </ul>
+      <p class="aim">実際にそうした経験があれば、その話を。なければ「時間を超えたことはありませんが、こう判断します」と答えてください。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="F9">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F10</span><span class="qtext">「現場全体で徹底した」とありますが、職人さんや協力業者に、どうやって守ってもらいましたか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES②</span></div>
+      <p class="aim">市の評価の軸にある「リーダーシップ」「チームでの協力」を見る質問です。自分より経験の長い職人に、どう動いてもらったかを聞いています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>決まりだから、ではなく<b>理由</b>を伝えた（この下に何の管があるか、近隣にどんな約束をしたか）</li>
+        <li>朝の打合せで、その日の注意点を具体的に共有した</li>
+        <li>自分が先に現場を見て、先に動いた</li>
+        <li>職人の意見を聞いて、やり方を変えたこともある</li>
+      </ul>
+      <p class="aim">「指示した」「守らせた」という言い方より、「一緒に確認した」「意見をもらった」のほうが、協調性が伝わります。市役所に入ると、年下の先輩や他の課の職員に動いてもらう場面が同じように出てきます。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="F10">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F11</span><span class="qtext">施工マニュアルや安全基準を「毎回」確認するとのことですが、慣れた作業でも毎回ですか。時間がかかりませんか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES①</span></div>
+      <p class="aim">「毎回」という言葉が本当かを確かめる質問です。効率との両立を聞いています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>慣れた作業ほど、思い込みで見落としやすいと考えている</li>
+        <li>同じ工事でも、現場ごとに埋設物・交通・近隣の条件が違う</li>
+        <li>全部を読み直すのではなく、チェックリストにして要点だけを短い時間で確かめている</li>
+        <li>確かめる時間は、手戻りが出たときの時間よりずっと短い</li>
+      </ul>
+      <div class="warn"><b>言い方</b>／実際には毎回でない場合は、「毎回です」と言い張らないでください。「着工前と、条件が変わったときには必ず」のように、実際のやり方で答えたほうが信用されます。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F11">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F12</span><span class="qtext">市民の声を丁寧に受け止めたい、とのことですが、すべての要望には応えられません。どうしますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">ES②</span><span class="tag src">動画</span></div>
+      <p class="aim">「受け止める」と「全部やる」は違う、と分かっているかを見ています。予算も人も限られている、という前提で答えてください。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>まず最後まで聴く。何に困っているのかを確かめる</li>
+        <li>できることと、できないことを分け、<b>できない理由</b>も伝える</li>
+        <li>順番は、危険の度合いや点検の結果で決まることを説明する</li>
+        <li>すぐにできなくても、応急の対応や代わりの方法がないかを考える</li>
+        <li>自分だけで返事をせず、上司と相談してから回答する。対応は記録に残す</li>
+      </ul>
+      <p class="aim">近隣への説明の経験（ES②）を、そのまま具体例に使えます。問答集の Q36・Q40 と同じ考え方です。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="F12">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F13</span><span class="qtext">最近の柏原市の取り組みやニュースで、関心を持ったものはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図 <span class="tag src">動画</span></div>
+      <p class="aim">「市民として」と話した人には、市のことを普段から見ているかを聞きやすくなります。一つ挙げて、土木の仕事に結びつけられれば十分です。</p>
+      <div class="lbl">素材（市公式サイトで確認できたもの）</div>
+      <ul class="points">
+        <li>水道事業が令和7年4月に大阪広域水道企業団へ統合された（下水道と道路は市）</li>
+        <li>第5次柏原市総合計画は、令和8年度から後期基本計画の期間に入っている</li>
+        <li>令和8年4月から、市役所の窓口と電話の受付が9時〜16時30分に変わった（職員の働き方改革と業務改善のため、と市は説明している）</li>
+        <li>市サイトに「亀の瀬ウェルカメフェスタ2026」の開催案内が出ている（2026年11月17日掲載）。亀の瀬は、国が地すべり対策を続けている場所</li>
+      </ul>
+      <div class="lbl">準備</div>
+      <ul class="points">
+        <li>「広報かしわら」の11月号と、市サイトの新着情報を面接の前日までに見る</li>
+        <li>自分が実際に読んだもの、見に行ったものから一つ選ぶ</li>
+      </ul>
+      <div class="warn"><b>注意</b>／上の素材は、読んで確かめてから使ってください。内容をよく知らないまま名前だけ挙げると、次の質問で詰まります。批評ではなく、「土木職としてこう関われそうだと感じた」で締めます。人口や財政の数字は、問答集の Q29 にあります。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F13">一つ決めた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">F14</span><span class="qtext">今回は複数の方が受験されています。その中で、あなたを採用する理由は何だと思いますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">意図</div>
+      <p class="aim">最終面接で出やすい、まとめの質問です。他の受験者と比べる必要はありません。自分の柱を、短く言い直せるかを見ています。</p>
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li>「他の方のことは存じませんので、自分のことをお話しします」と前置きする</li>
+        <li>柱1＝確認を怠らず、最後まで責任を持ってやり遂げる（自己PR）</li>
+        <li>柱2＝道路管理者に申請する側と、施工する側の両方を経験している。市が審査し監督する仕事を、相手の側から知っている</li>
+        <li>柱3＝柏原市に住んでいて、災害のときにすぐ動ける。長く働く</li>
+      </ul>
+      <div class="sample" data-label="回答例（約200字）">他の方のことは存じませんので、自分のことをお話しします。一つ目は、確認を怠らず、最後まで責任を持ってやり遂げる姿勢です。二つ目は、道路の管理者に申請する側と、実際に施工する側の両方を経験していることで、市が審査し監督する仕事を相手の立場から理解しています。三つ目は、柏原市に住んでおり、災害のときにもすぐに動けることです。入庁後は一から学び、長く働きたいと考えています。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="F14">確認済み</label>
+    </div>
+  </details>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.5 ============ -->
+  <div class="chapter" id="ch5" data-ch-label="CH.5 確認の質問"><span class="ch-no">CH.5</span><h2>一言目で答える確認の質問</h2></div>
+
+  <div class="chapter-warn">
+    <b>「はい」「いいえ」「事実」から始める</b><br>
+    条件を確かめる質問は、人事の担当者が事実を知りたくて聞いています。前置きをせず、一言目で答え、理由を一文だけ足してください。迷うそぶりが出ると、「本当は気にしているのでは」と受け取られます。面接までに、<b>事実を自分の中で決めておく</b>ことが準備です。
+  </div>
+
+  <ul class="quick">
+    <li><span class="q">現在は在職中ですか。いつから働けますか。</span><span class="a">事実を答える。在職中なら「引き継ぎをきちんと行い、4月1日の採用に支障がないようにします」</span><span class="r">問答集 Q12</span></li>
+    <li><span class="q">今の会社には、受験のことを伝えていますか。</span><span class="a">事実を答える。伝えていない場合は「合格をいただいた時点で速やかに伝え、引き継ぎを行います」</span><span class="r">問答集 Q12</span></li>
+    <li><span class="q">年収が下がるかもしれませんが、大丈夫ですか。</span><span class="a">「はい、承知しています」。金額は自分から言わない。家族がいる場合は、理解を得ていることを添える</span><span class="r">問答集 Q09</span></li>
+    <li><span class="q">年下の上司や先輩のもとで働くことになります。</span><span class="a">「問題ありません。入庁すれば新人ですので、一から教わります」</span><span class="r">問答集 Q10</span></li>
+    <li><span class="q">ほかに受けているところはありますか。</span><span class="a">事実を答える。そのうえで「柏原市が第一志望です」と理由を一言</span><span class="r">問答集 Q15</span></li>
+    <li><span class="q">災害時には、夜間や休日にも呼び出しがあります。</span><span class="a">「対応できます。市内に住んでいますので、すぐに参集できます」</span><span class="r">問答集 Q41</span></li>
+    <li><span class="q">希望と違う部署や、現場のない部署に配属されることもあります。</span><span class="a">「どの部署でも取り組みます」。調整や段取りの経験は、どの仕事でも使えると添える</span><span class="r">問答集 Q42・Q49</span></li>
+    <li><span class="q">長く勤めていただけますか。</span><span class="a">「はい。自分が住むまちで、定年まで働くつもりで受験しました」</span><span class="r">問答集 Q14</span></li>
+    <li><span class="q">お持ちの資格を教えてください。</span><span class="a">正式な名前と、取った年を答える。申込みのときに入力した内容と同じにする</span><span class="r">問答集 Q08</span></li>
+    <li><span class="q">健康面で、気になることはありますか。</span><span class="a">事実を答える。現場で働いてきたこと、続けている習慣を一つ</span><span class="r">問答集 Q50</span></li>
+  </ul>
+  <div class="memo">
+    <label for="memoQuick">自分メモ：事実の確認（在職か／会社に伝えたか／併願／資格の正式名と取得年）</label>
+    <textarea id="memoQuick" data-memo="quick" placeholder="申込みのときに入力した内容と食い違わないように書いておく"></textarea>
+    <div class="memo-note">この端末の中だけに保存されます</div>
+  </div>
+  <label class="done"><input type="checkbox" class="chk" data-k="quick">10問すべて、一言目を決めた</label>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.6 ============ -->
+  <div class="chapter" id="ch6" data-ch-label="CH.6 逆質問と最後の一言"><span class="ch-no">CH.6</span><h2>逆質問と最後の一言</h2></div>
+
+  <details class="qa">
+    <summary><span class="qno">G1</span><span class="qtext">最後に、何か質問はありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子</div>
+      <ul class="points">
+        <li><b>2つ用意して、聞くのは1つ</b>。25分の終わりで時間が押していることが多い</li>
+        <li>入庁する前提の、前向きな質問にする</li>
+        <li>答えていただいたら、お礼と一言の感想を返す。聞きっぱなしにしない</li>
+      </ul>
+      <div class="lbl">この人に合う質問の例</div>
+      <ul class="points">
+        <li>入庁までの期間に、勉強しておくべきことや、目を通しておくべき資料があれば教えていただけますか。</li>
+        <li>民間から入庁された技術職の方が、最初に戸惑われるのはどのような点でしょうか。今のうちから心構えをしておきたいと考えています。</li>
+        <li>土木職として、これから特に力を入れていかれる分野を伺えますか。</li>
+      </ul>
+      <div class="warn"><b>避ける質問</b>／給与、残業、休暇、配属の希望。市のサイトを見れば分かること。市民としての要望や苦情に聞こえること。面接の中で答えが出ていた場合は、「先ほどのお話でよく分かりました。入庁までに〜を勉強しておきます」と意欲を一言伝えて終えれば十分です。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="G1">2つ決めた</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">G2</span><span class="qtext">最後に、言い残したことや伝えたいことはありますか。</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <div class="lbl">骨子（30秒以内）</div>
+      <ul class="points">
+        <li>お礼</li>
+        <li>柱を一つだけ、もう一度（市民として／施工と申請の経験／確認を怠らない）</li>
+        <li>一から学ぶ姿勢と、長く働く意思</li>
+      </ul>
+      <div class="sample" data-label="回答例（約140字）">本日はありがとうございました。柏原市に住む一人として、また現場で施工と申請の両方を経験してきた者として、道路や下水道の整備と維持管理に長く携わりたいと考えています。入庁後は一から学ぶ姿勢で、確認を怠らず、最後まで責任を持って仕事に取り組みます。よろしくお願いいたします。</div>
+      <p class="aim">面接の中でうまく答えられなかった質問があれば、ここで一つだけ補って構いません。「先ほどの〜のご質問ですが、一点補足させてください」と前置きして、30秒以内で。</p>
+      <label class="done"><input type="checkbox" class="chk" data-k="G2">何も見ずに言えた</label>
+    </div>
+  </details>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.7 模擬面接 ============ -->
+  <div class="chapter" id="ch7" data-ch-label="CH.7 模擬面接"><span class="ch-no">CH.7</span><h2>模擬面接（25分）</h2></div>
+
+  <section class="mock" id="mock" aria-label="模擬面接">
+    <div id="mockIntro">
+      <p>本番と同じ25分で、14問を順番に出します。質問は毎回入れ替わります。<b>必ず声に出して</b>答えてください。頭の中で答えるのと、声に出すのとでは、かかる時間がまったく違います。</p>
+      <p>1つの答えは40〜60秒が目安です。答え終わったら「次の質問へ」。「深掘りの質問を出す」を押すと、同じ話題でもう一段聞かれます。終わると、質問ごとにかかった時間が出ます。スマートフォンの録音アプリで自分の声を録っておくと、あとで聞き直せます。</p>
+      <label class="mock-opt" id="speakOpt"><input type="checkbox" id="speakChk">質問を音声で読み上げる（画面を見ずに練習できます）</label>
+      <p class="aim" id="mockRuns"></p>
+      <div class="mock-actions" style="margin-top:14px"><button type="button" class="btn" id="mockStart">模擬面接を始める</button></div>
+    </div>
+
+    <div id="mockRun" hidden>
+      <div class="mock-hud">
+        <div><span class="k">残り</span><span class="v" id="mockRemain">25:00</span></div>
+        <div><span class="k">質問</span><span class="v" id="mockNo">1/14</span></div>
+        <div><span class="k">この答え</span><span class="v" id="mockAns">0:00</span></div>
+      </div>
+      <div class="mock-phase" id="mockPhase"></div>
+      <p class="mock-parent" id="mockParent" hidden></p>
+      <p class="mock-q" id="mockQ" aria-live="polite"></p>
+      <p class="mock-hint" id="mockHint"></p>
+      <div class="mock-actions">
+        <button type="button" class="btn" id="mockNext">次の質問へ</button>
+        <button type="button" class="btn ghost" id="mockFu">深掘りの質問を出す</button>
+      </div>
+      <div class="mock-end"><button type="button" class="btn ghost small" id="mockStop">ここで終了する</button></div>
+    </div>
+
+    <div id="mockDone" hidden>
+      <p><b id="mockSum"></b></p>
+      <p class="aim" id="mockAdvice"></p>
+      <ol class="mock-result" id="mockResult"></ol>
+      <div class="mock-actions"><button type="button" class="btn" id="mockAgain">もう一度（質問を入れ替える）</button></div>
+    </div>
+  </section>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.8 予定 ============ -->
+  <div class="chapter" id="ch8" data-ch-label="CH.8 当日までの予定"><span class="ch-no">CH.8</span><h2>11月25日までの予定</h2></div>
+
+  <ul class="plan" id="plan">
+    <li data-from="2026-11-17" data-to="2026-11-18"><span class="d">11/17（火）・18（水）｜言ったことを固める</span>
+      <label><input type="checkbox" class="chk" data-k="p1a">エントリーシート2本と動画の控えを、声に出して読み返す（CH.2）</label>
+      <label><input type="checkbox" class="chk" data-k="p1b">CH.3 の4問を、何も見ずに言えるまで声に出す</label>
+      <label><input type="checkbox" class="chk" data-k="p1c">自分メモを埋める（辞める理由、住んでいること、信頼された場面、事実の確認）</label>
+    </li>
+    <li data-from="2026-11-19" data-to="2026-11-20"><span class="d">11/19（木）・20（金）｜深掘りに備える</span>
+      <label><input type="checkbox" class="chk" data-k="p2a">CH.4 の F1〜F14 を声に出して答える</label>
+      <label><input type="checkbox" class="chk" data-k="p2b">問答集の「ES」章 E1〜E14 を声に出して答える</label>
+      <label><input type="checkbox" class="chk" data-k="p2c">CH.5 の10問の一言目を決める</label>
+    </li>
+    <li data-from="2026-11-21" data-to="2026-11-21"><span class="d">11/21（土）｜まちを見る・1回目の通し</span>
+      <label><input type="checkbox" class="chk" data-k="p3a">F2 で話す場所を実際に歩く。自宅周辺をハザードマップで確かめる</label>
+      <label><input type="checkbox" class="chk" data-k="p3b">「広報かしわら」11月号と、市サイトの新着情報を見る（F13）</label>
+      <label><input type="checkbox" class="chk" data-k="p3c">模擬面接 1回目（録音する）</label>
+    </li>
+    <li data-from="2026-11-22" data-to="2026-11-22"><span class="d">11/22（日）｜弱いところを直す</span>
+      <label><input type="checkbox" class="chk" data-k="p4a">録音を聞き、長すぎた答え・詰まった答えを言い直す</label>
+      <label><input type="checkbox" class="chk" data-k="p4b">問答集の CH.1（転職理由）と CH.4（技術職として）から、答えにくいものだけ</label>
+      <label><input type="checkbox" class="chk" data-k="p4c">模擬面接 2回目</label>
+    </li>
+    <li data-from="2026-11-23" data-to="2026-11-23"><span class="d">11/23（月・祝）｜人を相手に話す</span>
+      <label><input type="checkbox" class="chk" data-k="p5a">家族や知人に面接官役を頼み、模擬面接 3回目。画面の質問を読んでもらう</label>
+      <label><input type="checkbox" class="chk" data-k="p5b">逆質問を2つ、最後の一言を決める（CH.6）</label>
+    </li>
+    <li data-from="2026-11-24" data-to="2026-11-24"><span class="d">11/24（火）｜前日は新しいことをしない</span>
+      <label><input type="checkbox" class="chk" data-k="p6a">市からの案内を読み直す（集合時刻、場所、持ち物）</label>
+      <label><input type="checkbox" class="chk" data-k="p6b">服、靴、持ち物をそろえる。市役所までの時間を確かめる</label>
+      <label><input type="checkbox" class="chk" data-k="p6c">「控室で見る1枚」を読んで、早く寝る</label>
+    </li>
+    <li data-from="2026-11-25" data-to="2026-11-25"><span class="d">11/25（水）｜面接当日</span>
+      CH.9 の「当日の動き」と「控室で見る1枚」だけを見る。
+    </li>
+  </ul>
+  <p class="aim" style="margin-top:10px">仕事のある日は、30分取れれば十分です。黙って読む30分より、声に出す10分のほうが効きます。</p>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ CH.9 当日 ============ -->
+  <div class="chapter" id="ch9" data-ch-label="CH.9 当日の動き"><span class="ch-no">CH.9</span><h2>当日の動き</h2></div>
+
+  <div class="chapter-warn">
+    <b>市からの案内が最優先です</b><br>
+    集合時刻、集合場所、持ち物は、市から届いた案内（メールや受験システムの通知）のとおりにしてください。この資料は、その案内の中身を見ずに作っています。下は一般的な注意です。
+  </div>
+
+  <details class="qa">
+    <summary><span class="qno">前</span><span class="qtext">出発から受付まで</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <ul class="points">
+        <li>服装はスーツ。作業着や現場の服では行かない</li>
+        <li>持ち物：案内で指定されたもの、筆記用具、エントリーシートの控え、腕時計、ハンカチ</li>
+        <li>集合時刻の<b>10〜15分前</b>に庁舎に着く。早く着きすぎたら、外で控えを読み返す</li>
+        <li>遅れそうなとき、体調が悪いときは、分かった時点で人事課に電話する（072-971-5196。市役所の電話受付は9時〜16時30分）</li>
+        <li>庁舎に入ったら、スマートフォンの電源を切る</li>
+        <li>住んでいるまちの市役所です。庁舎の中や行き帰りで会う人は、職員かもしれません。敷地に入ったところから面接が始まっていると考えてください</li>
+      </ul>
+      <label class="done"><input type="checkbox" class="chk" data-k="d1">確認済み</label>
+    </div>
+  </details>
+
+  <details class="qa">
+    <summary><span class="qno">中</span><span class="qtext">入室から退室まで</span><span class="chev">▶</span></summary>
+    <div class="qbody">
+      <ul class="points">
+        <li>ノックして「どうぞ」を待つ →「失礼いたします」→ 椅子の横で、受験番号と氏名（指示があれば、そのとおりに）→「よろしくお願いいたします」→「おかけください」と言われてから座る</li>
+        <li>背もたれに寄りかからない。手は膝の上</li>
+        <li>目線は、質問した人を中心に。面接官が複数いるときは、ときどき全員を見る</li>
+        <li>声は、現場で話すときより少しゆっくり。語尾まではっきり</li>
+        <li>終わったら、座ったまま「ありがとうございました」→ 立って椅子の横で一礼 → 扉の前でもう一度「失礼いたします」</li>
+      </ul>
+      <div class="warn"><b>うまく答えられなかった質問があっても、引きずらない</b>／面接官は、一つの答えではなく、25分を通した人柄を見ています。次の質問を落ち着いて聞くことに切り替えてください。</div>
+      <label class="done"><input type="checkbox" class="chk" data-k="d2">確認済み</label>
+    </div>
+  </details>
+
+  <p class="back-to-toc"><a href="#toc">▲ 目次へ戻る</a></p>
+
+  <!-- ============ 直前の1枚 ============ -->
+  <div class="chapter" id="ch10" data-ch-label="控室で見る1枚"><span class="ch-no">直前</span><h2>控室で見る1枚</h2></div>
+
+  <div class="checklist">
+    <h3>自分の柱（3つ）</h3>
+    <ul>
+      <li>最後まで責任を持って、正確にやり遂げる（自作のチェックリスト）</li>
+      <li>立場の違う人と調整する（埋設物の協議と試掘、近隣への直接の説明）</li>
+      <li>柏原市に住む市民として、申請する側・施工する側の経験を行政の立場で活かす</li>
+    </ul>
+    <h3>話し方（5つ）</h3>
+    <ul>
+      <li>最初の一文で結論を言う</li>
+      <li>1つの答えは40〜60秒。足りなければ聞いてもらえる</li>
+      <li>書いたこと・動画で話したことより強く言わない（「一度もない」「ゼロ」は言わない）</li>
+      <li>知らないことは「存じません」と言う</li>
+      <li>今の会社の悪口を言わない</li>
+    </ul>
+    <h3>取り違えない事実（3つ）</h3>
+    <ul>
+      <li>水道は令和7年4月に大阪広域水道企業団へ。市の仕事は下水道と道路</li>
+      <li>大和川の本体は国の管理。市が担うのは雨水を流す下水道・水路、市道</li>
+      <li>「寄り添う」は、基準を緩めることではない。どの業者にも同じ目で</li>
+    </ul>
+    <h3>最後に</h3>
+    <ul>
+      <li>書類・動画・検査はすでに通過している。あとは、いつもの現場の打合せのように、落ち着いて話す</li>
+    </ul>
+  </div>
+
+  <footer class="note">
+    本資料は面接対策用の参考メモです。面接の進め方や質問は市が公表しているものではなく、経験者採用の個人面接で一般に聞かれる内容と、提出済みの書類・動画の内容から想定したものです。途中経過（土木職3名が最終面接へ）は市の採用ページ（2026年11月13日更新）、開庁時間は市の「市役所開庁時間の変更について」で2026年11月17日に確認しました。柏原市に関する事実や数字を面接で話すときは、必ず市の公式ホームページで最新の内容を確かめてください。<br>
+    <a href="https://www.city.kashiwara.lg.jp/docs/2026091400077/" rel="noopener">市の採用ページ</a>　／　<a href="https://www.city.kashiwara.lg.jp/docs/2025121100079/" rel="noopener">市役所開庁時間の変更について</a>　／　<a href="./kashiwara-kojin-mensetsu-qa.html">個人面接想定問答（全69問）</a>
+  </footer>
+
+</div>
+
+<button type="button" class="toc-fab" id="tocFab" aria-label="目次へ戻る">▲ 目次</button>
+
+<script>
+(function(){
+"use strict";
+
+/* ===================== 保存 ===================== */
+var KEY = 'kashiwara-saishu-v1';
+var st = { chk:{}, memo:{}, speak:false, runs:[] };
+try{
+  var raw = JSON.parse(localStorage.getItem(KEY) || 'null');
+  if(raw && typeof raw === 'object'){
+    if(raw.chk && typeof raw.chk === 'object') st.chk = raw.chk;
+    if(raw.memo && typeof raw.memo === 'object') st.memo = raw.memo;
+    st.speak = !!raw.speak;
+    if(Array.isArray(raw.runs)) st.runs = raw.runs;
+  }
+}catch(e){ /* 読めなくても動く */ }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){ /* 保存できなくても動く */ } }
+function $(id){ return document.getElementById(id); }
+function each(sel, fn){ Array.prototype.forEach.call(document.querySelectorAll(sel), fn); }
+
+/* ===================== 面接までの日数 ===================== */
+var INTERVIEW = new Date(2026, 10, 25);
+(function(){
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var d = Math.round((INTERVIEW.getTime() - today.getTime()) / 86400000);
+  if(d < 0) return;
+  $('dday').hidden = false;
+  if(d === 0){ $('ddayNum').textContent = '本日'; $('ddaySub').textContent = '集合時刻は市からの案内どおりに'; }
+  else { $('ddayNum').textContent = 'あと' + d + '日'; $('ddaySub').textContent = '11月25日（水）の面接まで'; }
+
+  each('#plan li', function(li){
+    var f = li.getAttribute('data-from').split('-'), t = li.getAttribute('data-to').split('-');
+    var from = new Date(+f[0], +f[1]-1, +f[2]), to = new Date(+t[0], +t[1]-1, +t[2]);
+    if(today.getTime() > to.getTime()) li.classList.add('is-past');
+    else if(today.getTime() >= from.getTime()) li.classList.add('is-today');
+  });
+})();
+
+/* ===================== チェックと進捗 ===================== */
+var chks = document.querySelectorAll('.chk');
+function update(){
+  var n = 0;
+  Array.prototype.forEach.call(chks, function(c){ if(c.checked) n++; });
+  $('count').textContent = n + ' / ' + chks.length;
+  $('fill').style.width = (chks.length ? n / chks.length * 100 : 0) + '%';
+}
+Array.prototype.forEach.call(chks, function(c){
+  var k = c.getAttribute('data-k');
+  if(st.chk[k]) c.checked = true;
+  c.addEventListener('change', function(){
+    if(c.checked) st.chk[k] = true; else delete st.chk[k];
+    save(); update();
+  });
+});
+update();
+
+/* ===================== 自分メモ ===================== */
+function fit(ta){ if(ta.offsetParent === null) return; ta.style.height = 'auto'; ta.style.height = Math.max(92, ta.scrollHeight + 2) + 'px'; }
+each('textarea[data-memo]', function(ta){
+  var k = ta.getAttribute('data-memo');
+  if(typeof st.memo[k] === 'string') ta.value = st.memo[k];
+  ta.addEventListener('input', function(){ st.memo[k] = ta.value; save(); fit(ta); });
+  fit(ta);
+});
+var all = document.querySelectorAll('details.qa');
+Array.prototype.forEach.call(all, function(d){
+  d.addEventListener('toggle', function(){
+    if(d.open) Array.prototype.forEach.call(d.querySelectorAll('textarea[data-memo]'), fit);
+  });
+});
+
+var btnAll = $('toggleAll');
+btnAll.addEventListener('click', function(){
+  var open = btnAll.textContent.indexOf('開く') !== -1;
+  Array.prototype.forEach.call(all, function(d){ d.open = open; });
+  btnAll.textContent = open ? 'すべて閉じる' : 'すべて開く';
+});
+window.addEventListener('beforeprint', function(){ Array.prototype.forEach.call(all, function(d){ d.open = true; }); });
+
+/* ===================== 目次ボタン・現在の章 ===================== */
+var fab = $('tocFab'), toc = $('toc');
+var ticking = false;
+function syncFab(){ ticking = false; fab.classList.toggle('show', window.scrollY > 360 && !mockRunning); }
+window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; window.requestAnimationFrame(syncFab); } }, {passive:true});
+fab.addEventListener('click', function(){ toc.scrollIntoView(); toc.setAttribute('tabindex','-1'); toc.focus({preventScroll:true}); });
+
+var chNow = $('chNow');
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting) chNow.textContent = '・' + en.target.getAttribute('data-ch-label'); });
+  }, {rootMargin:'0px 0px -85% 0px', threshold:0});
+  each('.chapter[id]', function(ch){ io.observe(ch); });
+}
+
+/* ===================== 模擬面接 ===================== */
+// q: 質問　ref: 骨子のある場所　fu: 深掘りの質問
+var POOL = {
+  open: [
+    { q:'柏原市にお住まいとのことですが、いつ頃からお住まいですか。', ref:'F1', fu:['住んでみて、柏原市の良いところはどこだと感じますか。'] },
+    { q:'これまでの職務経歴を、1分程度で簡単に説明してください。', ref:'問答集 Q16', fu:['現在の会社では、何名くらいの体制で現場を担当していますか。'] }
+  ],
+  motive: { q:'柏原市を志望した理由を教えてください。', ref:'C1', fu:['住んでいることと、そこで働くことは別ではありませんか。','近くの市でも同じ仕事はできますが、なぜ柏原市ですか。'] },
+  es: [
+    { q:'自己PRを1分程度でお願いします。', ref:'C2・問答集 E1', fu:['チェックリストは、具体的にどのようなものですか。','ダブルチェックをしていても、見落としたことはありませんか。'] },
+    { q:'この2年間で力を入れたことを教えてください。', ref:'C3・問答集 E5', fu:['試掘をして、図面と実際が違っていたことはありますか。','近隣の方に納得してもらえなかったことはありますか。'] },
+    { q:'「発注者や関係者から信頼をいただいている」とありますが、どんな場面でそう感じましたか。', ref:'F5', fu:['その信頼は、何が理由で得られたと思いますか。'] },
+    { q:'官公庁へ提出する申請書類とは、どのような書類ですか。', ref:'F6', fu:['道路法第24条の工事とは、どのようなものですか。','柏原市に申請を出したことはありますか。'] },
+    { q:'「相手に分かりやすく伝える」ために、具体的にどんな工夫をしていますか。', ref:'F7', fu:['伝えたつもりが伝わっていなかった、という経験はありますか。'] },
+    { q:'工程を遅らせられない現場で、安全と工期がぶつかったことはありますか。', ref:'F8', fu:['交通規制の時間内に作業が終わりそうにないとき、どうしますか。'] },
+    { q:'「現場全体で徹底した」とありますが、職人さんにどうやって守ってもらいましたか。', ref:'F10', fu:['自分より経験の長い職人さんと、意見が合わなかったときはどうしましたか。'] },
+    { q:'「大きな事故や工期の遅れを出すことなく」とありますが、小さなトラブルはありましたか。', ref:'問答集 E3', fu:['そのあと、仕事のやり方で変えたことはありますか。'] },
+    { q:'これまでの仕事での失敗と、そこから学んだことを教えてください。', ref:'問答集 Q22', fu:['同じ失敗を防ぐために、今はどうしていますか。'] },
+    { q:'施工マニュアルや安全基準を毎回確認するとのことですが、慣れた作業でも毎回ですか。', ref:'F11', fu:['確認に時間をかけすぎて、周りを待たせたことはありませんか。'] }
+  ],
+  quit: { q:'なぜ今の会社を辞めて、市役所で働こうと思ったのですか。', ref:'C4・問答集 Q04', fu:['今の会社で、その希望をかなえることはできないのですか。','なぜ、このタイミングなのですか。'] },
+  job: [
+    { q:'前職より年収が下がる可能性がありますが、大丈夫ですか。', ref:'CH.5・問答集 Q09', fu:['ご家族は、今回の転職についてどうおっしゃっていますか。'] },
+    { q:'年下の上司や先輩のもとで働くことになりますが、やっていけますか。', ref:'CH.5・問答集 Q10', fu:['前職のやり方と市のやり方が違ったら、どうしますか。'] },
+    { q:'現在は在職中ですか。採用となった場合、いつから働けますか。', ref:'CH.5・問答集 Q12', fu:['今の会社には、受験のことを伝えていますか。'] },
+    { q:'ほかに受験している自治体や会社はありますか。', ref:'CH.5・問答集 Q15', fu:['両方に合格したら、どちらに行きますか。'] },
+    { q:'また数年で辞めてしまうのでは、という心配があります。どうお考えですか。', ref:'CH.5・問答集 Q14', fu:['公務員の仕事が思っていたものと違ったら、どうしますか。'] }
+  ],
+  life: { q:'暮らす中で浸水対策や老朽化対策の重要性を感じている、とのことですが、具体的にどこで感じましたか。', ref:'F2', fu:['そこは、誰が管理している施設か分かりますか。','市の職員になったら、その場所にどう関わりたいですか。'] },
+  yorisoi: { q:'「業者と同じ目線に立って寄り添った指導」とは、具体的にどういうことですか。', ref:'F3', fu:['業者に甘くなる心配はありませんか。','知り合いの業者が市の工事を受注したら、どうしますか。'] },
+  city: [
+    { q:'給排水の工事が中心のようですが、柏原市の水道は市の事業ではありません。入庁後は何をしたいですか。', ref:'問答集 E11', fu:['下水道の仕事では、どんなことが課題だと思いますか。'] },
+    { q:'浸水や土砂災害への備えとして、市の土木職に何ができると思いますか。', ref:'問答集 E12', fu:['大和川は、誰が管理しているか分かりますか。'] },
+    { q:'発注者としての土木職は、具体的に何をする仕事だと思いますか。', ref:'問答集 Q31', fu:['その中で、すぐにできることと、これから学ぶことは何ですか。'] },
+    { q:'老朽化したインフラに、どう対応すべきだと思いますか。', ref:'問答集 Q33', fu:['予算が限られる中で、どう優先順位をつけますか。'] },
+    { q:'「道路に穴が空いている」と市民から通報が入りました。どう動きますか。', ref:'問答集 Q38', fu:['そこが市道ではなかった場合は、どうしますか。'] },
+    { q:'柏原市の課題を一つ挙げて、どう関わりたいか教えてください。', ref:'問答集 Q25', fu:['その課題について、市が行っている取り組みを知っていますか。'] },
+    { q:'最近の柏原市の取り組みやニュースで、関心を持ったものはありますか。', ref:'F13', fu:['それは、土木職の仕事とどう関わると思いますか。'] },
+    { q:'市民の声を丁寧に受け止めたい、とのことですが、すべての要望には応えられません。どうしますか。', ref:'F12', fu:['何度説明しても納得していただけないときは、どうしますか。'] }
+  ],
+  person: [
+    { q:'あなたの長所と短所を教えてください。', ref:'問答集 Q23', fu:['その短所を補うために、何かしていることはありますか。'] },
+    { q:'ストレスを感じたとき、どう対処していますか。', ref:'問答集 Q51', fu:['最近、いちばんプレッシャーを感じたのはどんな場面でしたか。'] },
+    { q:'上司と意見が対立したら、どうしますか。', ref:'問答集 Q47', fu:['それでも上司の判断が間違っていると思ったら、どうしますか。'] },
+    { q:'チームで仕事をするうえで、大切にしていることは何ですか。', ref:'F7・F10', fu:['チームの中で、あなたはどんな役割になることが多いですか。'] },
+    { q:'近所の方や知人から「うちの前の道を先に直してほしい」と頼まれたら、どうしますか。', ref:'F4', fu:['断ったことで関係が悪くなるかもしれませんが、それでも断りますか。'] },
+    { q:'今回は複数の方が受験されています。その中で、あなたを採用する理由は何だと思いますか。', ref:'F14', fu:['逆に、ご自身に足りないと思うところは何ですか。'] },
+    { q:'希望しない部署に配属されたら、どうしますか。', ref:'CH.5・問答集 Q49', fu:['現場に出ない事務の仕事が続いても大丈夫ですか。'] },
+    { q:'災害時には夜間や休日にも呼び出しがありますが、対応できますか。', ref:'CH.5・問答集 Q41', fu:['ご自身やご家族が被災していた場合は、どうしますか。'] },
+    { q:'10年後、柏原市役所でどうなっていたいですか。', ref:'問答集 Q53', fu:['そのために、入庁してからまず何をしますか。'] }
+  ],
+  close1: { q:'最後に、何か質問はありますか。', ref:'G1', fu:[] },
+  close2: { q:'最後に、言い残したことや伝えたいことがあればどうぞ。', ref:'G2', fu:[] }
+};
+var PHASE = { open:'導入', motive:'志望動機', es:'職務経験の深掘り', quit:'転職理由', job:'条件の確認', life:'柏原市・土木職', yorisoi:'柏原市・土木職', city:'柏原市・土木職', person:'人物', close1:'締め', close2:'締め' };
+var TOTAL_SEC = 25 * 60;
+
+function pick(arr, n){
+  var a = arr.slice(), out = [];
+  while(out.length < n && a.length){ out.push(a.splice(Math.floor(Math.random() * a.length), 1)[0]); }
+  return out;
+}
+function buildSet(){
+  var set = [];
+  function add(key, items){ items.forEach(function(it){ set.push({ phase: PHASE[key], q: it.q, ref: it.ref, fu: it.fu.slice() }); }); }
+  add('open', pick(POOL.open, 1));
+  add('motive', [POOL.motive]);
+  add('es', pick(POOL.es, 3));
+  add('quit', [POOL.quit]);
+  add('job', pick(POOL.job, 1));
+  add('life', [POOL.life]);
+  add('yorisoi', [POOL.yorisoi]);
+  add('city', pick(POOL.city, 1));
+  add('person', pick(POOL.person, 2));
+  add('close1', [POOL.close1]);
+  add('close2', [POOL.close2]);
+  return set;
+}
+
+var mockRunning = false, set = [], idx = 0, fuIdx = 0, log = [], totalStart = 0, segStart = 0, timer = null, wakeLock = null, speakToken = 0;
+var canSpeak = ('speechSynthesis' in window) && (typeof window.SpeechSynthesisUtterance === 'function');
+if(!canSpeak){ $('speakOpt').hidden = true; st.speak = false; }
+$('speakChk').checked = !!st.speak;
+$('speakChk').addEventListener('change', function(){ st.speak = $('speakChk').checked; save(); });
+
+function fmt(sec){ sec = Math.max(0, Math.floor(sec)); return Math.floor(sec / 60) + ':' + ('0' + (sec % 60)).slice(-2); }
+function say(text){
+  if(!canSpeak || !st.speak) return;
+  try{
+    var token = ++speakToken;
+    window.speechSynthesis.cancel();
+    var u = new window.SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP'; u.rate = 1;
+    // 読み上げが終わった時点から、答えの時間を計り直す
+    u.onend = function(){ if(token === speakToken && mockRunning) segStart = Date.now(); };
+    window.speechSynthesis.speak(u);
+  }catch(e){ /* 読み上げできなくても続ける */ }
+}
+function hush(){ speakToken++; if(canSpeak){ try{ window.speechSynthesis.cancel(); }catch(e){} } }
+function lockScreen(){
+  try{
+    if(navigator.wakeLock && navigator.wakeLock.request){
+      navigator.wakeLock.request('screen').then(function(l){ wakeLock = l; }).catch(function(){});
+    }
+  }catch(e){ /* 対応していない端末ではそのまま */ }
+}
+function unlockScreen(){ try{ if(wakeLock){ wakeLock.release(); } }catch(e){} wakeLock = null; }
+document.addEventListener('visibilitychange', function(){ if(mockRunning && document.visibilityState === 'visible') lockScreen(); });
+
+function showQuestion(){
+  var item = set[idx];
+  var isFu = fuIdx > 0;
+  var text = isFu ? item.fu[fuIdx - 1] : item.q;
+  $('mockNo').textContent = (idx + 1) + '/' + set.length;
+  $('mockPhase').textContent = item.phase + (isFu ? '｜深掘り' : '');
+  $('mockParent').hidden = !isFu;
+  $('mockParent').textContent = isFu ? '（' + item.q + '）' : '';
+  $('mockQ').textContent = text;
+  $('mockFu').disabled = fuIdx >= item.fu.length;
+  $('mockNext').textContent = idx === set.length - 1 ? '面接を終える' : '次の質問へ';
+  segStart = Date.now();
+  tick();
+  say(text);
+}
+function closeSeg(){
+  var item = set[idx];
+  var secs = (Date.now() - segStart) / 1000;
+  if(fuIdx === 0) log.push({ q: item.q, ref: item.ref, secs: secs, fu: [] });
+  else log[log.length - 1].fu.push({ q: item.fu[fuIdx - 1], secs: secs });
+}
+function tick(){
+  if(!mockRunning) return;
+  var now = Date.now();
+  var remain = TOTAL_SEC - (now - totalStart) / 1000;
+  var r = $('mockRemain');
+  if(remain >= 0){ r.textContent = fmt(remain); r.classList.remove('over'); }
+  else { r.textContent = '+' + fmt(-remain); r.classList.add('over'); }
+  var ans = (now - segStart) / 1000;
+  var a = $('mockAns'), h = $('mockHint');
+  a.textContent = fmt(ans);
+  var over = ans >= 75;
+  a.classList.toggle('over', over);
+  h.classList.toggle('over', over);
+  if(ans < 40) h.textContent = '結論から。40〜60秒で答える';
+  else if(ans < 60) h.textContent = 'そろそろまとめに入る';
+  else if(ans < 75) h.textContent = '60秒を過ぎました。結論に戻って締める';
+  else h.textContent = '長くなっています。「まとめますと」で切る';
+}
+function startMock(){
+  set = buildSet(); idx = 0; fuIdx = 0; log = [];
+  mockRunning = true;
+  $('mockIntro').hidden = true; $('mockDone').hidden = true; $('mockRun').hidden = false;
+  totalStart = Date.now();
+  if(timer) clearInterval(timer);
+  timer = setInterval(tick, 250);
+  lockScreen();
+  syncFab();
+  showQuestion();
+  jumpToMock();
+}
+function finishMock(){
+  mockRunning = false;
+  if(timer){ clearInterval(timer); timer = null; }
+  hush(); unlockScreen();
+  var total = (Date.now() - totalStart) / 1000;
+  var longN = 0, shortN = 0;
+  var ol = $('mockResult');
+  while(ol.firstChild) ol.removeChild(ol.firstChild);
+  log.forEach(function(e, i){
+    var li = document.createElement('li');
+    var t = document.createElement('span'); t.className = 'rt'; t.textContent = fmt(e.secs);
+    li.appendChild(t);
+    li.appendChild(document.createTextNode((i + 1) + '. ' + e.q));
+    if(e.secs >= 75){ longN++; var f1 = document.createElement('span'); f1.className = 'flag'; f1.textContent = '長い'; li.appendChild(f1); }
+    else if(e.secs < 15){ shortN++; var f2 = document.createElement('span'); f2.className = 'flag'; f2.textContent = '短い'; li.appendChild(f2); }
+    e.fu.forEach(function(s){
+      var sp = document.createElement('span'); sp.className = 'sub';
+      sp.textContent = '└ ' + fmt(s.secs) + '　' + s.q;
+      li.appendChild(sp);
+    });
+    var rr = document.createElement('span'); rr.className = 'rr'; rr.textContent = '骨子 → ' + e.ref;
+    li.appendChild(rr);
+    ol.appendChild(li);
+  });
+  $('mockSum').textContent = log.length + '問に答えて、' + fmt(total) + ' かかりました（本番は25:00）。';
+  var adv = [];
+  if(log.length < set.length) adv.push('途中で終了しました。次は最後の「締め」まで通してください。');
+  if(total > TOTAL_SEC + 60) adv.push('25分を超えています。1つの答えを短くします。');
+  if(longN) adv.push('75秒を超えた答えが' + longN + '問あります。最初の一文で結論を言い、具体例は一つに絞ってください。');
+  if(shortN) adv.push('15秒未満の答えが' + shortN + '問あります。理由か具体例を一つ足してください（確認の質問は短くて構いません）。');
+  if(!adv.length) adv.push('時間の配分は本番どおりです。次は、言葉に詰まった質問の骨子を見直してください。');
+  $('mockAdvice').textContent = adv.join(' ');
+  st.runs.push({ d: new Date().toISOString().slice(0, 10), t: Math.round(total), n: log.length });
+  if(st.runs.length > 20) st.runs = st.runs.slice(-20);
+  save(); renderRuns();
+  $('mockRun').hidden = true; $('mockDone').hidden = false;
+  syncFab();
+  jumpToMock();
+}
+// 質問とボタンが必ず画面に入るよう、アニメーションなしで模擬面接の枠まで移動する
+function jumpToMock(){
+  try{ $('mock').scrollIntoView({ behavior:'instant', block:'start' }); }
+  catch(e){ $('mock').scrollIntoView(); }
+}
+function renderRuns(){
+  var n = st.runs.length;
+  $('mockRuns').textContent = n ? 'これまでに' + n + '回通しました（前回 ' + fmt(st.runs[n - 1].t) + '・' + st.runs[n - 1].n + '問）。当日までに3回が目安です。' : '当日までに3回通すのが目安です。';
+}
+renderRuns();
+
+$('mockStart').addEventListener('click', startMock);
+$('mockAgain').addEventListener('click', startMock);
+$('mockNext').addEventListener('click', function(){
+  closeSeg();
+  if(idx >= set.length - 1){ finishMock(); return; }
+  idx++; fuIdx = 0; showQuestion();
+});
+$('mockFu').addEventListener('click', function(){
+  if(fuIdx >= set[idx].fu.length) return;
+  closeSeg(); fuIdx++; showQuestion();
+});
+$('mockStop').addEventListener('click', function(){ closeSeg(); finishMock(); });
+
+syncFab();
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+if(location.protocol === 'file:') return;
+if(!('serviceWorker' in navigator)) return;
+
+function showUpdateBanner(reg){
+  try{
+    if(document.getElementById('swUpdateBanner')) return;
+    var bar = document.createElement('div');
+    bar.id = 'swUpdateBanner';
+    bar.setAttribute('role','status');
+    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;'+
+      'display:flex;align-items:center;justify-content:space-between;gap:12px;'+
+      'background:#173630;color:#E8EDE7;'+
+      'font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;'+
+      'font-size:13px;line-height:1.6;'+
+      'padding:10px 14px calc(10px + env(safe-area-inset-bottom));'+
+      'box-shadow:0 -2px 12px rgba(0,0,0,.25)';
+    var txt = document.createElement('span');
+    txt.textContent = '新しい版があります';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = '再読み込み';
+    btn.style.cssText = 'flex:none;min-height:36px;padding:6px 14px;border-radius:8px;'+
+      'border:1px solid #E8EDE7;background:transparent;color:#E8EDE7;font-size:13px;cursor:pointer';
+    btn.addEventListener('click', function(){
+      try{ if(reg.waiting){ reg.waiting.postMessage('SKIP_WAITING'); } }catch(e){}
+      bar.remove();
+    });
+    bar.appendChild(txt);
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }catch(e){ /* no-op */ }
+}
+
+try{
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').then(function(reg){
+      if(reg.waiting && navigator.serviceWorker.controller){ showUpdateBanner(reg); }
+      reg.addEventListener('updatefound', function(){
+        var nw = reg.installing;
+        if(!nw) return;
+        nw.addEventListener('statechange', function(){
+          if(nw.state === 'installed' && navigator.serviceWorker.controller){
+            showUpdateBanner(reg);
+          }
+        });
+      });
+    }).catch(function(){ /* SW登録に失敗してもアプリ本体は通常どおり動作する */ });
+
+    var refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if(refreshing) return;
+      refreshing = true;
+      location.reload();
+    });
+  });
+}catch(e){ /* no-op */ }
+})();
+</script>
+
+</body>
+</html>
