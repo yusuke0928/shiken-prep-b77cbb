@@ -7,7 +7,7 @@
 //    届いたときだけ呼ぶ（学習中に中身が急に入れ替わって混乱しないように）。
 //  - バージョンを変えたら CACHE_VERSION を上げる。古いキャッシュは activate で削除。
 
-const CACHE_VERSION = 'kashiwara-v12.20261117';
+const CACHE_VERSION = 'kashiwara-v13.20261117';
 
 const PRECACHE_URLS = [
   './',
@@ -17,6 +17,7 @@ const PRECACHE_URLS = [
   './kashiwara-senko-taisaku.html',
   './kashiwara-kojin-mensetsu-qa.html',
   './kashiwara-saishu-mensetsu.html',
+  './kashiwara-toujitsu-mondo.html',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',

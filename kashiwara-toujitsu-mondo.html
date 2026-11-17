@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="柏原市対策">
+<meta name="theme-color" content="#173630" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0C1815" media="(prefers-color-scheme: dark)">
+<title>柏原市役所 土木職 最終面接 当日の想定問答集</title>
+<style>
+  :root{
+    --ink:#16211F;
+    --ink-soft:#4A5854;
+    --paper:#EEF0EA;
+    --paper-hi:#F7F8F4;
+    --river:#24504B;
+    --river-deep:#173630;
+    --contour:#C4CCC2;
+    --marker:#DCE94F;
+    --marker-soft:#F0F5B8;
+    --red:#9A2B1F;
+    --disp:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic","Hiragino Sans","Noto Sans JP",sans-serif;
+    --body:"BIZ UDPGothic","Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+    --mono:"Roboto Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:16px;line-height:1.85;
+    font-feature-settings:"palt";
+  }
+  .grid-bg{
+    background-image:
+      linear-gradient(to right, var(--contour) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--contour) 1px, transparent 1px);
+    background-size:19px 19px;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px calc(80px + env(safe-area-inset-bottom))}
+
+  header.cover{background:var(--river-deep);color:#E8EDE7;border-bottom:6px solid var(--marker);padding-top:env(safe-area-inset-top)}
+  .cover-inner{max-width:760px;margin:0 auto;padding:36px 18px 30px}
+  .stamp{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.22em;border:1px solid rgba(232,237,231,.5);padding:5px 11px;margin-bottom:20px}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(26px,6.6vw,40px);line-height:1.3;margin:0 0 14px;letter-spacing:.01em}
+  h1 .thin{display:block;font-size:.44em;font-weight:500;letter-spacing:.14em;opacity:.75;margin-bottom:10px}
+  .cover-meta{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:rgba(232,237,231,.72);border-top:1px solid rgba(232,237,231,.25);padding-top:14px;margin-top:20px;display:flex;flex-wrap:wrap;gap:6px 22px}
+  .cover-flow{font-size:13px;color:rgba(232,237,231,.82);margin-top:16px;line-height:1.9}
+  .cover-flow b{color:#E8EDE7}
+  .hub-btn{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;margin:0 8px 16px 0;border:1px solid rgba(232,237,231,.55);color:#E8EDE7;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.02em}
+  .hub-btn:active{background:rgba(232,237,231,.15)}
+  .hub-btn:focus-visible{outline:2px solid #DCE94F;outline-offset:2px}
+  .hub-mini{flex:none;display:inline-flex;align-items:center;min-height:32px;padding:3px 9px;border:1px solid var(--contour);color:var(--ink);font-size:11.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+
+  .howto{background:var(--paper-hi);border:1px solid var(--contour);padding:18px 20px;margin:26px 0 8px;font-size:14.5px;line-height:1.9}
+  .howto + .howto{margin-top:14px}
+  .howto b{font-family:var(--disp);font-weight:700}
+  .howto.hier{border-left:3px solid var(--river)}
+  .howto a{color:var(--river);font-weight:700}
+  mark{background:var(--marker-soft);color:inherit;border-bottom:2px solid var(--marker);padding:0 1px}
+
+  .progress{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--contour);margin:0 -18px 0;padding:11px 18px;display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
+  #count{white-space:nowrap;flex:none}
+  .bar{flex:1;height:5px;background:var(--contour);position:relative;overflow:hidden;min-width:20px}
+  .bar span{position:absolute;inset:0 auto 0 0;width:0;background:var(--river);transition:width .3s ease}
+  .ctrl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;background:none;border:1px solid var(--river);color:var(--river);padding:5px 10px;cursor:pointer;white-space:nowrap;border-radius:0}
+  .ctrl:hover{background:var(--river);color:var(--paper-hi)}
+  .ctrl:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+  /* ---- 絞り込み ---- */
+  .filter{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px}
+  .filter button{
+    font-family:var(--disp);font-weight:700;font-size:13.5px;
+    min-height:44px;padding:8px 14px;border-radius:0;cursor:pointer;
+    background:var(--paper-hi);border:1px solid var(--contour);color:var(--ink);
+    -webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;
+  }
+  .filter button[aria-pressed="true"]{background:var(--river);border-color:var(--river);color:#F7F8F4}
+  .filter button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .filter-note{font-size:13px;color:var(--ink-soft);margin:6px 0 0}
+
+  .toc{background:var(--paper-hi);border:1px solid var(--contour);padding:18px 20px;margin:18px 0 8px;scroll-margin-top:64px}
+  .toc-title{font-family:var(--disp);font-weight:700;font-size:14px;margin:0 0 10px;letter-spacing:.04em}
+  .toc ol{margin:0;padding:0;list-style:none;display:grid;gap:2px}
+  .toc a{display:flex;gap:10px;align-items:baseline;padding:9px 6px;color:var(--ink);text-decoration:none;font-size:14.5px;border-bottom:1px dashed var(--contour)}
+  .toc li:last-child a{border-bottom:none}
+  .toc a:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .toc-no{font-family:var(--mono);font-size:11px;color:var(--river);flex:none;letter-spacing:.06em;min-width:4.6em}
+  .toc-n{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--ink-soft);flex:none}
+
+  .chapter{margin:48px 0 8px;display:flex;align-items:baseline;gap:14px;scroll-margin-top:64px}
+  .chapter .ch-no{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--river);white-space:nowrap}
+  .chapter h2{font-family:var(--disp);font-weight:900;font-size:20px;margin:0;letter-spacing:.02em}
+  .chapter::after{content:"";flex:1;height:1px;background:var(--contour)}
+  .ch-lead{font-size:14px;color:var(--ink-soft);margin:0 0 14px;line-height:1.8}
+  .back-to-toc{margin:8px 0 26px;text-align:right}
+  .back-to-toc a{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--river);text-decoration:none;border-bottom:1px solid var(--river);padding-bottom:2px}
+
+  details.qa{background:var(--paper-hi);border:1px solid var(--contour);border-left:3px solid var(--river);margin-bottom:12px}
+  details.qa[open]{border-left-color:var(--marker)}
+  details.qa summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;gap:11px;align-items:flex-start}
+  details.qa summary::-webkit-details-marker{display:none}
+  summary:focus-visible{outline:2px solid var(--river);outline-offset:-2px}
+  .qno{font-family:var(--mono);font-weight:700;font-size:12px;color:var(--river);padding-top:5px;letter-spacing:.04em;flex:none;min-width:1.7em}
+  .qtext{font-family:var(--disp);font-weight:700;font-size:16.5px;line-height:1.65;flex:1}
+  .pri{flex:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;border:1px solid var(--river);color:var(--river);padding:1px 6px;margin-top:5px;white-space:nowrap}
+  .pri.p1{background:var(--river);color:#F7F8F4}
+  .pri.p3{border-color:var(--contour);color:var(--ink-soft)}
+  .chev{flex:none;color:var(--ink-soft);font-family:var(--mono);font-size:13px;padding-top:4px;transition:transform .2s}
+  details.qa[open] .chev{transform:rotate(90deg)}
+  .qbody{border-top:1px dashed var(--contour);margin:0 16px;padding:0 0 20px}
+  .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--river);margin:16px 0 7px}
+  .ans{background:var(--paper);border:1px solid var(--contour);padding:14px 16px;font-size:16px;line-height:1.95;margin:0}
+  .pt{font-size:14.5px;line-height:1.8;margin:0}
+  .next{font-size:14.5px;line-height:1.8;margin:0;color:var(--ink-soft)}
+  .fix{background:var(--marker-soft);border-left:3px solid var(--marker);padding:11px 14px;font-size:14px;line-height:1.8;margin-top:14px}
+  .memo{margin-top:14px}
+  .memo label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--river);margin-bottom:6px}
+  .memo textarea{display:block;width:100%;min-height:92px;font:inherit;font-size:16px;line-height:1.7;color:var(--ink);background:var(--paper);border:1px solid var(--contour);border-left:3px solid var(--river);padding:10px 12px;border-radius:0;resize:vertical;-webkit-appearance:none;appearance:none}
+  .memo textarea:focus{outline:2px solid var(--river);outline-offset:1px}
+  .memo-note{font-size:12px;color:var(--ink-soft);margin-top:4px}
+  .done{margin-top:16px;display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-soft);cursor:pointer;min-height:32px}
+  .done input{width:17px;height:17px;accent-color:var(--river);cursor:pointer}
+  [hidden]{display:none!important}
+
+  footer.note{margin-top:34px;font-size:12.5px;color:var(--ink-soft);line-height:1.9;border-top:1px solid var(--contour);padding-top:16px}
+  footer.note a{color:var(--river)}
+
+  .toc-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:6px;min-height:44px;min-width:44px;padding:11px 18px;background:var(--river-deep);color:#E8EDE7;border:1px solid rgba(232,237,231,.35);border-radius:999px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.28);opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity .22s ease,transform .22s ease}
+  .toc-fab.show{opacity:.92;transform:translateY(0);pointer-events:auto}
+
+  @media (max-width:520px){
+    details.qa summary{padding:14px 13px;gap:9px}
+    .qbody{margin:0 13px}
+    .qtext{font-size:15.5px}
+    .toc-fab{right:12px;padding:11px 14px;font-size:11px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ink:#E7ECE7;--ink-soft:#A9B6AF;--paper:#121613;--paper-hi:#191F1B;
+      --river:#7FC2A6;--river-deep:#0B1210;--contour:#2E3A33;
+      --marker:#DCE94F;--marker-soft:#2C3619;--red:#F0968A;
+    }
+    .stamp{border-color:rgba(231,236,231,.35)}
+    .ctrl:hover{color:var(--river-deep)}
+    .pri.p1,.filter button[aria-pressed="true"]{color:#0B1210}
+  }
+
+  @media print{
+    body{background:#fff;font-size:10.5pt;line-height:1.6}
+    .grid-bg{background-image:none}
+    header.cover{background:#fff;color:#000;border-bottom:2px solid #000}
+    .stamp,.progress,.done,.chev,.toc,.toc-fab,.back-to-toc,.hub-btn,.filter,.filter-note,.memo-note{display:none}
+    .cover-meta,.cover-flow{color:#333;border-color:#999}
+    details.qa{break-inside:avoid;background:#fff;border-color:#999}
+    .ans{background:#fff}
+    mark{background:#eee;border-bottom:1px solid #000}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-top"><a class="hub-btn" href="./index.html">‹ 対策ハブ</a><a class="hub-btn" href="./kashiwara-saishu-mensetsu.html">‹ 最終面接 直前対策</a></div>
+    <div class="stamp">FIELD NOTE — 最終面接</div>
+    <h1><span class="thin">柏原市役所 採用試験｜土木職</span>当日の想定問答集</h1>
+    <div class="cover-meta">
+      <span>個人面接：2026年11月25日（水）・25分</span>
+      <span id="metaCount"></span>
+      <span>作成：2026.11.17</span>
+    </div>
+    <div class="cover-flow">
+      25分の面接で聞かれそうな質問を、<b>当日の進行順</b>に並べ、すべてに<b>回答例</b>を付けました。回答例は、提出したエントリーシート2本と録画動画で話した内容から組み立てています。
+    </div>
+  </div>
+</header>
+
+<div class="wrap grid-bg">
+
+  <div class="howto hier">
+    <b>回答例の読み方</b><br>
+    ・<mark>〔　〕</mark> は、本人にしか分からない事実です。<b>必ず自分の事実に置き換えてください</b>。置き換える内容は、質問の下の「自分メモ」に書いておけます。<br>
+    ・回答例の中に、実際と違うこと・やっていないことがあれば、<b>その部分は削るか直してください</b>。回答例は、書類と動画の内容から推し量って書いたもので、本人に確かめたものではありません。<br>
+    ・質問は想定です。このとおりに聞かれるとは限りません。丸暗記せず、<b>最初の一文（結論）だけ覚えて</b>、あとは自分の言葉で話してください。
+  </div>
+
+  <div class="howto">
+    <b>使い方</b><br>
+    質問だけを見て、声に出して答える → タップして回答例と比べる → 言えたらチェック、の順で進めます。回答例の長さは40〜60秒（200〜300字）が目安です。骨子や注意点をくわしく読みたいときは <a href="./kashiwara-saishu-mensetsu.html">最終面接 直前対策</a>、25分の通し練習はその中の「模擬面接」を使ってください。
+  </div>
+
+  <div class="progress">
+    <span id="count">0 / 0</span>
+    <div class="bar"><span id="fill"></span></div>
+    <button class="ctrl" id="toggleAll">すべて開く</button>
+    <a class="hub-mini" href="./index.html" aria-label="対策ハブ（トップページ）へ戻る">‹ ハブ</a>
+  </div>
+
+  <div class="filter" role="group" aria-label="表示する質問">
+    <button type="button" data-f="all" aria-pressed="true">すべて</button>
+    <button type="button" data-f="1" aria-pressed="false">◎ 必ず準備だけ</button>
+    <button type="button" data-f="todo" aria-pressed="false">まだ言えていないものだけ</button>
+  </div>
+  <p class="filter-note" id="filterNote"></p>
+
+  <nav class="toc" id="toc" aria-label="章目次">
+    <div class="toc-title">目次（当日の進行順）</div>
+    <ol id="tocList"></ol>
+  </nav>
+
+  <div id="main"></div>
+
+  <footer class="note">
+    本資料は面接対策用の参考メモです。質問は、経験者採用の個人面接で一般に聞かれる内容と、提出済みの書類・動画の内容から想定したもので、市が公表しているものではありません。回答例は言い回しの一例です。柏原市に関する事実（水道事業の統合、大和川の管理、市域の約3分の2が山地、など）は、既存の「個人面接想定問答」で市公式サイトにより確認した内容に基づいています。面接で数字や制度名を話すときは、必ず市の公式ホームページで最新の内容を確かめてください。<br>
+    <a href="./kashiwara-saishu-mensetsu.html">最終面接 直前対策</a>　／　<a href="./kashiwara-kojin-mensetsu-qa.html">個人面接想定問答（全69問）</a>
+  </footer>
+
+</div>
+
+<button type="button" class="toc-fab" id="tocFab" aria-label="目次へ戻る">▲ 目次</button>
+
+<script>
+(function(){
+"use strict";
+
+/* =====================================================================
+   問答データ
+   p: 1=◎必ず準備 / 2=○聞かれやすい / 3=△念のため
+   q: 質問　a: 回答例（〔 〕は本人の事実に置き換える）
+   pt: ポイント　next: 次に来そうな質問　fix: 事実と違えば直す箇所の注意
+   memo: 自分メモ欄の見出し（〔 〕がある質問に付ける）
+   ===================================================================== */
+var DATA = [
+  { id:'a', no:'導入', time:'0〜2分', title:'入室・導入',
+    lead:'緊張をほぐすための短いやり取りです。長く話さず、はっきりした声で答えます。',
+    items:[
+      { k:'a1', p:1, q:'受験番号とお名前をお願いします。',
+        a:'受験番号〔　〕番、〔氏名〕です。本日はよろしくお願いいたします。',
+        pt:'これだけで十分です。面接官の指示があれば、そのとおりに。最初の声の大きさが、25分の印象を決めます。' },
+      { k:'a2', p:3, q:'今日は、どのようにして来られましたか。',
+        a:'自宅から〔徒歩・自転車・電車など〕で、〔　〕分ほどで参りました。',
+        pt:'雑談です。事実を一言で。市内に住んでいることが自然に伝わります。' },
+      { k:'a3', p:2, q:'柏原市にお住まいとのことですが、いつ頃からですか。',
+        a:'〔　〕年ほど前から、〔町名〕のあたりに住んでいます。〔住み始めたきっかけ〕で住み始めました。山と川が近く、落ち着いて暮らせるところが気に入っています。',
+        pt:'住所は町名までで十分です。気に入っている点は、自分の実感に置き換えてください。',
+        next:'住んでいて、気になるところはありますか。（→ 柏原市・土木職の最初の質問）',
+        memo:'いつから／どのあたり／きっかけ／気に入っている点' }
+    ]},
+
+  { id:'b', no:'動機', time:'2〜5分', title:'志望動機・自己PR',
+    lead:'動画とエントリーシートで伝えた内容を、目の前でもう一度話す場面です。違う話を持ち出さないこと。',
+    items:[
+      { k:'b1', p:1, q:'柏原市を志望した理由を教えてください。',
+        a:'現在柏原市に住んでおり、一人の市民として、また民間で培った経験を活かして、安全・安心なまちづくりに貢献したいと考え、志望しました。これまで給排水の引込み工事や歩道の切下げ工事の施工管理を担当し、埋設物の管理者との事前協議や、近隣の方への説明を大切にしてきました。柏原市で暮らす中で、大雨のときの浸水や土砂災害への備え、インフラの老朽化対策の大切さを感じています。申請する側、施工する側として行政と関わってきた経験を、今度は行政の立場で活かし、道路や下水道の整備と維持管理に長く携わりたいと考えています。',
+        pt:'動画と同じ骨子です。「簡潔に」と言われたら、最初の一文と最後の一文だけで30秒にまとめます。',
+        next:'近くの市でも同じ仕事はできますが、なぜ柏原市ですか。' },
+      { k:'b2', p:2, q:'近くの市でも同じ仕事はできますが、なぜ柏原市なのですか。',
+        a:'一番の理由は、自分が住んでいるまちだからです。毎日使っている道路や、大雨のときに気になる場所が身近にあり、そこに自分の経験を活かしたいと考えました。また、柏原市は大和川と石川が合流し、市域の約3分の2を山地が占めていて、浸水と土砂災害の両方への備えが必要な地域です。道路を掘削する工事で身につけた経験を、こうした課題のあるまちで長く活かしたいと考えています。',
+        pt:'ほかの市を悪く言わない。住んでいることは「きっかけ」で、後半は経験をどう活かすかに戻します。' },
+      { k:'b3', p:1, q:'自己PRをお願いします。',
+        a:'私の強みは、仕事を最後まで責任を持って、正確にやり遂げることです。施工管理として、安全管理や工程調整、官公庁への申請書類の作成を担当していますが、小さな見落としが事故や工程の遅れにつながるので、自分で作ったチェックリストで数量や図面との整合性を必ず確かめるようにしています。その積み重ねで、大きな事故や工期の遅れを出さずに現場を進めてきました。市の土木職は、工事を発注し監督する立場として、より正確さが求められると考えています。申請する側、施工する側として行政と関わってきた経験を、今度は行政の立場で活かしたいと考えています。',
+        pt:'エントリーシートと同じ順番です。「一度も事故はありません」とは言わない。',
+        next:'チェックリストは、具体的にどのようなものですか。' },
+      { k:'b4', p:2, q:'民間の会社ではなく、なぜ公務員なのですか。',
+        a:'民間の工事は、決められた範囲を工期内に仕上げて引き渡す仕事です。それに対して市の仕事は、計画から維持管理まで、一つのまちに長く責任を持つ仕事だと理解しています。採算だけで決めず、必要な場所を公平に整備していける点にも魅力を感じています。現場で身につけた経験を、今度はまち全体を支える側で活かしたいと考えました。',
+        pt:'「安定しているから」は言わない。民間を下に見る言い方にもしない。役割の違いとして話します。' }
+    ]},
+
+  { id:'c', no:'経験', time:'5〜12分', title:'職務経験の深掘り',
+    lead:'いちばん時間が長いところです。「具体的には」「そのときどうしましたか」と重ねて聞かれます。実際にあった出来事を、ここで決めておきます。',
+    items:[
+      { k:'c1', p:2, q:'これまでの職務経歴を、簡単に説明してください。',
+        a:'〔　〕年から現在の会社で、施工管理を担当しています。新築物件に伴う給排水の引込み工事と、道路法第24条の承認を受けて行う歩道切下げ工事が中心で、現場の安全管理、他の業者との工程調整、官公庁へ提出する申請書類の作成を担当しています。交通量の多い道路を掘削する現場では、埋設物の管理者との協議や試掘での確認、近隣の方への説明も自分で行っています。',
+        pt:'今の会社より前の職歴があれば、会社名は出さず、仕事の内容を一言足します。申込みのときに入力した職歴と同じにしてください。',
+        memo:'入社した年／それ以前の職歴（あれば）／持っている資格の正式名' },
+      { k:'c2', p:1, q:'この2年間で、特に力を入れたことを教えてください。',
+        a:'この2年間は、新築物件に伴う給排水引込み工事や歩道切下げ工事の施工管理に力を入れてきました。交通量の多い道路を掘削するので、第三者の事故や他の埋設管の損傷のおそれがあり、建物の引き渡し日にも関わるため工程も遅らせられません。そこで二つのことを徹底しました。一つは埋設物の確認で、管理者との協議と立ち会いに加え、試掘をして自分の目で位置と深さを確かめました。もう一つは近隣への説明で、住民や店舗の方に直接お会いし、騒音や安全対策を図面で説明してから着工しました。その結果、大きなトラブルや事故なく工期内に終えることができ、立場の違う方々と調整しながら仕事を進める力が身についたと考えています。',
+        pt:'エントリーシートと同じ話で答えます。別の話を持ち出さない。',
+        next:'試掘をして、図面と実際が違っていたことはありますか。／近隣の方から苦情を受けたことはありますか。' },
+      { k:'c3', p:1, q:'チェックリストは、具体的にどのようなものですか。',
+        a:'申請書類を提出する前と、施工の前に使っています。確かめる項目は、数量に間違いがないか、図面と現地が合っているか、〔実際に入れている項目〕などです。〔作ることになったきっかけ〕がきっかけで作りました。自分で確かめたあと、時間をおいてもう一度見直すようにしています。実際に、〔チェックリストで気づけたこと〕に提出前に気づけたことがあります。',
+        pt:'自己PRの中でいちばん具体的な部分なので、聞かれる可能性が高い質問です。実物を思い浮かべて、項目を2〜3個言えれば十分です。',
+        next:'それでも見落としたことはありませんか。',
+        memo:'実際の項目2〜3個／作ったきっかけ／気づけた実例' },
+      { k:'c4', p:1, q:'「大きな事故や工期の遅れを出すことなく」とありますが、小さなトラブルはありましたか。',
+        a:'はい、ありました。〔実際にあった小さな出来事〕ということがありました。気づいた時点ですぐに〔報告した相手〕に報告し、〔そのときの対応〕をしました。それ以来、〔変えたこと。チェックリストに項目を足した、など〕ようにしています。大きな事故や遅れにはなりませんでしたが、小さなことでも早く伝えることが大事だと学びました。',
+        pt:'「一度もありません」と答えると、書いた表現と食い違います。先に「ありました」と認め、気づいたあとの動きを話します。',
+        next:'そのあと、同じことは起きていませんか。',
+        memo:'小さなトラブルを一つ：何が起きた／誰に報告した／どう対応した／何を変えた' },
+      { k:'c5', p:2, q:'試掘をして、図面と実際が違っていたことはありますか。そのときどうしましたか。',
+        a:'はい、あります。〔図面より浅い位置に管があった、など実際の状況〕ことがありました。その場で作業を止め、管理者の方に連絡して確認していただき、〔防護の方法や掘削位置をどう変えたか〕をしたうえで進めました。図面はあくまで参考で、現地で確かめるまでは信用しきらないようにしています。',
+        pt:'現場を知っている面接官ほど聞く質問です。実体験があれば、いちばん説得力が出ます。',
+        fix:'大きく違っていた経験がなければ、「大きく違っていたことはありませんが、多少のずれは珍しくないので、必ず試掘で確かめています」と、事実の範囲で答えてください。',
+        memo:'図面と違っていた実例：どう違った／どう対応した' },
+      { k:'c6', p:2, q:'近隣の方に納得していただけなかったことや、苦情を受けたことはありますか。',
+        a:'はい、あります。〔騒音の時間帯、車の出入り、など実際の内容〕についてご意見をいただきました。まずお話を最後まで伺い、会社と発注者に確認したうえで、〔作業時間の変更、誘導員の配置、など実際の対応〕で対応しました。できないことについては、理由をお伝えしてご理解をお願いしました。直接お会いして話すことで、その後は声をかけていただけるようになりました。',
+        pt:'「説得しました」とは言わない。聴く → 確認する → できることとできないことを分けて伝える、の順です。',
+        fix:'最後の一文（声をかけていただけるようになった）は、実際にそうだった場合だけ使ってください。',
+        memo:'苦情の実例：内容／どう対応した／その後どうなった' },
+      { k:'c7', p:2, q:'工程を遅らせられない現場で、安全と工期がぶつかったことはありますか。',
+        a:'安全を優先します。私が担当した現場でも、引き渡しの日が決まっている中で、〔掘削してみると想定と違う状況が出てきた、など実際の場面〕ことがありました。その日は作業を止め、関係する方にすぐ連絡して状況を共有し、翌日以降の工程を組み直しました。早く知らせたことで、後の工程で調整していただくことができました。遅れそうなときほど、早く伝えることが大事だと考えています。',
+        pt:'最初の一言は必ず「安全を優先します」。工期のために無理をした、と聞こえる話は選ばない。',
+        next:'交通規制の時間内に終わりそうにないときは、どうしますか。',
+        memo:'安全を優先して作業を止めた実例' },
+      { k:'c8', p:3, q:'交通規制の時間内に作業が終わりそうにないとき、どうしますか。',
+        a:'規制の時間は許可の条件ですので、必ず守ります。終わらない見込みが出た時点で、その日の作業範囲を切り上げ、仮の復旧をして、時間内に道路を開けます。残りは翌日以降に回し、関係する方に連絡して工程を調整します。そうならないよう、1日の作業量には余裕を持たせて計画するようにしています。',
+        pt:'市は、その条件を付ける側、守らせる側です。条件を守る人だと伝わることが大事です。' },
+      { k:'c9', p:2, q:'職人さんや協力業者に、決めたことをどうやって守ってもらいましたか。',
+        a:'決まりだからではなく、理由を伝えるようにしています。たとえば、この下にどんな管が通っているか、近隣の方とどんな約束をしているかを、朝の打合せで具体的に共有します。経験の長い職人さんには、やり方について意見を聞き、良いと思ったものは取り入れています。自分が先に現場を確認して動くことも心掛けています。',
+        pt:'市の評価の軸「チームでの協力」「リーダーシップ」に当たる質問です。「指示した」より「一緒に確認した」。',
+        fix:'回答例の中で、実際にはやっていないことは削ってください。',
+        next:'職人さんと意見が合わなかったときは、どうしましたか。' },
+      { k:'c10', p:2, q:'官公庁へ提出する申請書類とは、どのような書類ですか。',
+        a:'私が担当した現場では、道路の承認工事の申請、道路占用の許可申請、警察署への道路使用許可の申請、〔下水道の排水設備に関する申請、など実際に出していたもの〕を作成し、提出していました。図面と現地が合っているか、数量、復旧の方法に、特に気をつけています。〔柏原市に提出したことがあれば、その経験を一言〕',
+        pt:'実際に作って出していた書類だけを挙げます。名前や様式は自治体で違うので、「私が担当した現場では」と前置きします。',
+        next:'道路法第24条の工事とは、どのようなものですか。',
+        memo:'実際に出していた書類／提出先／柏原市に出したことがあるか' },
+      { k:'c11', p:3, q:'道路法第24条の工事とは、どのようなものですか。',
+        a:'道路の管理者以外の者が、管理者の承認を受けて行う道路の工事です。私が担当してきた歩道の切下げは、車の乗り入れ口を設ける工事で、その代表的なものです。事前に相談して現地を確認し、申請書と図面を提出して承認を受け、施工し、完了の届出と検査を受ける、という流れで進めてきました。市は、市道についてこの承認を出す立場ですので、申請する側の経験を審査の場面で活かせると考えています。',
+        pt:'エントリーシートに条文番号を書いたので、中身を聞かれることがあります。細かい手続きは自治体で違うので、「私が担当した現場では」の範囲で話します。',
+        fix:'手続きの流れは、自分が実際に行った順番に直してください。' },
+      { k:'c12', p:2, q:'「相手に分かりやすく伝える」ために、どんな工夫をしていますか。',
+        a:'相手によって伝え方を変えています。職人さんには、図面に書き込んで、現地で一緒に確かめます。近隣の方には、専門用語を使わず、いつ、何時から何時まで、どんな音がするか、困ったときの連絡先はどこか、の順でお話しします。発注者や役所の方には、結論を先にお伝えし、写真や図面を添えます。伝えたあとは、質問がないかを確かめるようにしています。',
+        pt:'「心掛けています」で終わらせず、実際にやっていることを言います。この面接での話し方そのものが証拠になります。',
+        fix:'回答例の中で、実際にはやっていないことは削ってください。' },
+      { k:'c13', p:2, q:'「発注者や関係者から信頼をいただいている」とありますが、どんな場面でそう感じましたか。',
+        a:'〔実際にあった場面。同じ発注者から続けて仕事を任された、役所の窓口で書類の直しが少ないと言われた、など〕ときに、そう感じました。確認を怠らず、連絡を早くすることを続けてきた結果だと考えています。ただ、私一人の力ではなく、職人さんや協力業者の方々と一緒に進めてきた結果です。',
+        pt:'大きな話は要りません。実際に言われた言葉、実際にあった出来事だけを話します。',
+        memo:'信頼されていると感じた場面：誰から／どんな場面で／何と言われた' },
+      { k:'c14', p:2, q:'これまでの仕事での失敗と、そこから学んだことを教えてください。',
+        a:'〔実際の失敗。確認が足りず手戻りが出た、段取りの見込みが甘かった、など〕ことがあります。原因は、〔自分の何が足りなかったか〕でした。すぐに〔報告した相手〕に報告し、〔対応〕をしました。それ以来、〔変えたこと〕ようにしています。この経験が、今の確認の習慣につながっています。',
+        pt:'「特にありません」は避けます。小さなトラブルの質問と同じ出来事を使って構いません。原因を人のせいにしないこと。',
+        memo:'失敗を一つ：何が起きた／自分の原因／何を変えた' }
+    ]},
+
+  { id:'d', no:'転職', time:'12〜16分', title:'転職理由・条件の確認',
+    lead:'「なぜ辞めるのか」「長く働いてくれるか」を確かめる場面です。条件の確認は、一言目で「はい」「いいえ」「事実」を答えます。',
+    items:[
+      { k:'d1', p:1, q:'なぜ今の会社を辞めて、市役所で働こうと思ったのですか。',
+        a:'今の仕事では、道路を掘削する工事の段取りや、関係者との調整を一通り経験させてもらいました。ただ、新築に伴う工事は、建物が引き渡されると現場を離れることになり、その後の道路や管がどう使われ、どう傷んでいくかまでは関われません。自分が住んでいる柏原市で、つくるところから維持管理まで長く関わる仕事がしたいと考えるようになり、今回の募集を知って受験を決めました。',
+        pt:'合否にいちばん響く質問です。今の会社への不満から入らない。',
+        fix:'この回答例は型です。本当の理由と違う部分は、必ず自分の理由に書き換えてください。',
+        next:'今の会社では、その希望はかなえられないのですか。／なぜ今なのですか。',
+        memo:'辞める本当の理由／なぜ柏原市で、なぜ今なのか' },
+      { k:'d2', p:2, q:'今の会社では、その希望はかなえられないのですか。',
+        a:'今の会社の仕事は、建物の新築に伴う工事が中心で、完成したあとの維持管理に関わる機会がありません。会社に不満があるわけではなく、仕事の性質の違いだと考えています。つくった後まで責任を持つ仕事は、道路や下水道を管理する市の仕事だからこそできると考えました。',
+        pt:'会社を悪く言わず、「仕事の性質の違い」として答えます。',
+        fix:'今の会社で維持管理の仕事もしている場合は、この答えは使えません。自分の理由で作り直してください。' },
+      { k:'d3', p:1, q:'現在は在職中ですか。採用となった場合、いつから働けますか。',
+        a:'現在は在職中です。合格をいただきましたら、速やかに会社に伝え、担当している現場の引き継ぎをきちんと行ったうえで、4月1日から勤務できるようにいたします。',
+        pt:'事実を答えます。離職中の場合は「現在は離職しており、4月1日から勤務できます」。離れている期間に何をしていたかも一言で言えるようにしておきます。',
+        next:'今の会社には、受験のことを伝えていますか。',
+        memo:'在職か離職か／会社に伝えているか' },
+      { k:'d4', p:2, q:'年収が下がる可能性がありますが、大丈夫ですか。',
+        a:'はい、承知しています。金額だけでなく、仕事の内容と、長く続けられるかどうかで判断しました。〔家族にも話し、理解を得ています。〕',
+        pt:'一言目で「はい」。金額は自分から言わない。家族の話は、事実の場合だけ添えます。' },
+      { k:'d5', p:2, q:'年下の上司や先輩のもとで働くことになりますが、やっていけますか。',
+        a:'はい、問題ありません。年齢や経験年数と、その場での役割は別のものだと考えています。入庁すれば新人ですので、一から教えていただく立場です。これまでの経験は、聞かれたときや、役に立つ場面でお伝えするようにします。',
+        pt:'迷わず答えます。「教えてあげる」という姿勢に聞こえないように。' },
+      { k:'d6', p:2, q:'ほかに受験しているところはありますか。',
+        a:'〔いいえ、柏原市だけです。／はい、〔　〕も受験しています。〕第一志望は柏原市です。自分が住んでいるまちで働きたいというのが、今回の受験の出発点だからです。',
+        pt:'併願は隠さず、事実を答えます。そのうえで第一志望と理由を言い切ります。',
+        memo:'併願の有無' },
+      { k:'d7', p:2, q:'また数年で辞めてしまうのでは、という心配があります。',
+        a:'そのご心配はもっともだと思います。今回の転職は、今の仕事から離れたいからではなく、自分が住むまちで、計画から維持管理まで長く関わる仕事がしたいと考えて決めたものです。市役所は、異動を通じていろいろな仕事を経験しながら、長く勤められる職場だと理解しています。定年まで柏原市で働くつもりです。',
+        pt:'むっとしない。まず受け止めてから、長く働く意思を言い切ります。' },
+      { k:'d8', p:3, q:'前の会社のやり方と、市のやり方が違ったら、どうしますか。',
+        a:'まず市のやり方を覚えます。行政の手続きには、公平さや説明責任のための理由があると理解しています。慣れないうちから「前の会社ではこうでした」とは言いません。仕事を覚えたうえで、改善できそうな点があれば、「こういう方法も考えられませんか」と上司に相談する形でお伝えします。',
+        pt:'まず従う、覚える。提案は関係ができてから、相談の形で。' }
+    ]},
+
+  { id:'e', no:'市・職', time:'16〜21分', title:'柏原市・土木職の理解',
+    lead:'動画で話した言葉から、いちばん深く聞かれるところです。「寄り添った指導」と「暮らす中で感じた」の2問は、必ず用意してください。',
+    items:[
+      { k:'e1', p:1, q:'暮らす中で浸水対策や老朽化対策の重要性を感じている、とのことですが、具体的にどこで感じましたか。',
+        a:'〔場所。町名や「駅の近く」など大まかに〕のあたりで、〔大雨のときに道路に水がたまっている、側溝があふれそうになっている、舗装にひび割れや段差がある、など実際に見たこと〕のを見たことがあります。技術者として見ると、〔なぜそうなると思うか〕のではないかと感じました。市の職員になりましたら、こうした場所の点検や、優先順位をつけた維持管理に関わりたいと考えています。',
+        pt:'動画で自分から言ったことなので、ほぼ聞かれます。実際に見た場所を一つ決め、面接までに歩いて確かめておきます。その道路が市道かどうかも確かめます。',
+        fix:'「市の管理が悪い」という言い方にしない。見ていない場所の話はしない。',
+        next:'そこは、誰が管理している施設か分かりますか。',
+        memo:'どこで／いつ／何を見た／技術者としてどう見えた' },
+      { k:'e2', p:1, q:'「業者と同じ目線に立って寄り添った指導」とは、具体的にどういうことですか。',
+        a:'寄り添うというのは、基準を緩めるという意味ではありません。施工する側にいたとき、発注者の方からの回答が早かったり、指示の理由を説明していただけたりすると、現場はとても動きやすくなりました。同じように、協議には早く応じ、なぜその指示なのかを伝えることを心掛けたい、という意味です。一方で、品質や安全の基準、検査は、どの業者に対しても同じ目で行います。施工側にいた経験があるからこそ、なれ合いと受け取られないよう、公平さには特に気をつけたいと考えています。',
+        pt:'最初の一文は必ず「基準を緩めるという意味ではありません」。動画の中で、面接官がいちばん気にする言葉です。',
+        next:'業者に甘くなる心配はありませんか。／知り合いの業者が受注したら、どうしますか。' },
+      { k:'e3', p:2, q:'知り合いの業者や、今の会社の関係先が市の工事を受注したら、どうしますか。',
+        a:'ほかの業者と同じ対応をします。協議や検査の内容は記録に残し、一人で判断しないようにします。個人的な付き合いと仕事は分け、誤解を招くような関わり方は避けます。気になることがあれば、早めに上司に報告します。',
+        pt:'施工側から来た人に、面接官が必ず確かめたい点です。短く、言い切ります。' },
+      { k:'e4', p:2, q:'市の土木職は、具体的にどんな仕事をすると理解していますか。',
+        a:'工事を自分で行うのではなく、計画、設計、積算、発注、工事の監督、検査、そして完成したあとの維持管理までを担う仕事だと理解しています。そのほかに、道路の占用や承認工事の審査、市民の方からの相談への対応、災害時の対応もあると考えています。私は申請する側、施工する側を経験してきましたので、審査や監督の場面でその経験を活かせると考えています。一方で、設計や積算、予算の仕組みは、これから学ぶ必要があります。',
+        pt:'「現場で工事をする仕事」と答えない。できることと、これから学ぶことの両方を言います。' },
+      { k:'e5', p:1, q:'給排水の工事が中心のようですが、柏原市の水道は市の事業ではありません。入庁後は何をしたいですか。',
+        a:'はい、水道事業が令和7年4月に大阪広域水道企業団に統合されたことは承知しています。私の経験の中身は、道路を掘削し、埋設物を守り、元どおりに復旧することです。これは、下水道の工事や道路の維持管理、占用や承認工事の審査にそのまま通じると考えています。近隣の方への説明や関係機関との協議も、どの分野でも同じです。経験のない設計や積算などは、一から学びます。',
+        pt:'統合を知っていることを、先に言います。「上下水道の仕事がしたい」「水道の仕事がしたい」とは言わない。' },
+      { k:'e6', p:2, q:'浸水や土砂災害への備えとして、市の土木職に何ができると思いますか。',
+        a:'大和川の本体は国が管理していますので、市が担うのは、雨水を流す下水道や水路、側溝、市道などの整備と維持管理だと理解しています。日頃の点検と清掃で、雨が降ったときに施設がきちんと働くようにしておくことが、まず大事だと考えます。あわせて、国や府との調整、災害時の道路の応急復旧、ハザードマップの周知といった取り組みと組み合わせることが必要だと考えています。',
+        pt:'市ができることと、国や府が担うことを分けて話します。「大和川の治水をしたい」とは言わない。',
+        next:'大和川は、誰が管理しているか分かりますか。（→ 本体は国）' },
+      { k:'e7', p:2, q:'老朽化した道路や下水道に、どう対応すべきだと思いますか。',
+        a:'すべてを一度に更新する財源はありませんので、点検の結果に基づいて優先順位をつけ、壊れる前に手を入れる予防保全が基本になると考えます。点検の記録をきちんと残し、次の判断に使えるようにすることも大事だと考えています。道路を掘削する工事で、地中の管の状態を実際に見てきましたので、その経験を点検や維持管理に活かしたいと考えています。',
+        pt:'キーワードは「予防保全」「優先順位」「限られた財源」。',
+        fix:'最後の一文は、古い管などを実際に見た経験がある場合だけ使ってください。' },
+      { k:'e8', p:2, q:'市民の方から「道路に穴が空いている」と通報が入りました。どう動きますか。',
+        a:'まず場所と状況を伺い、すぐに現地を確認します。危険な状態であれば、カラーコーンなどで先に安全を確保します。そのうえで、市道かどうかを確かめ、市道であれば応急の補修を行い、必要に応じて本復旧を計画します。国道や府道であれば、管理者に速やかに連絡します。対応の内容は記録し、通報してくださった方にも結果をお伝えします。入庁後は、上司に報告しながら進めます。',
+        pt:'場面を想定した質問は、手順で答えます。確かめる → 安全を確保する → 報告・相談する → 結果を伝えて記録する。' },
+      { k:'e9', p:2, q:'市民の声を丁寧に受け止めたい、とのことですが、すべての要望には応えられません。どうしますか。',
+        a:'まず最後までお話を伺い、何に困っておられるのかを確かめます。そのうえで、できることとできないことを分け、できない場合はその理由もお伝えします。補修の順番は、危険の度合いや点検の結果で決めていることを説明し、すぐにできなくても、応急の対応や代わりの方法がないかを考えます。自分だけで返事をせず、上司と相談してから回答するようにします。',
+        pt:'「受け止める」と「全部やる」は違う、と分かっていることを伝えます。近隣への説明の経験を具体例に使えます。' },
+      { k:'e10', p:2, q:'市内に住んでいると、近所の方から「うちの前の道を先に直してほしい」と頼まれることもあります。どうしますか。',
+        a:'お話は丁寧に伺います。危険な状態であれば、場所と状況を確認して担当に伝えます。ただ、知り合いだからといって順番を変えることはしません。その場で約束はせず、補修の順番は点検の結果や危険の度合いで決めていることを説明し、通常の窓口をご案内します。頼まれたことは上司にも報告します。市内に住んでいるからこそ、誰に対しても同じ対応をすることを意識したいと考えています。',
+        pt:'「市民の目線」を強みにしたので、その裏側を聞く質問です。特別扱いしない、と言い切ります。' },
+      { k:'e11', p:2, q:'「即戦力として」とのことですが、すぐにできることと、これから学ぶことは何ですか。',
+        a:'すぐに活かせるのは、現場の安全と工程を見る目、施工業者や埋設物の管理者、近隣の方との調整、それから道路の占用や承認工事の書類の理解です。一方で、設計や積算、契約や予算の仕組み、条例や庁内の手続きは、これから学ぶことです。即戦力と申し上げましたが、入庁後は新人として、一から教えていただく立場だと考えています。',
+        pt:'「即戦力」は強い言葉なので、謙虚さと一緒に話します。' },
+      { k:'e12', p:3, q:'道路改良や橋りょうなど、規模の大きい公共工事の経験はありますか。',
+        a:'〔いいえ、そうした規模の大きい工事の経験はありません。／はい、〔　〕の経験があります。〕私の経験は、道路の掘削、埋設物の確認、交通規制、復旧、近隣への対応です。これらは、工事の規模が変わっても共通する部分だと考えています。足りない部分は、現場に足を運び、先輩方に教えていただいて身につけます。',
+        pt:'ないものを「ある」と言わない。経験の範囲を正直に言い、共通する部分とこれから身につける姿勢を伝えます。',
+        memo:'担当した工事の種類／おおよその件数／自分の役割' },
+      { k:'e13', p:2, q:'柏原市の課題を一つ挙げて、どう関わりたいか教えてください。',
+        a:'人口が減り、財源が限られる中で、古くなった道路や下水道をどう維持していくかが、大きな課題だと考えています。加えて、柏原市は浸水と土砂災害の両方への備えが必要な地形です。すべてを一度に直すことはできませんので、点検に基づいて優先順位をつけ、計画的に手を入れていくことが大事だと考えます。現場を見る目と、関係者との調整の経験で、その一端を担いたいと考えています。',
+        pt:'課題は批判で終わらせず、「だから自分はこう関わりたい」まで話します。' },
+      { k:'e14', p:3, q:'最近の柏原市の取り組みやニュースで、関心を持ったものはありますか。',
+        a:'〔広報かしわらや市のサイトで実際に見たもの〕に関心を持ちました。〔関心を持った理由〕からです。土木職としては、〔どう関われそうだと感じたか〕と感じました。',
+        pt:'面接の前日までに、広報かしわらの11月号と市サイトの新着情報を見て、一つ決めておきます。よく知らないものを名前だけ挙げない。',
+        memo:'関心を持ったもの／理由／土木職としての関わり方' }
+    ]},
+
+  { id:'f', no:'人物', time:'21〜24分', title:'人物',
+    lead:'長く一緒に働ける人かどうかを見る場面です。エントリーシートに書いた強みと、食い違わないように答えます。',
+    items:[
+      { k:'f1', p:1, q:'あなたの長所と短所を教えてください。',
+        a:'長所は、仕事を最後まで責任を持って、正確にやり遂げることです。自分で作ったチェックリストで確かめる習慣が、その表れだと思います。短所は、〔確認に時間をかけすぎることがある、など実際の短所〕点です。〔急ぐ場面では、確かめる項目に優先順位をつけ、期限を先に決めてから取りかかる、など実際にしている工夫〕ようにしています。',
+        pt:'長所は自己PRと同じにします。別の長所を挙げると、書類と面接で人物像がぶれます。短所は、実際に当てはまるものを。',
+        memo:'短所／それを補うためにしていること' },
+      { k:'f2', p:2, q:'ストレスを感じたとき、どう対処していますか。',
+        a:'一人で抱え込まず、早めに周りに相談するようにしています。現場では、問題が起きたときほど、早く共有したほうが解決が早いと学びました。仕事を離れたときは、〔運動、趣味など実際にしていること〕で気持ちを切り替えています。',
+        pt:'「ストレスは感じません」とは言わない。切り替え方は、実際にしていることを一つ。',
+        memo:'気持ちの切り替え方' },
+      { k:'f3', p:2, q:'上司と意見が対立したら、どうしますか。',
+        a:'まず上司の考えと、その理由をよく聞きます。そのうえで、自分の意見は根拠を整理してお伝えします。それでも結論が変わらなければ、組織としての判断に従います。ただ、安全や法令に関わることであれば、もう一度確認をお願いします。',
+        pt:'「従います」だけでも「譲りません」だけでもない。伝える → 判断に従う → 安全と法令は別、の順です。' },
+      { k:'f4', p:2, q:'チームで仕事をするうえで、大切にしていることは何ですか。',
+        a:'情報を早く、正確に共有することです。現場では、一人が知っていて他の人が知らないことが、事故や手戻りの原因になります。良くない知らせほど早く伝えること、相手に伝わったかを確かめることを大切にしています。',
+        pt:'自己PRの「必要な情報を確実に共有する」と同じ話です。' },
+      { k:'f5', p:2, q:'希望しない部署や、現場のない部署に配属されたら、どうしますか。',
+        a:'どの部署でも取り組みます。市の仕事はどれも、市民の暮らしにつながっていると考えています。現場のない部署でも、段取りや関係者との調整といった経験は活かせると思います。いろいろな部署を経験することが、市全体を理解することにつながると、前向きに考えています。',
+        pt:'一言目で「取り組みます」。' },
+      { k:'f6', p:2, q:'災害のときは、夜間や休日にも呼び出しがありますが、対応できますか。',
+        a:'はい、対応できます。市内に住んでいますので、すぐに参集できます。災害のときに動くことは、土木職の大事な役割だと理解しています。〔家族にも話してあります。〕',
+        pt:'市内在住は、ここでいちばんの強みになります。家族の話は、事実の場合だけ。' },
+      { k:'f7', p:2, q:'10年後、柏原市役所でどうなっていたいですか。',
+        a:'最初の数年は、市の仕事の進め方を一から身につけます。そのうえで、工事の監督や占用の審査など、現場の経験を活かせる仕事で、早く戦力になりたいと考えています。10年後には、後輩に教えられる立場になり、老朽化対策や災害への備えで、中心になって動ける職員になっていたいと考えています。',
+        pt:'学ぶ → 戦力になる → 教える側になる、の順で話します。' },
+      { k:'f8', p:2, q:'今回は複数の方が受験されています。その中で、あなたを採用する理由は何だと思いますか。',
+        a:'他の方のことは存じませんので、自分のことをお話しします。一つ目は、確認を怠らず、最後まで責任を持ってやり遂げる姿勢です。二つ目は、道路の管理者に申請する側と、実際に施工する側の両方を経験していることで、市が審査し監督する仕事を、相手の立場から理解しています。三つ目は、柏原市に住んでおり、災害のときにもすぐに動けることです。入庁後は一から学び、長く働きたいと考えています。',
+        pt:'ほかの受験者と比べない。自分の柱を三つ、短く言い直します。' },
+      { k:'f9', p:3, q:'ご自身に足りないと思うところは何ですか。',
+        a:'行政の仕事の経験がないことです。設計や積算、予算や契約の仕組み、条例などは、これから学ばなければなりません。また、これまでは一つの現場に集中する仕事でしたので、まち全体を見て優先順位を考える視点も、これから身につける必要があると考えています。入庁までにできる勉強は、進めておきます。',
+        pt:'足りない点を認めたうえで、どう埋めるかを言います。' }
+    ]},
+
+  { id:'g', no:'締め', time:'24〜25分', title:'逆質問・最後に一言',
+    lead:'時間が押していることが多い場面です。短く、前向きに終えます。',
+    items:[
+      { k:'g1', p:1, q:'最後に、何か質問はありますか。',
+        a:'一点、伺ってもよろしいでしょうか。入庁までの期間に、勉強しておくべきことや、目を通しておくべき資料があれば、教えていただけますか。（お答えをいただいたら）ありがとうございます。入庁までに、しっかり準備しておきます。',
+        pt:'2つ用意して、聞くのは1つ。もう1つの候補は「民間から入庁された技術職の方が、最初に戸惑われるのはどのような点でしょうか」。給与・残業・休暇は聞かない。',
+        next:'面接の中で答えが出ていた場合は、「先ほどのお話でよく分かりました。入庁までに勉強しておきます」で終えて構いません。' },
+      { k:'g2', p:1, q:'最後に、言い残したことや伝えたいことがあれば、どうぞ。',
+        a:'本日はありがとうございました。柏原市に住む一人として、また現場で施工と申請の両方を経験してきた者として、道路や下水道の整備と維持管理に長く携わりたいと考えています。入庁後は一から学ぶ姿勢で、確認を怠らず、最後まで責任を持って仕事に取り組みます。よろしくお願いいたします。',
+        pt:'30秒以内。面接の中でうまく答えられなかった質問があれば、「先ほどの〜のご質問ですが、一点補足させてください」と、ここで一つだけ補えます。' }
+    ]}
+];
+
+/* ===================== 保存 ===================== */
+var KEY = 'kashiwara-toujitsu-v1';
+var st = { chk:{}, memo:{} };
+try{
+  var raw = JSON.parse(localStorage.getItem(KEY) || 'null');
+  if(raw && typeof raw === 'object'){
+    if(raw.chk && typeof raw.chk === 'object') st.chk = raw.chk;
+    if(raw.memo && typeof raw.memo === 'object') st.memo = raw.memo;
+  }
+}catch(e){ /* 読めなくても動く */ }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(st)); }catch(e){ /* 保存できなくても動く */ } }
+function $(id){ return document.getElementById(id); }
+function el(tag, cls, text){ var e = document.createElement(tag); if(cls) e.className = cls; if(text != null) e.textContent = text; return e; }
+
+// 〔 〕で囲まれた部分（本人が置き換える箇所）に印を付けて入れる
+function fillMarked(node, text){
+  var re = /〔[^〔〕]*(?:〔[^〔〕]*〕[^〔〕]*)*〕/g, last = 0, m;
+  while((m = re.exec(text))){
+    if(m.index > last) node.appendChild(document.createTextNode(text.slice(last, m.index)));
+    node.appendChild(el('mark', null, m[0]));
+    last = m.index + m[0].length;
+  }
+  if(last < text.length) node.appendChild(document.createTextNode(text.slice(last)));
+}
+function answerLabel(text){
+  var n = text.replace(/[〔〕（）]/g, '').length;
+  if(n < 60) return '回答例';
+  var chars = Math.round(n / 10) * 10;
+  return '回答例（約' + chars + '字・' + Math.round(n / 5 / 5) * 5 + '秒前後）';
+}
+var PRI = { 1:['◎ 必ず準備','p1'], 2:['○ 聞かれやすい','p2'], 3:['△ 念のため','p3'] };
+
+/* ===================== 描画 ===================== */
+var main = $('main'), tocList = $('tocList');
+var total = 0, nMust = 0, seq = 0;
+DATA.forEach(function(sec){
+  var li = el('li'), a = el('a');
+  a.href = '#ch-' + sec.id;
+  a.appendChild(el('span', 'toc-no', sec.time));
+  a.appendChild(document.createTextNode(sec.title));
+  a.appendChild(el('span', 'toc-n', sec.items.length + '問'));
+  li.appendChild(a); tocList.appendChild(li);
+
+  var wrap = el('section'); wrap.setAttribute('data-sec', sec.id);
+  var ch = el('div', 'chapter'); ch.id = 'ch-' + sec.id;
+  ch.appendChild(el('span', 'ch-no', sec.time));
+  ch.appendChild(el('h2', null, sec.title));
+  wrap.appendChild(ch);
+  wrap.appendChild(el('p', 'ch-lead', sec.lead));
+
+  sec.items.forEach(function(it){
+    total++; seq++; if(it.p === 1) nMust++;
+    var d = el('details', 'qa'); d.setAttribute('data-p', it.p); d.setAttribute('data-k', it.k);
+    var s = el('summary');
+    s.appendChild(el('span', 'qno', ('0' + seq).slice(-2)));
+    s.appendChild(el('span', 'qtext', it.q));
+    s.appendChild(el('span', 'pri ' + PRI[it.p][1], PRI[it.p][0].slice(0, 1)));
+    s.appendChild(el('span', 'chev', '▶'));
+    d.appendChild(s);
+
+    var b = el('div', 'qbody');
+    b.appendChild(el('div', 'lbl', answerLabel(it.a) + '｜' + PRI[it.p][0]));
+    var ans = el('p', 'ans'); fillMarked(ans, it.a); b.appendChild(ans);
+    b.appendChild(el('div', 'lbl', 'ポイント'));
+    b.appendChild(el('p', 'pt', it.pt));
+    if(it.next){
+      b.appendChild(el('div', 'lbl', '次に来そうな質問'));
+      b.appendChild(el('p', 'next', it.next));
+    }
+    if(it.fix){
+      var fx = el('div', 'fix'); fx.appendChild(el('b', null, '事実に合わせて直す')); fx.appendChild(document.createTextNode('／' + it.fix));
+      b.appendChild(fx);
+    }
+    if(it.memo){
+      var mw = el('div', 'memo');
+      var lab = el('label', null, '自分メモ：' + it.memo); lab.setAttribute('for', 'memo-' + it.k);
+      var ta = el('textarea'); ta.id = 'memo-' + it.k; ta.setAttribute('data-memo', it.k);
+      ta.placeholder = '〔 〕に入れる自分の事実を書いておく';
+      mw.appendChild(lab); mw.appendChild(ta);
+      mw.appendChild(el('div', 'memo-note', 'この端末の中だけに保存されます（どこにも送信されません）'));
+      b.appendChild(mw);
+    }
+    var done = el('label', 'done');
+    var c = el('input', 'chk'); c.type = 'checkbox'; c.setAttribute('data-k', it.k);
+    done.appendChild(c); done.appendChild(document.createTextNode('声に出して言えた'));
+    b.appendChild(done);
+    d.appendChild(b);
+    wrap.appendChild(d);
+  });
+  var back = el('p', 'back-to-toc'), ba = el('a', null, '▲ 目次へ戻る'); ba.href = '#toc'; back.appendChild(ba);
+  wrap.appendChild(back);
+  main.appendChild(wrap);
+});
+$('metaCount').textContent = '全' + total + '問（◎ 必ず準備 ' + nMust + '問）';
+
+/* ===================== チェック・メモ・進捗 ===================== */
+var chks = document.querySelectorAll('.chk');
+var all = document.querySelectorAll('details.qa');
+function update(){
+  var n = 0;
+  Array.prototype.forEach.call(chks, function(c){ if(c.checked) n++; });
+  $('count').textContent = n + ' / ' + chks.length;
+  $('fill').style.width = (chks.length ? n / chks.length * 100 : 0) + '%';
+}
+Array.prototype.forEach.call(chks, function(c){
+  var k = c.getAttribute('data-k');
+  if(st.chk[k]) c.checked = true;
+  c.addEventListener('change', function(){
+    if(c.checked) st.chk[k] = true; else delete st.chk[k];
+    save(); update();
+  });
+});
+update();
+
+function fit(ta){ if(ta.offsetParent === null) return; ta.style.height = 'auto'; ta.style.height = Math.max(92, ta.scrollHeight + 2) + 'px'; }
+Array.prototype.forEach.call(document.querySelectorAll('textarea[data-memo]'), function(ta){
+  var k = ta.getAttribute('data-memo');
+  if(typeof st.memo[k] === 'string') ta.value = st.memo[k];
+  ta.addEventListener('input', function(){ st.memo[k] = ta.value; save(); fit(ta); });
+});
+Array.prototype.forEach.call(all, function(d){
+  d.addEventListener('toggle', function(){
+    if(d.open) Array.prototype.forEach.call(d.querySelectorAll('textarea[data-memo]'), fit);
+  });
+});
+
+var btnAll = $('toggleAll');
+btnAll.addEventListener('click', function(){
+  var open = btnAll.textContent.indexOf('開く') !== -1;
+  Array.prototype.forEach.call(all, function(d){ if(!d.hidden) d.open = open; });
+  btnAll.textContent = open ? 'すべて閉じる' : 'すべて開く';
+});
+window.addEventListener('beforeprint', function(){ Array.prototype.forEach.call(all, function(d){ if(!d.hidden) d.open = true; }); });
+
+/* ===================== 絞り込み ===================== */
+var filterBtns = document.querySelectorAll('.filter button');
+function applyFilter(f){
+  var shown = 0;
+  Array.prototype.forEach.call(all, function(d){
+    var show = true;
+    if(f === '1') show = d.getAttribute('data-p') === '1';
+    else if(f === 'todo') show = !st.chk[d.getAttribute('data-k')];
+    d.hidden = !show;
+    if(show) shown++;
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#main section'), function(sec){
+    sec.hidden = !sec.querySelector('details.qa:not([hidden])');
+  });
+  Array.prototype.forEach.call(filterBtns, function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-f') === f ? 'true' : 'false'); });
+  var note = '';
+  if(f === '1') note = '◎ の' + shown + '問を表示しています。時間がない日は、この' + shown + '問だけ声に出してください。';
+  else if(f === 'todo') note = shown ? 'まだチェックが付いていない' + shown + '問を表示しています。' : 'すべての質問にチェックが付いています。';
+  else note = '◎ 必ず準備 ／ ○ 聞かれやすい ／ △ 念のため。全' + shown + '問です。';
+  $('filterNote').textContent = note;
+}
+Array.prototype.forEach.call(filterBtns, function(b){
+  b.addEventListener('click', function(){ applyFilter(b.getAttribute('data-f')); });
+});
+applyFilter('all');
+
+/* ===================== 目次ボタン ===================== */
+var fab = $('tocFab'), toc = $('toc'), ticking = false;
+function syncFab(){ ticking = false; fab.classList.toggle('show', window.scrollY > 360); }
+window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; window.requestAnimationFrame(syncFab); } }, {passive:true});
+fab.addEventListener('click', function(){ toc.scrollIntoView(); toc.setAttribute('tabindex','-1'); toc.focus({preventScroll:true}); });
+syncFab();
+})();
+</script>
+
+<script>
+(function(){
+"use strict";
+if(location.protocol === 'file:') return;
+if(!('serviceWorker' in navigator)) return;
+
+function showUpdateBanner(reg){
+  try{
+    if(document.getElementById('swUpdateBanner')) return;
+    var bar = document.createElement('div');
+    bar.id = 'swUpdateBanner';
+    bar.setAttribute('role','status');
+    bar.style.cssText = 'position:fixed;left:0;right:0;bottom:0;z-index:9999;'+
+      'display:flex;align-items:center;justify-content:space-between;gap:12px;'+
+      'background:#173630;color:#E8EDE7;'+
+      'font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;'+
+      'font-size:13px;line-height:1.6;'+
+      'padding:10px 14px calc(10px + env(safe-area-inset-bottom));'+
+      'box-shadow:0 -2px 12px rgba(0,0,0,.25)';
+    var txt = document.createElement('span');
+    txt.textContent = '新しい版があります';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = '再読み込み';
+    btn.style.cssText = 'flex:none;min-height:36px;padding:6px 14px;border-radius:8px;'+
+      'border:1px solid #E8EDE7;background:transparent;color:#E8EDE7;font-size:13px;cursor:pointer';
+    btn.addEventListener('click', function(){
+      try{ if(reg.waiting){ reg.waiting.postMessage('SKIP_WAITING'); } }catch(e){}
+      bar.remove();
+    });
+    bar.appendChild(txt);
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }catch(e){ /* no-op */ }
+}
+
+try{
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').then(function(reg){
+      if(reg.waiting && navigator.serviceWorker.controller){ showUpdateBanner(reg); }
+      reg.addEventListener('updatefound', function(){
+        var nw = reg.installing;
+        if(!nw) return;
+        nw.addEventListener('statechange', function(){
+          if(nw.state === 'installed' && navigator.serviceWorker.controller){
+            showUpdateBanner(reg);
+          }
+        });
+      });
+    }).catch(function(){ /* SW登録に失敗してもアプリ本体は通常どおり動作する */ });
+
+    var refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function(){
+      if(refreshing) return;
+      refreshing = true;
+      location.reload();
+    });
+  });
+}catch(e){ /* no-op */ }
+})();
+</script>
+
+</body>
+</html>
